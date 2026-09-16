@@ -118,7 +118,7 @@ export default function GestaoProdutosPage() {
         {/* Header Breadcrumb */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-200 pb-4 gap-4">
           <div>
-            <Link href="/conta" className="inline-flex items-center gap-1 text-xs font-bold text-[#004e38] mb-2 hover:underline">
+            <Link href="/conta" className="inline-flex items-center gap-1 text-xs font-bold text-[#2563eb] mb-2 hover:underline">
               <ArrowLeft className="w-4 h-4" /> Voltar ao Dashboard
             </Link>
             <h1 className="text-3xl font-black text-gray-900 tracking-tight">Catálogo de Lotes & Descontos por Volume</h1>
@@ -129,15 +129,15 @@ export default function GestaoProdutosPage() {
           <div className="flex items-center gap-3">
             <Link
               href="/conta/estoque"
-              className="bg-white hover:bg-emerald-50 text-[#004e38] border border-emerald-300 text-xs font-bold px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-2xs"
+              className="bg-white hover:bg-blue-50 text-[#2563eb] border border-blue-300 text-xs font-bold px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-2xs"
             >
-              <Tag className="w-4 h-4 text-[#004e38]" />
+              <Tag className="w-4 h-4 text-[#2563eb]" />
               <span>Gestão de Estoque Vendedor</span>
             </Link>
 
             <Link
               href="/quick-order"
-              className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-bold px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-xs"
+              className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-bold px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-xs"
             >
               <Layers className="w-4 h-4 text-amber-300" />
               <span>Pedido Rápido via CSV</span>
@@ -153,13 +153,13 @@ export default function GestaoProdutosPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Pesquisar por nome do produto, SKU, marca ou categoria..."
-              className="w-full bg-[#f5f6f6] rounded-full py-2.5 pl-4 pr-10 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+              className="w-full bg-[#f5f6f6] rounded-full py-2.5 pl-4 pr-10 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
             />
             <Search className="w-4 h-4 text-gray-400 absolute right-3.5 top-3" />
           </div>
 
           <div className="flex items-center gap-2 font-bold shrink-0">
-            <Filter className="w-4 h-4 text-[#004e38]" />
+            <Filter className="w-4 h-4 text-[#2563eb]" />
             <span>Filtrar Categoria:</span>
             <select
               value={selectedCategory}
@@ -176,7 +176,7 @@ export default function GestaoProdutosPage() {
         {/* Products Grid */}
         {isLoading ? (
           <div className="p-16 text-center space-y-3 bg-white rounded-3xl border border-gray-200 shadow-2xs">
-            <Loader2 className="w-8 h-8 text-[#004e38] animate-spin mx-auto" />
+            <Loader2 className="w-8 h-8 text-[#2563eb] animate-spin mx-auto" />
             <p className="text-xs font-bold text-gray-500">Carregando catálogo corporativo e preços...</p>
           </div>
         ) : filtered.length === 0 ? (
@@ -193,7 +193,7 @@ export default function GestaoProdutosPage() {
               const subtotal = currentQty * prod.basePrice;
 
               return (
-                <div key={prod.id} className="bg-white p-6 rounded-3xl border border-gray-200 space-y-4 shadow-2xs hover:border-[#004e38] transition-all flex flex-col justify-between group">
+                <div key={prod.id} className="bg-white p-6 rounded-3xl border border-gray-200 space-y-4 shadow-2xs hover:border-[#2563eb] transition-all flex flex-col justify-between group">
                   <div className="space-y-4">
                     <div className="flex gap-4 items-center">
                       <div className="w-20 h-20 bg-[#f5f6f6] rounded-2xl p-2 relative flex items-center justify-center shrink-0 border border-gray-100 group-hover:scale-105 transition-transform">
@@ -212,7 +212,7 @@ export default function GestaoProdutosPage() {
                           <span className="text-[10px] text-gray-400 font-semibold">{prod.brand}</span>
                         </div>
                         <h3 className="font-black text-xs text-gray-900 line-clamp-2">{prod.name}</h3>
-                        <p className="text-[#004e38] font-black text-sm">
+                        <p className="text-[#2563eb] font-black text-sm">
                           R$ {prod.basePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                           <span className="text-[10px] font-normal text-gray-400 ml-1">/ {prod.uom || 'UN'}</span>
                         </p>
@@ -223,9 +223,9 @@ export default function GestaoProdutosPage() {
                     <div className="bg-[#f8fafc] p-3 rounded-2xl border border-gray-100 text-[11px] space-y-1.5">
                       <div className="flex justify-between items-center text-gray-600 font-bold">
                         <span className="flex items-center gap-1">
-                          <Truck className="w-3.5 h-3.5 text-[#004e38]" /> Disponibilidade nos CDs:
+                          <Truck className="w-3.5 h-3.5 text-[#2563eb]" /> Disponibilidade nos CDs:
                         </span>
-                        <span className="text-emerald-700 font-black">{totalStock} un.</span>
+                        <span className="text-blue-700 font-black">{totalStock} un.</span>
                       </div>
                       {prod.stockByCD && prod.stockByCD.length > 0 && (
                         <div className="grid grid-cols-2 gap-1 text-[10px] text-gray-500 font-medium">
@@ -247,7 +247,7 @@ export default function GestaoProdutosPage() {
                         </span>
                         <div className="space-y-1 text-[11px]">
                           {prod.volumeDiscounts.map((tier, idx) => (
-                            <div key={idx} className="flex justify-between bg-emerald-50/50 px-2.5 py-1 rounded-lg text-[#004e38]">
+                            <div key={idx} className="flex justify-between bg-blue-50/50 px-2.5 py-1 rounded-lg text-[#2563eb]">
                               <span>A partir de {tier.minQuantity} un:</span>
                               <strong>{tier.discountPercentage}% OFF (R$ {tier.unitPrice.toFixed(2)})</strong>
                             </div>
@@ -292,7 +292,7 @@ export default function GestaoProdutosPage() {
                       <button
                         type="button"
                         onClick={() => handleQuickAdd(prod)}
-                        className="bg-[#004e38] hover:bg-[#033627] text-white font-bold text-xs px-4 py-2 rounded-full transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
+                        className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-xs px-4 py-2 rounded-full transition-all flex items-center gap-1.5 cursor-pointer shadow-xs"
                       >
                         {addedItemSku === prod.sku ? (
                           <>

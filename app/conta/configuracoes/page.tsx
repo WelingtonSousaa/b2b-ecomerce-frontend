@@ -25,8 +25,8 @@ export default function ConfiguracoesEmpresaPage() {
   const { company, user, openEditCompanyModal } = useAuth();
   const { showToast } = useToast();
 
-  const [emailNfe, setEmailNfe] = useState('fiscal@techsolutions.com.br');
-  const [emailBoleto, setEmailBoleto] = useState('financeiro@techsolutions.com.br');
+  const [emailNfe, setEmailNfe] = useState('');
+  const [emailBoleto, setEmailBoleto] = useState('');
   const [notifyWhatsApp, setNotifyWhatsApp] = useState(true);
   const [notifyStockAlert, setNotifyStockAlert] = useState(true);
   const [notifyApprovals, setNotifyApprovals] = useState(true);
@@ -56,7 +56,7 @@ export default function ConfiguracoesEmpresaPage() {
           {/* Section 1: E-mails Fiscais & Cobrança */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-2xs space-y-5">
             <div className="flex items-center gap-3 border-b border-gray-100 pb-4">
-              <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-[#004e38] flex items-center justify-center font-bold">
+              <div className="w-10 h-10 rounded-2xl bg-blue-50 text-[#2563eb] flex items-center justify-center font-bold">
                 <Mail className="w-5 h-5" />
               </div>
               <div>
@@ -73,7 +73,7 @@ export default function ConfiguracoesEmpresaPage() {
                   required
                   value={emailNfe}
                   onChange={(e) => setEmailNfe(e.target.value)}
-                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
                 />
               </div>
 
@@ -84,7 +84,7 @@ export default function ConfiguracoesEmpresaPage() {
                   required
                   value={emailBoleto}
                   onChange={(e) => setEmailBoleto(e.target.value)}
-                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
                 />
               </div>
             </div>
@@ -103,7 +103,7 @@ export default function ConfiguracoesEmpresaPage() {
             </div>
 
             <div className="space-y-3 text-xs">
-              <label className="flex items-center justify-between p-3.5 bg-[#f8fafc] rounded-2xl border border-gray-200 cursor-pointer hover:border-[#004e38] transition-colors">
+              <label className="flex items-center justify-between p-3.5 bg-[#f8fafc] rounded-2xl border border-gray-200 cursor-pointer hover:border-[#2563eb] transition-colors">
                 <div>
                   <span className="font-extrabold text-gray-900 block">Notificações por WhatsApp Business</span>
                   <span className="text-gray-400 text-[11px]">Receber código de rastreio e 2ª via do boleto pelo WhatsApp.</span>
@@ -112,11 +112,11 @@ export default function ConfiguracoesEmpresaPage() {
                   type="checkbox"
                   checked={notifyWhatsApp}
                   onChange={(e) => setNotifyWhatsApp(e.target.checked)}
-                  className="w-5 h-5 accent-[#004e38]"
+                  className="w-5 h-5 accent-[#2563eb]"
                 />
               </label>
 
-              <label className="flex items-center justify-between p-3.5 bg-[#f8fafc] rounded-2xl border border-gray-200 cursor-pointer hover:border-[#004e38] transition-colors">
+              <label className="flex items-center justify-between p-3.5 bg-[#f8fafc] rounded-2xl border border-gray-200 cursor-pointer hover:border-[#2563eb] transition-colors">
                 <div>
                   <span className="font-extrabold text-gray-900 block">Alerta de Reposição de Estoque</span>
                   <span className="text-gray-400 text-[11px]">Avisar quando itens estratégicos atingirem o estoque de segurança.</span>
@@ -125,11 +125,11 @@ export default function ConfiguracoesEmpresaPage() {
                   type="checkbox"
                   checked={notifyStockAlert}
                   onChange={(e) => setNotifyStockAlert(e.target.checked)}
-                  className="w-5 h-5 accent-[#004e38]"
+                  className="w-5 h-5 accent-[#2563eb]"
                 />
               </label>
 
-              <label className="flex items-center justify-between p-3.5 bg-[#f8fafc] rounded-2xl border border-gray-200 cursor-pointer hover:border-[#004e38] transition-colors">
+              <label className="flex items-center justify-between p-3.5 bg-[#f8fafc] rounded-2xl border border-gray-200 cursor-pointer hover:border-[#2563eb] transition-colors">
                 <div>
                   <span className="font-extrabold text-gray-900 block">Alerta de Pedidos Aguardando Aprovação</span>
                   <span className="text-gray-400 text-[11px]">Notificar aprovadores assim que um comprador submeter um pedido acima da alçada.</span>
@@ -138,7 +138,7 @@ export default function ConfiguracoesEmpresaPage() {
                   type="checkbox"
                   checked={notifyApprovals}
                   onChange={(e) => setNotifyApprovals(e.target.checked)}
-                  className="w-5 h-5 accent-[#004e38]"
+                  className="w-5 h-5 accent-[#2563eb]"
                 />
               </label>
             </div>
@@ -165,7 +165,7 @@ export default function ConfiguracoesEmpresaPage() {
                 type="checkbox"
                 checked={twoFactorAuth}
                 onChange={(e) => setTwoFactorAuth(e.target.checked)}
-                className="w-5 h-5 accent-[#004e38]"
+                className="w-5 h-5 accent-[#2563eb]"
               />
             </div>
           </div>
@@ -174,7 +174,7 @@ export default function ConfiguracoesEmpresaPage() {
           <div className="flex items-center justify-end gap-3 pt-2">
             <button
               type="submit"
-              className="bg-[#004e38] hover:bg-[#033627] text-white font-black text-xs px-8 py-3 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-sm hover:scale-102"
+              className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-black text-xs px-8 py-3 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-sm hover:scale-102"
             >
               <Save className="w-4 h-4 text-amber-300" />
               <span>Salvar Todas as Preferências</span>

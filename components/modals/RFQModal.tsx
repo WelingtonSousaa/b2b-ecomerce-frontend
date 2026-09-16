@@ -37,8 +37,8 @@ export default function RFQModal({
 
     try {
       const cleanPrice = parseFloat(targetPrice.replace(/\./g, '').replace(',', '.')) || (basePrice * 0.8);
-      const res = await rfqService.submitRFQ({
-        items: [
+      const res = await rfqService.createQuote({
+        requestedItems: [
           {
             sku,
             quantity,
@@ -72,19 +72,19 @@ export default function RFQModal({
       <div className="bg-white text-gray-900 rounded-3xl shadow-2xl border border-gray-200 w-full max-w-lg overflow-hidden relative">
         
         {/* Header */}
-        <div className="bg-[#0b1d16] text-white px-6 py-4 flex items-center justify-between">
+        <div className="bg-[#0f172a] text-white px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-amber-400 text-gray-950 font-black flex items-center justify-center text-xs">
               RFQ
             </div>
             <div>
               <h3 className="text-sm font-black tracking-tight">Solicitação de Cotação em Lote</h3>
-              <p className="text-[10px] text-emerald-300">Negociação Direta B2B • Atacado Especial</p>
+              <p className="text-[10px] text-blue-300">Negociação Direta B2B • Atacado Especial</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1 hover:bg-emerald-900/60 rounded-lg text-emerald-200 hover:text-white transition-colors cursor-pointer"
+            className="p-1 hover:bg-blue-900/60 rounded-lg text-blue-200 hover:text-white transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -94,15 +94,15 @@ export default function RFQModal({
         {!isSubmitted ? (
           <form onSubmit={handleSubmit} className="p-6 space-y-4 text-xs">
             {/* Target Product Summary */}
-            <div className="bg-emerald-50/70 p-3.5 rounded-2xl border border-emerald-100 flex items-center justify-between">
+            <div className="bg-blue-50/70 p-3.5 rounded-2xl border border-blue-100 flex items-center justify-between">
               <div>
-                <span className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider">Item Selecionado</span>
+                <span className="text-[10px] font-bold text-blue-800 uppercase tracking-wider">Item Selecionado</span>
                 <h4 className="font-extrabold text-gray-900 line-clamp-1">{productName}</h4>
                 <span className="font-mono text-[10px] text-gray-500">SKU: {sku}</span>
               </div>
               <div className="text-right">
                 <span className="text-[10px] text-gray-400">Preço Tabela:</span>
-                <p className="font-black text-emerald-900 text-sm">
+                <p className="font-black text-blue-900 text-sm">
                   R$ {basePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                 </p>
               </div>
@@ -119,7 +119,7 @@ export default function RFQModal({
                   min="1"
                   value={quantity}
                   onChange={(e) => setQuantity(Number(e.target.value))}
-                  className="w-full h-10 px-3 rounded-xl border border-gray-300 font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-600"
+                  className="w-full h-10 px-3 rounded-xl border border-gray-300 font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
                   required
                 />
               </div>
@@ -134,7 +134,7 @@ export default function RFQModal({
                     type="text"
                     value={targetPrice}
                     onChange={(e) => setTargetPrice(e.target.value)}
-                    className="w-full h-10 pl-9 pr-3 rounded-xl border border-gray-300 font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-600"
+                    className="w-full h-10 pl-9 pr-3 rounded-xl border border-gray-300 font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-600"
                     placeholder="390,00"
                     required
                   />
@@ -149,7 +149,7 @@ export default function RFQModal({
               <select
                 value={paymentPreference}
                 onChange={(e) => setPaymentPreference(e.target.value)}
-                className="w-full h-10 px-3 rounded-xl border border-gray-300 font-semibold text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-600 bg-white"
+                className="w-full h-10 px-3 rounded-xl border border-gray-300 font-semibold text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-600 bg-white"
               >
                 <option value="BOLETO_30_DIAS">Boleto Faturado - 30 Dias</option>
                 <option value="BOLETO_60_DIAS">Boleto Faturado - 28/56/84 Dias</option>
@@ -167,7 +167,7 @@ export default function RFQModal({
                 onChange={(e) => setNotes(e.target.value)}
                 rows={3}
                 placeholder="Ex: Entrega fracionada em 2 filiais (SP e SC) ou faturamento via conta Suframa..."
-                className="w-full p-3 rounded-xl border border-gray-300 font-medium text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-600 resize-none"
+                className="w-full p-3 rounded-xl border border-gray-300 font-medium text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-600 resize-none"
               />
             </div>
 
@@ -183,7 +183,7 @@ export default function RFQModal({
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold flex items-center gap-2 transition-colors shadow-md cursor-pointer disabled:opacity-50"
+                className="px-5 py-2.5 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-extrabold flex items-center gap-2 transition-colors shadow-md cursor-pointer disabled:opacity-50"
               >
                 {isSubmitting ? (
                   <>
@@ -202,13 +202,13 @@ export default function RFQModal({
         ) : (
           /* Confirmation State */
           <div className="p-8 text-center space-y-4">
-            <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto animate-bounce">
+            <div className="w-16 h-16 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mx-auto animate-bounce">
               <CheckCircle2 className="w-10 h-10 stroke-[2.5]" />
             </div>
             <div>
               <h4 className="text-lg font-black text-gray-900">Solicitação Enviada com Sucesso!</h4>
               <p className="text-xs text-gray-600 mt-1 max-w-sm mx-auto">
-                Sua cotação <strong className="text-emerald-800">#{protocol}</strong> foi encaminhada para a mesa de atendimento da Shopcart B2B.
+                Sua cotação <strong className="text-blue-800">#{protocol}</strong> foi encaminhada para a mesa de atendimento da OneSync B2B.
               </p>
             </div>
 
@@ -225,7 +225,7 @@ export default function RFQModal({
 
             <button
               onClick={handleReset}
-              className="w-full py-3 bg-emerald-900 hover:bg-emerald-950 text-white font-extrabold rounded-xl transition-colors shadow-md cursor-pointer"
+              className="w-full py-3 bg-blue-900 hover:bg-blue-950 text-white font-extrabold rounded-xl transition-colors shadow-md cursor-pointer"
             >
               Voltar ao Produto
             </button>

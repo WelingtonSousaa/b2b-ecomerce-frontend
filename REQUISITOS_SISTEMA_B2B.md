@@ -20,12 +20,10 @@ O **Shopcart Corporativo** opera como uma plataforma **SaaS Multi-Tenant B2B e M
 
 - **Framework**: Next.js 16 (App Router + Turbopack)
 - **Linguagem**: TypeScript (Strict Mode)
-- **Design System & Estilos**: Tailwind CSS + Tokens de Cores HSL Customizados (Verde Esmeralda Corporativo `#004e38`, Pêssego Studio `#f9ece4`, Grafite Titânio `#18181b`)
+- **Design System & Estilos**: Tailwind CSS + Tokens de Cores HSL Customizados (Azul OneSync `#2563eb`, Navy Escuro `#0f172a`, Grafite Titânio `#18181b`)
 - **Gestão de Estados Globais**:
   - `AuthContext`: Gestão de sessões CNPJ, alçadas de compra, perfis e modo visitante.
-  - `StorefrontContext`: Customização dinâmica de temas, banners e departamentos da vitrine com sincronização em tempo real.
   - `CartContext`: Carrinho corporativo com descontos progressivos por volume e cálculo fiscal.
-  - `CompareContext`: Comparador técnico flutuante com análise de especificações lado a lado.
   - `ToastContext`: Sistema centralizado de notificações e feedbacks ao usuário.
 - **Qualidade de Código**: ESLint (`0 erros / 0 warnings`), sem códigos mortos e tipagem 100% estrita.
 

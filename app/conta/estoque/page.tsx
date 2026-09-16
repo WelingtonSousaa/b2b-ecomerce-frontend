@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from "next/navigation";
 import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -41,6 +42,7 @@ import CompanyPanelHeader from '@/components/layout/CompanyPanelHeader';
 import { useToast } from '@/context/ToastContext';
 
 export default function GestaoEstoqueVendedorPage() {
+  const router = useRouter();
   const { showToast } = useToast();
   const [products, setProducts] = useState<Product[]>([]);
   const [movements, setMovements] = useState<StockMovement[]>([]);
@@ -83,9 +85,9 @@ export default function GestaoEstoqueVendedorPage() {
   const [formCategory, setFormCategory] = useState('headphones');
   const [formSku, setFormSku] = useState('');
   const [formEan, setFormEan] = useState('');
-  const [formNcm, setFormNcm] = useState('8518.30.00');
-  const [formBatchNumber, setFormBatchNumber] = useState('LOT-2026-08A');
-  const [formExpirationDate, setFormExpirationDate] = useState('2028-12-31');
+  const [formNcm, setFormNcm] = useState('');
+  const [formBatchNumber, setFormBatchNumber] = useState('');
+  const [formExpirationDate, setFormExpirationDate] = useState('');
   const [formBasePrice, setFormBasePrice] = useState<number>(489.00);
   const [formMoq, setFormMoq] = useState<number>(5);
   const [formUom, setFormUom] = useState<UOM>('CX');
@@ -176,7 +178,7 @@ export default function GestaoEstoqueVendedorPage() {
       setEditingProduct(null);
       const randomId = Math.floor(100 + Math.random() * 900);
       setFormName('');
-      setFormBrand('Shopcart Pro');
+      setFormBrand('OneSync Pro');
       setFormCategory('headphones');
       setFormSku(`SKU-VEND-${randomId}`);
       setFormEan(`78912345${randomId}001`);
@@ -315,7 +317,7 @@ export default function GestaoEstoqueVendedorPage() {
       sku,
       ean,
       name: name || 'Produto Corporativo',
-      brand: brand || 'Shopcart Pro'
+      brand: brand || 'OneSync Pro'
     });
   };
 
@@ -362,13 +364,13 @@ export default function GestaoEstoqueVendedorPage() {
               onClick={() => handleOpenMovementModal()}
               className="bg-white hover:bg-gray-100 text-gray-800 border border-gray-200 text-xs font-bold px-4 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-2xs"
             >
-              <ArrowUpRight className="w-4 h-4 text-emerald-600" />
+              <ArrowUpRight className="w-4 h-4 text-blue-600" />
               <span>Ajuste / Movimentação (+ / -)</span>
             </button>
 
             <button
-              onClick={() => handleOpenRegisterModal()}
-              className="bg-white hover:bg-emerald-50 text-[#004e38] border-2 border-[#004e38] text-xs font-black px-4 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-2xs"
+              onClick={() => router.push("/conta/estoque/novo")}
+              className="bg-white hover:bg-blue-50 text-[#2563eb] border-2 border-[#2563eb] text-xs font-black px-4 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-2xs"
             >
               <Plus className="w-4 h-4" />
               <span>Cadastro Rápido (Item Simples)</span>
@@ -376,7 +378,7 @@ export default function GestaoEstoqueVendedorPage() {
 
             <Link
               href="/conta/estoque/novo"
-              className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-black px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-sm"
+              className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-black px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-sm"
             >
               <Layers className="w-4 h-4 text-amber-300" />
               <span>Novo Produto com Grade</span>
@@ -392,15 +394,15 @@ export default function GestaoEstoqueVendedorPage() {
           <div className="bg-white p-5 rounded-3xl border border-gray-200 space-y-1 shadow-2xs">
             <span className="text-xs font-bold text-gray-400 uppercase">Total de SKUs em Linha</span>
             <div className="text-2xl font-black text-gray-900">{products.length} Produtos</div>
-            <span className="text-[10px] text-emerald-700 font-semibold flex items-center gap-1">
-              <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+            <span className="text-[10px] text-blue-700 font-semibold flex items-center gap-1">
+              <CheckCircle2 className="w-3 h-3 text-blue-600" />
               {products.filter(p => p.hasVariants).length} Produtos possuem grade com variações
             </span>
           </div>
 
           <div className="bg-white p-5 rounded-3xl border border-gray-200 space-y-1 shadow-2xs">
             <span className="text-xs font-bold text-gray-400 uppercase">Estoque Físico Consolidado</span>
-            <div className="text-2xl font-black text-[#004e38]">
+            <div className="text-2xl font-black text-[#2563eb]">
               {products.reduce((acc, p) => acc + p.stockByCD.reduce((cAcc, cd) => cAcc + cd.availableQuantity, 0), 0)} Unidades
             </div>
             <span className="text-[10px] text-gray-500">Distribuídos nos CDs de SP, SC e BA</span>
@@ -425,7 +427,7 @@ export default function GestaoEstoqueVendedorPage() {
             onClick={() => setActiveTab('inventory')}
             className={`pb-2.5 px-4 font-black text-sm transition-all relative cursor-pointer ${
               activeTab === 'inventory'
-                ? 'text-[#004e38] border-b-2 border-[#004e38]'
+                ? 'text-[#2563eb] border-b-2 border-[#2563eb]'
                 : 'text-gray-400 hover:text-gray-700'
             }`}
           >
@@ -439,7 +441,7 @@ export default function GestaoEstoqueVendedorPage() {
             onClick={() => setActiveTab('kardex')}
             className={`pb-2.5 px-4 font-black text-sm transition-all relative cursor-pointer ${
               activeTab === 'kardex'
-                ? 'text-[#004e38] border-b-2 border-[#004e38]'
+                ? 'text-[#2563eb] border-b-2 border-[#2563eb]'
                 : 'text-gray-400 hover:text-gray-700'
             }`}
           >
@@ -462,13 +464,13 @@ export default function GestaoEstoqueVendedorPage() {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Pesquisar por Nome, SKU, Variação, EAN-13 ou NCM..."
-                  className="w-full bg-[#f5f6f6] rounded-full py-2.5 pl-4 pr-10 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                  className="w-full bg-[#f5f6f6] rounded-full py-2.5 pl-4 pr-10 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
                 />
                 <Search className="w-4 h-4 text-gray-400 absolute right-3.5 top-3" />
               </div>
 
               <div className="flex items-center gap-2 font-bold shrink-0">
-                <Filter className="w-4 h-4 text-[#004e38]" />
+                <Filter className="w-4 h-4 text-[#2563eb]" />
                 <span>Categoria:</span>
                 <select
                   value={filterCategory}
@@ -495,7 +497,7 @@ export default function GestaoEstoqueVendedorPage() {
 
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-[#004e38] text-white font-extrabold uppercase text-[10px] tracking-wider">
+                  <thead className="bg-[#2563eb] text-white font-extrabold uppercase text-[10px] tracking-wider">
                     <tr>
                       <th className="p-4">SKU / EAN-13</th>
                       <th className="p-4">Produto, Marca & Grade</th>
@@ -519,7 +521,7 @@ export default function GestaoEstoqueVendedorPage() {
                             <td className="p-4 space-y-1">
                               <span className="font-mono font-bold text-gray-900 block">{prod.sku}</span>
                               <span className="font-mono text-[10px] text-gray-400 flex items-center gap-1">
-                                <Barcode className="w-3.5 h-3.5 text-[#004e38]" /> {prod.ean}
+                                <Barcode className="w-3.5 h-3.5 text-[#2563eb]" /> {prod.ean}
                               </span>
                             </td>
 
@@ -536,7 +538,7 @@ export default function GestaoEstoqueVendedorPage() {
                                     {prod.hasVariants && prod.variants && (
                                       <button
                                         onClick={() => toggleExpandProduct(prod.id)}
-                                        className="bg-emerald-50 hover:bg-emerald-100 text-[#004e38] text-[9px] font-black px-2 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1 cursor-pointer transition-colors"
+                                        className="bg-blue-50 hover:bg-blue-100 text-[#2563eb] text-[9px] font-black px-2 py-0.5 rounded-full border border-blue-200 flex items-center gap-1 cursor-pointer transition-colors"
                                       >
                                         <Layers className="w-3 h-3 text-amber-500" />
                                         <span>{prod.variants.length} Variantes</span>
@@ -554,19 +556,19 @@ export default function GestaoEstoqueVendedorPage() {
                                 NCM: {prod.ncm}
                               </span>
                               <span className="text-[10px] text-gray-400 flex items-center gap-1 pt-0.5">
-                                <Calendar className="w-3 h-3 text-emerald-600" /> Validade: 12/2028
+                                <Calendar className="w-3 h-3 text-blue-600" /> Validade: 12/2028
                               </span>
                             </td>
 
                             {/* MOQ */}
                             <td className="p-4 text-center">
-                              <span className="bg-emerald-50 text-[#004e38] font-bold text-[11px] px-2.5 py-1 rounded-full border border-emerald-200">
+                              <span className="bg-blue-50 text-[#2563eb] font-bold text-[11px] px-2.5 py-1 rounded-full border border-blue-200">
                                 {prod.moq} {prod.uom}s ({prod.itemsPerUom} un/cx)
                               </span>
                             </td>
 
                             {/* Preço Base */}
-                            <td className="p-4 text-right font-black text-[#004e38] text-sm">
+                            <td className="p-4 text-right font-black text-[#2563eb] text-sm">
                               R$ {prod.basePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                             </td>
 
@@ -590,7 +592,7 @@ export default function GestaoEstoqueVendedorPage() {
                                 {/* Botão de Ajuste Rápido de Estoque (+ / -) */}
                                 <button
                                   onClick={() => handleOpenMovementModal(prod)}
-                                  className="p-1.5 rounded-lg bg-emerald-50 hover:bg-[#004e38] text-[#004e38] hover:text-white transition-colors cursor-pointer"
+                                  className="p-1.5 rounded-lg bg-blue-50 hover:bg-[#2563eb] text-[#2563eb] hover:text-white transition-colors cursor-pointer"
                                   title="Ajuste Manual de Estoque (+ / -)"
                                 >
                                   <ArrowUpRight className="w-4 h-4" />
@@ -598,15 +600,15 @@ export default function GestaoEstoqueVendedorPage() {
 
                                 <button
                                   onClick={() => handlePrintBarcodes(prod.sku, prod.ean, prod.name, prod.brand)}
-                                  className="p-1.5 rounded-lg bg-gray-100 hover:bg-emerald-50 text-gray-600 hover:text-[#004e38] transition-colors cursor-pointer"
+                                  className="p-1.5 rounded-lg bg-gray-100 hover:bg-blue-50 text-gray-600 hover:text-[#2563eb] transition-colors cursor-pointer"
                                   title="Imprimir Etiquetas EAN-13"
                                 >
                                   <Printer className="w-4 h-4" />
                                 </button>
 
                                 <button
-                                  onClick={() => handleOpenRegisterModal(prod)}
-                                  className="p-1.5 rounded-lg bg-gray-100 hover:bg-emerald-50 text-gray-600 hover:text-[#004e38] transition-colors cursor-pointer"
+                                  onClick={() => router.push("/conta/estoque/novo?edit=" + prod.id)}
+                                  className="p-1.5 rounded-lg bg-gray-100 hover:bg-blue-50 text-gray-600 hover:text-[#2563eb] transition-colors cursor-pointer"
                                   title="Editar Produto"
                                 >
                                   <Edit3 className="w-4 h-4" />
@@ -627,17 +629,17 @@ export default function GestaoEstoqueVendedorPage() {
                           {prod.hasVariants && prod.variants && isExpanded && (
                             <tr className="bg-[#f8fafc]">
                               <td colSpan={7} className="p-4 pl-12">
-                                <div className="bg-white p-4 rounded-2xl border border-emerald-200/80 shadow-2xs space-y-3">
+                                <div className="bg-white p-4 rounded-2xl border border-blue-200/80 shadow-2xs space-y-3">
                                   <div className="flex items-center justify-between">
                                     <div className="flex items-center gap-2">
-                                      <Layers className="w-4 h-4 text-[#004e38]" />
+                                      <Layers className="w-4 h-4 text-[#2563eb]" />
                                       <span className="font-extrabold text-xs text-gray-900">
                                         Grade de Variações ({prod.variants.length} combinações disponíveis):
                                       </span>
                                     </div>
                                     <Link
                                       href="/conta/estoque/novo"
-                                      className="text-[10px] font-bold text-[#004e38] hover:underline flex items-center gap-1"
+                                      className="text-[10px] font-bold text-[#2563eb] hover:underline flex items-center gap-1"
                                     >
                                       <span>Gerenciar Grade no Cadastro Avançado</span>
                                       <ExternalLink className="w-3 h-3" />
@@ -667,17 +669,17 @@ export default function GestaoEstoqueVendedorPage() {
                                           const vTotal = sp + sc + ba;
 
                                           return (
-                                            <tr key={v.id} className="hover:bg-emerald-50/30">
+                                            <tr key={v.id} className="hover:bg-blue-50/30">
                                               <td className="p-2 font-bold text-gray-800">
                                                 {Object.entries(v.combination).map(([k, val]) => (
-                                                  <span key={k} className="bg-emerald-50 text-[#004e38] px-1.5 py-0.5 rounded border border-emerald-200 mr-1 text-[10px]">
+                                                  <span key={k} className="bg-blue-50 text-[#2563eb] px-1.5 py-0.5 rounded border border-blue-200 mr-1 text-[10px]">
                                                     {val}
                                                   </span>
                                                 ))}
                                               </td>
                                               <td className="p-2 font-mono font-bold text-gray-700">{v.sku}</td>
                                               <td className="p-2 font-mono text-gray-500">{v.ean}</td>
-                                              <td className="p-2 text-right font-black text-[#004e38]">
+                                              <td className="p-2 text-right font-black text-[#2563eb]">
                                                 R$ {v.basePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                                               </td>
                                               <td className="p-2 text-center font-bold text-gray-700">{sp}</td>
@@ -687,7 +689,7 @@ export default function GestaoEstoqueVendedorPage() {
                                               <td className="p-2 text-center">
                                                 <button
                                                   onClick={() => handleOpenMovementModal(prod)}
-                                                  className="p-1 rounded bg-emerald-100 hover:bg-[#004e38] text-[#004e38] hover:text-white transition-colors cursor-pointer"
+                                                  className="p-1 rounded bg-blue-100 hover:bg-[#2563eb] text-[#2563eb] hover:text-white transition-colors cursor-pointer"
                                                   title="Ajustar Estoque Desta Variante"
                                                 >
                                                   <ArrowUpRight className="w-3.5 h-3.5" />
@@ -726,19 +728,19 @@ export default function GestaoEstoqueVendedorPage() {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Pesquisar por Produto, SKU, NF-e ou Motivo..."
-                  className="w-full bg-[#f5f6f6] rounded-full py-2.5 pl-4 pr-10 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                  className="w-full bg-[#f5f6f6] rounded-full py-2.5 pl-4 pr-10 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
                 />
                 <Search className="w-4 h-4 text-gray-400 absolute right-3.5 top-3" />
               </div>
 
               <div className="flex items-center gap-2 font-bold shrink-0">
-                <Filter className="w-4 h-4 text-[#004e38]" />
+                <Filter className="w-4 h-4 text-[#2563eb]" />
                 <span>Tipo de Operação:</span>
                 <div className="flex bg-[#f5f6f6] p-1 rounded-full text-xs">
                   <button
                     onClick={() => setMovementTypeFilter('ALL')}
                     className={`px-3 py-1 rounded-full font-bold transition-all cursor-pointer ${
-                      movementTypeFilter === 'ALL' ? 'bg-[#004e38] text-white shadow-2xs' : 'text-gray-600'
+                      movementTypeFilter === 'ALL' ? 'bg-[#2563eb] text-white shadow-2xs' : 'text-gray-600'
                     }`}
                   >
                     Todas ({movements.length})
@@ -746,7 +748,7 @@ export default function GestaoEstoqueVendedorPage() {
                   <button
                     onClick={() => setMovementTypeFilter('IN')}
                     className={`px-3 py-1 rounded-full font-bold transition-all cursor-pointer ${
-                      movementTypeFilter === 'IN' ? 'bg-emerald-600 text-white shadow-2xs' : 'text-gray-600'
+                      movementTypeFilter === 'IN' ? 'bg-blue-600 text-white shadow-2xs' : 'text-gray-600'
                     }`}
                   >
                     🟢 Entradas (+)
@@ -772,7 +774,7 @@ export default function GestaoEstoqueVendedorPage() {
                 </div>
                 <button
                   onClick={handleExportKardex}
-                  className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-bold px-4 py-2 rounded-full flex items-center gap-1.5 cursor-pointer shadow-xs transition-all"
+                  className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-bold px-4 py-2 rounded-full flex items-center gap-1.5 cursor-pointer shadow-xs transition-all"
                 >
                   <Download className="w-3.5 h-3.5" />
                   <span>Exportar Kardex (CSV)</span>
@@ -781,7 +783,7 @@ export default function GestaoEstoqueVendedorPage() {
 
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-[#004e38] text-white font-extrabold uppercase text-[10px] tracking-wider">
+                  <thead className="bg-[#2563eb] text-white font-extrabold uppercase text-[10px] tracking-wider">
                     <tr>
                       <th className="p-4">Data / Hora</th>
                       <th className="p-4">Tipo & Motivo</th>
@@ -802,11 +804,11 @@ export default function GestaoEstoqueVendedorPage() {
                         <td className="p-4 space-y-1">
                           <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full font-black text-[10px] ${
                             mov.type === 'IN'
-                              ? 'bg-emerald-100 text-emerald-900'
+                              ? 'bg-blue-100 text-blue-900'
                               : 'bg-red-100 text-red-900'
                           }`}>
                             {mov.type === 'IN' ? (
-                              <ArrowUpRight className="w-3 h-3 text-emerald-700" />
+                              <ArrowUpRight className="w-3 h-3 text-blue-700" />
                             ) : (
                               <ArrowDownRight className="w-3 h-3 text-red-700" />
                             )}
@@ -830,7 +832,7 @@ export default function GestaoEstoqueVendedorPage() {
 
                         <td className="p-4 text-center">
                           <span className={`font-black text-sm ${
-                            mov.type === 'IN' ? 'text-emerald-700' : 'text-red-600'
+                            mov.type === 'IN' ? 'text-blue-700' : 'text-red-600'
                           }`}>
                             {mov.type === 'IN' ? `+${mov.quantity}` : `-${mov.quantity}`} un
                           </span>
@@ -863,304 +865,6 @@ export default function GestaoEstoqueVendedorPage() {
 
       </div>
 
-      {/* MODAL RÁPIDO PARA PRODUTOS SIMPLES (COM ALERTA DE DUPLICIDADE EM TEMPO REAL) */}
-      {isRegisterModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200 font-sans">
-          <div className="bg-white text-gray-900 rounded-3xl shadow-2xl border border-gray-100 w-full max-w-2xl overflow-hidden relative max-h-[90vh] flex flex-col">
-            
-            {/* Header */}
-            <div className="bg-[#004e38] text-white p-6 relative shrink-0">
-              <button
-                onClick={() => setIsRegisterModalOpen(false)}
-                className="absolute top-5 right-5 p-1 rounded-full bg-white/10 hover:bg-white/20 text-white cursor-pointer transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-
-              <div className="flex items-center gap-2.5 mb-1">
-                <Package className="w-5 h-5 text-amber-400" />
-                <h3 className="text-xl font-extrabold tracking-tight">
-                  {editingProduct ? 'Editar Mercadoria em Estoque' : 'Cadastro Rápido de Item Simples'}
-                </h3>
-              </div>
-              <p className="text-xs text-emerald-100">
-                Ideal para cadastrar itens únicos rapidamente sem variações de cor/tamanho.
-              </p>
-            </div>
-
-            {/* Modal Body Form */}
-            <form onSubmit={handleSaveProduct} className="p-6 overflow-y-auto space-y-5 flex-1 text-xs">
-              
-              {/* Callout para Grade Avançada */}
-              {!editingProduct && (
-                <div className="bg-blue-50 border border-blue-200 p-3 rounded-2xl flex items-center justify-between text-blue-900">
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-blue-600 shrink-0" />
-                    <span className="text-[11px] font-semibold">
-                      Precisa cadastrar um item com <strong>variações de cor, capacidade ou voltagem</strong>?
-                    </span>
-                  </div>
-                  <Link
-                    href="/conta/estoque/novo"
-                    onClick={() => setIsRegisterModalOpen(false)}
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-[10px] px-3 py-1.5 rounded-full transition-colors shrink-0 ml-2"
-                  >
-                    Ir para Grade Avançada →
-                  </Link>
-                </div>
-              )}
-
-              {/* Alerta de Duplicidade em Tempo Real */}
-              {quickModalDuplicity && (
-                <div className="bg-amber-50 border-2 border-amber-400 text-amber-950 p-3.5 rounded-2xl space-y-2 animate-in fade-in">
-                  <div className="flex items-center gap-2 font-bold text-amber-900 text-xs">
-                    <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0" />
-                    <span>⚠️ Atenção: Item já cadastrado em estoque!</span>
-                  </div>
-                  <p className="text-[11px] text-amber-900">
-                    O {quickModalDuplicity.reason} para o produto: <strong>&ldquo;{quickModalDuplicity.matchedProduct.name}&rdquo;</strong>.
-                  </p>
-                  <div className="flex items-center gap-2 pt-1">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setIsRegisterModalOpen(false);
-                        handleOpenMovementModal(quickModalDuplicity.matchedProduct);
-                      }}
-                      className="bg-amber-800 hover:bg-amber-900 text-white font-bold text-[10px] px-3 py-1 rounded-full cursor-pointer"
-                    >
-                      Ajustar Estoque Deste Produto
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const randomId = Math.floor(100 + Math.random() * 900);
-                        setFormSku(`SKU-VEND-${randomId}`);
-                        setFormEan(`78912345${randomId}001`);
-                      }}
-                      className="bg-white border border-amber-400 text-amber-900 font-bold text-[10px] px-3 py-1 rounded-full cursor-pointer hover:bg-amber-100"
-                    >
-                      Gerar Novo SKU/EAN Único
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {formSuccessAlert && (
-                <div className="bg-emerald-100 border border-emerald-300 text-[#004e38] p-3 rounded-2xl flex items-center gap-2 font-bold animate-in fade-in">
-                  <CheckCircle2 className="w-5 h-5" />
-                  <span>Produto salvo e sincronizado no catálogo de vendas B2B!</span>
-                </div>
-              )}
-
-              {/* SECTION 1: Dados Básicos & Identificação */}
-              <div className="space-y-3">
-                <h4 className="font-extrabold text-gray-900 text-xs uppercase tracking-wider flex items-center gap-1.5 border-b border-gray-100 pb-1.5">
-                  <Package className="w-4 h-4 text-[#004e38]" /> 1. Identificação Básica
-                </h4>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div className="space-y-1">
-                    <label className="font-bold text-gray-700">Nome Comercial da Mercadoria *</label>
-                    <input
-                      type="text"
-                      required
-                      value={formName}
-                      onChange={(e) => setFormName(e.target.value)}
-                      placeholder="Ex: Fone Bluetooth Pro Bass"
-                      className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2 font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                    />
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="font-bold text-gray-700">Marca / Fabricante *</label>
-                    <input
-                      type="text"
-                      required
-                      value={formBrand}
-                      onChange={(e) => setFormBrand(e.target.value)}
-                      placeholder="Ex: Shopcart Pro"
-                      className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2 font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                    />
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="font-bold text-gray-700">Código SKU Interno *</label>
-                    <input
-                      type="text"
-                      required
-                      value={formSku}
-                      onChange={(e) => setFormSku(e.target.value)}
-                      className={`w-full bg-[#f5f6f6] border rounded-xl px-3 py-2 font-mono font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#004e38] ${
-                        quickModalDuplicity ? 'border-amber-400 bg-amber-50' : 'border-gray-200'
-                      }`}
-                    />
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="font-bold text-gray-700 flex items-center gap-1">
-                      <Barcode className="w-3.5 h-3.5 text-[#004e38]" /> Código de Barras (EAN-13 / GTIN) *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={formEan}
-                      onChange={(e) => setFormEan(e.target.value)}
-                      className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2 font-mono text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* SECTION 2: Fiscal, Lote & Validade */}
-              <div className="space-y-3">
-                <h4 className="font-extrabold text-gray-900 text-xs uppercase tracking-wider flex items-center gap-1.5 border-b border-gray-100 pb-1.5">
-                  <ShieldCheck className="w-4 h-4 text-[#004e38]" /> 2. Classificação Fiscal & Lote
-                </h4>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  <div className="space-y-1">
-                    <label className="font-bold text-gray-700">Classificação Fiscal NCM *</label>
-                    <input
-                      type="text"
-                      required
-                      value={formNcm}
-                      onChange={(e) => setFormNcm(e.target.value)}
-                      className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2 font-mono font-bold text-gray-900 focus:outline-none"
-                    />
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="font-bold text-gray-700">Lote de Fabricação</label>
-                    <input
-                      type="text"
-                      value={formBatchNumber}
-                      onChange={(e) => setFormBatchNumber(e.target.value)}
-                      className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2 font-mono text-gray-900 focus:outline-none"
-                    />
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="font-bold text-gray-700 flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5 text-emerald-600" /> Data de Validade
-                    </label>
-                    <input
-                      type="date"
-                      value={formExpirationDate}
-                      onChange={(e) => setFormExpirationDate(e.target.value)}
-                      className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2 text-gray-900 focus:outline-none"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* SECTION 3: Precificação & Distribuição nos CDs */}
-              <div className="space-y-3">
-                <h4 className="font-extrabold text-gray-900 text-xs uppercase tracking-wider flex items-center gap-1.5 border-b border-gray-100 pb-1.5">
-                  <Building2 className="w-4 h-4 text-[#004e38]" /> 3. Preço Base & Estoque Físico Multi-CD
-                </h4>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  <div className="space-y-1">
-                    <label className="font-bold text-gray-700">Preço Base B2B (R$) *</label>
-                    <input
-                      type="number"
-                      step="0.01"
-                      required
-                      value={formBasePrice}
-                      onChange={(e) => setFormBasePrice(Number(e.target.value))}
-                      className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2 font-black text-[#004e38] text-sm focus:outline-none"
-                    />
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="font-bold text-gray-700">Unidade (UOM)</label>
-                    <select
-                      value={formUom}
-                      onChange={(e) => setFormUom(e.target.value as UOM)}
-                      className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2 font-bold text-gray-900 focus:outline-none"
-                    >
-                      <option value="CX">Caixa (CX)</option>
-                      <option value="UN">Unidade (UN)</option>
-                      <option value="FARDO">Fardo (FARDO)</option>
-                      <option value="PALLETE">Pallete (PALLETE)</option>
-                    </select>
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="font-bold text-gray-700">Lote Mínimo (MOQ)</label>
-                    <input
-                      type="number"
-                      min="1"
-                      required
-                      value={formMoq}
-                      onChange={(e) => setFormMoq(Number(e.target.value))}
-                      className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2 font-bold text-gray-900 focus:outline-none"
-                    />
-                  </div>
-                </div>
-
-                {/* Quantidades por CD */}
-                <div className="bg-[#f8fafc] p-3 rounded-2xl border border-gray-100 grid grid-cols-3 gap-2">
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-gray-500 uppercase block">CD Sudeste (SP)</label>
-                    <input
-                      type="number"
-                      min="0"
-                      value={formStockSP}
-                      onChange={(e) => setFormStockSP(Number(e.target.value))}
-                      className="w-full bg-white border border-gray-200 rounded-lg px-2.5 py-1.5 font-black text-gray-900 text-xs"
-                    />
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-gray-500 uppercase block">CD Sul (SC)</label>
-                    <input
-                      type="number"
-                      min="0"
-                      value={formStockSC}
-                      onChange={(e) => setFormStockSC(Number(e.target.value))}
-                      className="w-full bg-white border border-gray-200 rounded-lg px-2.5 py-1.5 font-black text-gray-900 text-xs"
-                    />
-                  </div>
-
-                  <div className="space-y-1">
-                    <label className="text-[10px] font-bold text-gray-500 uppercase block">CD Nordeste (BA)</label>
-                    <input
-                      type="number"
-                      min="0"
-                      value={formStockBA}
-                      onChange={(e) => setFormStockBA(Number(e.target.value))}
-                      className="w-full bg-white border border-gray-200 rounded-lg px-2.5 py-1.5 font-black text-gray-900 text-xs"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Actions */}
-              <div className="flex items-center justify-end gap-3 pt-3 border-t border-gray-100">
-                <button
-                  type="button"
-                  onClick={() => setIsRegisterModalOpen(false)}
-                  className="px-5 py-2 rounded-full font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer"
-                >
-                  Cancelar
-                </button>
-
-                <button
-                  type="submit"
-                  className="bg-[#004e38] hover:bg-[#033627] text-white font-black px-6 py-2 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-sm"
-                >
-                  <Save className="w-4 h-4" />
-                  <span>{editingProduct ? 'Salvar Alterações' : 'Confirmar Cadastro Rápido'}</span>
-                </button>
-              </div>
-
-            </form>
-          </div>
-        </div>
-      )}
-
       {/* MODAL DE AJUSTE MANUAL DE ESTOQUE (ENTRADA / SAÍDA / BAIXA) */}
       <StockMovementModal
         isOpen={isMovementModalOpen}
@@ -1176,7 +880,7 @@ export default function GestaoEstoqueVendedorPage() {
           <div className="bg-white text-gray-900 rounded-3xl shadow-2xl border border-gray-100 w-full max-w-md overflow-hidden relative p-6 space-y-6">
             <div className="flex items-center justify-between border-b border-gray-100 pb-3">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-xl bg-emerald-100 text-[#004e38] flex items-center justify-center font-bold">
+                <div className="w-8 h-8 rounded-xl bg-blue-100 text-[#2563eb] flex items-center justify-center font-bold">
                   <Barcode className="w-4 h-4" />
                 </div>
                 <div>
@@ -1199,7 +903,7 @@ export default function GestaoEstoqueVendedorPage() {
                   {barcodeModalItem.brand}
                 </span>
                 <h4 className="font-black text-sm text-gray-900">{barcodeModalItem.name}</h4>
-                <p className="font-mono text-xs font-bold text-[#004e38]">SKU: {barcodeModalItem.sku}</p>
+                <p className="font-mono text-xs font-bold text-[#2563eb]">SKU: {barcodeModalItem.sku}</p>
               </div>
 
               {/* Simulated EAN-13 Barcode Lines */}
@@ -1241,7 +945,7 @@ export default function GestaoEstoqueVendedorPage() {
                   showToast('Comando de impressão enviado para a impressora de etiquetas térmica (Zebra/Argox)!', 'success');
                   setBarcodeModalItem(null);
                 }}
-                className="bg-[#004e38] hover:bg-[#033627] text-white font-black text-xs px-6 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-xs"
+                className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-black text-xs px-6 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-xs"
               >
                 <Printer className="w-4 h-4 text-amber-300" />
                 <span>Imprimir Etiqueta Térmica</span>

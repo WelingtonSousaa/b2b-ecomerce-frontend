@@ -1,18 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
 import {
   Calculator,
-  FileSpreadsheet,
-  Building2,
-  TrendingUp,
-  Percent,
-  CheckCircle2,
-  AlertCircle,
-  HelpCircle,
-  Sparkles,
-  Download
+  FileSpreadsheet
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import CompanyPanelHeader from '@/components/layout/CompanyPanelHeader';
@@ -140,7 +131,7 @@ CRÉDITO FISCAL APROPRIÁVEL (ICMS + PIS/COFINS): R$ ${currentCalc.netCredit.toF
         actions={
           <button
             onClick={handleExportFiscalReport}
-            className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-black px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-xs"
+            className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-black px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-xs"
           >
             <FileSpreadsheet className="w-4 h-4 text-amber-300" />
             <span>Baixar Demonstrativo Fiscal (DRE)</span>
@@ -155,12 +146,12 @@ CRÉDITO FISCAL APROPRIÁVEL (ICMS + PIS/COFINS): R$ ${currentCalc.netCredit.toF
           <div className="bg-white p-6 rounded-3xl border border-gray-200 space-y-1 shadow-2xs">
             <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Regime Tributário</span>
             <p className="text-xl font-black text-gray-900">{currentCompany.regimeTributario}</p>
-            <span className="text-[10px] text-emerald-700 font-bold">Validação na Receita Federal OK</span>
+            <span className="text-[10px] text-blue-700 font-bold">Validação na Receita Federal OK</span>
           </div>
 
           <div className="bg-white p-6 rounded-3xl border border-gray-200 space-y-1 shadow-2xs">
             <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">ICMS-ST Acumulado</span>
-            <p className="text-xl font-black text-[#004e38]">
+            <p className="text-xl font-black text-[#2563eb]">
               R$ {currentCalc.icmsSt.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
             </p>
             <span className="text-[10px] text-gray-500">Recolhimento na Fonte por GNRE</span>
@@ -176,10 +167,10 @@ CRÉDITO FISCAL APROPRIÁVEL (ICMS + PIS/COFINS): R$ ${currentCalc.netCredit.toF
 
           <div className="bg-white p-6 rounded-3xl border border-gray-200 space-y-1 shadow-2xs">
             <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Crédito Fiscal Apropriável</span>
-            <p className="text-xl font-black text-emerald-700">
+            <p className="text-xl font-black text-blue-700">
               R$ {currentCalc.netCredit.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
             </p>
-            <span className="text-[10px] text-emerald-700 font-bold">PIS/COFINS & ICMS Entrada</span>
+            <span className="text-[10px] text-blue-700 font-bold">PIS/COFINS & ICMS Entrada</span>
           </div>
         </div>
 
@@ -188,7 +179,7 @@ CRÉDITO FISCAL APROPRIÁVEL (ICMS + PIS/COFINS): R$ ${currentCalc.netCredit.toF
           
           <div className="flex flex-col lg:flex-row lg:items-center justify-between border-b border-gray-100 pb-5 gap-4">
             <div className="flex items-center gap-3.5">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-[#004e38] flex items-center justify-center font-bold shadow-xs">
+              <div className="w-12 h-12 rounded-2xl bg-blue-100 text-[#2563eb] flex items-center justify-center font-bold shadow-xs">
                 <Calculator className="w-6 h-6" />
               </div>
               <div>
@@ -204,7 +195,7 @@ CRÉDITO FISCAL APROPRIÁVEL (ICMS + PIS/COFINS): R$ ${currentCalc.netCredit.toF
                 onClick={() => setPurchasePurpose('RESELL')}
                 className={`px-4 py-2 rounded-xl transition-all cursor-pointer ${
                   purchasePurpose === 'RESELL'
-                    ? 'bg-[#004e38] text-white shadow-xs'
+                    ? 'bg-[#2563eb] text-white shadow-xs'
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
@@ -215,7 +206,7 @@ CRÉDITO FISCAL APROPRIÁVEL (ICMS + PIS/COFINS): R$ ${currentCalc.netCredit.toF
                 onClick={() => setPurchasePurpose('CONSUMPTION')}
                 className={`px-4 py-2 rounded-xl transition-all cursor-pointer ${
                   purchasePurpose === 'CONSUMPTION'
-                    ? 'bg-[#004e38] text-white shadow-xs'
+                    ? 'bg-[#2563eb] text-white shadow-xs'
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
@@ -264,7 +255,7 @@ CRÉDITO FISCAL APROPRIÁVEL (ICMS + PIS/COFINS): R$ ${currentCalc.netCredit.toF
                   step="5"
                   value={mvaPercentage}
                   onChange={(e) => setMvaPercentage(Number(e.target.value))}
-                  className="w-full accent-[#004e38] mt-2 cursor-pointer"
+                  className="w-full accent-[#2563eb] mt-2 cursor-pointer"
                 />
               </div>
             )}
@@ -275,7 +266,7 @@ CRÉDITO FISCAL APROPRIÁVEL (ICMS + PIS/COFINS): R$ ${currentCalc.netCredit.toF
                   type="checkbox"
                   checked={hasSuframaOption}
                   onChange={(e) => setHasSuframaOption(e.target.checked)}
-                  className="accent-[#004e38] w-4 h-4"
+                  className="accent-[#2563eb] w-4 h-4"
                 />
                 <span className="text-xs font-bold text-gray-800">Incentivo SUFRAMA / ZFM</span>
               </label>
@@ -296,7 +287,7 @@ CRÉDITO FISCAL APROPRIÁVEL (ICMS + PIS/COFINS): R$ ${currentCalc.netCredit.toF
                 <span className="text-gray-600">
                   ICMS Substituição Tributária (ICMS-ST Destino com MVA {mvaPercentage}%)
                 </span>
-                <strong className="text-emerald-800 font-mono font-bold">R$ {currentCalc.icmsSt.toFixed(2)}</strong>
+                <strong className="text-blue-800 font-mono font-bold">R$ {currentCalc.icmsSt.toFixed(2)}</strong>
               </div>
             )}
 
@@ -320,7 +311,7 @@ CRÉDITO FISCAL APROPRIÁVEL (ICMS + PIS/COFINS): R$ ${currentCalc.netCredit.toF
             </div>
 
             {currentCalc.suframaDiscount > 0 && (
-              <div className="flex justify-between py-2 border-b border-gray-100 text-emerald-700 font-bold">
+              <div className="flex justify-between py-2 border-b border-gray-100 text-blue-700 font-bold">
                 <span>Incentivo Zona Franca de Manaus (SUFRAMA):</span>
                 <span className="font-mono">- R$ {currentCalc.suframaDiscount.toFixed(2)}</span>
               </div>
@@ -328,13 +319,13 @@ CRÉDITO FISCAL APROPRIÁVEL (ICMS + PIS/COFINS): R$ ${currentCalc.netCredit.toF
 
             <div className="flex justify-between border-t border-gray-200 pt-3 text-sm font-black">
               <span>Total de Tributos Calculados no Faturamento:</span>
-              <span className="text-[#004e38] font-mono text-base">
+              <span className="text-[#2563eb] font-mono text-base">
                 R$ {currentCalc.totalTaxes.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
               </span>
             </div>
 
             {currentCalc.netCredit > 0 && (
-              <div className="bg-emerald-50 border border-emerald-200 p-3 rounded-2xl flex items-center justify-between text-xs text-[#004e38]">
+              <div className="bg-blue-50 border border-blue-200 p-3 rounded-2xl flex items-center justify-between text-xs text-[#2563eb]">
                 <span className="font-bold">✨ Aproveitamento de Crédito Tributário (Lucro Real):</span>
                 <span className="font-mono font-black text-sm">
                   + R$ {currentCalc.netCredit.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}

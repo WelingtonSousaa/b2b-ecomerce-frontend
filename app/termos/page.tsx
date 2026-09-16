@@ -10,21 +10,21 @@ export default function TermosPage() {
         
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs text-gray-500 font-medium border-b border-gray-100 pb-4">
-          <Link href="/" className="hover:text-[#004e38]">Home</Link>
+          <Link href="/" className="hover:text-[#2563eb]">Home</Link>
           <span>/</span>
           <span className="font-bold text-gray-900">Termos & Condições de Uso B2B</span>
         </div>
 
         {/* Header */}
         <div className="space-y-3 border-b border-gray-100 pb-6">
-          <span className="inline-block bg-emerald-100 text-[#004e38] text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider">
+          <span className="inline-block bg-blue-100 text-[#2563eb] text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider">
             Contrato de Prestação de Serviços & Vendas
           </span>
           <h1 className="text-3xl sm:text-4xl font-black text-gray-900 tracking-tight">
             Termos & Condições Gerais de Uso
           </h1>
           <p className="text-xs sm:text-sm text-gray-500">
-            Regulamento oficial que rege o acesso, concessão de limite de crédito, faturamento corporativo e compras por CNPJ no portal Shopcart.
+            Regulamento oficial que rege o acesso, concessão de limite de crédito, faturamento corporativo e compras por CNPJ no portal OneSync.
           </p>
         </div>
 
@@ -36,10 +36,10 @@ export default function TermosPage() {
               1. Elegibilidade & Cadastro de Pessoa Jurídica (CNPJ)
             </h2>
             <p>
-              A utilização do portal de compras Shopcart B2B é restrita a pessoas jurídicas devidamente constituídas e registradas com CNPJ ativo no cadastro da Secretaria da Receita Federal do Brasil.
+              A utilização do portal de compras OneSync B2B é restrita a pessoas jurídicas devidamente constituídas e registradas com CNPJ ativo no cadastro da Secretaria da Receita Federal do Brasil.
             </p>
             <p>
-              Ao realizar o cadastro, a empresa declara que as informações prestadas são verdadeiras e autoriza a Shopcart a efetuar a validação junto a órgãos oficiais e bureaus de crédito.
+              Ao realizar o cadastro, a empresa declara que as informações prestadas são verdadeiras e autoriza a OneSync a efetuar a validação junto a órgãos oficiais e bureaus de crédito.
             </p>
           </div>
 
@@ -48,7 +48,7 @@ export default function TermosPage() {
               2. Concessão de Limite de Crédito & Faturamento no Boleto
             </h2>
             <p>
-              A liberação de limite de crédito e concessão de prazos de faturamento (28, 56 e 84 dias) fica sujeita à análise de risco e aprovação prévia pela mesa de crédito interna da Shopcart.
+              A liberação de limite de crédito e concessão de prazos de faturamento (28, 56 e 84 dias) fica sujeita à análise de risco e aprovação prévia pela mesa de crédito interna da OneSync.
             </p>
             <p>
               O atraso no pagamento dos boletos acarretará a incidência de juros de mora de 1% ao mês e multa contratual de 2%, podendo levar à suspensão temporária do limite de crédito cadastrado.
@@ -72,7 +72,7 @@ export default function TermosPage() {
               4. Privacidade e Proteção de Dados (LGPD)
             </h2>
             <p>
-              A Shopcart Brasil Ltda. compromete-se com o cumprimento integral da Lei Geral de Proteção de Dados (Lei nº 13.709/2018), tratando os dados dos representantes cadastrados exclusivamente para fins operacionais e de faturamento.
+              A OneSync Brasil Ltda. compromete-se com o cumprimento integral da Lei Geral de Proteção de Dados (Lei nº 13.709/2018), tratando os dados dos representantes cadastrados exclusivamente para fins operacionais e de faturamento.
             </p>
           </div>
 

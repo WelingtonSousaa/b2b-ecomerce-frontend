@@ -20,7 +20,7 @@ export default function PixPaymentModal({
   const [timeLeft, setTimeLeft] = useState(900); // 15 minutos em segundos
 
   const pixDiscountAmount = amount * 0.95; // 5% de desconto no PIX
-  const pixKey = '00020126580014BR.GOV.BCB.PIX0136shopcart-pix-cnpj-1234567800019952040000530398654052421.555802BR5925SHOPCART BRASIL LTDA6009SAO PAULO62070503***6304E2D8';
+  const pixKey = '00020126580014BR.GOV.BCB.PIX0136onesync-pix-cnpj-1234567800019952040000530398654052421.555802BR5925ONESYNC BRASIL LTDA6009SAO PAULO62070503***6304E2D8';
 
   // Timer countdown
   useEffect(() => {
@@ -59,7 +59,7 @@ export default function PixPaymentModal({
 
         {/* Header Title */}
         <div className="space-y-2 pt-2">
-          <span className="inline-block bg-emerald-100 text-[#004e38] text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
+          <span className="inline-block bg-blue-100 text-[#2563eb] text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
             PIX CNPJ Instantâneo (-5% Desconto)
           </span>
           <h3 className="text-xl font-black text-gray-900 tracking-tight">Pagamento via PIX CNPJ</h3>
@@ -71,17 +71,17 @@ export default function PixPaymentModal({
         {/* Discount Amount Banner */}
         <div className="bg-[#f5f6f6] p-4 rounded-2xl border border-gray-200 space-y-1">
           <span className="text-[11px] text-gray-500 font-semibold block">Valor com Desconto de 5% Aplicado:</span>
-          <div className="text-2xl font-black text-[#004e38]">
+          <div className="text-2xl font-black text-[#2563eb]">
             R$ {pixDiscountAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
           </div>
           <span className="text-[10px] text-gray-400 font-medium">Economia de R$ {(amount - pixDiscountAmount).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
         </div>
 
         {/* QR Code Container */}
-        <div className="bg-white p-4 rounded-2xl border-2 border-emerald-500 inline-block mx-auto relative shadow-sm">
+        <div className="bg-white p-4 rounded-2xl border-2 border-blue-500 inline-block mx-auto relative shadow-sm">
           <div className="w-44 h-44 bg-[#f8fafc] rounded-xl flex flex-col items-center justify-center relative p-2">
             <QrCode className="w-36 h-36 text-gray-900" />
-            <div className="absolute w-8 h-8 rounded-lg bg-[#004e38] text-white font-black text-xs flex items-center justify-center border-2 border-white shadow-xs">
+            <div className="absolute w-8 h-8 rounded-lg bg-[#2563eb] text-white font-black text-xs flex items-center justify-center border-2 border-white shadow-xs">
               S
             </div>
           </div>
@@ -105,7 +105,7 @@ export default function PixPaymentModal({
             />
             <button
               onClick={handleCopyPixKey}
-              className="bg-[#004e38] hover:bg-[#033627] text-white font-bold text-xs px-4 py-2 rounded-xl transition-all shrink-0 flex items-center gap-1 cursor-pointer"
+              className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-xs px-4 py-2 rounded-xl transition-all shrink-0 flex items-center gap-1 cursor-pointer"
             >
               {copied ? (
                 <>
@@ -122,14 +122,14 @@ export default function PixPaymentModal({
 
         {/* Real-time Status Indicator */}
         <div className="flex items-center justify-center gap-2 text-xs font-bold text-gray-600 pt-1">
-          <span className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-ping"></span>
+          <span className="w-2.5 h-2.5 bg-blue-500 rounded-full animate-ping"></span>
           <span>Aguardando confirmação bancária em tempo real...</span>
         </div>
 
         {/* Confirm Payment Action */}
         <button
           onClick={onConfirmSuccess}
-          className="w-full bg-[#004e38] hover:bg-[#033627] text-white text-xs font-extrabold py-3.5 rounded-full transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+          className="w-full bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-extrabold py-3.5 rounded-full transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
         >
           <span>Já Realizei o Pagamento via PIX</span>
           <ArrowRight className="w-4 h-4" />

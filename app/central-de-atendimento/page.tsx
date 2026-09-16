@@ -11,28 +11,28 @@ export default function CentralAtendimentoPage() {
       title: 'Mesa de Análise de Crédito',
       desc: 'Dúvidas sobre limite de crédito corporativo, análise de balanço, faturamento faturado (28/56/84 dias) e liberação de cadastro.',
       phone: '0800 123 4567 - Ramal 1',
-      email: 'credito@shopcart.com.br'
+      email: 'credito@onesync.com.br'
     },
     {
       icon: FileText,
       title: 'Emissão de Notas & Impostos',
       desc: 'Segunda via de danfe, arquivo XML, correções em NF-e, carta de correção (CC-e) e apuração de ICMS-ST / DIFAL.',
       phone: '0800 123 4567 - Ramal 2',
-      email: 'nfe@shopcart.com.br'
+      email: 'nfe@onesync.com.br'
     },
     {
       icon: Truck,
       title: 'Rastreamento & Expedição Multi-CD',
       desc: 'Status de envio, agendamento de descargas corporativas, CTE e acompanhamento de cargas em trânsito (CIF e FOB).',
       phone: '0800 123 4567 - Ramal 3',
-      email: 'logistica@shopcart.com.br'
+      email: 'logistica@onesync.com.br'
     },
     {
       icon: RefreshCcw,
       title: 'RMA, Trocas & Devoluções',
       desc: 'Abertura de chamados de garantia de fábrica, avarias de transporte, ressalvas de conhecimento de frete e devolução legal em 30 dias.',
       phone: '0800 123 4567 - Ramal 4',
-      email: 'rma@shopcart.com.br'
+      email: 'rma@onesync.com.br'
     }
   ];
 
@@ -42,14 +42,14 @@ export default function CentralAtendimentoPage() {
         
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs text-gray-500 font-medium border-b border-gray-100 pb-4">
-          <Link href="/" className="hover:text-[#004e38]">Home</Link>
+          <Link href="/" className="hover:text-[#2563eb]">Home</Link>
           <span>/</span>
           <span className="font-bold text-gray-900">Central de Atendimento</span>
         </div>
 
         {/* Hero Section */}
         <div className="bg-[#f5f6f6] rounded-3xl p-8 lg:p-14 text-center space-y-4">
-          <span className="inline-block bg-[#004e38] text-white text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider">
+          <span className="inline-block bg-[#2563eb] text-white text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider">
             Suporte Dedicado B2B
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight">
@@ -65,8 +65,8 @@ export default function CentralAtendimentoPage() {
           {supportChannels.map((item, idx) => {
             const Icon = item.icon;
             return (
-              <div key={idx} className="bg-white p-8 rounded-3xl border border-gray-200 shadow-2xs space-y-4 hover:border-[#004e38] transition-all">
-                <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#004e38] flex items-center justify-center">
+              <div key={idx} className="bg-white p-8 rounded-3xl border border-gray-200 shadow-2xs space-y-4 hover:border-[#2563eb] transition-all">
+                <div className="w-12 h-12 rounded-2xl bg-blue-50 text-[#2563eb] flex items-center justify-center">
                   <Icon className="w-6 h-6" />
                 </div>
 
@@ -77,11 +77,11 @@ export default function CentralAtendimentoPage() {
 
                 <div className="pt-3 border-t border-gray-100 space-y-1.5 text-xs font-semibold text-gray-800">
                   <div className="flex items-center gap-2">
-                    <Phone className="w-4 h-4 text-[#004e38]" />
+                    <Phone className="w-4 h-4 text-[#2563eb]" />
                     <span>{item.phone}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Mail className="w-4 h-4 text-[#004e38]" />
+                    <Mail className="w-4 h-4 text-[#2563eb]" />
                     <span>{item.email}</span>
                   </div>
                 </div>
@@ -91,14 +91,14 @@ export default function CentralAtendimentoPage() {
         </div>
 
         {/* Quick Links Banner */}
-        <div className="bg-[#004e38] text-white p-8 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="bg-[#2563eb] text-white p-8 rounded-3xl flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
             <h4 className="text-lg font-extrabold">Precisa enviar uma mensagem personalizada?</h4>
-            <p className="text-xs text-emerald-100">Acesse nosso formulário de contato com resposta em até 2h úteis.</p>
+            <p className="text-xs text-blue-100">Acesse nosso formulário de contato com resposta em até 2h úteis.</p>
           </div>
           <Link
             href="/contato"
-            className="bg-white hover:bg-emerald-50 text-[#004e38] font-bold text-xs px-6 py-3 rounded-full transition-all shrink-0 flex items-center gap-1.5"
+            className="bg-white hover:bg-blue-50 text-[#2563eb] font-bold text-xs px-6 py-3 rounded-full transition-all shrink-0 flex items-center gap-1.5"
           >
             <span>Ir para Formulário de Contato</span>
             <ArrowRight className="w-4 h-4" />

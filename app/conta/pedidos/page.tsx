@@ -70,7 +70,7 @@ export default function PedidosPage() {
     setTimeout(() => {
       setDownloadingDanfe(null);
       const content = `=====================================================
-DANFE SIMPLIFICADA B2B - SHOPCART PLATFORM
+DANFE SIMPLIFICADA B2B - ONESYNC PLATFORM
 Documento Fiscal Auxiliar de NF-e
 =====================================================
 Pedido: ${orderNumber}
@@ -78,7 +78,7 @@ Chave de Acesso NFe: 3526 0819 4820 0001 5500 1000 0048 2012 3948 1029
 Status: Autorizada pelo SEFAZ-SP
 Natureza da Operação: Venda de Mercadoria B2B por CNPJ
 Ambiente: Produção Fiscal
-Emitente: Shopcart Distribuição e Comércio LTDA - CNPJ: 10.987.654/0001-32
+Emitente: OneSync Distribuição e Comércio LTDA - CNPJ: 10.987.654/0001-32
 Destinatário: Tech Solutions & Tecnologia LTDA - CNPJ: 12.345.678/0001-95
 =====================================================`;
       const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
@@ -146,7 +146,7 @@ Destinatário: Tech Solutions & Tecnologia LTDA - CNPJ: 12.345.678/0001-95
         actions={
           <button
             onClick={handleExportCSV}
-            className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-black px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-xs"
+            className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-black px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-xs"
           >
             <Download className="w-4 h-4 text-amber-300" />
             <span>Exportar Relatório CSV</span>
@@ -164,13 +164,13 @@ Destinatário: Tech Solutions & Tecnologia LTDA - CNPJ: 12.345.678/0001-95
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Pesquisar por número de pedido ou NFe..."
-              className="w-full bg-[#f5f6f6] rounded-full py-2.5 pl-4 pr-10 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+              className="w-full bg-[#f5f6f6] rounded-full py-2.5 pl-4 pr-10 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
             />
             <Search className="w-4 h-4 text-gray-400 absolute right-3.5 top-3" />
           </div>
 
           <div className="flex items-center gap-2 font-bold shrink-0">
-            <Filter className="w-4 h-4 text-[#004e38]" />
+            <Filter className="w-4 h-4 text-[#2563eb]" />
             <span>Filtrar Status:</span>
             <select
               value={filterStatus}
@@ -190,7 +190,7 @@ Destinatário: Tech Solutions & Tecnologia LTDA - CNPJ: 12.345.678/0001-95
         <div className="bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-2xs">
           {isLoading ? (
             <div className="p-16 text-center space-y-3">
-              <Loader2 className="w-8 h-8 text-[#004e38] animate-spin mx-auto" />
+              <Loader2 className="w-8 h-8 text-[#2563eb] animate-spin mx-auto" />
               <p className="text-xs font-bold text-gray-500">Carregando pedidos corporativos...</p>
             </div>
           ) : filteredOrders.length === 0 ? (
@@ -199,7 +199,7 @@ Destinatário: Tech Solutions & Tecnologia LTDA - CNPJ: 12.345.678/0001-95
               <p className="text-xs text-gray-400">Monte um novo pedido corporativo no catálogo de produtos.</p>
               <Link
                 href="/produtos"
-                className="inline-block mt-2 bg-[#004e38] text-white text-xs font-bold px-6 py-2.5 rounded-full hover:bg-[#033627] transition-colors"
+                className="inline-block mt-2 bg-[#2563eb] text-white text-xs font-bold px-6 py-2.5 rounded-full hover:bg-[#1d4ed8] transition-colors"
               >
                 Ir para o Catálogo
               </Link>
@@ -207,7 +207,7 @@ Destinatário: Tech Solutions & Tecnologia LTDA - CNPJ: 12.345.678/0001-95
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-[#004e38] text-white font-extrabold uppercase text-[10px] tracking-wider">
+                <thead className="bg-[#2563eb] text-white font-extrabold uppercase text-[10px] tracking-wider">
                   <tr>
                     <th className="p-4">Nº do Pedido</th>
                     <th className="p-4">Data Emissão</th>
@@ -225,7 +225,7 @@ Destinatário: Tech Solutions & Tecnologia LTDA - CNPJ: 12.345.678/0001-95
                         <button
                           type="button"
                           onClick={() => setSelectedOrder(ord)}
-                          className="hover:underline text-[#004e38] font-bold inline-flex items-center gap-1 cursor-pointer"
+                          className="hover:underline text-[#2563eb] font-bold inline-flex items-center gap-1 cursor-pointer"
                         >
                           <span>{ord.orderNumber}</span>
                           <Eye className="w-3.5 h-3.5 text-gray-400" />
@@ -239,8 +239,8 @@ Destinatário: Tech Solutions & Tecnologia LTDA - CNPJ: 12.345.678/0001-95
                       </td>
                       <td className="p-4 text-center">
                         {ord.status === 'DELIVERED' && (
-                          <span className="bg-emerald-100 text-emerald-800 font-bold px-2.5 py-1 rounded-md text-[10px] inline-flex items-center gap-1">
-                            <CheckCircle2 className="w-3 h-3 text-emerald-600" /> Entregue
+                          <span className="bg-blue-100 text-blue-800 font-bold px-2.5 py-1 rounded-md text-[10px] inline-flex items-center gap-1">
+                            <CheckCircle2 className="w-3 h-3 text-blue-600" /> Entregue
                           </span>
                         )}
                         {ord.status === 'APPROVED' && (
@@ -259,14 +259,14 @@ Destinatário: Tech Solutions & Tecnologia LTDA - CNPJ: 12.345.678/0001-95
                           </span>
                         )}
                       </td>
-                      <td className="p-4 text-right font-black text-[#004e38] text-sm">
+                      <td className="p-4 text-right font-black text-[#2563eb] text-sm">
                         R$ {(ord.summary?.grandTotal || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                       </td>
                       <td className="p-4 text-center space-x-2">
                         <button
                           type="button"
                           onClick={() => handleDownloadDanfe(ord.orderNumber)}
-                          className="inline-flex items-center gap-1 text-[11px] font-bold text-[#004e38] hover:underline cursor-pointer"
+                          className="inline-flex items-center gap-1 text-[11px] font-bold text-[#2563eb] hover:underline cursor-pointer"
                         >
                           <FileText className="w-3.5 h-3.5" />
                           <span>{downloadingDanfe === ord.orderNumber ? 'Baixando...' : 'DANFE NF-e'}</span>
@@ -275,7 +275,7 @@ Destinatário: Tech Solutions & Tecnologia LTDA - CNPJ: 12.345.678/0001-95
                       <td className="p-4 text-center space-x-2">
                         <button
                           onClick={() => handleReorder(ord)}
-                          className="bg-[#004e38] hover:bg-[#033627] text-white font-bold text-[11px] px-3.5 py-1.5 rounded-full transition-all inline-flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                          className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-[11px] px-3.5 py-1.5 rounded-full transition-all inline-flex items-center gap-1.5 cursor-pointer shadow-2xs"
                         >
                           <RotateCcw className="w-3.5 h-3.5 text-amber-300" />
                           <span>Recomprar</span>
@@ -298,11 +298,11 @@ Destinatário: Tech Solutions & Tecnologia LTDA - CNPJ: 12.345.678/0001-95
             
             <div className="flex items-center justify-between border-b border-gray-100 pb-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-emerald-100 text-[#004e38] flex items-center justify-center font-bold">
+                <div className="w-10 h-10 rounded-2xl bg-blue-100 text-[#2563eb] flex items-center justify-center font-bold">
                   <Package className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="font-mono text-xs font-bold text-[#004e38] bg-emerald-50 px-2 py-0.5 rounded">
+                  <span className="font-mono text-xs font-bold text-[#2563eb] bg-blue-50 px-2 py-0.5 rounded">
                     {selectedOrder.orderNumber}
                   </span>
                   <h2 className="text-lg font-black text-gray-900 mt-0.5">Detalhes do Pedido Corporativo</h2>
@@ -324,28 +324,28 @@ Destinatário: Tech Solutions & Tecnologia LTDA - CNPJ: 12.345.678/0001-95
 
               <div className="flex items-center justify-between text-xs font-bold relative">
                 <div className="flex flex-col items-center gap-1 z-10">
-                  <div className="w-7 h-7 rounded-full bg-[#004e38] text-white flex items-center justify-center text-xs">
+                  <div className="w-7 h-7 rounded-full bg-[#2563eb] text-white flex items-center justify-center text-xs">
                     ✓
                   </div>
                   <span className="text-[10px] text-gray-800">1. Aprovado</span>
                 </div>
 
-                <div className="flex-1 h-1 bg-[#004e38] mx-2"></div>
+                <div className="flex-1 h-1 bg-[#2563eb] mx-2"></div>
 
                 <div className="flex flex-col items-center gap-1 z-10">
-                  <div className="w-7 h-7 rounded-full bg-[#004e38] text-white flex items-center justify-center text-xs">
+                  <div className="w-7 h-7 rounded-full bg-[#2563eb] text-white flex items-center justify-center text-xs">
                     ✓
                   </div>
                   <span className="text-[10px] text-gray-800">2. Faturado NF-e</span>
                 </div>
 
-                <div className="flex-1 h-1 bg-[#004e38] mx-2"></div>
+                <div className="flex-1 h-1 bg-[#2563eb] mx-2"></div>
 
                 <div className="flex flex-col items-center gap-1 z-10">
-                  <div className="w-7 h-7 rounded-full bg-[#004e38] text-white flex items-center justify-center text-xs">
+                  <div className="w-7 h-7 rounded-full bg-[#2563eb] text-white flex items-center justify-center text-xs">
                     <Truck className="w-3.5 h-3.5" />
                   </div>
-                  <span className="text-[10px] text-[#004e38] font-black">3. Em Rota CD</span>
+                  <span className="text-[10px] text-[#2563eb] font-black">3. Em Rota CD</span>
                 </div>
 
                 <div className="flex-1 h-1 bg-gray-200 mx-2"></div>
@@ -362,10 +362,10 @@ Destinatário: Tech Solutions & Tecnologia LTDA - CNPJ: 12.345.678/0001-95
                 <span className="text-gray-500">Rastreamento Jadlog / Braspress:</span>
                 <button
                   onClick={() => handleCopyTracking('BR-SP-2026-9812450')}
-                  className="font-mono font-bold text-[#004e38] flex items-center gap-1 hover:underline cursor-pointer"
+                  className="font-mono font-bold text-[#2563eb] flex items-center gap-1 hover:underline cursor-pointer"
                 >
                   <span>BR-SP-2026-9812450</span>
-                  {copiedTracking ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5 text-gray-400" />}
+                  {copiedTracking ? <Check className="w-3.5 h-3.5 text-blue-600" /> : <Copy className="w-3.5 h-3.5 text-gray-400" />}
                 </button>
               </div>
             </div>
@@ -378,7 +378,7 @@ Destinatário: Tech Solutions & Tecnologia LTDA - CNPJ: 12.345.678/0001-95
               </div>
               <div>
                 <span className="text-gray-400 font-bold block text-[10px] uppercase">Status</span>
-                <strong className="text-[#004e38] font-bold">{selectedOrder.status}</strong>
+                <strong className="text-[#2563eb] font-bold">{selectedOrder.status}</strong>
               </div>
               <div>
                 <span className="text-gray-400 font-bold block text-[10px] uppercase">Condição de Pagamento</span>
@@ -424,7 +424,7 @@ Destinatário: Tech Solutions & Tecnologia LTDA - CNPJ: 12.345.678/0001-95
                 <span>Subtotal dos Produtos:</span>
                 <span className="font-bold text-gray-900">R$ {(selectedOrder.summary?.subtotal || 0).toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-emerald-700 font-bold">
+              <div className="flex justify-between text-blue-700 font-bold">
                 <span>Desconto de Volume B2B:</span>
                 <span>- R$ {(selectedOrder.summary?.discountTotal || 0).toFixed(2)}</span>
               </div>
@@ -432,7 +432,7 @@ Destinatário: Tech Solutions & Tecnologia LTDA - CNPJ: 12.345.678/0001-95
                 <span>Tributos (ICMS-ST / DIFAL):</span>
                 <span className="font-bold text-gray-900">Incluso na NF-e</span>
               </div>
-              <div className="flex justify-between border-t border-gray-200 pt-2 text-sm font-black text-[#004e38]">
+              <div className="flex justify-between border-t border-gray-200 pt-2 text-sm font-black text-[#2563eb]">
                 <span>Total Geral Faturado:</span>
                 <span>R$ {(selectedOrder.summary?.grandTotal || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
               </div>
@@ -445,14 +445,14 @@ Destinatário: Tech Solutions & Tecnologia LTDA - CNPJ: 12.345.678/0001-95
                 onClick={() => handleDownloadDanfe(selectedOrder.orderNumber)}
                 className="bg-white hover:bg-gray-100 text-gray-800 border border-gray-200 font-bold text-xs px-4 py-2.5 rounded-full transition-colors flex items-center gap-1.5 cursor-pointer"
               >
-                <Printer className="w-4 h-4 text-[#004e38]" />
+                <Printer className="w-4 h-4 text-[#2563eb]" />
                 <span>Imprimir DANFE Auxiliar</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setSelectedOrder(null)}
-                className="bg-[#004e38] hover:bg-[#033627] text-white font-bold text-xs px-6 py-2.5 rounded-full transition-all cursor-pointer"
+                className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-xs px-6 py-2.5 rounded-full transition-all cursor-pointer"
               >
                 Fechar
               </button>

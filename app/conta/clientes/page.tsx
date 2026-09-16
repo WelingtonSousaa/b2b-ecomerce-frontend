@@ -5,7 +5,6 @@ import Link from 'next/link';
 import {
   Building2,
   MapPin,
-  ArrowLeft,
   Plus,
   X,
   CheckCircle2,
@@ -14,23 +13,20 @@ import {
   Loader2,
   Users,
   Shield,
-  DollarSign,
   UserCheck,
   UserX,
   Mail,
   Edit2,
   FileText,
-  AlertCircle,
   ExternalLink,
-  Sparkles,
-  Phone
+  Sparkles
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { authService } from '@/services/auth.service';
 import { fetchCNPJData } from '@/lib/api/cnpj';
 import { useToast } from '@/context/ToastContext';
 import CompanyPanelHeader from '@/components/layout/CompanyPanelHeader';
-import { CompanyUser, UserRole, CompanyAccount, Branch } from '@/types/b2b';
+import { CompanyUser, UserRole, CompanyAccount } from '@/types/b2b';
 
 interface BranchItem {
   id: string;
@@ -179,29 +175,6 @@ export default function ClientesEFiliaisPage() {
     }).catch(() => {});
   }, [company?.id]);
 
-  // Modals
-  const [isBranchModalOpen, setIsBranchModalOpen] = useState(false);
-  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
-  const [isSearchingCNPJ, setIsSearchingCNPJ] = useState(false);
-
-  // Branch Form
-  const [cnpjInput, setCnpjInput] = useState('');
-  const [nomeFilial, setNomeFilial] = useState('');
-  const [ieInput, setIeInput] = useState('');
-  const [cepInput, setCepInput] = useState('');
-  const [logradouro, setLogradouro] = useState('');
-  const [numero, setNumero] = useState('');
-  const [bairro, setBairro] = useState('');
-  const [cidade, setCidade] = useState('');
-  const [uf, setUf] = useState('SP');
-  const [formError, setFormError] = useState('');
-
-  // User Form
-  const [userName, setUserName] = useState('');
-  const [userEmail, setUserEmail] = useState('');
-  const [userRole, setUserRole] = useState<UserRole>('BUYER');
-  const [userLimit, setUserLimit] = useState<number>(5000);
-
   const currentCompany: CompanyAccount = company || {
     id: 'comp-1',
     cnpj: '12.345.678/0001-95',
@@ -228,81 +201,10 @@ export default function ClientesEFiliaisPage() {
     branches: []
   };
 
-  const handleSearchBranchCNPJ = async () => {
-    setFormError('');
-    const clean = cnpjInput.replace(/\D/g, '');
-    if (clean.length !== 14) {
-      setFormError('Informe um CNPJ válido com 14 dígitos.');
-      return;
-    }
-    setIsSearchingCNPJ(true);
-    try {
-      const data = await fetchCNPJData(clean);
-      setNomeFilial(data.nomeFantasia || data.razaoSocial || `Filial ${data.endereco?.cidade || ''}`);
-      setIeInput(data.inscricaoEstadual || '');
-      if (data.endereco) {
-        setLogradouro(data.endereco.logradouro || '');
-        setNumero(data.endereco.numero || '');
-        setBairro(data.endereco.bairro || '');
-        setCidade(data.endereco.cidade || '');
-        setUf(data.endereco.uf || 'SP');
-        setCepInput(data.endereco.cep || '');
-      }
-      showToast('Dados do CNPJ preenchidos automaticamente!', 'success');
-    } catch {
-      setFormError('Não foi possível consultar automaticamente. Preencha os campos manualmente.');
-    } finally {
-      setIsSearchingCNPJ(false);
-    }
+  const handleToggleBranchActive = (id: string) => {
+    setBranches(prev => prev.map(b => b.id === id ? { ...b, isActive: !b.isActive } : b));
+    showToast('Status da filial atualizado.', 'info');
   };
-
-  const handleAddBranch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!cnpjInput || !nomeFilial || !logradouro || !cidade || !cepInput) {
-      setFormError('Preencha os campos obrigatórios.');
-      return;
-    }
-
-    const newBranch: BranchItem = {
-      id: `branch-${Date.now()}`,
-      cnpj: cnpjInput,
-      nomeFilial: nomeFilial,
-      inscricaoEstadual: ieInput || 'ISENTO',
-      isActive: true,
-      address: {
-        logradouro: logradouro,
-        numero: numero || 'S/N',
-        bairro: bairro || 'Centro',
-        cidade: cidade,
-        uf: uf,
-        cep: cepInput,
-        pais: 'Brasil'
-      }
-    };
-
-    setBranches(prev => [newBranch, ...prev]);
-    setIsBranchModalOpen(false);
-    showToast(`Filial "${nomeFilial}" cadastrada com sucesso!`, 'success');
-
-    authService.addCompanyBranch(currentCompany.id || 'comp-1', {
-      cnpj: cnpjInput,
-      nomeFilial,
-      inscricaoEstadual: ieInput || 'ISENTO',
-      address: newBranch.address
-    }).catch(() => {});
-
-    // Reset
-    setCnpjInput('');
-    setNomeFilial('');
-    setIeInput('');
-    setCepInput('');
-    setLogradouro('');
-    setNumero('');
-    setBairro('');
-    setCidade('');
-    setFormError('');
-  };
-
   const handleDeleteBranch = (id: string, name: string) => {
     if (confirm(`Deseja realmente desvincular a filial "${name}"?`)) {
       setBranches(prev => prev.filter(b => b.id !== id));
@@ -311,42 +213,6 @@ export default function ClientesEFiliaisPage() {
     }
   };
 
-  const handleToggleBranchActive = (id: string) => {
-    setBranches(prev => prev.map(b => b.id === id ? { ...b, isActive: !b.isActive } : b));
-    showToast('Status da filial atualizado.', 'info');
-  };
-
-  // Add User handler
-  const handleAddUser = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!userName || !userEmail) return;
-
-    const newUser: CompanyUser = {
-      id: `user-${Date.now()}`,
-      companyId: currentCompany.id || 'comp-1',
-      name: userName,
-      email: userEmail,
-      role: userRole,
-      spendingLimitPerOrder: Number(userLimit),
-      isActive: true,
-    };
-
-    setTeamUsers(prev => [newUser, ...prev]);
-    setIsUserModalOpen(false);
-    showToast(`Usuário "${userName}" adicionado à equipe com alçada de R$ ${userLimit.toLocaleString('pt-BR')}!`, 'success');
-
-    authService.createCompanyUser(currentCompany.id || 'comp-1', {
-      name: userName,
-      email: userEmail,
-      role: userRole,
-      spendingLimitPerOrder: Number(userLimit)
-    }).catch(() => {});
-
-    setUserName('');
-    setUserEmail('');
-    setUserRole('BUYER');
-    setUserLimit(5000);
-  };
 
   const handleToggleUserActive = (id: string) => {
     setTeamUsers(prev => prev.map(u => u.id === id ? { ...u, isActive: !u.isActive } : u));
@@ -392,25 +258,25 @@ export default function ClientesEFiliaisPage() {
         activeBadge={`${branches.length} Filiais • ${teamUsers.length} Usuários`}
         actions={
           activeTab === 'branches' ? (
-            <button
-              onClick={() => setIsBranchModalOpen(true)}
-              className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-black px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-sm"
+            <Link
+              href="/conta/clientes/nova-filial"
+              className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-black px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-sm"
             >
               <Plus className="w-4 h-4 text-amber-300" />
               <span>Adicionar Nova Filial (CNPJ)</span>
-            </button>
+            </Link>
           ) : activeTab === 'team' ? (
-            <button
-              onClick={() => setIsUserModalOpen(true)}
-              className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-black px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-sm"
+            <Link
+              href="/conta/clientes/novo-usuario"
+              className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-black px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-sm"
             >
               <Plus className="w-4 h-4 text-amber-300" />
-              <span>Cadastrar Novo Comprador / Aprovador</span>
-            </button>
+              <span>Convidar Colaborador</span>
+            </Link>
           ) : (
             <button
               onClick={openEditCompanyModal}
-              className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-black px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-sm"
+              className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-black px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-sm"
             >
               <Edit2 className="w-4 h-4 text-amber-300" />
               <span>Editar Matriz Fiscal</span>
@@ -427,7 +293,7 @@ export default function ClientesEFiliaisPage() {
             onClick={() => setActiveTab('branches')}
             className={`flex-1 min-w-[200px] py-2.5 px-4 rounded-xl text-xs font-black transition-all flex items-center justify-center gap-2 cursor-pointer ${
               activeTab === 'branches'
-                ? 'bg-[#004e38] text-white shadow-xs'
+                ? 'bg-[#2563eb] text-white shadow-xs'
                 : 'text-gray-600 hover:bg-gray-100'
             }`}
           >
@@ -439,7 +305,7 @@ export default function ClientesEFiliaisPage() {
             onClick={() => setActiveTab('team')}
             className={`flex-1 min-w-[200px] py-2.5 px-4 rounded-xl text-xs font-black transition-all flex items-center justify-center gap-2 cursor-pointer ${
               activeTab === 'team'
-                ? 'bg-[#004e38] text-white shadow-xs'
+                ? 'bg-[#2563eb] text-white shadow-xs'
                 : 'text-gray-600 hover:bg-gray-100'
             }`}
           >
@@ -451,7 +317,7 @@ export default function ClientesEFiliaisPage() {
             onClick={() => setActiveTab('fiscal')}
             className={`flex-1 min-w-[200px] py-2.5 px-4 rounded-xl text-xs font-black transition-all flex items-center justify-center gap-2 cursor-pointer ${
               activeTab === 'fiscal'
-                ? 'bg-[#004e38] text-white shadow-xs'
+                ? 'bg-[#2563eb] text-white shadow-xs'
                 : 'text-gray-600 hover:bg-gray-100'
             }`}
           >
@@ -468,12 +334,12 @@ export default function ClientesEFiliaisPage() {
             <div className="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-2xs space-y-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-100 pb-4 gap-2">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl bg-[#004e38] text-white flex items-center justify-center font-bold shadow-xs">
+                  <div className="w-12 h-12 rounded-2xl bg-[#2563eb] text-white flex items-center justify-center font-bold shadow-xs">
                     <Building2 className="w-6 h-6" />
                   </div>
                   <div>
                     <div className="flex items-center gap-2">
-                      <span className="bg-emerald-100 text-[#004e38] text-[10px] font-black px-2 py-0.5 rounded-full uppercase border border-emerald-200">
+                      <span className="bg-blue-100 text-[#2563eb] text-[10px] font-black px-2 py-0.5 rounded-full uppercase border border-blue-200">
                         Matriz Principal (Sede Corporativa)
                       </span>
                       <span className="bg-gray-100 text-gray-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
@@ -497,7 +363,7 @@ export default function ClientesEFiliaisPage() {
                 </div>
                 <div className="bg-gray-50 p-3 rounded-2xl border border-gray-100">
                   <span className="text-gray-400 font-bold text-[10px] uppercase block">Limite de Faturamento</span>
-                  <p className="font-black text-[#004e38] text-sm mt-0.5">
+                  <p className="font-black text-[#2563eb] text-sm mt-0.5">
                     R$ {currentCompany.creditLimitTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                   </p>
                 </div>
@@ -518,7 +384,7 @@ export default function ClientesEFiliaisPage() {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Pesquisar filial por nome, CNPJ, cidade ou UF..."
-                  className="w-full bg-[#f5f6f6] rounded-full py-2.5 pl-4 pr-10 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                  className="w-full bg-[#f5f6f6] rounded-full py-2.5 pl-4 pr-10 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
                 />
                 <Search className="w-4 h-4 text-gray-400 absolute right-3.5 top-3" />
               </div>
@@ -530,12 +396,12 @@ export default function ClientesEFiliaisPage() {
             {/* Filiais Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredBranches.map(branch => (
-                <div key={branch.id} className="bg-white p-6 rounded-3xl border border-gray-200 shadow-2xs space-y-4 hover:border-[#004e38] transition-all flex flex-col justify-between">
+                <div key={branch.id} className="bg-white p-6 rounded-3xl border border-gray-200 shadow-2xs space-y-4 hover:border-[#2563eb] transition-all flex flex-col justify-between">
                   <div className="space-y-3">
                     <div className="flex items-start justify-between border-b border-gray-100 pb-3">
                       <div>
                         <span className={`text-[10px] font-black px-2 py-0.5 rounded uppercase ${
-                          branch.isActive ? 'text-emerald-800 bg-emerald-50 border border-emerald-200' : 'text-gray-500 bg-gray-100'
+                          branch.isActive ? 'text-blue-800 bg-blue-50 border border-blue-200' : 'text-gray-500 bg-gray-100'
                         }`}>
                           {branch.isActive ? '✓ Habilitada para NF-e' : 'Bloqueada'}
                         </span>
@@ -547,7 +413,7 @@ export default function ClientesEFiliaisPage() {
                           type="button"
                           onClick={() => handleToggleBranchActive(branch.id)}
                           className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
-                            branch.isActive ? 'text-emerald-600 hover:bg-emerald-50' : 'text-gray-400 hover:bg-gray-100'
+                            branch.isActive ? 'text-blue-600 hover:bg-blue-50' : 'text-gray-400 hover:bg-gray-100'
                           }`}
                           title={branch.isActive ? 'Desativar filial' : 'Ativar filial'}
                         >
@@ -571,12 +437,12 @@ export default function ClientesEFiliaisPage() {
                       </div>
                       <div className="bg-[#f8fafc] p-2.5 rounded-xl">
                         <span className="text-gray-400 text-[10px] uppercase font-bold block">UF de Entrega</span>
-                        <p className="font-bold text-[#004e38] text-[11px]">{branch.address.cidade} - {branch.address.uf}</p>
+                        <p className="font-bold text-[#2563eb] text-[11px]">{branch.address.cidade} - {branch.address.uf}</p>
                       </div>
                     </div>
 
                     <div className="pt-2 text-xs text-gray-600 flex items-start gap-2 border-t border-gray-100">
-                      <MapPin className="w-4 h-4 text-[#004e38] shrink-0 mt-0.5" />
+                      <MapPin className="w-4 h-4 text-[#2563eb] shrink-0 mt-0.5" />
                       <span className="line-clamp-2">
                         {branch.address.logradouro}, {branch.address.numero} - {branch.address.bairro} (CEP: {branch.address.cep})
                       </span>
@@ -585,7 +451,7 @@ export default function ClientesEFiliaisPage() {
 
                   <div className="pt-2 border-t border-gray-100 flex items-center justify-between text-[11px]">
                     <span className="text-gray-400">Entrega Multi-CD:</span>
-                    <span className="text-[#004e38] font-bold">CD {branch.address.uf === 'SP' ? 'Sudeste (SP)' : branch.address.uf === 'SC' ? 'Sul (SC)' : 'Nordeste (BA)'}</span>
+                    <span className="text-[#2563eb] font-bold">CD {branch.address.uf === 'SP' ? 'Sudeste (SP)' : branch.address.uf === 'SC' ? 'Sul (SC)' : 'Nordeste (BA)'}</span>
                   </div>
                 </div>
               ))}
@@ -598,9 +464,9 @@ export default function ClientesEFiliaisPage() {
           <div className="space-y-6 animate-in fade-in duration-150">
             
             {/* Info Banner Alçadas B2B */}
-            <div className="bg-emerald-50 border border-emerald-200 p-5 rounded-3xl text-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="bg-blue-50 border border-blue-200 p-5 rounded-3xl text-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-[#004e38] text-white flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-2xl bg-[#2563eb] text-white flex items-center justify-center shrink-0">
                   <Shield className="w-5 h-5" />
                 </div>
                 <div>
@@ -613,7 +479,7 @@ export default function ClientesEFiliaisPage() {
 
               <Link
                 href="/pedidos-aprovacao"
-                className="bg-[#004e38] hover:bg-[#033627] text-white font-black text-xs px-5 py-2.5 rounded-full transition-all flex items-center gap-1.5 shrink-0 shadow-xs"
+                className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-black text-xs px-5 py-2.5 rounded-full transition-all flex items-center gap-1.5 shrink-0 shadow-xs"
               >
                 <span>Central de Aprovações</span>
                 <ExternalLink className="w-3.5 h-3.5" />
@@ -634,7 +500,7 @@ export default function ClientesEFiliaisPage() {
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     placeholder="Filtrar colaboradores..."
-                    className="w-full bg-[#f5f6f6] rounded-full py-2 pl-3 pr-8 text-xs font-medium focus:outline-none focus:ring-1 focus:ring-[#004e38]"
+                    className="w-full bg-[#f5f6f6] rounded-full py-2 pl-3 pr-8 text-xs font-medium focus:outline-none focus:ring-1 focus:ring-[#2563eb]"
                   />
                   <Search className="w-3.5 h-3.5 text-gray-400 absolute right-3 top-2.5" />
                 </div>
@@ -642,7 +508,7 @@ export default function ClientesEFiliaisPage() {
 
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-[#004e38] text-white font-extrabold uppercase text-[10px] tracking-wider">
+                  <thead className="bg-[#2563eb] text-white font-extrabold uppercase text-[10px] tracking-wider">
                     <tr>
                       <th className="p-4">Colaborador / E-mail</th>
                       <th className="p-4">Papel no Sistema</th>
@@ -660,14 +526,14 @@ export default function ClientesEFiliaisPage() {
                         <tr key={u.id} className="hover:bg-[#f8fafc] transition-colors">
                           <td className="p-4">
                             <div className="flex items-center gap-3">
-                              <div className="w-9 h-9 rounded-xl bg-emerald-50 text-[#004e38] font-black flex items-center justify-center text-xs shrink-0 border border-emerald-200">
+                              <div className="w-9 h-9 rounded-xl bg-blue-50 text-[#2563eb] font-black flex items-center justify-center text-xs shrink-0 border border-blue-200">
                                 {u.name.charAt(0)}
                               </div>
                               <div>
                                 <span className="font-extrabold text-gray-900 block text-xs flex items-center gap-1.5">
                                   {u.name}
                                   {isCurrentUser && (
-                                    <span className="bg-[#004e38] text-white text-[9px] font-mono px-1.5 py-0.2 rounded-full">
+                                    <span className="bg-[#2563eb] text-white text-[9px] font-mono px-1.5 py-0.2 rounded-full">
                                       Você
                                     </span>
                                   )}
@@ -691,19 +557,19 @@ export default function ClientesEFiliaisPage() {
                               </span>
                             )}
                             {u.role === 'BUYER' && (
-                              <span className="bg-emerald-100 text-emerald-900 border border-emerald-200 font-black text-[10px] px-2.5 py-1 rounded-full">
+                              <span className="bg-blue-100 text-blue-900 border border-blue-200 font-black text-[10px] px-2.5 py-1 rounded-full">
                                 🛍️ Comprador B2B
                               </span>
                             )}
                           </td>
 
-                          <td className="p-4 text-right font-mono font-black text-sm text-[#004e38]">
+                          <td className="p-4 text-right font-mono font-black text-sm text-[#2563eb]">
                             R$ {(u.spendingLimitPerOrder || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                           </td>
 
                           <td className="p-4 text-center">
                             <span className={`font-bold text-[10px] px-2 py-0.5 rounded-full ${
-                              u.isActive ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'
+                              u.isActive ? 'bg-blue-100 text-blue-800' : 'bg-red-100 text-red-800'
                             }`}>
                               {u.isActive ? '✓ Ativo' : 'Bloqueado'}
                             </span>
@@ -716,7 +582,7 @@ export default function ClientesEFiliaisPage() {
                               className={`text-[11px] font-bold px-3 py-1.5 rounded-full border transition-all cursor-pointer ${
                                 isCurrentUser
                                   ? 'bg-gray-100 text-gray-500 border-gray-200 cursor-default'
-                                  : 'bg-white hover:bg-emerald-50 text-[#004e38] border-emerald-300 shadow-2xs hover:scale-105'
+                                  : 'bg-white hover:bg-blue-50 text-[#2563eb] border-blue-300 shadow-2xs hover:scale-105'
                               }`}
                               disabled={isCurrentUser}
                             >
@@ -729,7 +595,7 @@ export default function ClientesEFiliaisPage() {
                               <button
                                 type="button"
                                 onClick={() => handleToggleUserActive(u.id)}
-                                className="p-1.5 rounded-lg text-gray-400 hover:text-emerald-700 hover:bg-emerald-50 transition-colors cursor-pointer"
+                                className="p-1.5 rounded-lg text-gray-400 hover:text-blue-700 hover:bg-blue-50 transition-colors cursor-pointer"
                                 title="Alterar status de acesso"
                               >
                                 <UserCheck className="w-4 h-4" />
@@ -765,7 +631,7 @@ export default function ClientesEFiliaisPage() {
               </div>
               <button
                 onClick={openEditCompanyModal}
-                className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-bold px-5 py-2 rounded-full transition-colors flex items-center gap-1.5 cursor-pointer"
+                className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-bold px-5 py-2 rounded-full transition-colors flex items-center gap-1.5 cursor-pointer"
               >
                 <Edit2 className="w-3.5 h-3.5" />
                 <span>Editar Dados</span>
@@ -785,7 +651,7 @@ export default function ClientesEFiliaisPage() {
 
               <div className="bg-[#f8fafc] p-4 rounded-2xl border border-gray-200 space-y-1">
                 <span className="text-gray-400 font-bold uppercase text-[10px]">CNPJ Raiz</span>
-                <p className="font-mono font-extrabold text-[#004e38] text-sm">{currentCompany.cnpj}</p>
+                <p className="font-mono font-extrabold text-[#2563eb] text-sm">{currentCompany.cnpj}</p>
               </div>
 
               <div className="bg-[#f8fafc] p-4 rounded-2xl border border-gray-200 space-y-1">
@@ -800,7 +666,7 @@ export default function ClientesEFiliaisPage() {
 
               <div className="bg-[#f8fafc] p-4 rounded-2xl border border-gray-200 space-y-1">
                 <span className="text-gray-400 font-bold uppercase text-[10px]">Regime Tributário</span>
-                <p className="font-black text-emerald-800 text-sm">{currentCompany.regimeTributario}</p>
+                <p className="font-black text-blue-800 text-sm">{currentCompany.regimeTributario}</p>
               </div>
 
               <div className="bg-[#f8fafc] p-4 rounded-2xl border border-gray-200 space-y-1">
@@ -812,7 +678,7 @@ export default function ClientesEFiliaisPage() {
 
               <div className="bg-[#f8fafc] p-4 rounded-2xl border border-gray-200 space-y-1">
                 <span className="text-gray-400 font-bold uppercase text-[10px]">Status de Homologação</span>
-                <p className="font-black text-emerald-700 text-sm">Aprovado para Faturamento a Prazo</p>
+                <p className="font-black text-blue-700 text-sm">Aprovado para Faturamento a Prazo</p>
               </div>
 
               <div className="bg-[#f8fafc] p-4 rounded-2xl border border-gray-200 space-y-1">
@@ -821,11 +687,11 @@ export default function ClientesEFiliaisPage() {
               </div>
             </div>
 
-            <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 text-xs text-emerald-950 flex items-center gap-3">
-              <Sparkles className="w-5 h-5 text-[#004e38] shrink-0" />
+            <div className="p-4 bg-blue-50 rounded-2xl border border-blue-200 text-xs text-blue-950 flex items-center gap-3">
+              <Sparkles className="w-5 h-5 text-[#2563eb] shrink-0" />
               <span>
                 Para alterar o regime tributário ou solicitar isenção fiscal interestadual, consulte a página de{' '}
-                <Link href="/conta/analise-tributaria" className="font-black text-[#004e38] underline">
+                <Link href="/conta/analise-tributaria" className="font-black text-[#2563eb] underline">
                   Análise e Relatórios Tributários
                 </Link>.
               </span>
@@ -834,286 +700,6 @@ export default function ClientesEFiliaisPage() {
         )}
 
       </div>
-
-      {/* MODAL 1: ADICIONAR NOVA FILIAL */}
-      {isBranchModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200 font-sans">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl border border-gray-100 max-h-[90vh] overflow-y-auto">
-            
-            <div className="flex items-center justify-between border-b border-gray-100 pb-4">
-              <div className="flex items-center gap-2.5">
-                <div className="w-10 h-10 rounded-2xl bg-emerald-100 text-[#004e38] flex items-center justify-center font-bold">
-                  <Building2 className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-black text-gray-900">Cadastrar Nova Filial / CNPJ</h3>
-                  <p className="text-xs text-gray-400">Vincule um novo CNPJ para entregas e faturamento.</p>
-                </div>
-              </div>
-              <button
-                onClick={() => setIsBranchModalOpen(false)}
-                className="p-1.5 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 transition-colors cursor-pointer"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            {formError && (
-              <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-xs font-bold">
-                {formError}
-              </div>
-            )}
-
-            <form onSubmit={handleAddBranch} className="space-y-4 text-xs">
-              <div>
-                <label className="font-bold text-gray-700 block mb-1">CNPJ da Filial *</label>
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    required
-                    value={cnpjInput}
-                    onChange={(e) => setCnpjInput(e.target.value)}
-                    placeholder="00.000.000/0000-00"
-                    className="flex-1 bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-mono font-bold focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                  />
-                  <button
-                    type="button"
-                    onClick={handleSearchBranchCNPJ}
-                    disabled={isSearchingCNPJ}
-                    className="bg-[#004e38] text-white font-bold px-4 py-2.5 rounded-xl hover:bg-[#033627] transition-colors flex items-center gap-1 shrink-0 cursor-pointer disabled:opacity-50"
-                  >
-                    {isSearchingCNPJ ? <Loader2 className="w-4 h-4 animate-spin" /> : <Search className="w-4 h-4" />}
-                    <span>Puxar Dados</span>
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <label className="font-bold text-gray-700 block mb-1">Identificação da Filial / Apelido *</label>
-                <input
-                  type="text"
-                  required
-                  value={nomeFilial}
-                  onChange={(e) => setNomeFilial(e.target.value)}
-                  placeholder="ex: Filial Curitiba / Depósito Sul"
-                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-medium focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="font-bold text-gray-700 block mb-1">Inscrição Estadual</label>
-                  <input
-                    type="text"
-                    value={ieInput}
-                    onChange={(e) => setIeInput(e.target.value)}
-                    placeholder="ex: 123.456.789"
-                    className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-mono focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                  />
-                </div>
-                <div>
-                  <label className="font-bold text-gray-700 block mb-1">CEP *</label>
-                  <input
-                    type="text"
-                    required
-                    value={cepInput}
-                    onChange={(e) => setCepInput(e.target.value)}
-                    placeholder="00000-000"
-                    className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-mono focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-3">
-                <div className="col-span-2">
-                  <label className="font-bold text-gray-700 block mb-1">Logradouro *</label>
-                  <input
-                    type="text"
-                    required
-                    value={logradouro}
-                    onChange={(e) => setLogradouro(e.target.value)}
-                    placeholder="Rua / Avenida"
-                    className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-medium focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                  />
-                </div>
-                <div>
-                  <label className="font-bold text-gray-700 block mb-1">Número</label>
-                  <input
-                    type="text"
-                    value={numero}
-                    onChange={(e) => setNumero(e.target.value)}
-                    placeholder="1000"
-                    className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-medium focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-3">
-                <div>
-                  <label className="font-bold text-gray-700 block mb-1">Bairro</label>
-                  <input
-                    type="text"
-                    value={bairro}
-                    onChange={(e) => setBairro(e.target.value)}
-                    placeholder="Bairro"
-                    className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-medium focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                  />
-                </div>
-                <div>
-                  <label className="font-bold text-gray-700 block mb-1">Cidade *</label>
-                  <input
-                    type="text"
-                    required
-                    value={cidade}
-                    onChange={(e) => setCidade(e.target.value)}
-                    placeholder="Cidade"
-                    className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2.5 font-medium focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                  />
-                </div>
-                <div>
-                  <label className="font-bold text-gray-700 block mb-1">UF *</label>
-                  <input
-                    type="text"
-                    required
-                    maxLength={2}
-                    value={uf}
-                    onChange={(e) => setUf(e.target.value.toUpperCase())}
-                    placeholder="SP"
-                    className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2.5 font-bold uppercase focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                  />
-                </div>
-              </div>
-
-              <div className="pt-4 flex items-center justify-between border-t border-gray-100">
-                <button
-                  type="button"
-                  onClick={() => setIsBranchModalOpen(false)}
-                  className="text-gray-500 font-bold hover:text-gray-900 cursor-pointer"
-                >
-                  Cancelar
-                </button>
-
-                <button
-                  type="submit"
-                  className="bg-[#004e38] hover:bg-[#033627] text-white font-bold px-6 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-xs"
-                >
-                  <CheckCircle2 className="w-4 h-4 text-amber-300" />
-                  <span>Salvar Filial</span>
-                </button>
-              </div>
-            </form>
-
-          </div>
-        </div>
-      )}
-
-      {/* MODAL 2: CADASTRAR NOVO USUÁRIO & ALÇADA */}
-      {isUserModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200 font-sans">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 space-y-6 shadow-2xl border border-gray-100">
-            
-            <div className="flex items-center justify-between border-b border-gray-100 pb-4">
-              <div className="flex items-center gap-2.5">
-                <div className="w-10 h-10 rounded-2xl bg-emerald-100 text-[#004e38] flex items-center justify-center font-bold">
-                  <Users className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-black text-gray-900">Cadastrar Colaborador & Alçada</h3>
-                  <p className="text-xs text-gray-400">Defina o limite de faturamento individual por pedido.</p>
-                </div>
-              </div>
-              <button
-                onClick={() => setIsUserModalOpen(false)}
-                className="p-1.5 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-600 transition-colors cursor-pointer"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-
-            <form onSubmit={handleAddUser} className="space-y-4 text-xs">
-              <div>
-                <label className="font-bold text-gray-700 block mb-1">Nome Completo do Colaborador *</label>
-                <input
-                  type="text"
-                  required
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                  placeholder="ex: Roberto Guimarães"
-                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-bold focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                />
-              </div>
-
-              <div>
-                <label className="font-bold text-gray-700 block mb-1">E-mail Corporativo *</label>
-                <input
-                  type="email"
-                  required
-                  value={userEmail}
-                  onChange={(e) => setUserEmail(e.target.value)}
-                  placeholder="roberto.compras@empresa.com.br"
-                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-medium focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="font-bold text-gray-700 block mb-1">Papel / Função *</label>
-                  <select
-                    value={userRole}
-                    onChange={(e) => {
-                      const role = e.target.value as UserRole;
-                      setUserRole(role);
-                      if (role === 'BUYER') setUserLimit(5000);
-                      if (role === 'APPROVER') setUserLimit(500000);
-                      if (role === 'ADMIN') setUserLimit(500000);
-                    }}
-                    className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2.5 font-bold focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                  >
-                    <option value="BUYER">Comprador B2B</option>
-                    <option value="APPROVER">Aprovador / Financeiro</option>
-                    <option value="ADMIN">Administrador Master</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="font-bold text-gray-700 block mb-1">Limite por Pedido (R$) *</label>
-                  <input
-                    type="number"
-                    step="500"
-                    required
-                    value={userLimit}
-                    onChange={(e) => setUserLimit(Number(e.target.value))}
-                    className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2.5 font-mono font-bold focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                  />
-                </div>
-              </div>
-
-              <div className="p-3 bg-gray-50 rounded-xl border border-gray-200 text-[11px] text-gray-500 leading-relaxed">
-                ℹ️ Compradores com alçada até R$ {userLimit.toLocaleString('pt-BR')} podem fechar pedidos diretamente. Acima desse valor, o pedido exigirá liberação na Central de Aprovações.
-              </div>
-
-              <div className="pt-4 flex items-center justify-between border-t border-gray-100">
-                <button
-                  type="button"
-                  onClick={() => setIsUserModalOpen(false)}
-                  className="text-gray-500 font-bold hover:text-gray-900 cursor-pointer"
-                >
-                  Cancelar
-                </button>
-
-                <button
-                  type="submit"
-                  className="bg-[#004e38] hover:bg-[#033627] text-white font-bold px-6 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-xs"
-                >
-                  <CheckCircle2 className="w-4 h-4 text-amber-300" />
-                  <span>Cadastrar Usuário</span>
-                </button>
-              </div>
-            </form>
-
-          </div>
-        </div>
-      )}
 
     </div>
   );

@@ -29,19 +29,19 @@ export default function NfeModal({
       <div className="bg-white text-gray-900 rounded-3xl shadow-2xl border border-gray-200 w-full max-w-2xl overflow-hidden relative">
         
         {/* Header */}
-        <div className="bg-[#0b1d16] text-white px-6 py-4 flex items-center justify-between">
+        <div className="bg-[#0f172a] text-white px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-emerald-600 text-white font-black flex items-center justify-center text-xs shadow-sm">
+            <div className="w-8 h-8 rounded-lg bg-blue-600 text-white font-black flex items-center justify-center text-xs shadow-sm">
               NFe
             </div>
             <div>
               <h3 className="text-sm font-black tracking-tight">DANFE & Central de Documentos Fiscais</h3>
-              <p className="text-[10px] text-emerald-300">Emissão Autorizada pela SEFAZ • Chave Eletrônica de Acesso</p>
+              <p className="text-[10px] text-blue-300">Emissão Autorizada pela SEFAZ • Chave Eletrônica de Acesso</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1 hover:bg-emerald-900/60 rounded-lg text-emerald-200 hover:text-white transition-colors"
+            className="p-1 hover:bg-blue-900/60 rounded-lg text-blue-200 hover:text-white transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -51,15 +51,15 @@ export default function NfeModal({
         <div className="p-6 space-y-4 text-xs">
           
           {/* SEFAZ Status Badge */}
-          <div className="bg-emerald-50 p-3.5 rounded-2xl border border-emerald-200 flex items-center justify-between">
+          <div className="bg-blue-50 p-3.5 rounded-2xl border border-blue-200 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+              <CheckCircle2 className="w-5 h-5 text-blue-600 shrink-0" />
               <div>
-                <span className="font-extrabold text-emerald-950 block">Uso Autorizado pela SEFAZ SP</span>
-                <span className="text-[10px] text-emerald-800 font-mono">Protocolo de Autorização: 135260098412948</span>
+                <span className="font-extrabold text-blue-950 block">Uso Autorizado pela SEFAZ SP</span>
+                <span className="text-[10px] text-blue-800 font-mono">Protocolo de Autorização: 135260098412948</span>
               </div>
             </div>
-            <span className="bg-emerald-600 text-white text-[10px] font-black px-2.5 py-1 rounded-lg uppercase tracking-wide">
+            <span className="bg-blue-600 text-white text-[10px] font-black px-2.5 py-1 rounded-lg uppercase tracking-wide">
               AUTORIZADA
             </span>
           </div>
@@ -93,7 +93,7 @@ export default function NfeModal({
 
             <div className="bg-gray-50 p-3 rounded-xl border border-gray-200">
               <span className="text-[10px] font-semibold text-gray-400 block">Valor Total Nota</span>
-              <span className="font-black text-emerald-900 text-xs">
+              <span className="font-black text-blue-900 text-xs">
                 R$ {totalValue.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
               </span>
             </div>
@@ -102,7 +102,7 @@ export default function NfeModal({
           {/* Fiscal Tax Breakdown */}
           <div className="bg-gray-50/80 p-4 rounded-2xl border border-gray-200 text-gray-700 space-y-1.5">
             <h4 className="font-extrabold text-gray-900 text-xs flex items-center gap-1.5 border-b border-gray-200 pb-2">
-              <Building2 className="w-4 h-4 text-emerald-600" />
+              <Building2 className="w-4 h-4 text-blue-600" />
               Destinatário: Tech Solutions LTDA (CNPJ: 12.345.678/0001-90)
             </h4>
             <div className="grid grid-cols-3 gap-2 text-[11px] pt-1">
@@ -116,7 +116,7 @@ export default function NfeModal({
               </div>
               <div>
                 <span className="text-gray-400 block">ICMS-ST Retido:</span>
-                <span className="font-bold text-emerald-900">R$ 1.280,00</span>
+                <span className="font-bold text-blue-900">R$ 1.280,00</span>
               </div>
             </div>
           </div>
@@ -141,7 +141,7 @@ export default function NfeModal({
 
               <button
                 onClick={() => alert('Download da DANFE em PDF iniciado.')}
-                className="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold flex items-center gap-2 transition-colors shadow-md"
+                className="px-5 py-2.5 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-extrabold flex items-center gap-2 transition-colors shadow-md"
               >
                 <Download className="w-4 h-4" />
                 <span>Baixar DANFE (PDF)</span>

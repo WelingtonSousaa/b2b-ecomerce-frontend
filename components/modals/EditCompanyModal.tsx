@@ -78,7 +78,7 @@ export default function EditCompanyModal() {
       <div className="bg-white text-gray-900 rounded-3xl shadow-2xl border border-gray-100 w-full max-w-2xl overflow-hidden relative max-h-[90vh] flex flex-col">
         
         {/* Modal Header */}
-        <div className="bg-[#004e38] text-white p-6 relative shrink-0">
+        <div className="bg-[#2563eb] text-white p-6 relative shrink-0">
           <button
             onClick={closeEditCompanyModal}
             className="absolute top-5 right-5 p-1 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
@@ -92,7 +92,7 @@ export default function EditCompanyModal() {
             </div>
             <div>
               <h3 className="text-xl font-extrabold tracking-tight">Editar Perfil & Identidade da Empresa</h3>
-              <p className="text-xs text-emerald-100 mt-0.5">
+              <p className="text-xs text-blue-100 mt-0.5">
                 Atualize a marca, razão social, dados fiscais e endereço cadastrados na plataforma.
               </p>
             </div>
@@ -105,7 +105,7 @@ export default function EditCompanyModal() {
           {/* Section 1: Marca & Identidade Visual */}
           <div className="space-y-3 border-b border-gray-100 pb-5">
             <div className="flex items-center gap-2">
-              <Briefcase className="w-4 h-4 text-[#004e38]" />
+              <Briefcase className="w-4 h-4 text-[#2563eb]" />
               <h4 className="text-sm font-bold text-gray-900">Identidade Visual & Logotipo</h4>
             </div>
 
@@ -115,7 +115,7 @@ export default function EditCompanyModal() {
                 {logoUrl ? (
                   <Image src={logoUrl} alt="Logo da Empresa" fill className="object-contain p-2" />
                 ) : (
-                  <Building2 className="w-8 h-8 text-[#004e38]" />
+                  <Building2 className="w-8 h-8 text-[#2563eb]" />
                 )}
               </div>
 
@@ -126,7 +126,7 @@ export default function EditCompanyModal() {
                   value={logoUrl}
                   onChange={(e) => setLogoUrl(e.target.value)}
                   placeholder="https://suaempresa.com.br/logo.png"
-                  className="w-full bg-white border border-gray-200 rounded-xl px-3.5 py-2 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                  className="w-full bg-white border border-gray-200 rounded-xl px-3.5 py-2 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
                 />
                 <p className="text-[10px] text-gray-400">
                   O logotipo será exibido na barra de navegação, relatórios e cotações da plataforma.
@@ -138,7 +138,7 @@ export default function EditCompanyModal() {
           {/* Section 2: Dados Corporativos Fiscais */}
           <div className="space-y-4 border-b border-gray-100 pb-5">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-[#004e38]" />
+              <ShieldCheck className="w-4 h-4 text-[#2563eb]" />
               <h4 className="text-sm font-bold text-gray-900">Dados Fiscais & Cadastro (CNPJ)</h4>
             </div>
 
@@ -150,7 +150,7 @@ export default function EditCompanyModal() {
                   required
                   value={nomeFantasia}
                   onChange={(e) => setNomeFantasia(e.target.value)}
-                  className="w-full bg-[#f5f6f6] rounded-xl px-3.5 py-2.5 text-xs font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                  className="w-full bg-[#f5f6f6] rounded-xl px-3.5 py-2.5 text-xs font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
                 />
               </div>
 
@@ -161,7 +161,7 @@ export default function EditCompanyModal() {
                   required
                   value={razaoSocial}
                   onChange={(e) => setRazaoSocial(e.target.value)}
-                  className="w-full bg-[#f5f6f6] rounded-xl px-3.5 py-2.5 text-xs font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                  className="w-full bg-[#f5f6f6] rounded-xl px-3.5 py-2.5 text-xs font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
                 />
               </div>
             </div>
@@ -241,7 +241,7 @@ export default function EditCompanyModal() {
           {/* Section 3: Endereço Fiscal */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-[#004e38]" />
+              <MapPin className="w-4 h-4 text-[#2563eb]" />
               <h4 className="text-sm font-bold text-gray-900">Endereço Fiscal Principal</h4>
             </div>
 
@@ -333,7 +333,7 @@ export default function EditCompanyModal() {
 
             <button
               type="submit"
-              className="bg-[#004e38] hover:bg-[#033627] text-white font-bold px-8 py-3.5 rounded-full transition-all shadow-sm flex items-center gap-2 cursor-pointer"
+              className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold px-8 py-3.5 rounded-full transition-all shadow-sm flex items-center gap-2 cursor-pointer"
             >
               {isSavedSuccess ? (
                 <>

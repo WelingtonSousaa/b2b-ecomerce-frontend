@@ -46,7 +46,7 @@ export default function AuthRequiredModal() {
       <div className="bg-white text-gray-900 rounded-3xl shadow-2xl border border-gray-100 w-full max-w-lg overflow-hidden relative">
         
         {/* Header Bar */}
-        <div className="bg-[#004e38] text-white p-7 sm:p-8 relative">
+        <div className="bg-[#2563eb] text-white p-7 sm:p-8 relative">
           <button
             onClick={closeAuthModal}
             className="absolute top-6 right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer"
@@ -67,7 +67,7 @@ export default function AuthRequiredModal() {
             Entrar na sua Conta
           </h3>
 
-          <p className="text-xs sm:text-sm text-emerald-100/90 mt-1.5 leading-relaxed font-medium">
+          <p className="text-xs sm:text-sm text-blue-100/90 mt-1.5 leading-relaxed font-medium">
             {authModalReason || 'Você está no modo visitante. Entre com seu CNPJ para acessar o sistema completo.'}
           </p>
         </div>
@@ -91,7 +91,7 @@ export default function AuthRequiredModal() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="ex: compras@empresa.com.br"
-                className="w-full bg-[#f5f6f6] border border-gray-200 focus:border-[#004e38] rounded-xl px-4 py-3.5 text-xs font-medium focus:outline-none focus:bg-white transition-colors"
+                className="w-full bg-[#f5f6f6] border border-gray-200 focus:border-[#2563eb] rounded-xl px-4 py-3.5 text-xs font-medium focus:outline-none focus:bg-white transition-colors"
               />
             </div>
 
@@ -103,7 +103,7 @@ export default function AuthRequiredModal() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-[#f5f6f6] border border-gray-200 focus:border-[#004e38] rounded-xl px-4 py-3.5 text-xs font-medium focus:outline-none focus:bg-white transition-colors"
+                className="w-full bg-[#f5f6f6] border border-gray-200 focus:border-[#2563eb] rounded-xl px-4 py-3.5 text-xs font-medium focus:outline-none focus:bg-white transition-colors"
               />
             </div>
 
@@ -111,7 +111,7 @@ export default function AuthRequiredModal() {
               <button
                 type="submit"
                 disabled={isLoggingIn}
-                className="w-full bg-[#004e38] hover:bg-[#033627] text-white font-bold text-xs py-4 rounded-full transition-all shadow-sm cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50 hover:scale-101"
+                className="w-full bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-xs py-4 rounded-full transition-all shadow-sm cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50 hover:scale-101"
               >
                 {isLoggingIn ? (
                   <>
@@ -130,7 +130,7 @@ export default function AuthRequiredModal() {
                 type="button"
                 disabled={isLoggingIn}
                 onClick={handleQuickDemoLogin}
-                className="w-full bg-[#f5f6f6] hover:bg-gray-200 text-[#004e38] font-bold text-xs py-3 rounded-full transition-colors cursor-pointer border border-emerald-200"
+                className="w-full bg-[#f5f6f6] hover:bg-gray-200 text-[#2563eb] font-bold text-xs py-3 rounded-full transition-colors cursor-pointer border border-blue-200"
               >
                 ⚡ Entrar em 1 Clique (Demonstração)
               </button>
@@ -143,7 +143,7 @@ export default function AuthRequiredModal() {
             <Link
               href="/cadastro"
               onClick={closeAuthModal}
-              className="w-full bg-emerald-50 hover:bg-emerald-100 text-[#004e38] font-bold text-xs py-3.5 rounded-full transition-colors inline-flex items-center justify-center gap-2 border border-emerald-200"
+              className="w-full bg-blue-50 hover:bg-blue-100 text-[#2563eb] font-bold text-xs py-3.5 rounded-full transition-colors inline-flex items-center justify-center gap-2 border border-blue-200"
             >
               <UserPlus className="w-4 h-4" />
               <span>Cadastre sua Empresa →</span>

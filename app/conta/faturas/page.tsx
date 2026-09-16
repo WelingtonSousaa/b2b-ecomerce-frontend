@@ -72,7 +72,7 @@ export default function FaturasPage() {
           penalty: res.data.penaltyAndInterestAmount,
           dueDate: res.data.newDueDate || inv.dueDate,
           linhaDigitavel: res.data.linhaDigitavel || '34191.79001 01043.510047 91020.150008 5 99990000000000',
-          pixCode: '00020126580014br.gov.bcb.pix0136123e4567-e89b-12d3-a456-4266141740005204000053039865802BR5925SHOPCART DISTRIBUICAO6009SAO PAULO62070503***6304E2CA'
+          pixCode: '00020126580014br.gov.bcb.pix0136123e4567-e89b-12d3-a456-4266141740005204000053039865802BR5925ONESYNC DISTRIBUICAO6009SAO PAULO62070503***6304E2CA'
         });
         return;
       }
@@ -88,7 +88,7 @@ export default function FaturasPage() {
       penalty: penalty,
       dueDate: inv.dueDate,
       linhaDigitavel: '23793.38128 60000.123456 12000.678904 1 98760000000000',
-      pixCode: '00020126580014br.gov.bcb.pix0136123e4567-e89b-12d3-a456-4266141740005204000053039865802BR5925SHOPCART DISTRIBUICAO6009SAO PAULO62070503***6304E2CA'
+      pixCode: '00020126580014br.gov.bcb.pix0136123e4567-e89b-12d3-a456-4266141740005204000053039865802BR5925ONESYNC DISTRIBUICAO6009SAO PAULO62070503***6304E2CA'
     });
   };
 
@@ -163,7 +163,7 @@ export default function FaturasPage() {
         actions={
           <button
             onClick={handleExportFinancialCsv}
-            className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-black px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-xs"
+            className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-black px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-xs"
           >
             <Download className="w-4 h-4 text-amber-300" />
             <span>Exportar Relatório Financeiro (CSV)</span>
@@ -184,13 +184,13 @@ export default function FaturasPage() {
           </div>
 
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 space-y-2 shadow-2xs">
-            <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider block">Limite Disponível para Faturamento</span>
-            <div className="text-3xl font-black text-[#004e38]">
+            <span className="text-xs font-bold text-blue-800 uppercase tracking-wider block">Limite Disponível para Faturamento</span>
+            <div className="text-3xl font-black text-[#2563eb]">
               R$ {(currentCompany.creditLimitAvailable || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
             </div>
             <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
               <div
-                className="bg-[#004e38] h-full rounded-full"
+                className="bg-[#2563eb] h-full rounded-full"
                 style={{
                   width: `${Math.min(100, ((currentCompany.creditLimitAvailable || 0) / (currentCompany.creditLimitTotal || 1)) * 100)}%`
                 }}
@@ -216,7 +216,7 @@ export default function FaturasPage() {
 
           {isLoading ? (
             <div className="p-16 text-center space-y-3">
-              <Loader2 className="w-8 h-8 text-[#004e38] animate-spin mx-auto" />
+              <Loader2 className="w-8 h-8 text-[#2563eb] animate-spin mx-auto" />
               <p className="text-xs font-bold text-gray-500">Carregando faturas e boletos...</p>
             </div>
           ) : invoices.length === 0 ? (
@@ -227,7 +227,7 @@ export default function FaturasPage() {
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs">
-                <thead className="bg-[#004e38] text-white font-extrabold uppercase text-[10px] tracking-wider">
+                <thead className="bg-[#2563eb] text-white font-extrabold uppercase text-[10px] tracking-wider">
                   <tr>
                     <th className="p-4">Nº da Fatura / NFe</th>
                     <th className="p-4">Data Vencimento</th>
@@ -244,7 +244,7 @@ export default function FaturasPage() {
                       <td className="p-4 font-semibold text-gray-700">{inv.dueDate}</td>
                       <td className="p-4 text-center">
                         {inv.status === 'PAID' && (
-                          <span className="bg-emerald-100 text-emerald-800 font-bold px-2.5 py-1 rounded-md text-[10px]">
+                          <span className="bg-blue-100 text-blue-800 font-bold px-2.5 py-1 rounded-md text-[10px]">
                             ✔ Liquidado / Pago
                           </span>
                         )}
@@ -266,7 +266,7 @@ export default function FaturasPage() {
                         <button
                           type="button"
                           onClick={() => handleDownloadXml(inv.invoiceNumber)}
-                          className="inline-flex items-center gap-1 text-[11px] font-bold text-[#004e38] hover:underline cursor-pointer"
+                          className="inline-flex items-center gap-1 text-[11px] font-bold text-[#2563eb] hover:underline cursor-pointer"
                         >
                           <FileCode className="w-3.5 h-3.5" />
                           <span>Baixar XML</span>
@@ -276,7 +276,7 @@ export default function FaturasPage() {
                         <button
                           type="button"
                           onClick={() => handleOpenBoletoModal(inv)}
-                          className="bg-[#004e38] hover:bg-[#033627] text-white font-bold text-[11px] px-4 py-2 rounded-full transition-all inline-flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                          className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-[11px] px-4 py-2 rounded-full transition-all inline-flex items-center gap-1.5 cursor-pointer shadow-2xs"
                         >
                           <Barcode className="w-3.5 h-3.5 text-amber-300" />
                           <span>Visualizar Boleto / PIX</span>
@@ -299,7 +299,7 @@ export default function FaturasPage() {
             
             <div className="flex items-center justify-between border-b border-gray-100 pb-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-[#004e38] text-white flex items-center justify-center font-bold">
+                <div className="w-10 h-10 rounded-2xl bg-[#2563eb] text-white flex items-center justify-center font-bold">
                   <Barcode className="w-5 h-5" />
                 </div>
                 <div>
@@ -321,7 +321,7 @@ export default function FaturasPage() {
             <div className="bg-[#f8fafc] p-4 rounded-2xl border border-gray-200 space-y-3 text-xs">
               <div className="flex justify-between items-center border-b border-gray-200 pb-2">
                 <span className="text-gray-500 font-bold">Beneficiário:</span>
-                <span className="font-black text-gray-900">Shopcart Distribuição B2B LTDA (CNPJ 10.987.654/0001-32)</span>
+                <span className="font-black text-gray-900">OneSync Distribuição B2B LTDA (CNPJ 10.987.654/0001-32)</span>
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <div>
@@ -330,7 +330,7 @@ export default function FaturasPage() {
                 </div>
                 <div className="text-right">
                   <span className="text-gray-400 block text-[10px] uppercase font-bold">Valor Atualizado</span>
-                  <strong className="text-[#004e38] text-base font-black">
+                  <strong className="text-[#2563eb] text-base font-black">
                     R$ {selectedBoleto.recalculatedAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                   </strong>
                 </div>
@@ -347,29 +347,29 @@ export default function FaturasPage() {
                 <button
                   type="button"
                   onClick={handleCopyLinha}
-                  className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-bold px-3 py-2 rounded-lg flex items-center gap-1.5 shrink-0 transition-colors cursor-pointer"
+                  className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-bold px-3 py-2 rounded-lg flex items-center gap-1.5 shrink-0 transition-colors cursor-pointer"
                 >
-                  {copiedLinha ? <Check className="w-3.5 h-3.5 text-emerald-300" /> : <Copy className="w-3.5 h-3.5" />}
+                  {copiedLinha ? <Check className="w-3.5 h-3.5 text-blue-300" /> : <Copy className="w-3.5 h-3.5" />}
                   <span>{copiedLinha ? 'Copiado!' : 'Copiar'}</span>
                 </button>
               </div>
             </div>
 
             {/* PIX QR Code Copia e Cola */}
-            <div className="bg-emerald-50/70 p-4 rounded-2xl border border-emerald-200 space-y-2 text-xs">
+            <div className="bg-blue-50/70 p-4 rounded-2xl border border-blue-200 space-y-2 text-xs">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-emerald-900 flex items-center gap-1.5">
-                  <QrCode className="w-4 h-4 text-[#004e38]" /> Pagamento Instantâneo via PIX
+                <span className="font-bold text-blue-900 flex items-center gap-1.5">
+                  <QrCode className="w-4 h-4 text-[#2563eb]" /> Pagamento Instantâneo via PIX
                 </span>
                 <button
                   type="button"
                   onClick={handleCopyPix}
-                  className="text-[#004e38] font-bold hover:underline inline-flex items-center gap-1 cursor-pointer"
+                  className="text-[#2563eb] font-bold hover:underline inline-flex items-center gap-1 cursor-pointer"
                 >
                   {copiedPix ? '✔ PIX Copiado!' : 'Copiar Chave PIX'}
                 </button>
               </div>
-              <p className="text-[11px] text-emerald-800 leading-relaxed">
+              <p className="text-[11px] text-blue-800 leading-relaxed">
                 Pague pelo app do seu banco com baixa automática e liberação imediata do limite de crédito corporativo.
               </p>
             </div>
@@ -384,14 +384,14 @@ export default function FaturasPage() {
                 }}
                 className="bg-white hover:bg-gray-100 text-gray-800 border border-gray-200 font-bold text-xs px-4 py-2.5 rounded-full transition-colors flex items-center gap-1.5 cursor-pointer"
               >
-                <Printer className="w-4 h-4 text-[#004e38]" />
+                <Printer className="w-4 h-4 text-[#2563eb]" />
                 <span>Imprimir Boleto Bancário</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => setSelectedBoleto(null)}
-                className="bg-[#004e38] hover:bg-[#033627] text-white font-bold text-xs px-6 py-2.5 rounded-full transition-all cursor-pointer"
+                className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-xs px-6 py-2.5 rounded-full transition-all cursor-pointer"
               >
                 Fechar
               </button>

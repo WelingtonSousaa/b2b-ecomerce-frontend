@@ -73,9 +73,9 @@ export default function FormalQuotePdfModal({
       <div className="bg-white rounded-3xl max-w-4xl w-full shadow-2xl overflow-hidden border border-gray-200 my-8 print:border-none print:shadow-none print:m-0 print:rounded-none">
         
         {/* MODAL ACTION BAR (Hidden in print) */}
-        <div className="bg-[#004e38] text-white p-4 flex items-center justify-between print:hidden">
+        <div className="bg-[#2563eb] text-white p-4 flex items-center justify-between print:hidden">
           <div className="flex items-center gap-2">
-            <FileCheck2 className="w-5 h-5 text-emerald-300" />
+            <FileCheck2 className="w-5 h-5 text-blue-300" />
             <span className="font-bold text-sm">Gerador de Proposta Comercial & Cotação Formal B2B</span>
           </div>
 
@@ -101,28 +101,28 @@ export default function FormalQuotePdfModal({
         <div className="p-8 sm:p-12 space-y-8 text-gray-900 font-sans text-xs bg-white" id="printable-quote">
           
           {/* Header */}
-          <div className="flex flex-col sm:flex-row justify-between items-start gap-6 border-b-2 border-[#004e38] pb-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start gap-6 border-b-2 border-[#2563eb] pb-6">
             <div>
-              <div className="flex items-center gap-2 text-[#004e38] font-black text-2xl tracking-tight">
-                <span>Shopcart</span>
-                <span className="text-xs bg-[#004e38] text-white px-2 py-0.5 rounded uppercase font-bold">B2B Distribuidora</span>
+              <div className="flex items-center gap-2 text-[#2563eb] font-black text-2xl tracking-tight">
+                <span>OneSync</span>
+                <span className="text-xs bg-[#2563eb] text-white px-2 py-0.5 rounded uppercase font-bold">B2B Distribuidora</span>
               </div>
               <p className="text-gray-500 text-[11px] mt-1">
-                Shopcart Comércio e Distribuição de Equipamentos LTDA<br />
+                OneSync Comércio e Distribuição de Equipamentos LTDA<br />
                 CNPJ: 45.928.190/0001-32 | IE: 112.490.119.110<br />
                 Av. das Nações Unidas, 14200 - São Paulo/SP - CEP: 04794-000
               </p>
             </div>
 
             <div className="text-right space-y-1 sm:self-center">
-              <span className="inline-block bg-emerald-100 text-[#004e38] font-mono font-black text-sm px-3 py-1 rounded-lg">
+              <span className="inline-block bg-blue-100 text-[#2563eb] font-mono font-black text-sm px-3 py-1 rounded-lg">
                 PROPOSTA: {customQuoteNumber}
               </span>
               <div className="text-[11px] text-gray-500 flex items-center justify-end gap-1 font-medium">
                 <Calendar className="w-3.5 h-3.5" />
                 <span>Emissão: <strong>{today}</strong></span>
               </div>
-              <div className="text-[11px] text-emerald-800 font-bold">
+              <div className="text-[11px] text-blue-800 font-bold">
                 Validade: {validUntil} (15 dias)
               </div>
             </div>
@@ -162,7 +162,7 @@ export default function FormalQuotePdfModal({
               <tbody className="divide-y divide-gray-100">
                 {items.map((it, idx) => (
                   <tr key={idx}>
-                    <td className="py-3 font-mono font-bold text-[#004e38]">{it.product.sku}</td>
+                    <td className="py-3 font-mono font-bold text-[#2563eb]">{it.product.sku}</td>
                     <td className="py-3 font-bold text-gray-800">{it.product.name}</td>
                     <td className="py-3 font-mono text-gray-500">{it.product.ncm}</td>
                     <td className="py-3 text-center font-bold">{it.quantity} un.</td>
@@ -178,8 +178,8 @@ export default function FormalQuotePdfModal({
 
           {/* Financial Summary & Taxes */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4 border-t border-gray-200">
-            <div className="space-y-2 bg-emerald-50/50 p-4 rounded-2xl border border-emerald-100">
-              <span className="text-[10px] font-black text-[#004e38] uppercase tracking-wider block">Condições Comerciais & Tributárias</span>
+            <div className="space-y-2 bg-blue-50/50 p-4 rounded-2xl border border-blue-100">
+              <span className="text-[10px] font-black text-[#2563eb] uppercase tracking-wider block">Condições Comerciais & Tributárias</span>
               <ul className="space-y-1 text-[11px] text-gray-700">
                 <li>• <strong>Condição de Pagamento:</strong> Boleto Faturado a Prazo (30/60/90 dias)</li>
                 <li>• <strong>Modalidade de Frete:</strong> CIF (Frete e Seguro Inclusos até o destino)</li>
@@ -199,9 +199,9 @@ export default function FormalQuotePdfModal({
               </div>
               <div className="flex justify-between text-gray-600">
                 <span>Frete CIF Corporativo:</span>
-                <span className="font-bold text-emerald-700">GRÁTIS (ISENTO)</span>
+                <span className="font-bold text-blue-700">GRÁTIS (ISENTO)</span>
               </div>
-              <div className="flex justify-between text-base font-black text-[#004e38] pt-2 border-t border-gray-200">
+              <div className="flex justify-between text-base font-black text-[#2563eb] pt-2 border-t border-gray-200">
                 <span>VALOR TOTAL FATURADO:</span>
                 <span>R$ {grandTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
               </div>
@@ -212,7 +212,7 @@ export default function FormalQuotePdfModal({
           <div className="pt-8 border-t border-gray-300 grid grid-cols-2 gap-12 text-center text-[11px]">
             <div className="space-y-1">
               <div className="h-10 border-b border-gray-400" />
-              <strong className="block text-gray-800">Departamento Comercial Shopcart B2B</strong>
+              <strong className="block text-gray-800">Departamento Comercial OneSync B2B</strong>
               <span className="text-gray-500">Vendas Corporativas & Licitações</span>
             </div>
 
@@ -233,12 +233,12 @@ export default function FormalQuotePdfModal({
               value={directorEmail}
               onChange={(e) => setDirectorEmail(e.target.value)}
               placeholder="E-mail da diretoria..."
-              className="bg-white border border-gray-300 rounded-full px-4 py-2 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+              className="bg-white border border-gray-300 rounded-full px-4 py-2 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
               required
             />
             <button
               type="submit"
-              className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-bold px-4 py-2 rounded-full transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
+              className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-bold px-4 py-2 rounded-full transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
             >
               <Send className="w-3.5 h-3.5" />
               <span>{isSent ? 'Enviado!' : 'Enviar ao Diretor'}</span>

@@ -177,9 +177,9 @@ export default function QuickOrderPage() {
           <a
             href="/modelo_pedido_b2b.csv"
             download="modelo_pedido_b2b.csv"
-            className="bg-[#00462e] hover:bg-[#003422] text-white text-xs font-bold px-4 py-2.5 rounded-lg transition-colors flex items-center gap-2 shrink-0 shadow-xs"
+            className="bg-[#1d4ed8] hover:bg-[#1e40af] text-white text-xs font-bold px-4 py-2.5 rounded-lg transition-colors flex items-center gap-2 shrink-0 shadow-xs"
           >
-            <Download className="w-4 h-4 text-emerald-300" />
+            <Download className="w-4 h-4 text-blue-300" />
             <span>Baixar Planilha Modelo (.CSV)</span>
           </a>
 
@@ -192,7 +192,7 @@ export default function QuickOrderPage() {
               onClick={() => setActiveTab('csv')}
               className={`flex-1 py-3.5 px-6 flex items-center justify-center gap-2 border-b-2 transition-colors ${
                 activeTab === 'csv'
-                  ? 'border-emerald-800 text-emerald-900 bg-white'
+                  ? 'border-blue-800 text-blue-900 bg-white'
                   : 'border-transparent text-gray-500 hover:text-gray-900'
               }`}
             >
@@ -204,7 +204,7 @@ export default function QuickOrderPage() {
               onClick={() => setActiveTab('manual')}
               className={`flex-1 py-3.5 px-6 flex items-center justify-center gap-2 border-b-2 transition-colors ${
                 activeTab === 'manual'
-                  ? 'border-emerald-800 text-emerald-900 bg-white'
+                  ? 'border-blue-800 text-blue-900 bg-white'
                   : 'border-transparent text-gray-500 hover:text-gray-900'
               }`}
             >
@@ -217,14 +217,14 @@ export default function QuickOrderPage() {
             {/* Tab 1: CSV Upload */}
             {activeTab === 'csv' && (
               <div className="space-y-4">
-                <div className="border-2 border-dashed border-gray-300 hover:border-emerald-600 rounded-xl p-8 text-center bg-gray-50/50 hover:bg-emerald-50/30 transition-all cursor-pointer relative">
+                <div className="border-2 border-dashed border-gray-300 hover:border-blue-600 rounded-xl p-8 text-center bg-gray-50/50 hover:bg-blue-50/30 transition-all cursor-pointer relative">
                   <input
                     type="file"
                     accept=".csv,.txt"
                     onChange={handleFileUpload}
                     className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
                   />
-                  <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-800 mx-auto flex items-center justify-center mb-3">
+                  <div className="w-12 h-12 rounded-full bg-blue-100 text-blue-800 mx-auto flex items-center justify-center mb-3">
                     <Upload className="w-6 h-6" />
                   </div>
                   <h3 className="text-sm font-bold text-gray-900">
@@ -260,7 +260,7 @@ export default function QuickOrderPage() {
                               value={row.sku}
                               onChange={(e) => handleUpdateManualRow(row.id, 'sku', e.target.value)}
                               placeholder="Ex: SKU-HEAD-01"
-                              className="w-full border border-gray-300 rounded px-3 py-1.5 font-mono text-xs focus:border-emerald-600 focus:outline-none"
+                              className="w-full border border-gray-300 rounded px-3 py-1.5 font-mono text-xs focus:border-blue-600 focus:outline-none"
                             />
                           </td>
                           <td className="p-3">
@@ -269,7 +269,7 @@ export default function QuickOrderPage() {
                               min={1}
                               value={row.quantity}
                               onChange={(e) => handleUpdateManualRow(row.id, 'quantity', parseInt(e.target.value) || 1)}
-                              className="w-full border border-gray-300 rounded px-3 py-1.5 font-bold text-xs focus:border-emerald-600 focus:outline-none"
+                              className="w-full border border-gray-300 rounded px-3 py-1.5 font-bold text-xs focus:border-blue-600 focus:outline-none"
                             />
                           </td>
                           <td className="p-3 text-center">
@@ -297,7 +297,7 @@ export default function QuickOrderPage() {
 
                   <button
                     onClick={() => runValidation(manualRows)}
-                    className="bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-bold px-6 py-2.5 rounded-lg transition-colors flex items-center gap-2"
+                    className="bg-blue-800 hover:bg-blue-900 text-white text-xs font-bold px-6 py-2.5 rounded-lg transition-colors flex items-center gap-2"
                   >
                     <RefreshCw className="w-4 h-4" />
                     <span>Validar Lista de Produtos</span>
@@ -311,7 +311,7 @@ export default function QuickOrderPage() {
         {/* Validation Results Panel */}
         {isProcessing && (
           <div className="bg-white p-8 rounded-xl border border-gray-200 text-center space-y-3">
-            <RefreshCw className="w-8 h-8 text-emerald-700 animate-spin mx-auto" />
+            <RefreshCw className="w-8 h-8 text-blue-700 animate-spin mx-auto" />
             <p className="text-sm font-bold text-gray-900">Validando SKUs, estoque por CD e regras de MOQ...</p>
           </div>
         )}
@@ -327,7 +327,7 @@ export default function QuickOrderPage() {
                   <span className="text-xs font-normal text-gray-400">({validationResults.length} linhas processadas)</span>
                 </h2>
                 <div className="flex items-center gap-4 text-xs mt-1">
-                  <span className="text-emerald-700 font-bold flex items-center gap-1">
+                  <span className="text-blue-700 font-bold flex items-center gap-1">
                     <CheckCircle2 className="w-4 h-4" /> {validCount} Linhas Válidas
                   </span>
                   {errorCount > 0 && (
@@ -399,7 +399,7 @@ export default function QuickOrderPage() {
                       <td className="p-3 text-center font-bold text-gray-900">{res.rawQuantity}</td>
                       <td className="p-3 text-center">
                         {res.status === 'VALID' && (
-                          <span className="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded text-[10px] inline-flex items-center gap-1">
+                          <span className="bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded text-[10px] inline-flex items-center gap-1">
                             <CheckCircle2 className="w-3 h-3" /> VÁLIDO
                           </span>
                         )}
@@ -421,7 +421,7 @@ export default function QuickOrderPage() {
                       </td>
                       <td className="p-3">
                         {res.status === 'VALID' ? (
-                          <span className="text-emerald-700 font-medium">Estoque e alíquotas de tributos confirmados para a sua UF.</span>
+                          <span className="text-blue-700 font-medium">Estoque e alíquotas de tributos confirmados para a sua UF.</span>
                         ) : (
                           <span className="text-red-700 font-bold">{res.errorMessage}</span>
                         )}

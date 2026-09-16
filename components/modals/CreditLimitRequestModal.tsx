@@ -79,7 +79,7 @@ export default function CreditLimitRequestModal({
       <div className="bg-white text-gray-900 rounded-3xl shadow-2xl border border-gray-100 w-full max-w-xl overflow-hidden relative flex flex-col">
         
         {/* Header */}
-        <div className="bg-[#004e38] text-white p-6 relative">
+        <div className="bg-[#2563eb] text-white p-6 relative">
           <button
             onClick={onClose}
             className="absolute top-5 right-5 p-1 rounded-full bg-white/10 hover:bg-white/20 text-white cursor-pointer"
@@ -90,7 +90,7 @@ export default function CreditLimitRequestModal({
             <CreditCard className="w-5 h-5 text-amber-300" />
             <h3 className="text-xl font-black">Solicitar Aumento de Limite de Crédito B2B</h3>
           </div>
-          <p className="text-xs text-emerald-100">
+          <p className="text-xs text-blue-100">
             Faturamento direto a prazo no Boleto Bancário (28/56/84 dias) com análise automática de risco.
           </p>
         </div>
@@ -98,7 +98,7 @@ export default function CreditLimitRequestModal({
         <form onSubmit={handleSubmit} className="p-6 space-y-4 text-xs overflow-y-auto max-h-[75vh]">
           
           {isSuccess && (
-            <div className="bg-emerald-100 border border-emerald-300 text-[#004e38] p-3 rounded-2xl flex items-center gap-2 font-bold animate-in fade-in">
+            <div className="bg-blue-100 border border-blue-300 text-[#2563eb] p-3 rounded-2xl flex items-center gap-2 font-bold animate-in fade-in">
               <CheckCircle2 className="w-5 h-5" />
               <span>Solicitação de Limite enviada com sucesso! Protocolo: {protocol}</span>
             </div>
@@ -113,9 +113,9 @@ export default function CreditLimitRequestModal({
               </span>
             </div>
 
-            <div className="bg-emerald-50 p-3 rounded-xl border border-emerald-200">
-              <span className="text-[10px] text-[#004e38] font-bold uppercase block">Limite Pretendido</span>
-              <span className="text-lg font-black text-[#004e38]">
+            <div className="bg-blue-50 p-3 rounded-xl border border-blue-200">
+              <span className="text-[10px] text-[#2563eb] font-bold uppercase block">Limite Pretendido</span>
+              <span className="text-lg font-black text-[#2563eb]">
                 R$ {Number(requestedLimit).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
               </span>
             </div>
@@ -130,7 +130,7 @@ export default function CreditLimitRequestModal({
                 required
                 value={requestedLimit}
                 onChange={(e) => setRequestedLimit(Number(e.target.value))}
-                className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-2.5 font-black text-sm text-[#004e38]"
+                className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-2.5 font-black text-sm text-[#2563eb]"
               />
             </div>
 
@@ -174,15 +174,15 @@ export default function CreditLimitRequestModal({
           </div>
 
           {/* Live Scoring Box */}
-          <div className="bg-emerald-50/60 p-3.5 rounded-2xl border border-emerald-200 flex items-center justify-between">
+          <div className="bg-blue-50/60 p-3.5 rounded-2xl border border-blue-200 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-[#004e38]" />
+              <ShieldCheck className="w-5 h-5 text-[#2563eb]" />
               <div>
-                <span className="font-black text-[#004e38] text-xs block">Simulação de Score de Crédito: Grau {scoreGrade}</span>
-                <span className="text-[10px] text-emerald-900 font-medium">Compatibilidade de 96% com a saúde financeira do CNPJ</span>
+                <span className="font-black text-[#2563eb] text-xs block">Simulação de Score de Crédito: Grau {scoreGrade}</span>
+                <span className="text-[10px] text-blue-900 font-medium">Compatibilidade de 96% com a saúde financeira do CNPJ</span>
               </div>
             </div>
-            <span className="bg-[#004e38] text-white text-[10px] font-black px-2.5 py-1 rounded-full">
+            <span className="bg-[#2563eb] text-white text-[10px] font-black px-2.5 py-1 rounded-full">
               Pré-Aprovado
             </span>
           </div>
@@ -204,7 +204,7 @@ export default function CreditLimitRequestModal({
             <button
               type="submit"
               disabled={isSubmitting}
-              className="bg-[#004e38] hover:bg-[#033627] text-white font-black px-6 py-2 rounded-full shadow-xs cursor-pointer flex items-center gap-2 disabled:opacity-50"
+              className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-black px-6 py-2 rounded-full shadow-xs cursor-pointer flex items-center gap-2 disabled:opacity-50"
             >
               {isSubmitting ? (
                 <>

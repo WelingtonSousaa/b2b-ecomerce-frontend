@@ -16,7 +16,6 @@ export default function CotacoesPage() {
 
   const fetchQuotes = async () => {
     try {
-      setIsLoading(true);
       const res = await rfqService.getQuotes();
       if (res.data && res.data.length > 0) {
         setQuotes(res.data);
@@ -65,8 +64,8 @@ export default function CotacoesPage() {
     switch (status) {
       case 'APPROVED':
         return (
-          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-950 border border-emerald-300">
-            <CheckCircle2 className="w-3 h-3 text-emerald-700" /> Aprovada com Desconto
+          <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10px] font-black bg-blue-100 text-blue-950 border border-blue-300">
+            <CheckCircle2 className="w-3 h-3 text-blue-700" /> Aprovada com Desconto
           </span>
         );
       case 'UNDER_REVIEW':
@@ -98,13 +97,13 @@ export default function CotacoesPage() {
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 py-8">
         
         {/* Banner Header */}
-        <div className="bg-[#0b1d16] text-white p-8 rounded-3xl shadow-xl mb-8 border border-emerald-950 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="bg-[#0f172a] text-white p-8 rounded-3xl shadow-xl mb-8 border border-blue-950 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
             <div className="flex items-center gap-2 text-amber-400 font-black text-xs uppercase tracking-wider mb-2">
               <FileSpreadsheet className="w-4 h-4" /> RFQ - Request for Quote
             </div>
             <h1 className="text-2xl sm:text-3xl font-black tracking-tight">Central de Cotações em Lote</h1>
-            <p className="text-emerald-200/90 text-xs sm:text-sm mt-1 max-w-xl">
+            <p className="text-blue-200/90 text-xs sm:text-sm mt-1 max-w-xl">
               Gerencie solicitações de preços negociados, prazos especiais de faturamento e propostas de compras atacadistas.
             </p>
           </div>
@@ -127,7 +126,7 @@ export default function CotacoesPage() {
 
           {isLoading ? (
             <div className="p-12 text-center text-gray-500 flex flex-col items-center gap-2">
-              <Loader2 className="w-6 h-6 animate-spin text-[#004e38]" />
+              <Loader2 className="w-6 h-6 animate-spin text-[#2563eb]" />
               <span className="text-xs font-bold">Carregando cotações da empresa...</span>
             </div>
           ) : (
@@ -139,10 +138,10 @@ export default function CotacoesPage() {
                 const formattedDate = q.createdAt ? new Date(q.createdAt).toLocaleDateString('pt-BR') : '10/08/2026';
 
                 return (
-                  <div key={q.id} className="p-6 hover:bg-emerald-50/40 transition-colors flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                  <div key={q.id} className="p-6 hover:bg-blue-50/40 transition-colors flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-black text-xs shrink-0">
+                      <div className="w-12 h-12 rounded-2xl bg-blue-100 text-blue-800 flex items-center justify-center font-black text-xs shrink-0">
                         RFQ
                       </div>
 
@@ -162,7 +161,7 @@ export default function CotacoesPage() {
                           <span>•</span>
                           <span>Lote Total: <strong className="text-gray-900">{totalQuantity} UN</strong></span>
                           <span>•</span>
-                          <span>Itens na Cotação: <strong className="text-emerald-900 font-bold">{itemsCount} SKUs</strong></span>
+                          <span>Itens na Cotação: <strong className="text-blue-900 font-bold">{itemsCount} SKUs</strong></span>
                         </div>
                       </div>
                     </div>
@@ -172,7 +171,7 @@ export default function CotacoesPage() {
 
                       <button
                         onClick={() => setSelectedQuote(q)}
-                        className="mt-2 text-xs font-extrabold text-emerald-700 hover:text-emerald-900 flex items-center gap-1 hover:underline cursor-pointer"
+                        className="mt-2 text-xs font-extrabold text-blue-700 hover:text-blue-900 flex items-center gap-1 hover:underline cursor-pointer"
                       >
                         <span>Ver Detalhes do RFQ</span>
                         <ArrowUpRight className="w-3.5 h-3.5" />
@@ -212,7 +211,7 @@ export default function CotacoesPage() {
                   <div key={idx} className="flex justify-between items-center text-xs font-medium">
                     <span className="font-mono font-bold text-gray-800">{it.sku}</span>
                     <span className="text-gray-600">Qtd: <strong>{it.quantity} un</strong></span>
-                    <span className="text-emerald-800 font-bold">Alvo: R$ {it.targetPrice ? it.targetPrice.toFixed(2) : '-'}</span>
+                    <span className="text-blue-800 font-bold">Alvo: R$ {it.targetPrice ? it.targetPrice.toFixed(2) : '-'}</span>
                   </div>
                 ))}
               </div>
@@ -222,7 +221,7 @@ export default function CotacoesPage() {
             <div className="flex justify-end pt-2">
               <button
                 onClick={() => setSelectedQuote(null)}
-                className="px-5 py-2 bg-[#004e38] text-white font-bold rounded-xl text-xs cursor-pointer"
+                className="px-5 py-2 bg-[#2563eb] text-white font-bold rounded-xl text-xs cursor-pointer"
               >
                 Fechar
               </button>

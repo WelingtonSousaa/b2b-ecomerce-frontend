@@ -102,7 +102,7 @@ export default function IntegracoesErpPage() {
             <button
               onClick={handleTriggerTestWebhook}
               disabled={isEmittingTest}
-              className="bg-white hover:bg-emerald-50 text-[#004e38] border border-emerald-300 text-xs font-bold px-4 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-2xs disabled:opacity-50"
+              className="bg-white hover:bg-blue-50 text-[#2563eb] border border-blue-300 text-xs font-bold px-4 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-2xs disabled:opacity-50"
             >
               <Zap className={`w-4 h-4 text-amber-500 ${isEmittingTest ? 'animate-bounce' : ''}`} />
               <span>{isEmittingTest ? 'Disparando...' : 'Disparar Webhook Teste'}</span>
@@ -111,7 +111,7 @@ export default function IntegracoesErpPage() {
             <button
               onClick={handleManualSync}
               disabled={isSyncing}
-              className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-black px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-sm disabled:opacity-50"
+              className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-black px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-sm disabled:opacity-50"
             >
               <RefreshCw className={`w-4 h-4 ${isSyncing ? 'animate-spin' : ''}`} />
               <span>{isSyncing ? 'Sincronizando ERPs...' : 'Sincronizar Todos os ERPs'}</span>
@@ -124,7 +124,7 @@ export default function IntegracoesErpPage() {
         
         {isLoading ? (
           <div className="p-16 text-center space-y-3 bg-white rounded-3xl border border-gray-200 shadow-2xs">
-            <Loader2 className="w-8 h-8 text-[#004e38] animate-spin mx-auto" />
+            <Loader2 className="w-8 h-8 text-[#2563eb] animate-spin mx-auto" />
             <p className="text-xs font-bold text-gray-500">Carregando conectores ERP e logs de webhooks...</p>
           </div>
         ) : (
@@ -132,10 +132,10 @@ export default function IntegracoesErpPage() {
             {/* ERP Connectors Status Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {integrations.map((erp) => (
-                <div key={erp.id} className="bg-white p-6 rounded-3xl border border-gray-200 shadow-2xs space-y-4 hover:border-[#004e38] transition-all">
+                <div key={erp.id} className="bg-white p-6 rounded-3xl border border-gray-200 shadow-2xs space-y-4 hover:border-[#2563eb] transition-all">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-2xl bg-emerald-50 text-[#004e38] flex items-center justify-center font-bold">
+                      <div className="w-10 h-10 rounded-2xl bg-blue-50 text-[#2563eb] flex items-center justify-center font-bold">
                         <Database className="w-5 h-5" />
                       </div>
                       <div>
@@ -144,15 +144,15 @@ export default function IntegracoesErpPage() {
                       </div>
                     </div>
                     <span className="relative flex h-3 w-3">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
                     </span>
                   </div>
 
                   <div className="space-y-2 text-xs text-gray-600 border-t border-gray-100 pt-3 font-medium">
                     <div className="flex justify-between items-center">
                       <span className="text-gray-400">Status:</span>
-                      <span className="bg-emerald-50 text-emerald-800 font-black text-[10px] px-2 py-0.5 rounded border border-emerald-200">
+                      <span className="bg-blue-50 text-blue-800 font-black text-[10px] px-2 py-0.5 rounded border border-blue-200">
                         Online / Conectado
                       </span>
                     </div>
@@ -162,7 +162,7 @@ export default function IntegracoesErpPage() {
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-gray-400">Pedidos Sincronizados:</span>
-                      <strong className="text-[#004e38] font-mono text-xs">{erp.syncedOrdersCount || 0} pedidos</strong>
+                      <strong className="text-[#2563eb] font-mono text-xs">{erp.syncedOrdersCount || 0} pedidos</strong>
                     </div>
                   </div>
                 </div>
@@ -198,7 +198,7 @@ export default function IntegracoesErpPage() {
                         <span className="font-mono font-black text-[10px] bg-gray-100 text-gray-800 px-2 py-0.5 rounded">
                           {log.event}
                         </span>
-                        <span className="text-[10px] font-black text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                        <span className="text-[10px] font-black text-blue-800 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
                           HTTP {log.responseStatus} OK
                         </span>
                         <span className="text-[10px] text-gray-400 font-mono flex items-center gap-1">
@@ -210,7 +210,7 @@ export default function IntegracoesErpPage() {
 
                     <div className="flex items-center gap-3 shrink-0 self-end sm:self-auto">
                       <span className="font-mono text-[11px] text-gray-400">{log.durationMs}ms</span>
-                      <span className="text-[#004e38] font-bold text-xs hover:underline flex items-center gap-1">
+                      <span className="text-[#2563eb] font-bold text-xs hover:underline flex items-center gap-1">
                         <Eye className="w-3.5 h-3.5" />
                         <span>Ver JSON</span>
                       </span>
@@ -232,7 +232,7 @@ export default function IntegracoesErpPage() {
             <div className="flex items-center justify-between border-b border-gray-100 pb-3">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-xl bg-gray-100 text-gray-800 flex items-center justify-center font-bold">
-                  <Code className="w-4 h-4 text-[#004e38]" />
+                  <Code className="w-4 h-4 text-[#2563eb]" />
                 </div>
                 <div>
                   <h3 className="font-black text-base text-gray-900">Inspecionar Payload do Webhook</h3>
@@ -251,7 +251,7 @@ export default function IntegracoesErpPage() {
               <div className="grid grid-cols-3 gap-2 bg-[#f8fafc] p-3 rounded-2xl border border-gray-200">
                 <div>
                   <span className="text-gray-400 font-bold text-[10px] uppercase block">Status Code</span>
-                  <span className="font-mono font-black text-emerald-700">HTTP {selectedLog.responseStatus} OK</span>
+                  <span className="font-mono font-black text-blue-700">HTTP {selectedLog.responseStatus} OK</span>
                 </div>
                 <div>
                   <span className="text-gray-400 font-bold text-[10px] uppercase block">Latência</span>
@@ -265,7 +265,7 @@ export default function IntegracoesErpPage() {
 
               <div className="space-y-1.5">
                 <span className="font-bold text-gray-700 block">Payload JSON Formatado</span>
-                <pre className="bg-gray-950 text-emerald-400 p-4 rounded-2xl font-mono text-[11px] overflow-x-auto leading-relaxed border border-gray-800">
+                <pre className="bg-gray-950 text-blue-400 p-4 rounded-2xl font-mono text-[11px] overflow-x-auto leading-relaxed border border-gray-800">
 {JSON.stringify({
   eventId: selectedLog.id,
   event: selectedLog.event,
@@ -286,7 +286,7 @@ export default function IntegracoesErpPage() {
               <button
                 type="button"
                 onClick={() => setSelectedLog(null)}
-                className="bg-[#004e38] hover:bg-[#033627] text-white font-bold text-xs px-6 py-2.5 rounded-full transition-all"
+                className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-xs px-6 py-2.5 rounded-full transition-all"
               >
                 Fechar
               </button>

@@ -70,7 +70,7 @@ export function DualRangeSlider({
 
         {/* Active Emerald Highlighted Track between the two thumbs */}
         <div
-          className="absolute h-2 bg-[#004e38] rounded-full"
+          className="absolute h-2 bg-[#2563eb] rounded-full"
           style={{
             left: `${minPercent}%`,
             width: `${Math.max(0, maxPercent - minPercent)}%`,
@@ -93,7 +93,7 @@ export function DualRangeSlider({
             [&::-webkit-slider-thumb]:rounded-full
             [&::-webkit-slider-thumb]:bg-white
             [&::-webkit-slider-thumb]:border-2
-            [&::-webkit-slider-thumb]:border-[#004e38]
+            [&::-webkit-slider-thumb]:border-[#2563eb]
             [&::-webkit-slider-thumb]:shadow-md
             [&::-webkit-slider-thumb]:cursor-grab
             [&::-webkit-slider-thumb]:active:cursor-grabbing
@@ -107,7 +107,7 @@ export function DualRangeSlider({
             [&::-moz-range-thumb]:rounded-full
             [&::-moz-range-thumb]:bg-white
             [&::-moz-range-thumb]:border-2
-            [&::-moz-range-thumb]:border-[#004e38]
+            [&::-moz-range-thumb]:border-[#2563eb]
             [&::-moz-range-thumb]:shadow-md
             [&::-moz-range-thumb]:cursor-grab
             [&::-moz-range-thumb]:active:cursor-grabbing
@@ -135,7 +135,7 @@ export function DualRangeSlider({
             [&::-webkit-slider-thumb]:rounded-full
             [&::-webkit-slider-thumb]:bg-white
             [&::-webkit-slider-thumb]:border-2
-            [&::-webkit-slider-thumb]:border-[#004e38]
+            [&::-webkit-slider-thumb]:border-[#2563eb]
             [&::-webkit-slider-thumb]:shadow-md
             [&::-webkit-slider-thumb]:cursor-grab
             [&::-webkit-slider-thumb]:active:cursor-grabbing
@@ -149,7 +149,7 @@ export function DualRangeSlider({
             [&::-moz-range-thumb]:rounded-full
             [&::-moz-range-thumb]:bg-white
             [&::-moz-range-thumb]:border-2
-            [&::-moz-range-thumb]:border-[#004e38]
+            [&::-moz-range-thumb]:border-[#2563eb]
             [&::-moz-range-thumb]:shadow-md
             [&::-moz-range-thumb]:cursor-grab
             [&::-moz-range-thumb]:active:cursor-grabbing
@@ -260,7 +260,7 @@ export default function ProductFilterBar({
               onClick={() => setActiveDropdown(activeDropdown === 'type' ? null : 'type')}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-full border transition-all cursor-pointer ${
                 filters.type !== 'Todos'
-                  ? 'bg-[#004e38] text-white border-[#004e38] shadow-xs'
+                  ? 'bg-[#2563eb] text-white border-[#2563eb] shadow-xs'
                   : 'bg-[#f5f6f6] hover:bg-gray-200 text-gray-800 border-transparent'
               }`}
             >
@@ -279,11 +279,11 @@ export default function ProductFilterBar({
                       setActiveDropdown(null);
                     }}
                     className={`w-full text-left px-4 py-2 hover:bg-[#f5f6f6] transition-colors flex items-center justify-between ${
-                      filters.type === t ? 'font-bold text-[#004e38] bg-emerald-50/50' : 'text-gray-700'
+                      filters.type === t ? 'font-bold text-[#2563eb] bg-blue-50/50' : 'text-gray-700'
                     }`}
                   >
                     <span>{t}</span>
-                    {filters.type === t && <Check className="w-3.5 h-3.5 text-[#004e38]" />}
+                    {filters.type === t && <Check className="w-3.5 h-3.5 text-[#2563eb]" />}
                   </button>
                 ))}
               </div>
@@ -297,7 +297,7 @@ export default function ProductFilterBar({
               onClick={() => setActiveDropdown(activeDropdown === 'price' ? null : 'price')}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-full border transition-all cursor-pointer ${
                 filters.minPrice > 0 || filters.maxPrice < maxCatalogPrice
-                  ? 'bg-[#004e38] text-white border-[#004e38] shadow-xs'
+                  ? 'bg-[#2563eb] text-white border-[#2563eb] shadow-xs'
                   : 'bg-[#f5f6f6] hover:bg-gray-200 text-gray-800 border-transparent'
               }`}
             >
@@ -325,7 +325,7 @@ export default function ProductFilterBar({
                 {/* Editable Manual Inputs Box */}
                 <div className="flex items-center justify-between gap-3 text-xs">
                   {/* Min Price Input */}
-                  <div className="flex-1 bg-gray-50 border border-gray-200 focus-within:border-[#004e38] focus-within:ring-2 focus-within:ring-[#004e38]/15 focus-within:bg-white rounded-2xl p-2.5 transition-all">
+                  <div className="flex-1 bg-gray-50 border border-gray-200 focus-within:border-[#2563eb] focus-within:ring-2 focus-within:ring-[#2563eb]/15 focus-within:bg-white rounded-2xl p-2.5 transition-all">
                     <label htmlFor="dropdown-min-price" className="text-[10px] text-gray-400 block font-bold uppercase tracking-wider mb-0.5">
                       Mínimo
                     </label>
@@ -347,7 +347,7 @@ export default function ProductFilterBar({
                             minPrice: Math.max(0, Math.min(val, filters.maxPrice))
                           });
                         }}
-                        className="w-full bg-transparent font-mono font-bold text-[#004e38] text-xs focus:outline-none placeholder:text-gray-300"
+                        className="w-full bg-transparent font-mono font-bold text-[#2563eb] text-xs focus:outline-none placeholder:text-gray-300"
                       />
                     </div>
                   </div>
@@ -355,7 +355,7 @@ export default function ProductFilterBar({
                   <span className="text-gray-400 font-bold">até</span>
 
                   {/* Max Price Input */}
-                  <div className="flex-1 bg-gray-50 border border-gray-200 focus-within:border-[#004e38] focus-within:ring-2 focus-within:ring-[#004e38]/15 focus-within:bg-white rounded-2xl p-2.5 transition-all">
+                  <div className="flex-1 bg-gray-50 border border-gray-200 focus-within:border-[#2563eb] focus-within:ring-2 focus-within:ring-[#2563eb]/15 focus-within:bg-white rounded-2xl p-2.5 transition-all">
                     <label htmlFor="dropdown-max-price" className="text-[10px] text-gray-400 block font-bold uppercase tracking-wider mb-0.5">
                       Máximo
                     </label>
@@ -377,7 +377,7 @@ export default function ProductFilterBar({
                             maxPrice: Math.max(filters.minPrice, Math.min(val, maxCatalogPrice))
                           });
                         }}
-                        className="w-full bg-transparent font-mono font-bold text-[#004e38] text-xs focus:outline-none placeholder:text-gray-300"
+                        className="w-full bg-transparent font-mono font-bold text-[#2563eb] text-xs focus:outline-none placeholder:text-gray-300"
                       />
                     </div>
                   </div>
@@ -387,7 +387,7 @@ export default function ProductFilterBar({
                 <div className="space-y-1.5 pt-1">
                   <label className="text-[11px] font-bold text-gray-600 flex justify-between">
                     <span>Arraste os 2 pontos ou digite acima:</span>
-                    <span className="text-[#004e38] font-mono font-extrabold">
+                    <span className="text-[#2563eb] font-mono font-extrabold">
                       R$ {filters.minPrice.toLocaleString('pt-BR')} — R$ {filters.maxPrice.toLocaleString('pt-BR')}
                     </span>
                   </label>
@@ -413,28 +413,28 @@ export default function ProductFilterBar({
                   <button
                     type="button"
                     onClick={() => applyPriceFilter(0, 500)}
-                    className="p-1.5 rounded-lg bg-gray-50 hover:bg-emerald-50 text-[11px] text-gray-700 hover:text-[#004e38] border border-gray-100 text-center font-medium transition-colors"
+                    className="p-1.5 rounded-lg bg-gray-50 hover:bg-blue-50 text-[11px] text-gray-700 hover:text-[#2563eb] border border-gray-100 text-center font-medium transition-colors"
                   >
                     Até R$ 500
                   </button>
                   <button
                     type="button"
                     onClick={() => applyPriceFilter(500, 3000)}
-                    className="p-1.5 rounded-lg bg-gray-50 hover:bg-emerald-50 text-[11px] text-gray-700 hover:text-[#004e38] border border-gray-100 text-center font-medium transition-colors"
+                    className="p-1.5 rounded-lg bg-gray-50 hover:bg-blue-50 text-[11px] text-gray-700 hover:text-[#2563eb] border border-gray-100 text-center font-medium transition-colors"
                   >
                     R$ 500 a R$ 3.000
                   </button>
                   <button
                     type="button"
                     onClick={() => applyPriceFilter(3000, 10000)}
-                    className="p-1.5 rounded-lg bg-gray-50 hover:bg-emerald-50 text-[11px] text-gray-700 hover:text-[#004e38] border border-gray-100 text-center font-medium transition-colors"
+                    className="p-1.5 rounded-lg bg-gray-50 hover:bg-blue-50 text-[11px] text-gray-700 hover:text-[#2563eb] border border-gray-100 text-center font-medium transition-colors"
                   >
                     R$ 3.000 a R$ 10.000
                   </button>
                   <button
                     type="button"
                     onClick={() => applyPriceFilter(0, maxCatalogPrice)}
-                    className="p-1.5 rounded-lg bg-gray-50 hover:bg-emerald-50 text-[11px] text-gray-700 hover:text-[#004e38] border border-gray-100 text-center font-medium transition-colors"
+                    className="p-1.5 rounded-lg bg-gray-50 hover:bg-blue-50 text-[11px] text-gray-700 hover:text-[#2563eb] border border-gray-100 text-center font-medium transition-colors"
                   >
                     Ver Todos
                   </button>
@@ -444,7 +444,7 @@ export default function ProductFilterBar({
                 <button
                   type="button"
                   onClick={() => setActiveDropdown(null)}
-                  className="w-full bg-[#004e38] hover:bg-[#033627] text-white font-bold text-xs py-2.5 rounded-full transition-all shadow-xs cursor-pointer text-center"
+                  className="w-full bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-xs py-2.5 rounded-full transition-all shadow-xs cursor-pointer text-center"
                 >
                   Concluir
                 </button>
@@ -459,7 +459,7 @@ export default function ProductFilterBar({
               onClick={() => setActiveDropdown(activeDropdown === 'rating' ? null : 'rating')}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-full border transition-all cursor-pointer ${
                 filters.minRating > 0
-                  ? 'bg-[#004e38] text-white border-[#004e38] shadow-xs'
+                  ? 'bg-[#2563eb] text-white border-[#2563eb] shadow-xs'
                   : 'bg-[#f5f6f6] hover:bg-gray-200 text-gray-800 border-transparent'
               }`}
             >
@@ -484,14 +484,14 @@ export default function ProductFilterBar({
                       setActiveDropdown(null);
                     }}
                     className={`w-full text-left px-4 py-2.5 hover:bg-[#f5f6f6] transition-colors flex items-center justify-between ${
-                      filters.minRating === item.rating ? 'font-bold text-[#004e38] bg-emerald-50/50' : 'text-gray-700'
+                      filters.minRating === item.rating ? 'font-bold text-[#2563eb] bg-blue-50/50' : 'text-gray-700'
                     }`}
                   >
                     <div className="flex items-center gap-1.5">
                       {item.rating > 0 && <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />}
                       <span>{item.label}</span>
                     </div>
-                    {filters.minRating === item.rating && <Check className="w-3.5 h-3.5 text-[#004e38]" />}
+                    {filters.minRating === item.rating && <Check className="w-3.5 h-3.5 text-[#2563eb]" />}
                   </button>
                 ))}
               </div>
@@ -505,7 +505,7 @@ export default function ProductFilterBar({
               onClick={() => setActiveDropdown(activeDropdown === 'color' ? null : 'color')}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-full border transition-all cursor-pointer ${
                 filters.color !== 'Todos'
-                  ? 'bg-[#004e38] text-white border-[#004e38] shadow-xs'
+                  ? 'bg-[#2563eb] text-white border-[#2563eb] shadow-xs'
                   : 'bg-[#f5f6f6] hover:bg-gray-200 text-gray-800 border-transparent'
               }`}
             >
@@ -524,7 +524,7 @@ export default function ProductFilterBar({
                       setActiveDropdown(null);
                     }}
                     className={`w-full text-left px-4 py-2 hover:bg-[#f5f6f6] transition-colors flex items-center justify-between ${
-                      filters.color === c.name ? 'font-bold text-[#004e38] bg-emerald-50/50' : 'text-gray-700'
+                      filters.color === c.name ? 'font-bold text-[#2563eb] bg-blue-50/50' : 'text-gray-700'
                     }`}
                   >
                     <div className="flex items-center gap-2">
@@ -536,7 +536,7 @@ export default function ProductFilterBar({
                       )}
                       <span>{c.name}</span>
                     </div>
-                    {filters.color === c.name && <Check className="w-3.5 h-3.5 text-[#004e38]" />}
+                    {filters.color === c.name && <Check className="w-3.5 h-3.5 text-[#2563eb]" />}
                   </button>
                 ))}
               </div>
@@ -550,7 +550,7 @@ export default function ProductFilterBar({
               onClick={() => setActiveDropdown(activeDropdown === 'material' ? null : 'material')}
               className={`flex items-center gap-1.5 px-4 py-2 rounded-full border transition-all cursor-pointer ${
                 filters.material !== 'Todos'
-                  ? 'bg-[#004e38] text-white border-[#004e38] shadow-xs'
+                  ? 'bg-[#2563eb] text-white border-[#2563eb] shadow-xs'
                   : 'bg-[#f5f6f6] hover:bg-gray-200 text-gray-800 border-transparent'
               }`}
             >
@@ -569,11 +569,11 @@ export default function ProductFilterBar({
                       setActiveDropdown(null);
                     }}
                     className={`w-full text-left px-4 py-2 hover:bg-[#f5f6f6] transition-colors flex items-center justify-between ${
-                      filters.material === m ? 'font-bold text-[#004e38] bg-emerald-50/50' : 'text-gray-700'
+                      filters.material === m ? 'font-bold text-[#2563eb] bg-blue-50/50' : 'text-gray-700'
                     }`}
                   >
                     <span>{m}</span>
-                    {filters.material === m && <Check className="w-3.5 h-3.5 text-[#004e38]" />}
+                    {filters.material === m && <Check className="w-3.5 h-3.5 text-[#2563eb]" />}
                   </button>
                 ))}
               </div>
@@ -628,7 +628,7 @@ export default function ProductFilterBar({
             <select
               value={filters.sortBy}
               onChange={(e) => onFilterChange({ ...filters, sortBy: e.target.value })}
-              className="bg-[#f5f6f6] hover:bg-gray-200 text-gray-900 rounded-full px-4 py-2 pr-8 border border-transparent appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+              className="bg-[#f5f6f6] hover:bg-gray-200 text-gray-900 rounded-full px-4 py-2 pr-8 border border-transparent appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
             >
               <option value="featured">Mais Relevantes</option>
               <option value="price-low">Menor Preço</option>
@@ -652,7 +652,7 @@ export default function ProductFilterBar({
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="bg-[#004e38] text-white p-5 flex items-center justify-between shrink-0 shadow-md">
+            <div className="bg-[#2563eb] text-white p-5 flex items-center justify-between shrink-0 shadow-md">
               <div className="flex items-center gap-2.5">
                 <SlidersHorizontal className="w-5 h-5" />
                 <h3 className="text-lg font-black tracking-tight">Todos os Filtros do Catálogo</h3>
@@ -673,7 +673,7 @@ export default function ProductFilterBar({
               <div className="space-y-4 border-b border-gray-100 pb-5">
                 <div className="flex items-center justify-between">
                   <h4 className="font-extrabold text-sm text-gray-900">Faixa de Preço (Min e Max)</h4>
-                  <span className="font-mono text-xs font-bold text-[#004e38]">
+                  <span className="font-mono text-xs font-bold text-[#2563eb]">
                     R$ {filters.minPrice.toLocaleString('pt-BR')} — R$ {filters.maxPrice.toLocaleString('pt-BR')}
                   </span>
                 </div>
@@ -681,7 +681,7 @@ export default function ProductFilterBar({
                 {/* Editable Manual Inputs Box in Modal */}
                 <div className="flex items-center justify-between gap-3 text-xs">
                   {/* Min Price Input */}
-                  <div className="flex-1 bg-gray-50 border border-gray-200 focus-within:border-[#004e38] focus-within:ring-2 focus-within:ring-[#004e38]/15 focus-within:bg-white rounded-2xl p-2.5 transition-all">
+                  <div className="flex-1 bg-gray-50 border border-gray-200 focus-within:border-[#2563eb] focus-within:ring-2 focus-within:ring-[#2563eb]/15 focus-within:bg-white rounded-2xl p-2.5 transition-all">
                     <label htmlFor="modal-min-price" className="text-[10px] text-gray-400 block font-bold uppercase tracking-wider mb-0.5">
                       Mínimo
                     </label>
@@ -703,7 +703,7 @@ export default function ProductFilterBar({
                             minPrice: Math.max(0, Math.min(val, filters.maxPrice))
                           });
                         }}
-                        className="w-full bg-transparent font-mono font-bold text-[#004e38] text-xs focus:outline-none placeholder:text-gray-300"
+                        className="w-full bg-transparent font-mono font-bold text-[#2563eb] text-xs focus:outline-none placeholder:text-gray-300"
                       />
                     </div>
                   </div>
@@ -711,7 +711,7 @@ export default function ProductFilterBar({
                   <span className="text-gray-400 font-bold">até</span>
 
                   {/* Max Price Input */}
-                  <div className="flex-1 bg-gray-50 border border-gray-200 focus-within:border-[#004e38] focus-within:ring-2 focus-within:ring-[#004e38]/15 focus-within:bg-white rounded-2xl p-2.5 transition-all">
+                  <div className="flex-1 bg-gray-50 border border-gray-200 focus-within:border-[#2563eb] focus-within:ring-2 focus-within:ring-[#2563eb]/15 focus-within:bg-white rounded-2xl p-2.5 transition-all">
                     <label htmlFor="modal-max-price" className="text-[10px] text-gray-400 block font-bold uppercase tracking-wider mb-0.5">
                       Máximo
                     </label>
@@ -733,7 +733,7 @@ export default function ProductFilterBar({
                             maxPrice: Math.max(filters.minPrice, Math.min(val, maxCatalogPrice))
                           });
                         }}
-                        className="w-full bg-transparent font-mono font-bold text-[#004e38] text-xs focus:outline-none placeholder:text-gray-300"
+                        className="w-full bg-transparent font-mono font-bold text-[#2563eb] text-xs focus:outline-none placeholder:text-gray-300"
                       />
                     </div>
                   </div>
@@ -766,7 +766,7 @@ export default function ProductFilterBar({
                       onClick={() => onFilterChange({ ...filters, type: t })}
                       className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                         filters.type === t
-                          ? 'bg-[#004e38] text-white font-bold'
+                          ? 'bg-[#2563eb] text-white font-bold'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
@@ -787,7 +787,7 @@ export default function ProductFilterBar({
                       onClick={() => onFilterChange({ ...filters, color: c.name })}
                       className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                         filters.color === c.name
-                          ? 'bg-[#004e38] text-white font-bold'
+                          ? 'bg-[#2563eb] text-white font-bold'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
@@ -814,7 +814,7 @@ export default function ProductFilterBar({
                       onClick={() => onFilterChange({ ...filters, material: m })}
                       className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                         filters.material === m
-                          ? 'bg-[#004e38] text-white font-bold'
+                          ? 'bg-[#2563eb] text-white font-bold'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
@@ -835,7 +835,7 @@ export default function ProductFilterBar({
                       onClick={() => onFilterChange({ ...filters, minRating: r })}
                       className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                         filters.minRating === r
-                          ? 'bg-[#004e38] text-white font-bold'
+                          ? 'bg-[#2563eb] text-white font-bold'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                     >
@@ -859,7 +859,7 @@ export default function ProductFilterBar({
                   type="checkbox"
                   checked={filters.onlyDeals}
                   onChange={(e) => onFilterChange({ ...filters, onlyDeals: e.target.checked })}
-                  className="w-4 h-4 text-[#004e38] rounded-md accent-[#004e38] cursor-pointer"
+                  className="w-4 h-4 text-[#2563eb] rounded-md accent-[#2563eb] cursor-pointer"
                 />
               </div>
 
@@ -878,7 +878,7 @@ export default function ProductFilterBar({
               <button
                 type="button"
                 onClick={() => setIsAllFiltersOpen(false)}
-                className="bg-[#004e38] hover:bg-[#033627] text-white font-bold text-xs px-6 py-2.5 rounded-full transition-all shadow-xs cursor-pointer"
+                className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold text-xs px-6 py-2.5 rounded-full transition-all shadow-xs cursor-pointer"
               >
                 Ver {totalResultsCount} Produtos
               </button>

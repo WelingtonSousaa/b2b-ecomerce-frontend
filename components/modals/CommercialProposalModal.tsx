@@ -81,12 +81,12 @@ export default function CommercialProposalModal({
       <div className="bg-white text-gray-900 rounded-3xl shadow-2xl border border-gray-200 w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden print:shadow-none print:border-none print:max-w-none print:max-h-none print:rounded-none">
         
         {/* Header Bar (Hidden during print) */}
-        <div className="bg-[#004e38] text-white p-5 flex items-center justify-between shrink-0 print:hidden">
+        <div className="bg-[#2563eb] text-white p-5 flex items-center justify-between shrink-0 print:hidden">
           <div className="flex items-center gap-2.5">
             <FileText className="w-5 h-5 text-amber-400" />
             <div>
               <h3 className="text-base font-extrabold tracking-tight">Proposta Comercial B2B (Orçamento Oficial)</h3>
-              <p className="text-[11px] text-emerald-100">Documento pronto para homologação e departamento financeiro</p>
+              <p className="text-[11px] text-blue-100">Documento pronto para homologação e departamento financeiro</p>
             </div>
           </div>
 
@@ -124,17 +124,17 @@ export default function CommercialProposalModal({
             
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-[#004e38] text-white flex items-center justify-center font-black">
+                <div className="w-7 h-7 rounded-lg bg-[#2563eb] text-white flex items-center justify-center font-black">
                   S
                 </div>
-                <span className="text-2xl font-black text-gray-900 tracking-tight">Shopcart Brasil Ltda.</span>
+                <span className="text-2xl font-black text-gray-900 tracking-tight">OneSync Brasil Ltda.</span>
               </div>
               <p className="text-xs text-gray-600 font-medium">CNPJ: 12.345.678/0001-99 | Inscrição Estadual: 109.876.543.110</p>
               <p className="text-xs text-gray-500">Av. Paulista, 1000 - Bela Vista - São Paulo / SP - CEP: 01310-100</p>
             </div>
 
             <div className="bg-[#f5f6f6] p-4 rounded-2xl border border-gray-200 text-right space-y-1 shrink-0 print:border-gray-300">
-              <span className="text-[10px] font-black text-[#004e38] uppercase tracking-wider block">Proposta Comercial Nº</span>
+              <span className="text-[10px] font-black text-[#2563eb] uppercase tracking-wider block">Proposta Comercial Nº</span>
               <span className="font-mono text-lg font-black text-gray-900 block">{proposalNumber}</span>
               <div className="text-[11px] text-gray-600 font-semibold space-y-0.5 pt-1 border-t border-gray-200">
                 <p>Emissão: <strong>{issueDate}</strong></p>
@@ -188,7 +188,7 @@ export default function CommercialProposalModal({
 
             <div className="border border-gray-200 rounded-2xl overflow-hidden">
               <table className="w-full text-left text-xs">
-                <thead className="bg-[#004e38] text-white font-extrabold uppercase text-[10px] tracking-wider">
+                <thead className="bg-[#2563eb] text-white font-extrabold uppercase text-[10px] tracking-wider">
                   <tr>
                     <th className="p-3">SKU</th>
                     <th className="p-3">Descrição do Produto / Lote</th>
@@ -204,7 +204,7 @@ export default function CommercialProposalModal({
                       <td className="p-3 font-extrabold text-gray-900">{item.name}</td>
                       <td className="p-3 text-center font-bold">{item.quantity}</td>
                       <td className="p-3 text-right">R$ {item.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</td>
-                      <td className="p-3 text-right font-black text-[#004e38]">
+                      <td className="p-3 text-right font-black text-[#2563eb]">
                         R$ {(item.price * item.quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                       </td>
                     </tr>
@@ -224,15 +224,15 @@ export default function CommercialProposalModal({
               </h5>
               <ul className="space-y-1.5 text-gray-700 font-medium">
                 <li className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#004e38]" />
+                  <CheckCircle2 className="w-4 h-4 text-[#2563eb]" />
                   <span><strong>Boleto Bancário Faturado:</strong> 28 / 56 / 84 dias (Sujeito à alçada)</span>
                 </li>
                 <li className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#004e38]" />
+                  <CheckCircle2 className="w-4 h-4 text-[#2563eb]" />
                   <span><strong>PIX CNPJ:</strong> Com 3% de desconto financeiro automático</span>
                 </li>
                 <li className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#004e38]" />
+                  <CheckCircle2 className="w-4 h-4 text-[#2563eb]" />
                   <span><strong>Frete Modalidade CIF:</strong> Expedição expressa do CD São Paulo</span>
                 </li>
               </ul>
@@ -247,7 +247,7 @@ export default function CommercialProposalModal({
               
               <div className="flex justify-between text-gray-600">
                 <span>Frete CIF (Expedição Expressa CD SP):</span>
-                <span className="font-bold text-emerald-700">GRÁTIS</span>
+                <span className="font-bold text-blue-700">GRÁTIS</span>
               </div>
 
               <div className="flex justify-between text-gray-600">
@@ -257,7 +257,7 @@ export default function CommercialProposalModal({
 
               <div className="pt-3 border-t border-gray-200 flex justify-between items-baseline">
                 <span className="text-sm font-black text-gray-900">Valor Total da Proposta:</span>
-                <span className="text-xl font-black text-[#004e38]">
+                <span className="text-xl font-black text-[#2563eb]">
                   R$ {grandTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                 </span>
               </div>
@@ -269,7 +269,7 @@ export default function CommercialProposalModal({
           <div className="pt-8 border-t border-gray-200 grid grid-cols-2 gap-8 text-center text-xs text-gray-500">
             <div className="space-y-1">
               <div className="border-b border-gray-400 w-48 mx-auto pb-8"></div>
-              <p className="font-bold text-gray-900 pt-1">Shopcart Brasil Ltda.</p>
+              <p className="font-bold text-gray-900 pt-1">OneSync Brasil Ltda.</p>
               <p className="text-[10px]">Departamento de Vendas Corporativas B2B</p>
             </div>
 

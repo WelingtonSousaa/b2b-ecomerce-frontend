@@ -63,7 +63,7 @@ export default function NotificationDropdown() {
   const getIcon = (type: NotificationType) => {
     switch (type) {
       case 'ORDER_STATUS':
-        return <Truck className="w-4 h-4 text-emerald-600" />;
+        return <Truck className="w-4 h-4 text-blue-600" />;
       case 'RMA_UPDATE':
         return <RotateCcw className="w-4 h-4 text-amber-600" />;
       case 'PRICE_BOOK_UPDATE':
@@ -81,7 +81,7 @@ export default function NotificationDropdown() {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="relative p-2 rounded-full hover:bg-gray-100 text-gray-700 hover:text-[#004e38] transition-colors cursor-pointer"
+        className="relative p-2 rounded-full hover:bg-gray-100 text-gray-700 hover:text-[#2563eb] transition-colors cursor-pointer"
         title="Central de Notificações B2B"
       >
         <Bell className="w-5 h-5" />
@@ -96,7 +96,7 @@ export default function NotificationDropdown() {
         <div className="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-2xl shadow-xl border border-gray-200 z-50 overflow-hidden text-xs font-sans animate-in fade-in duration-150">
           
           {/* Header */}
-          <div className="bg-[#004e38] text-white p-3.5 flex items-center justify-between">
+          <div className="bg-[#2563eb] text-white p-3.5 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Bell className="w-4 h-4 text-amber-300" />
               <span className="font-extrabold text-sm">Notificações Corporativas</span>
@@ -104,7 +104,7 @@ export default function NotificationDropdown() {
             {unreadCount > 0 && (
               <button
                 onClick={markAllAsRead}
-                className="text-[10px] text-emerald-200 hover:text-white font-bold flex items-center gap-1 cursor-pointer"
+                className="text-[10px] text-blue-200 hover:text-white font-bold flex items-center gap-1 cursor-pointer"
               >
                 <Check className="w-3 h-3" />
                 <span>Marcar lidas</span>
@@ -124,7 +124,7 @@ export default function NotificationDropdown() {
                   key={notif.id}
                   onClick={() => markAsRead(notif.id)}
                   className={`p-3.5 hover:bg-[#f8fafc] transition-colors flex gap-3 ${
-                    !notif.isRead ? 'bg-emerald-50/40 font-medium' : 'text-gray-600'
+                    !notif.isRead ? 'bg-blue-50/40 font-medium' : 'text-gray-600'
                   }`}
                 >
                   <div className="w-8 h-8 rounded-xl bg-white border border-gray-200 flex items-center justify-center shrink-0 shadow-2xs">
@@ -140,7 +140,7 @@ export default function NotificationDropdown() {
                       <Link
                         href={notif.actionUrl}
                         onClick={() => setIsOpen(false)}
-                        className="inline-block text-[10px] font-bold text-[#004e38] hover:underline pt-0.5"
+                        className="inline-block text-[10px] font-bold text-[#2563eb] hover:underline pt-0.5"
                       >
                         Ver Detalhes →
                       </Link>
@@ -156,7 +156,7 @@ export default function NotificationDropdown() {
             <Link
               href="/conta"
               onClick={() => setIsOpen(false)}
-              className="text-[11px] font-bold text-gray-600 hover:text-[#004e38]"
+              className="text-[11px] font-bold text-gray-600 hover:text-[#2563eb]"
             >
               Ir para o Painel da Empresa
             </Link>

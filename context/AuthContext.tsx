@@ -86,31 +86,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const logout = () => {
-    authService.logout();
     setUser(null);
     setCompany(null);
   };
 
   const register = async (companyData: Partial<CompanyAccount>, userData: Partial<CompanyUser>, password?: string) => {
-    const response = await authService.register({
-      company: companyData,
-      user: userData,
-      password: password || 'password123',
-    });
-
-    if (response.data?.user && response.data?.company) {
-      setUser(response.data.user);
-      setCompany(response.data.company);
-      setIsAuthModalOpen(false);
-    }
+    // Mock register
+    setUser(userData as CompanyUser);
+    setCompany(companyData as CompanyAccount);
+    setIsAuthModalOpen(false);
   };
 
   const updateCompany = async (data: Partial<CompanyAccount>) => {
     if (!company) return;
-    const response = await authService.updateCompany(company.id, data);
-    if (response.data) {
-      setCompany(response.data);
-    }
+    setCompany({ ...company, ...data });
   };
 
   const openAuthModal = (reason?: string) => {

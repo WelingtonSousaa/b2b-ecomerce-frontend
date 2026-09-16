@@ -126,7 +126,7 @@ export default function StockMovementModal({
       <div className="bg-white text-gray-900 rounded-3xl shadow-2xl border border-gray-100 w-full max-w-2xl overflow-hidden relative max-h-[90vh] flex flex-col">
         
         {/* Header */}
-        <div className="bg-[#004e38] text-white p-6 relative shrink-0">
+        <div className="bg-[#2563eb] text-white p-6 relative shrink-0">
           <button
             onClick={onClose}
             className="absolute top-5 right-5 p-1 rounded-full bg-white/10 hover:bg-white/20 text-white cursor-pointer transition-colors"
@@ -137,14 +137,14 @@ export default function StockMovementModal({
           <div className="flex items-center gap-2.5 mb-1">
             <div className="w-9 h-9 rounded-xl bg-white/15 flex items-center justify-center">
               {movementType === 'IN' ? (
-                <ArrowUpRight className="w-5 h-5 text-emerald-300" />
+                <ArrowUpRight className="w-5 h-5 text-blue-300" />
               ) : (
                 <ArrowDownRight className="w-5 h-5 text-amber-300" />
               )}
             </div>
             <div>
               <h3 className="text-xl font-black tracking-tight">Movimentação Manual de Estoque</h3>
-              <p className="text-xs text-emerald-100">
+              <p className="text-xs text-blue-100">
                 Ajuste de entrada (reposição/compra) ou saída (avaria/baixa/amostra) com auditoria instantânea.
               </p>
             </div>
@@ -155,8 +155,8 @@ export default function StockMovementModal({
         <form onSubmit={handleSubmit} className="p-6 overflow-y-auto space-y-5 flex-1 text-xs">
           
           {showSuccess && (
-            <div className="bg-emerald-50 border border-emerald-300 text-[#004e38] p-3 rounded-2xl flex items-center gap-2 font-bold animate-in fade-in">
-              <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+            <div className="bg-blue-50 border border-blue-300 text-[#2563eb] p-3 rounded-2xl flex items-center gap-2 font-bold animate-in fade-in">
+              <CheckCircle2 className="w-5 h-5 text-blue-600 shrink-0" />
               <span>Estoque atualizado com sucesso e registrado no histórico Kardex!</span>
             </div>
           )}
@@ -175,11 +175,11 @@ export default function StockMovementModal({
                 }}
                 className={`py-3 px-4 rounded-2xl font-bold flex items-center justify-center gap-2 border-2 transition-all cursor-pointer ${
                   movementType === 'IN'
-                    ? 'bg-emerald-50/80 border-[#004e38] text-[#004e38] shadow-xs'
+                    ? 'bg-blue-50/80 border-[#2563eb] text-[#2563eb] shadow-xs'
                     : 'bg-[#f5f6f6] border-transparent text-gray-500 hover:bg-gray-200/60'
                 }`}
               >
-                <ArrowUpRight className="w-4 h-4 text-emerald-600" />
+                <ArrowUpRight className="w-4 h-4 text-blue-600" />
                 <span>🟢 Entrada de Estoque (+)</span>
               </button>
 
@@ -210,7 +210,7 @@ export default function StockMovementModal({
               <select
                 value={selectedProductId}
                 onChange={(e) => handleProductChange(e.target.value)}
-                className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2.5 font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2.5 font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
               >
                 {products.map(p => (
                   <option key={p.id} value={p.id}>
@@ -227,7 +227,7 @@ export default function StockMovementModal({
               <select
                 value={selectedCdId}
                 onChange={(e) => setSelectedCdId(e.target.value)}
-                className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2.5 font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2.5 font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
               >
                 <option value="cd-sp">CD Sudeste - São Paulo (SP)</option>
                 <option value="cd-sc">CD Sul - Joinville (SC)</option>
@@ -238,15 +238,15 @@ export default function StockMovementModal({
 
           {/* Se o produto tem variantes, exibir seleção de variação */}
           {currentProduct?.hasVariants && currentProduct.variants && currentProduct.variants.length > 0 && (
-            <div className="space-y-1.5 bg-emerald-50/50 p-3.5 rounded-2xl border border-emerald-200/80">
-              <label className="font-extrabold text-[#004e38] uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+            <div className="space-y-1.5 bg-blue-50/50 p-3.5 rounded-2xl border border-blue-200/80">
+              <label className="font-extrabold text-[#2563eb] uppercase tracking-wider text-[11px] flex items-center gap-1.5">
                 <Layers className="w-3.5 h-3.5" />
                 Selecione a Variação / Grade do Produto:
               </label>
               <select
                 value={selectedVariantId}
                 onChange={(e) => setSelectedVariantId(e.target.value)}
-                className="w-full bg-white border border-emerald-300 rounded-xl px-3 py-2 font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                className="w-full bg-white border border-blue-300 rounded-xl px-3 py-2 font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
               >
                 {currentProduct.variants.map(v => (
                   <option key={v.id} value={v.id}>
@@ -265,7 +265,7 @@ export default function StockMovementModal({
             <select
               value={reason}
               onChange={(e) => setReason(e.target.value as StockMovementReason)}
-              className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2.5 font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+              className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2.5 font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
             >
               {movementType === 'IN' ? (
                 <>
@@ -302,7 +302,7 @@ export default function StockMovementModal({
               </div>
 
               <div className={`p-3 rounded-xl border font-black text-sm flex flex-col items-center justify-center ${
-                movementType === 'IN' ? 'bg-emerald-50 border-emerald-200 text-[#004e38]' : 'bg-red-50 border-red-200 text-red-700'
+                movementType === 'IN' ? 'bg-blue-50 border-blue-200 text-[#2563eb]' : 'bg-red-50 border-red-200 text-red-700'
               }`}>
                 <span className="text-[10px] uppercase font-bold">
                   {movementType === 'IN' ? '+ Entrada' : '- Saída'}
@@ -314,7 +314,7 @@ export default function StockMovementModal({
 
               <div className="bg-white p-3 rounded-xl border border-gray-100 shadow-2xs">
                 <span className="text-[10px] text-gray-400 font-bold uppercase block">Novo Saldo</span>
-                <span className={`text-lg font-black ${resultingStock < 10 ? 'text-amber-600' : 'text-emerald-700'}`}>
+                <span className={`text-lg font-black ${resultingStock < 10 ? 'text-amber-600' : 'text-blue-700'}`}>
                   {resultingStock} un
                 </span>
               </div>
@@ -338,7 +338,7 @@ export default function StockMovementModal({
                 required
                 value={quantity}
                 onChange={(e) => setQuantity(Number(e.target.value))}
-                className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2 font-black text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2 font-black text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
               />
             </div>
 
@@ -349,7 +349,7 @@ export default function StockMovementModal({
                 value={fiscalDoc}
                 onChange={(e) => setFiscalDoc(e.target.value)}
                 placeholder="Ex: NF-e 004921"
-                className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2 font-mono text-gray-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2 font-mono text-gray-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
               />
             </div>
 
@@ -360,7 +360,7 @@ export default function StockMovementModal({
                 value={batchNumber}
                 onChange={(e) => setBatchNumber(e.target.value)}
                 placeholder="Ex: LOT-2026-08A"
-                className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2 font-mono text-gray-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2 font-mono text-gray-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
               />
             </div>
           </div>
@@ -373,7 +373,7 @@ export default function StockMovementModal({
                 type="text"
                 value={operator}
                 onChange={(e) => setOperator(e.target.value)}
-                className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2 text-gray-900 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2 text-gray-900 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
               />
             </div>
 
@@ -384,7 +384,7 @@ export default function StockMovementModal({
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="Motivo detalhado para auditoria..."
-                className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2 text-gray-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-3 py-2 text-gray-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
               />
             </div>
           </div>
@@ -403,7 +403,7 @@ export default function StockMovementModal({
               type="submit"
               className={`px-6 py-2.5 rounded-full font-black text-white shadow-sm flex items-center gap-2 cursor-pointer transition-all ${
                 movementType === 'IN'
-                  ? 'bg-[#004e38] hover:bg-[#033627]'
+                  ? 'bg-[#2563eb] hover:bg-[#1d4ed8]'
                   : 'bg-red-600 hover:bg-red-700'
               }`}
             >

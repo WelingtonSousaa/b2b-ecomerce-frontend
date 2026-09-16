@@ -281,18 +281,18 @@ export default function CadastroPage() {
         
         {/* Navigation & Back Link */}
         <div className="flex items-center justify-between border-b border-gray-200 pb-4">
-          <Link href="/" className="inline-flex items-center gap-1.5 text-xs font-bold text-[#004e38] hover:underline">
+          <Link href="/" className="inline-flex items-center gap-1.5 text-xs font-bold text-[#2563eb] hover:underline">
             <ArrowLeft className="w-4 h-4" /> Voltar para a Loja
           </Link>
           <div className="flex items-center gap-2 text-xs font-bold text-gray-600 bg-white px-3 py-1.5 rounded-full border border-gray-200 shadow-2xs">
-            <ShieldCheck className="w-4 h-4 text-[#004e38]" />
+            <ShieldCheck className="w-4 h-4 text-[#2563eb]" />
             <span>Ambiente Seguro B2B • Conexão Criptografada SSL</span>
           </div>
         </div>
 
         {/* Title Banner */}
         <div className="text-center space-y-2">
-          <div className="inline-flex items-center gap-1.5 bg-emerald-100/70 text-[#004e38] text-xs font-black px-3.5 py-1.5 rounded-full border border-emerald-300 uppercase tracking-wider">
+          <div className="inline-flex items-center gap-1.5 bg-blue-100/70 text-[#2563eb] text-xs font-black px-3.5 py-1.5 rounded-full border border-blue-300 uppercase tracking-wider">
             <Sparkles className="w-4 h-4 text-amber-600" /> Onboarding Empresarial Completo
           </div>
           <h1 className="text-3xl sm:text-4xl font-black text-gray-900 tracking-tight">
@@ -308,7 +308,7 @@ export default function CadastroPage() {
           <div className="grid grid-cols-3 gap-2 text-center text-xs font-bold">
             <div
               className={`py-3 px-2 rounded-xl transition-all flex items-center justify-center gap-2 ${
-                step === 1 ? 'bg-[#004e38] text-white shadow-xs' : step > 1 ? 'bg-emerald-50 text-[#004e38] border border-emerald-200' : 'text-gray-400 bg-gray-50'
+                step === 1 ? 'bg-[#2563eb] text-white shadow-xs' : step > 1 ? 'bg-blue-50 text-[#2563eb] border border-blue-200' : 'text-gray-400 bg-gray-50'
               }`}
             >
               <Building2 className="w-4 h-4 shrink-0" />
@@ -316,7 +316,7 @@ export default function CadastroPage() {
             </div>
             <div
               className={`py-3 px-2 rounded-xl transition-all flex items-center justify-center gap-2 ${
-                step === 2 ? 'bg-[#004e38] text-white shadow-xs' : step > 2 ? 'bg-emerald-50 text-[#004e38] border border-emerald-200' : 'text-gray-400 bg-gray-50'
+                step === 2 ? 'bg-[#2563eb] text-white shadow-xs' : step > 2 ? 'bg-blue-50 text-[#2563eb] border border-blue-200' : 'text-gray-400 bg-gray-50'
               }`}
             >
               <Lock className="w-4 h-4 shrink-0" />
@@ -324,7 +324,7 @@ export default function CadastroPage() {
             </div>
             <div
               className={`py-3 px-2 rounded-xl transition-all flex items-center justify-center gap-2 ${
-                step === 3 ? 'bg-[#004e38] text-white shadow-xs' : 'text-gray-400 bg-gray-50'
+                step === 3 ? 'bg-[#2563eb] text-white shadow-xs' : 'text-gray-400 bg-gray-50'
               }`}
             >
               <CheckCircle2 className="w-4 h-4 shrink-0" />
@@ -344,7 +344,7 @@ export default function CadastroPage() {
               <div className="flex items-center justify-between">
                 <div>
                   <h2 className="text-base font-black text-gray-900 tracking-tight flex items-center gap-2">
-                    <Building2 className="w-5 h-5 text-[#004e38]" /> Como deseja preencher os dados da empresa?
+                    <Building2 className="w-5 h-5 text-[#2563eb]" /> Como deseja preencher os dados da empresa?
                   </h2>
                   <p className="text-xs text-gray-500 mt-0.5">
                     Utilize a busca automática via CNPJ ou preencha manualmente campo a campo.
@@ -358,11 +358,11 @@ export default function CadastroPage() {
                   onClick={() => setFillMode('AUTO_CNPJ')}
                   className={`p-4 rounded-2xl border text-left transition-all cursor-pointer flex items-start gap-3 ${
                     fillMode === 'AUTO_CNPJ'
-                      ? 'border-[#004e38] bg-emerald-50/50 ring-2 ring-[#004e38]/20'
+                      ? 'border-[#2563eb] bg-blue-50/50 ring-2 ring-[#2563eb]/20'
                       : 'border-gray-200 hover:border-gray-300 bg-gray-50/50'
                   }`}
                 >
-                  <div className="w-8 h-8 rounded-full bg-emerald-100 text-[#004e38] flex items-center justify-center shrink-0 font-bold">
+                  <div className="w-8 h-8 rounded-full bg-blue-100 text-[#2563eb] flex items-center justify-center shrink-0 font-bold">
                     ⚡
                   </div>
                   <div>
@@ -378,7 +378,7 @@ export default function CadastroPage() {
                   onClick={() => setFillMode('MANUAL')}
                   className={`p-4 rounded-2xl border text-left transition-all cursor-pointer flex items-start gap-3 ${
                     fillMode === 'MANUAL'
-                      ? 'border-[#004e38] bg-emerald-50/50 ring-2 ring-[#004e38]/20'
+                      ? 'border-[#2563eb] bg-blue-50/50 ring-2 ring-[#2563eb]/20'
                       : 'border-gray-200 hover:border-gray-300 bg-gray-50/50'
                   }`}
                 >
@@ -400,7 +400,7 @@ export default function CadastroPage() {
               <div className="bg-[#f8fafc] p-5 rounded-2xl border border-slate-200 space-y-3">
                 <label className="text-xs font-bold text-gray-800 flex items-center justify-between">
                   <span>Digite o CNPJ da Empresa (apenas números ou com pontuação)</span>
-                  <span className="text-[11px] font-normal text-emerald-700 font-mono">Consulta Receita Federal Oficial</span>
+                  <span className="text-[11px] font-normal text-blue-700 font-mono">Consulta Receita Federal Oficial</span>
                 </label>
                 <div className="flex flex-col sm:flex-row gap-2.5">
                   <input
@@ -409,13 +409,13 @@ export default function CadastroPage() {
                     onChange={(e) => handleCNPJChange(e.target.value)}
                     placeholder="00.000.000/0001-00"
                     maxLength={18}
-                    className="flex-1 bg-white border border-gray-300 focus:border-[#004e38] rounded-xl px-4 py-3 text-sm font-mono font-bold text-gray-900 focus:outline-none shadow-2xs"
+                    className="flex-1 bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl px-4 py-3 text-sm font-mono font-bold text-gray-900 focus:outline-none shadow-2xs"
                   />
                   <button
                     type="button"
                     onClick={handleSearchCNPJ}
                     disabled={isSearchingCNPJ}
-                    className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-bold px-6 py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs disabled:opacity-50 shrink-0"
+                    className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-bold px-6 py-3.5 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-xs disabled:opacity-50 shrink-0"
                   >
                     {isSearchingCNPJ ? (
                       <>
@@ -437,8 +437,8 @@ export default function CadastroPage() {
                   </p>
                 )}
                 {isCNPJValidated && (
-                  <div className="bg-emerald-100/60 p-2.5 rounded-xl border border-emerald-300 text-[11px] text-emerald-900 font-bold flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-700 shrink-0" />
+                  <div className="bg-blue-100/60 p-2.5 rounded-xl border border-blue-300 text-[11px] text-blue-900 font-bold flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-blue-700 shrink-0" />
                     <span>CNPJ validado com sucesso na Receita Federal! Você pode conferir e ajustar os campos abaixo:</span>
                   </div>
                 )}
@@ -458,7 +458,7 @@ export default function CadastroPage() {
 
               {/* Seção 1: Identificação Cadastral */}
               <div className="space-y-4">
-                <h3 className="font-black text-gray-900 text-xs uppercase tracking-wider flex items-center gap-1.5 text-[#004e38]">
+                <h3 className="font-black text-gray-900 text-xs uppercase tracking-wider flex items-center gap-1.5 text-[#2563eb]">
                   <FileText className="w-4 h-4" /> 1. Identificação Cadastral & Fiscal
                 </h3>
 
@@ -474,7 +474,7 @@ export default function CadastroPage() {
                       onChange={(e) => handleCNPJChange(e.target.value)}
                       placeholder="00.000.000/0001-00"
                       maxLength={18}
-                      className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl px-4 py-3 text-xs font-mono font-bold text-gray-900 focus:outline-none"
+                      className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl px-4 py-3 text-xs font-mono font-bold text-gray-900 focus:outline-none"
                     />
                   </div>
 
@@ -485,7 +485,7 @@ export default function CadastroPage() {
                     <select
                       value={industrySegment}
                       onChange={(e) => setIndustrySegment(e.target.value)}
-                      className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl px-4 py-3 text-xs font-bold text-gray-900 focus:outline-none"
+                      className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl px-4 py-3 text-xs font-bold text-gray-900 focus:outline-none"
                     >
                       <option value="Tecnologia & Informática">Tecnologia & Informática</option>
                       <option value="Indústria & Manufatura">Indústria & Manufatura</option>
@@ -510,7 +510,7 @@ export default function CadastroPage() {
                       value={razaoSocial}
                       onChange={(e) => setRazaoSocial(e.target.value)}
                       placeholder="ex: Tech Solutions & Tecnologia LTDA"
-                      className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl px-4 py-3 text-xs font-bold text-gray-900 focus:outline-none"
+                      className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl px-4 py-3 text-xs font-bold text-gray-900 focus:outline-none"
                     />
                   </div>
 
@@ -523,7 +523,7 @@ export default function CadastroPage() {
                       value={nomeFantasia}
                       onChange={(e) => setNomeFantasia(e.target.value)}
                       placeholder="ex: Tech Solutions B2B"
-                      className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl px-4 py-3 text-xs font-medium text-gray-900 focus:outline-none"
+                      className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl px-4 py-3 text-xs font-medium text-gray-900 focus:outline-none"
                     />
                   </div>
                 </div>
@@ -541,7 +541,7 @@ export default function CadastroPage() {
                             setIsentoIE(e.target.checked);
                             if (e.target.checked) setInscricaoEstadual('');
                           }}
-                          className="rounded text-[#004e38] focus:ring-0"
+                          className="rounded text-[#2563eb] focus:ring-0"
                         />
                         <span className="text-[10px] text-gray-500 font-bold">Isento / Não Contribuinte</span>
                       </label>
@@ -553,7 +553,7 @@ export default function CadastroPage() {
                       onChange={(e) => setInscricaoEstadual(e.target.value)}
                       placeholder="ex: 123.456.789.111"
                       className={`w-full border rounded-xl px-4 py-3 text-xs font-mono font-bold focus:outline-none ${
-                        isentoIE ? 'bg-gray-100 text-gray-400 border-gray-200' : 'bg-white text-gray-900 border-gray-300 focus:border-[#004e38]'
+                        isentoIE ? 'bg-gray-100 text-gray-400 border-gray-200' : 'bg-white text-gray-900 border-gray-300 focus:border-[#2563eb]'
                       }`}
                     />
                   </div>
@@ -565,7 +565,7 @@ export default function CadastroPage() {
                       value={inscricaoMunicipal}
                       onChange={(e) => setInscricaoMunicipal(e.target.value)}
                       placeholder="Opcional (ex: 9876543)"
-                      className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl px-4 py-3 text-xs font-mono font-bold text-gray-900 focus:outline-none"
+                      className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl px-4 py-3 text-xs font-mono font-bold text-gray-900 focus:outline-none"
                     />
                   </div>
 
@@ -576,7 +576,7 @@ export default function CadastroPage() {
                     <select
                       value={regimeTributario}
                       onChange={(e) => setRegimeTributario(e.target.value as 'LUCRO_PRESUMIDO' | 'LUCRO_REAL' | 'SIMPLES_NACIONAL')}
-                      className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl px-4 py-3 text-xs font-bold text-gray-900 focus:outline-none"
+                      className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl px-4 py-3 text-xs font-bold text-gray-900 focus:outline-none"
                     >
                       <option value="LUCRO_PRESUMIDO">Lucro Presumido</option>
                       <option value="LUCRO_REAL">Lucro Real (Grandes Contas)</option>
@@ -594,7 +594,7 @@ export default function CadastroPage() {
 
               {/* Seção 2: Endereço Fiscal da Sede */}
               <div className="space-y-4 pt-4 border-t border-gray-100">
-                <h3 className="font-black text-gray-900 text-xs uppercase tracking-wider flex items-center gap-1.5 text-[#004e38]">
+                <h3 className="font-black text-gray-900 text-xs uppercase tracking-wider flex items-center gap-1.5 text-[#2563eb]">
                   <MapPin className="w-4 h-4" /> 2. Endereço Fiscal / Sede da Empresa
                 </h3>
 
@@ -610,7 +610,7 @@ export default function CadastroPage() {
                       onChange={(e) => handleCEPChange(e.target.value)}
                       placeholder="00000-000"
                       maxLength={9}
-                      className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl px-4 py-3 text-xs font-mono font-bold text-gray-900 focus:outline-none"
+                      className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl px-4 py-3 text-xs font-mono font-bold text-gray-900 focus:outline-none"
                     />
                   </div>
 
@@ -624,7 +624,7 @@ export default function CadastroPage() {
                       value={logradouro}
                       onChange={(e) => setLogradouro(e.target.value)}
                       placeholder="ex: Av. Paulista"
-                      className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl px-4 py-3 text-xs font-medium text-gray-900 focus:outline-none"
+                      className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl px-4 py-3 text-xs font-medium text-gray-900 focus:outline-none"
                     />
                   </div>
                 </div>
@@ -640,7 +640,7 @@ export default function CadastroPage() {
                       value={numero}
                       onChange={(e) => setNumero(e.target.value)}
                       placeholder="ex: 1000"
-                      className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl px-4 py-3 text-xs font-bold text-gray-900 focus:outline-none"
+                      className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl px-4 py-3 text-xs font-bold text-gray-900 focus:outline-none"
                     />
                   </div>
 
@@ -651,7 +651,7 @@ export default function CadastroPage() {
                       value={complemento}
                       onChange={(e) => setComplemento(e.target.value)}
                       placeholder="ex: Conjunto 42"
-                      className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl px-4 py-3 text-xs font-medium text-gray-900 focus:outline-none"
+                      className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl px-4 py-3 text-xs font-medium text-gray-900 focus:outline-none"
                     />
                   </div>
 
@@ -662,7 +662,7 @@ export default function CadastroPage() {
                       value={bairro}
                       onChange={(e) => setBairro(e.target.value)}
                       placeholder="ex: Bela Vista"
-                      className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl px-4 py-3 text-xs font-medium text-gray-900 focus:outline-none"
+                      className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl px-4 py-3 text-xs font-medium text-gray-900 focus:outline-none"
                     />
                   </div>
 
@@ -676,7 +676,7 @@ export default function CadastroPage() {
                           value={cidade}
                           onChange={(e) => setCidade(e.target.value)}
                           placeholder="São Paulo"
-                          className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl px-3 py-3 text-xs font-medium text-gray-900 focus:outline-none"
+                          className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl px-3 py-3 text-xs font-medium text-gray-900 focus:outline-none"
                         />
                       </div>
                       <div>
@@ -684,7 +684,7 @@ export default function CadastroPage() {
                         <select
                           value={uf}
                           onChange={(e) => setUf(e.target.value)}
-                          className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl px-2 py-3 text-xs font-bold text-gray-900 focus:outline-none"
+                          className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl px-2 py-3 text-xs font-bold text-gray-900 focus:outline-none"
                         >
                           {['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO'].map(u => (
                             <option key={u} value={u}>{u}</option>
@@ -702,7 +702,7 @@ export default function CadastroPage() {
                       type="checkbox"
                       checked={hasSuframa}
                       onChange={(e) => setHasSuframa(e.target.checked)}
-                      className="w-4 h-4 rounded text-[#004e38] focus:ring-0"
+                      className="w-4 h-4 rounded text-[#2563eb] focus:ring-0"
                     />
                     <span>A empresa possui Incentivo Fiscal SUFRAMA / Zona Franca de Manaus (ZFM)?</span>
                   </label>
@@ -714,7 +714,7 @@ export default function CadastroPage() {
                         value={suframaCode}
                         onChange={(e) => setSuframaCode(e.target.value)}
                         placeholder="ex: SUF-987654-ZFM"
-                        className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl px-4 py-2.5 text-xs font-mono font-bold text-gray-900 focus:outline-none"
+                        className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl px-4 py-2.5 text-xs font-mono font-bold text-gray-900 focus:outline-none"
                       />
                     </div>
                   )}
@@ -729,7 +729,7 @@ export default function CadastroPage() {
 
                 <button
                   type="submit"
-                  className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-bold px-8 py-4 rounded-full transition-all shadow-sm flex items-center gap-2 cursor-pointer hover:scale-102"
+                  className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-bold px-8 py-4 rounded-full transition-all shadow-sm flex items-center gap-2 cursor-pointer hover:scale-102"
                 >
                   <span>Avançar para Senha & Acesso</span>
                   <ArrowRight className="w-4 h-4 text-amber-300" />
@@ -747,8 +747,8 @@ export default function CadastroPage() {
           <div className="bg-white border border-gray-200 rounded-3xl p-6 sm:p-10 space-y-8 shadow-xs animate-in fade-in duration-200">
             
             <div className="border-b border-gray-100 pb-4">
-              <div className="flex items-center gap-2.5 text-emerald-800 font-bold text-xs mb-1">
-                <Building2 className="w-4 h-4 text-[#004e38]" />
+              <div className="flex items-center gap-2.5 text-blue-800 font-bold text-xs mb-1">
+                <Building2 className="w-4 h-4 text-[#2563eb]" />
                 <span>Empresa: {razaoSocial || cnpj} ({cnpj})</span>
               </div>
               <h2 className="text-xl font-black text-gray-900 tracking-tight">
@@ -771,7 +771,7 @@ export default function CadastroPage() {
 
               {/* Seção A: Usuário Comprador / Administrador */}
               <div className="space-y-4">
-                <h3 className="font-black text-gray-900 text-xs uppercase tracking-wider flex items-center gap-1.5 text-[#004e38]">
+                <h3 className="font-black text-gray-900 text-xs uppercase tracking-wider flex items-center gap-1.5 text-[#2563eb]">
                   <UserCheck className="w-4 h-4" /> 1. Responsável / Comprador Autorizado
                 </h3>
 
@@ -786,7 +786,7 @@ export default function CadastroPage() {
                       value={userName}
                       onChange={(e) => setUserName(e.target.value)}
                       placeholder="ex: Carlos Eduardo Silva"
-                      className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl px-4 py-3 text-xs font-medium text-gray-900 focus:outline-none"
+                      className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl px-4 py-3 text-xs font-medium text-gray-900 focus:outline-none"
                     />
                   </div>
 
@@ -801,7 +801,7 @@ export default function CadastroPage() {
                         value={userEmail}
                         onChange={(e) => setUserEmail(e.target.value)}
                         placeholder="ex: carlos.compras@suaempresa.com.br"
-                        className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl pl-10 pr-4 py-3 text-xs font-medium text-gray-900 focus:outline-none"
+                        className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl pl-10 pr-4 py-3 text-xs font-medium text-gray-900 focus:outline-none"
                       />
                       <Mail className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
                     </div>
@@ -821,7 +821,7 @@ export default function CadastroPage() {
                         onChange={(e) => handlePhoneChange(e.target.value)}
                         placeholder="(11) 98765-4321"
                         maxLength={15}
-                        className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl pl-10 pr-4 py-3 text-xs font-medium text-gray-900 focus:outline-none"
+                        className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl pl-10 pr-4 py-3 text-xs font-medium text-gray-900 focus:outline-none"
                       />
                       <Phone className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
                     </div>
@@ -834,7 +834,7 @@ export default function CadastroPage() {
                       value={department}
                       onChange={(e) => setDepartment(e.target.value)}
                       placeholder="ex: Compras / TI / Financeiro"
-                      className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl px-4 py-3 text-xs font-medium text-gray-900 focus:outline-none"
+                      className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl px-4 py-3 text-xs font-medium text-gray-900 focus:outline-none"
                     />
                   </div>
 
@@ -843,7 +843,7 @@ export default function CadastroPage() {
                     <select
                       value={userRole}
                       onChange={(e) => setUserRole(e.target.value as 'BUYER' | 'APPROVER' | 'ADMIN')}
-                      className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl px-4 py-3 text-xs font-bold text-gray-900 focus:outline-none"
+                      className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl px-4 py-3 text-xs font-bold text-gray-900 focus:outline-none"
                     >
                       <option value="BUYER">Comprador (Monta pedidos e carrinhos)</option>
                       <option value="APPROVER">Gestor Financeiro / Aprovador</option>
@@ -855,7 +855,7 @@ export default function CadastroPage() {
 
               {/* Seção B: Senha & Segurança */}
               <div className="space-y-4 pt-4 border-t border-gray-100">
-                <h3 className="font-black text-gray-900 text-xs uppercase tracking-wider flex items-center gap-1.5 text-[#004e38]">
+                <h3 className="font-black text-gray-900 text-xs uppercase tracking-wider flex items-center gap-1.5 text-[#2563eb]">
                   <Lock className="w-4 h-4" /> 2. Senha de Acesso & Segurança
                 </h3>
 
@@ -871,7 +871,7 @@ export default function CadastroPage() {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Mínimo 6 caracteres"
-                        className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl px-4 py-3 text-xs font-medium text-gray-900 focus:outline-none pr-10"
+                        className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl px-4 py-3 text-xs font-medium text-gray-900 focus:outline-none pr-10"
                       />
                       <button
                         type="button"
@@ -894,7 +894,7 @@ export default function CadastroPage() {
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         placeholder="Repita a mesma senha"
-                        className="w-full bg-white border border-gray-300 focus:border-[#004e38] rounded-xl px-4 py-3 text-xs font-medium text-gray-900 focus:outline-none pr-10"
+                        className="w-full bg-white border border-gray-300 focus:border-[#2563eb] rounded-xl px-4 py-3 text-xs font-medium text-gray-900 focus:outline-none pr-10"
                       />
                       <button
                         type="button"
@@ -914,7 +914,7 @@ export default function CadastroPage() {
                   </p>
                 )}
                 {password && confirmPassword && password === confirmPassword && (
-                  <p className="text-emerald-700 text-[11px] font-bold flex items-center gap-1">
+                  <p className="text-blue-700 text-[11px] font-bold flex items-center gap-1">
                     <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
                     Senhas coincidem perfeitamente.
                   </p>
@@ -923,7 +923,7 @@ export default function CadastroPage() {
 
               {/* Seção C: Faturamento & Limite de Crédito Desejado */}
               <div className="space-y-4 pt-4 border-t border-gray-100">
-                <h3 className="font-black text-gray-900 text-xs uppercase tracking-wider flex items-center gap-1.5 text-[#004e38]">
+                <h3 className="font-black text-gray-900 text-xs uppercase tracking-wider flex items-center gap-1.5 text-[#2563eb]">
                   <CreditCard className="w-4 h-4" /> 3. Preferências de Faturamento B2B
                 </h3>
 
@@ -938,7 +938,7 @@ export default function CadastroPage() {
                     <select
                       value={requestedCreditLimit}
                       onChange={(e) => setRequestedCreditLimit(e.target.value)}
-                      className="bg-white border border-gray-300 rounded-xl px-4 py-2.5 text-xs font-bold text-[#004e38] focus:outline-none"
+                      className="bg-white border border-gray-300 rounded-xl px-4 py-2.5 text-xs font-bold text-[#2563eb] focus:outline-none"
                     >
                       <option value="25000">R$ 25.000,00 (Pequeno Porte)</option>
                       <option value="50000">R$ 50.000,00 (Médio Porte - Padrão)</option>
@@ -955,11 +955,11 @@ export default function CadastroPage() {
                       required
                       checked={acceptTerms}
                       onChange={(e) => setAcceptTerms(e.target.checked)}
-                      className="w-4 h-4 rounded text-[#004e38] focus:ring-0 mt-0.5"
+                      className="w-4 h-4 rounded text-[#2563eb] focus:ring-0 mt-0.5"
                     />
                     <span className="leading-relaxed">
                       Declaro que sou representante autorizado da empresa e concordo com os{' '}
-                      <Link href="/termos" target="_blank" className="font-bold text-[#004e38] underline">
+                      <Link href="/termos" target="_blank" className="font-bold text-[#2563eb] underline">
                         Termos de Fornecimento B2B
                       </Link>{' '}
                       e com o tratamento de dados corporativos de acordo com a LGPD.
@@ -981,7 +981,7 @@ export default function CadastroPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-bold px-8 py-4 rounded-full transition-all shadow-sm flex items-center gap-2 cursor-pointer hover:scale-102 disabled:opacity-50"
+                  className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-bold px-8 py-4 rounded-full transition-all shadow-sm flex items-center gap-2 cursor-pointer hover:scale-102 disabled:opacity-50"
                 >
                   {isSubmitting ? (
                     <>
@@ -1006,16 +1006,16 @@ export default function CadastroPage() {
         {/* ========================================================================= */}
         {step === 3 && (
           <div className="bg-white border border-gray-200 rounded-3xl p-8 sm:p-12 text-center space-y-6 shadow-xs animate-in zoom-in-95 duration-200">
-            <div className="w-20 h-20 rounded-full bg-emerald-100 text-[#004e38] flex items-center justify-center mx-auto shadow-xs">
+            <div className="w-20 h-20 rounded-full bg-blue-100 text-[#2563eb] flex items-center justify-center mx-auto shadow-xs">
               <CheckCircle2 className="w-12 h-12 stroke-[2.5]" />
             </div>
 
             <div className="space-y-2">
-              <span className="text-xs font-black uppercase tracking-wider text-[#004e38] bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+              <span className="text-xs font-black uppercase tracking-wider text-[#2563eb] bg-blue-50 px-3 py-1 rounded-full border border-blue-200">
                 Cadastro Aprovado com Sucesso!
               </span>
               <h2 className="text-3xl font-black text-gray-900 tracking-tight">
-                Bem-vindo à Shopcart B2B
+                Bem-vindo à OneSync B2B
               </h2>
               <p className="text-xs sm:text-sm text-gray-600 max-w-lg mx-auto leading-relaxed">
                 A empresa <strong className="text-gray-900">{razaoSocial}</strong> (CNPJ: {cnpj}) foi registrada no sistema. Seu login corporativo com o e-mail <strong>{userEmail}</strong> está ativo!
@@ -1023,12 +1023,12 @@ export default function CadastroPage() {
             </div>
 
             {/* Approved Summary Card */}
-            <div className="bg-slate-50 p-6 rounded-2xl max-w-lg mx-auto space-y-3 text-xs border border-emerald-200 text-left">
+            <div className="bg-slate-50 p-6 rounded-2xl max-w-lg mx-auto space-y-3 text-xs border border-blue-200 text-left">
               <div className="flex items-center justify-between border-b border-gray-200 pb-2.5">
                 <span className="font-bold text-gray-700 flex items-center gap-1.5">
-                  <CreditCard className="w-4 h-4 text-[#004e38]" /> Limite Pré-Aprovado para Boleto:
+                  <CreditCard className="w-4 h-4 text-[#2563eb]" /> Limite Pré-Aprovado para Boleto:
                 </span>
-                <span className="font-black text-[#004e38] text-base">
+                <span className="font-black text-[#2563eb] text-base">
                   R$ {Number(requestedCreditLimit).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                 </span>
               </div>
@@ -1051,7 +1051,7 @@ export default function CadastroPage() {
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link
                 href="/produtos"
-                className="w-full sm:w-auto bg-[#004e38] hover:bg-[#033627] text-white text-xs font-bold px-8 py-4 rounded-full transition-all shadow-sm hover:scale-105"
+                className="w-full sm:w-auto bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-bold px-8 py-4 rounded-full transition-all shadow-sm hover:scale-105"
               >
                 Acessar Catálogo & Fazer Primeiro Pedido
               </Link>

@@ -30,7 +30,6 @@ export default function RmaDevolucoesPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('TODOS');
-  const [isNewRmaModalOpen, setIsNewRmaModalOpen] = useState(false);
 
   // Print Reverse Voucher Modal State
   const [selectedTicketForPrint, setSelectedTicketForPrint] = useState<RmaTicket | null>(null);
@@ -100,58 +99,6 @@ export default function RmaDevolucoesPage() {
     }
   };
 
-  const handleCreateRma = (e: React.FormEvent) => {
-    e.preventDefault();
-    const cdInfo = DEFAULT_DISTRIBUTION_CENTERS.find(c => c.id === cdDestination);
-
-    const newTicket: RmaTicket = {
-      id: `rma-${Date.now()}`,
-      protocolNumber: `RMA-2026-${Math.floor(1000 + Math.random() * 9000)}`,
-      orderId: 'ord-1001',
-      orderNumber,
-      companyId: 'comp-1',
-      companyName: 'Tech Solutions & Tecnologia LTDA',
-      cnpj: '12.345.678/0001-90',
-      cdDestinationId: cdDestination,
-      cdDestinationName: cdInfo ? cdInfo.name : 'CD São Paulo (Matriz)',
-      status: 'APPROVED_SHIPPING',
-      createdAt: new Date().toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }),
-      updatedAt: new Date().toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' }),
-      reverseTrackingCode: `REV-BR-${Math.floor(100000000 + Math.random() * 900000000)}`,
-      reverseDanfeNfeKey: `35260812345678000190550010000098711${Math.floor(100000000 + Math.random() * 900000000)}`,
-      resolutionNotes: 'Chamado aberto automaticamente. Código de postagem reversa gerado para envio ao Centro de Distribuição.',
-      creditVoucherAmount: quantity * 489.00,
-      items: [
-        {
-          sku: selectedSku,
-          productName,
-          lotNumber,
-          quantity,
-          reason,
-          unitPrice: 489.00,
-          reasonDescription: description || 'Avaria identificada no recebimento do lote.',
-          evidenceImages: ['/media/img1.jpeg'],
-        }
-      ]
-    };
-
-    rmaService.createRmaTicket({
-      orderNumber,
-      cdDestinationId: cdDestination,
-      companyId: 'comp-1',
-      items: newTicket.items,
-      comments: description,
-    }).catch(() => {});
-
-    setTickets(prev => [newTicket, ...prev]);
-    setSuccessAlert(true);
-    showToast(`Ticket ${newTicket.protocolNumber} aberto com sucesso! Código reverso emitido.`, 'success');
-    setTimeout(() => {
-      setSuccessAlert(false);
-      setIsNewRmaModalOpen(false);
-    }, 1500);
-  };
-
   return (
     <div className="bg-[#f8fafc] min-h-screen pb-20 font-sans">
       
@@ -161,13 +108,13 @@ export default function RmaDevolucoesPage() {
         subtitle="Gestão de devoluções de lotes por avaria em transporte, garantia de fábrica e emissão de autorização de postagem reversa."
         activeBadge={`${tickets.length} Protocolos`}
         actions={
-          <button
-            onClick={() => setIsNewRmaModalOpen(true)}
-            className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-black px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-sm"
+          <Link
+            href="/conta/rma/novo"
+            className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-black px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-sm"
           >
             <Plus className="w-4 h-4 text-amber-300" />
             <span>Solicitar RMA / Devolução de Lote</span>
-          </button>
+          </Link>
         }
       />
 
@@ -337,148 +284,6 @@ export default function RmaDevolucoesPage() {
         </div>
 
       </div>
-
-      {/* MODAL 1: SOLICITAR NOVO RMA */}
-      {isNewRmaModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200 font-sans">
-          <div className="bg-white text-gray-900 rounded-3xl shadow-2xl border border-gray-100 w-full max-w-xl overflow-hidden relative flex flex-col">
-            
-            <div className="bg-[#004e38] text-white p-6 relative">
-              <button
-                onClick={() => setIsNewRmaModalOpen(false)}
-                className="absolute top-5 right-5 p-1 rounded-full bg-white/10 hover:bg-white/20 text-white cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-              <div className="flex items-center gap-2 mb-1">
-                <RotateCcw className="w-5 h-5 text-amber-300" />
-                <h3 className="text-xl font-black">Solicitar RMA / Devolução de Lote</h3>
-              </div>
-              <p className="text-xs text-emerald-100">
-                Abertura formal de chamado técnico de troca, laudo de avaria ou garantia B2B.
-              </p>
-            </div>
-
-            <form onSubmit={handleCreateRma} className="p-6 space-y-4 text-xs overflow-y-auto max-h-[75vh]">
-              
-              {successAlert && (
-                <div className="bg-emerald-100 border border-emerald-300 text-[#004e38] p-3 rounded-2xl flex items-center gap-2 font-bold animate-in fade-in">
-                  <CheckCircle2 className="w-5 h-5" />
-                  <span>Ticket de RMA aberto com sucesso! Código de postagem reversa emitido.</span>
-                </div>
-              )}
-
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <label className="font-bold text-gray-700">Número do Pedido Faturado *</label>
-                  <input
-                    type="text"
-                    required
-                    value={orderNumber}
-                    onChange={(e) => setOrderNumber(e.target.value)}
-                    className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-2.5 font-bold focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <label className="font-bold text-gray-700">Centro de Distribuição Alvo *</label>
-                  <select
-                    value={cdDestination}
-                    onChange={(e) => setCdDestination(e.target.value)}
-                    className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-2.5 font-bold focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                  >
-                    <option value="cd-sp">CD Sudeste - São Paulo (SP)</option>
-                    <option value="cd-sc">CD Sul - Joinville (SC)</option>
-                    <option value="cd-ba">CD Nordeste - Camaçari (BA)</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-3">
-                <div className="space-y-1">
-                  <label className="font-bold text-gray-700">Código SKU *</label>
-                  <input
-                    type="text"
-                    required
-                    value={selectedSku}
-                    onChange={(e) => setSelectedSku(e.target.value)}
-                    className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-2.5 font-mono font-bold focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <label className="font-bold text-gray-700">Lote Físico *</label>
-                  <input
-                    type="text"
-                    required
-                    value={lotNumber}
-                    onChange={(e) => setLotNumber(e.target.value)}
-                    className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-2.5 font-mono focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <label className="font-bold text-gray-700">Quantidade (un) *</label>
-                  <input
-                    type="number"
-                    min="1"
-                    required
-                    value={quantity}
-                    onChange={(e) => setQuantity(Number(e.target.value))}
-                    className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-2.5 font-bold focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-1">
-                <label className="font-bold text-gray-700">Motivo da Solicitação</label>
-                <select
-                  value={reason}
-                  onChange={(e) => setReason(e.target.value as RmaReason)}
-                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-2.5 font-bold focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                >
-                  <option value="TRANSPORT_DAMAGE">Avaria / Caixa Rompida no Transporte</option>
-                  <option value="FACTORY_DEFECT">Defeito Técnico de Fabricação / Hardware</option>
-                  <option value="SHIPPING_DIVERGENCE">Divergência de Quantidade ou SKU Enviado</option>
-                  <option value="SHORT_EXPIRATION">Lote com Validade Incompatível</option>
-                  <option value="COMMERCIAL_RETURN">Devolução Comercial em Acordo</option>
-                </select>
-              </div>
-
-              <div className="space-y-1">
-                <label className="font-bold text-gray-700">Descrição do Defeito / Observações</label>
-                <textarea
-                  rows={2}
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Relate detalhadamente o ocorrido..."
-                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                />
-              </div>
-
-              <div className="p-4 border border-dashed border-gray-300 rounded-2xl bg-[#f8fafc] text-center space-y-1 cursor-pointer">
-                <Upload className="w-5 h-5 mx-auto text-gray-400" />
-                <span className="font-bold text-gray-700 block">Anexar Fotos da Mercadoria e Laudo de Avaria</span>
-                <span className="text-[10px] text-gray-400">Formatos aceitos: JPG, PNG, PDF (Máx. 10MB)</span>
-              </div>
-
-              <div className="flex items-center justify-end gap-3 pt-3 border-t border-gray-100">
-                <button
-                  type="button"
-                  onClick={() => setIsNewRmaModalOpen(false)}
-                  className="px-4 py-2 rounded-full font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 cursor-pointer"
-                >
-                  Cancelar
-                </button>
-                <button
-                  type="submit"
-                  className="bg-[#004e38] hover:bg-[#033627] text-white font-black px-6 py-2 rounded-full shadow-xs cursor-pointer"
-                >
-                  Gerar Ticket & Código Reverso
-                </button>
-              </div>
-            </form>
-
-          </div>
-        </div>
-      )}
 
       {/* MODAL 2: IMPRESSÃO DE ETIQUETA REVERSA & MINUTA */}
       {selectedTicketForPrint && (

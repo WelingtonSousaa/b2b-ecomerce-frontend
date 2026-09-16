@@ -11,4 +11,3 @@ export * from './integrations.service';
 export * from './notifications.service';
 export * from './rfq.service';
 export * from './tax.service';
-export * from './storefront.service';

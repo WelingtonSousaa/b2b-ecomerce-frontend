@@ -32,17 +32,17 @@ export default function NovoProdutoGradePage() {
   const { showToast } = useToast();
 
   // Basic Info
-  const [name, setName] = useState('Smartphone Galaxy Enterprise 5G');
-  const [brand, setBrand] = useState('Samsung');
+  const [name, setName] = useState('');
+  const [brand, setBrand] = useState('');
   const [categorySlug, setCategorySlug] = useState('laptops');
-  const [description, setDescription] = useState('Smartphone corporativo homologado com recursos de segurança e durabilidade industrial.');
-  const [ncm, setNcm] = useState('8517.13.00');
+  const [description, setDescription] = useState('');
+  const [ncm, setNcm] = useState('');
   const [uom, setUom] = useState<UOM>('CX');
   const [itemsPerUom, setItemsPerUom] = useState<number>(5);
   const [moq, setMoq] = useState<number>(2);
   const [basePrice, setBasePrice] = useState<number>(3499.00);
-  const [batchNumber, setBatchNumber] = useState('LOT-SMR-2026A');
-  const [expirationDate, setExpirationDate] = useState('2029-12-31');
+  const [batchNumber, setBatchNumber] = useState('');
+  const [expirationDate, setExpirationDate] = useState('');
 
   // Variation Attributes
   const [attributes, setAttributes] = useState<AttributeInput[]>([
@@ -299,12 +299,12 @@ export default function NovoProdutoGradePage() {
           <div>
             <Link
               href="/conta/estoque"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#004e38] mb-2 hover:underline"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#2563eb] mb-2 hover:underline"
             >
               <ArrowLeft className="w-4 h-4" /> Voltar para Gestão de Estoque
             </Link>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-emerald-100 flex items-center justify-center text-[#004e38]">
+              <div className="w-10 h-10 rounded-2xl bg-blue-100 flex items-center justify-center text-[#2563eb]">
                 <Layers className="w-6 h-6" />
               </div>
               <div>
@@ -327,7 +327,7 @@ export default function NovoProdutoGradePage() {
             </Link>
             <button
               onClick={handleSaveProduct}
-              className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-black px-6 py-2.5 rounded-full transition-all flex items-center gap-2 shadow-sm cursor-pointer"
+              className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-black px-6 py-2.5 rounded-full transition-all flex items-center gap-2 shadow-sm cursor-pointer"
             >
               <Save className="w-4 h-4" />
               <span>Salvar Produto & Grade</span>
@@ -337,11 +337,11 @@ export default function NovoProdutoGradePage() {
 
         {/* Success Alert */}
         {savedSuccess && (
-          <div className="bg-emerald-100 border border-emerald-300 text-[#004e38] p-4 rounded-2xl flex items-center gap-3 font-bold animate-in fade-in">
-            <CheckCircle2 className="w-6 h-6 text-emerald-600 shrink-0" />
+          <div className="bg-blue-100 border border-blue-300 text-[#2563eb] p-4 rounded-2xl flex items-center gap-3 font-bold animate-in fade-in">
+            <CheckCircle2 className="w-6 h-6 text-blue-600 shrink-0" />
             <div>
               <p className="text-sm font-black">Produto com Grade e Variantes salvo com sucesso!</p>
-              <p className="text-xs font-medium text-emerald-800">Redirecionando para a tabela consolidada de estoque...</p>
+              <p className="text-xs font-medium text-blue-800">Redirecionando para a tabela consolidada de estoque...</p>
             </div>
           </div>
         )}
@@ -371,7 +371,7 @@ export default function NovoProdutoGradePage() {
           {/* SECTION 1: Informações Gerais do Produto Pai */}
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 space-y-6 shadow-2xs">
             <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
-              <Package className="w-5 h-5 text-[#004e38]" />
+              <Package className="w-5 h-5 text-[#2563eb]" />
               <h2 className="text-base font-extrabold text-gray-900">1. Informações Básicas do Produto Principal (Pai)</h2>
             </div>
 
@@ -384,7 +384,7 @@ export default function NovoProdutoGradePage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Ex: Smartphone Galaxy Enterprise 5G"
-                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
                 />
               </div>
 
@@ -396,7 +396,7 @@ export default function NovoProdutoGradePage() {
                   value={brand}
                   onChange={(e) => setBrand(e.target.value)}
                   placeholder="Ex: Samsung, Sony, Apple"
-                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
                 />
               </div>
 
@@ -405,7 +405,7 @@ export default function NovoProdutoGradePage() {
                 <select
                   value={categorySlug}
                   onChange={(e) => setCategorySlug(e.target.value)}
-                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
                 >
                   <option value="laptops">Smartphones, Computadores & Laptops</option>
                   <option value="headphones">Fones, Áudio & Controles</option>
@@ -421,7 +421,7 @@ export default function NovoProdutoGradePage() {
                   value={ncm}
                   onChange={(e) => setNcm(e.target.value)}
                   placeholder="Ex: 8517.13.00"
-                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-mono font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-mono font-bold text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
                 />
               </div>
 
@@ -432,7 +432,7 @@ export default function NovoProdutoGradePage() {
                   step="0.01"
                   value={basePrice}
                   onChange={(e) => setBasePrice(Number(e.target.value))}
-                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-black text-[#004e38] text-sm focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-black text-[#2563eb] text-sm focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
                 />
               </div>
 
@@ -488,7 +488,7 @@ export default function NovoProdutoGradePage() {
           <div className="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 space-y-6 shadow-2xs">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-3">
               <div className="flex items-center gap-2">
-                <Tag className="w-5 h-5 text-[#004e38]" />
+                <Tag className="w-5 h-5 text-[#2563eb]" />
                 <div>
                   <h2 className="text-base font-extrabold text-gray-900">2. Atributos da Grade & Variações</h2>
                   <p className="text-[11px] text-gray-500">Defina os atributos como Cor, Armazenamento, Voltagem ou Tamanho e separe os valores por vírgula.</p>
@@ -508,7 +508,7 @@ export default function NovoProdutoGradePage() {
                 <button
                   type="button"
                   onClick={handleGenerateMatrix}
-                  className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-black px-4 py-2 rounded-full transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                  className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-black px-4 py-2 rounded-full transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-amber-300" />
                   <span>Gerar Matriz de Variantes</span>
@@ -536,7 +536,7 @@ export default function NovoProdutoGradePage() {
                       value={attr.name}
                       onChange={(e) => handleAttributeChange(idx, 'name', e.target.value)}
                       placeholder="Ex: Cor, Armazenamento, Voltagem"
-                      className="w-full bg-white border border-gray-200 rounded-xl px-3 py-1.5 font-bold text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#004e38]"
+                      className="w-full bg-white border border-gray-200 rounded-xl px-3 py-1.5 font-bold text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#2563eb]"
                     />
                   </div>
 
@@ -547,7 +547,7 @@ export default function NovoProdutoGradePage() {
                       value={attr.valuesStr}
                       onChange={(e) => handleAttributeChange(idx, 'valuesStr', e.target.value)}
                       placeholder="Ex: Preto, Branco, Titânio"
-                      className="w-full bg-white border border-gray-200 rounded-xl px-3 py-1.5 font-medium text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#004e38]"
+                      className="w-full bg-white border border-gray-200 rounded-xl px-3 py-1.5 font-medium text-gray-900 focus:outline-none focus:ring-1 focus:ring-[#2563eb]"
                     />
                   </div>
                 </div>
@@ -559,7 +559,7 @@ export default function NovoProdutoGradePage() {
               <div className="flex items-center justify-between">
                 <h3 className="font-extrabold text-gray-900 text-sm flex items-center gap-2">
                   <span>Matriz de Combinações ({variants.length} Variantes Ativas)</span>
-                  <span className="bg-emerald-50 text-[#004e38] text-[10px] font-bold px-2 py-0.5 rounded-full border border-emerald-200">
+                  <span className="bg-blue-50 text-[#2563eb] text-[10px] font-bold px-2 py-0.5 rounded-full border border-blue-200">
                     Auto-SKU & EAN-13
                   </span>
                 </h3>
@@ -567,7 +567,7 @@ export default function NovoProdutoGradePage() {
 
               <div className="overflow-x-auto border border-gray-200 rounded-2xl shadow-2xs">
                 <table className="w-full text-left text-xs bg-white">
-                  <thead className="bg-[#004e38] text-white font-extrabold uppercase text-[10px] tracking-wider">
+                  <thead className="bg-[#2563eb] text-white font-extrabold uppercase text-[10px] tracking-wider">
                     <tr>
                       <th className="p-3">Combinação / Variação</th>
                       <th className="p-3">SKU & Código EAN-13</th>
@@ -593,7 +593,7 @@ export default function NovoProdutoGradePage() {
                           <td className="p-3 space-y-1">
                             <div className="flex flex-wrap gap-1">
                               {Object.entries(v.combination).map(([k, val]) => (
-                                <span key={k} className="bg-emerald-50 text-[#004e38] border border-emerald-200 text-[10px] font-bold px-2 py-0.5 rounded-md">
+                                <span key={k} className="bg-blue-50 text-[#2563eb] border border-blue-200 text-[10px] font-bold px-2 py-0.5 rounded-md">
                                   {k}: {val}
                                 </span>
                               ))}
@@ -615,7 +615,7 @@ export default function NovoProdutoGradePage() {
                               />
                             </div>
                             <div className="flex items-center gap-1">
-                              <Barcode className="w-3 h-3 text-[#004e38]" />
+                              <Barcode className="w-3 h-3 text-[#2563eb]" />
                               <input
                                 type="text"
                                 value={v.ean}
@@ -631,7 +631,7 @@ export default function NovoProdutoGradePage() {
                               step="0.01"
                               value={v.basePrice}
                               onChange={(e) => handleUpdateVariantField(idx, 'basePrice', Number(e.target.value))}
-                              className="w-24 bg-[#f5f6f6] border border-gray-200 rounded-lg px-2 py-1 font-black text-right text-xs text-[#004e38]"
+                              className="w-24 bg-[#f5f6f6] border border-gray-200 rounded-lg px-2 py-1 font-black text-right text-xs text-[#2563eb]"
                             />
                           </td>
 
@@ -701,7 +701,7 @@ export default function NovoProdutoGradePage() {
             {/* Lote & Validade */}
             <div className="bg-white p-6 rounded-3xl border border-gray-200 space-y-4 shadow-2xs text-xs">
               <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
-                <Calendar className="w-5 h-5 text-[#004e38]" />
+                <Calendar className="w-5 h-5 text-[#2563eb]" />
                 <h3 className="font-extrabold text-gray-900">3. Rastreabilidade & Validade de Fabricação</h3>
               </div>
 
@@ -731,22 +731,22 @@ export default function NovoProdutoGradePage() {
             {/* Escala de Volume B2B */}
             <div className="bg-white p-6 rounded-3xl border border-gray-200 space-y-4 shadow-2xs text-xs">
               <div className="flex items-center gap-2 border-b border-gray-100 pb-3">
-                <DollarSign className="w-5 h-5 text-[#004e38]" />
+                <DollarSign className="w-5 h-5 text-[#2563eb]" />
                 <h3 className="font-extrabold text-gray-900">4. Escala Automática de Desconto por Volume</h3>
               </div>
 
               <div className="space-y-2">
                 <div className="flex justify-between items-center bg-[#f8fafc] p-2.5 rounded-xl border border-gray-100">
                   <span className="font-bold text-gray-700">Faixa 1 (1 a 10 {uom}s):</span>
-                  <span className="font-black text-[#004e38]">Preço Base Integral (0% Off)</span>
+                  <span className="font-black text-[#2563eb]">Preço Base Integral (0% Off)</span>
                 </div>
                 <div className="flex justify-between items-center bg-[#f8fafc] p-2.5 rounded-xl border border-gray-100">
                   <span className="font-bold text-gray-700">Faixa 2 (11 a 50 {uom}s):</span>
-                  <span className="font-black text-emerald-700">10% de Desconto Comercial</span>
+                  <span className="font-black text-blue-700">10% de Desconto Comercial</span>
                 </div>
                 <div className="flex justify-between items-center bg-[#f8fafc] p-2.5 rounded-xl border border-gray-100">
                   <span className="font-bold text-gray-700">Faixa 3 (51+ {uom}s):</span>
-                  <span className="font-black text-emerald-800">20% de Desconto Atacadista</span>
+                  <span className="font-black text-blue-800">20% de Desconto Atacadista</span>
                 </div>
               </div>
             </div>
@@ -764,7 +764,7 @@ export default function NovoProdutoGradePage() {
 
             <button
               type="submit"
-              className="bg-[#004e38] hover:bg-[#033627] text-white font-black px-8 py-3 rounded-full text-xs transition-all flex items-center gap-2 shadow-sm cursor-pointer"
+              className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-black px-8 py-3 rounded-full text-xs transition-all flex items-center gap-2 shadow-sm cursor-pointer"
             >
               <Save className="w-4 h-4" />
               <span>Concluir Cadastro do Produto com Grade</span>

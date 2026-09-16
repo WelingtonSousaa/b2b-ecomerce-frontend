@@ -70,19 +70,19 @@ export default function CnpjModal({ isOpen, onClose, onSelectCnpj }: CnpjModalPr
       <div className="bg-white text-gray-900 rounded-3xl shadow-2xl border border-gray-200 w-full max-w-xl overflow-hidden relative">
         
         {/* Header */}
-        <div className="bg-[#0b1d16] text-white px-6 py-4 flex items-center justify-between">
+        <div className="bg-[#0f172a] text-white px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-amber-400 text-gray-950 font-black flex items-center justify-center text-xs">
               CNPJ
             </div>
             <div>
               <h3 className="text-sm font-black tracking-tight">Validação Fiscal Automática de CNPJ</h3>
-              <p className="text-[10px] text-emerald-300">Integração Receita Federal • Sintegra • SUFRAMA</p>
+              <p className="text-[10px] text-blue-300">Integração Receita Federal • Sintegra • SUFRAMA</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1 hover:bg-emerald-900/60 rounded-lg text-emerald-200 hover:text-white transition-colors"
+            className="p-1 hover:bg-blue-900/60 rounded-lg text-blue-200 hover:text-white transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -99,14 +99,14 @@ export default function CnpjModal({ isOpen, onClose, onSelectCnpj }: CnpjModalPr
                 value={cnpjInput}
                 onChange={(e) => setCnpjInput(e.target.value)}
                 placeholder="Digite o CNPJ para consulta..."
-                className="w-full h-11 px-4 text-xs font-mono font-bold text-gray-900 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-600"
+                className="w-full h-11 px-4 text-xs font-mono font-bold text-gray-900 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600"
                 required
               />
             </div>
             <button
               type="submit"
               disabled={isLoading}
-              className="h-11 px-5 bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold rounded-xl flex items-center gap-2 transition-colors shrink-0 cursor-pointer"
+              className="h-11 px-5 bg-blue-700 hover:bg-blue-800 text-white font-extrabold rounded-xl flex items-center gap-2 transition-colors shrink-0 cursor-pointer"
             >
               {isLoading ? <RefreshCw className="w-4 h-4 animate-spin" /> : <Search className="w-4 h-4" />}
               <span>Consultar</span>
@@ -119,12 +119,12 @@ export default function CnpjModal({ isOpen, onClose, onSelectCnpj }: CnpjModalPr
               
               {/* Badges Bar */}
               <div className="flex flex-wrap items-center gap-2 pt-1">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-900 border border-emerald-300">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" /> Receita Federal: {queryResult.statusReceita}
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black bg-blue-100 text-blue-900 border border-blue-300">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-blue-700" /> Receita Federal: {queryResult.statusReceita}
                 </span>
 
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black bg-emerald-100 text-emerald-900 border border-emerald-300">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" /> Sintegra IE: OK
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black bg-blue-100 text-blue-900 border border-blue-300">
+                  <ShieldCheck className="w-3.5 h-3.5 text-blue-700" /> Sintegra IE: OK
                 </span>
 
                 {queryResult.hasSuframa ? (
@@ -160,7 +160,7 @@ export default function CnpjModal({ isOpen, onClose, onSelectCnpj }: CnpjModalPr
                 <div className="grid grid-cols-2 gap-2 pt-1 border-t border-gray-200/60">
                   <div>
                     <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">Regime Tributário</span>
-                    <p className="font-extrabold text-emerald-900">{queryResult.regimeTributario}</p>
+                    <p className="font-extrabold text-blue-900">{queryResult.regimeTributario}</p>
                   </div>
 
                   <div>
@@ -194,7 +194,7 @@ export default function CnpjModal({ isOpen, onClose, onSelectCnpj }: CnpjModalPr
                 if (onSelectCnpj && queryResult) onSelectCnpj(queryResult);
                 onClose();
               }}
-              className="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold flex items-center gap-2 transition-colors shadow-md cursor-pointer"
+              className="px-5 py-2.5 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-extrabold flex items-center gap-2 transition-colors shadow-md cursor-pointer"
             >
               <CheckCircle2 className="w-4 h-4" />
               <span>Confirmar e Selecionar CNPJ</span>

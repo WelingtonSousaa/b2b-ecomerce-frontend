@@ -16,7 +16,6 @@ import {
   Loader2
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
-import { useCompare } from '@/context/CompareContext';
 import { useToast } from '@/context/ToastContext';
 import ShippingTaxCalculator from '@/components/common/ShippingTaxCalculator';
 import FormalQuotePdfModal from '@/components/modals/FormalQuotePdfModal';
@@ -25,7 +24,6 @@ import { Product } from '@/types/b2b';
 
 export default function ProductDetailPage() {
   const { isAuthenticated, openAuthModal } = useAuth();
-  const { addToCompare, isProductInCompare } = useCompare();
   const { showToast } = useToast();
   const params = useParams();
   const slug = params?.slug as string;
@@ -57,7 +55,7 @@ export default function ProductDetailPage() {
     return (
       <div className="bg-white min-h-[60vh] flex items-center justify-center">
         <div className="text-center space-y-3">
-          <Loader2 className="w-8 h-8 text-[#004e38] animate-spin mx-auto" />
+          <Loader2 className="w-8 h-8 text-[#2563eb] animate-spin mx-auto" />
           <p className="text-xs font-bold text-gray-500">Carregando detalhes do produto...</p>
         </div>
       </div>
@@ -69,7 +67,7 @@ export default function ProductDetailPage() {
       <div className="max-w-[1440px] mx-auto px-4 py-16 text-center space-y-4">
         <h2 className="text-2xl font-black text-gray-900">Produto não encontrado</h2>
         <p className="text-xs text-gray-500">O SKU solicitado não existe no catálogo corporativo.</p>
-        <Link href="/produtos" className="inline-block bg-[#004e38] text-white text-xs font-bold px-6 py-2.5 rounded-full">
+        <Link href="/produtos" className="inline-block bg-[#2563eb] text-white text-xs font-bold px-6 py-2.5 rounded-full">
           Voltar ao Catálogo
         </Link>
       </div>
@@ -87,7 +85,7 @@ export default function ProductDetailPage() {
     { name: 'Padrão / Original', hex: '#383838', imgIndex: 0 },
     { name: 'Cinza Espacial', hex: '#52525b', imgIndex: Math.min(1, images.length - 1) },
     { name: 'Prateado Fosco', hex: '#e4e4e7', imgIndex: Math.min(2, images.length - 1) },
-    { name: 'Azul Corporativo', hex: '#004e38', imgIndex: Math.min(3, images.length - 1) },
+    { name: 'Azul Corporativo', hex: '#2563eb', imgIndex: Math.min(3, images.length - 1) },
   ];
 
   const totalAvailableStock = product.stockByCD ? product.stockByCD.reduce((acc, cd) => acc + cd.availableQuantity, 0) : 0;
@@ -109,22 +107,17 @@ export default function ProductDetailPage() {
     }
   };
 
-  const handleCompareClick = () => {
-    addToCompare(product);
-    showToast(`${product.name} adicionado ao Comparador Técnico!`, 'info');
-  };
-
   return (
     <div className="bg-white min-h-screen pb-20 pt-6 font-sans">
       <div className="max-w-[1440px] mx-auto px-4 lg:px-12 space-y-8">
         
         {/* 1. Breadcrumbs */}
         <div className="flex flex-wrap items-center gap-2 text-xs text-gray-500 font-medium">
-          <Link href="/" className="hover:text-[#004e38]">Home</Link>
+          <Link href="/" className="hover:text-[#2563eb]">Home</Link>
           <span>/</span>
-          <Link href="/produtos" className="hover:text-[#004e38]">Produtos Corporativos</Link>
+          <Link href="/produtos" className="hover:text-[#2563eb]">Produtos Corporativos</Link>
           <span>/</span>
-          <Link href={`/produtos?categoria=${product.categorySlug || 'fones-audio'}`} className="hover:text-[#004e38]">
+          <Link href={`/produtos?categoria=${product.categorySlug || 'fones-audio'}`} className="hover:text-[#2563eb]">
             {product.brand}
           </Link>
           <span>/</span>
@@ -168,7 +161,7 @@ export default function ProductDetailPage() {
                   key={idx}
                   onClick={() => setSelectedImage(idx)}
                   className={`relative aspect-square w-full bg-[#f5f6f6] rounded-2xl p-2 transition-all cursor-pointer ${
-                    selectedImage === idx ? 'ring-2 ring-[#004e38]' : 'hover:opacity-80'
+                    selectedImage === idx ? 'ring-2 ring-[#2563eb]' : 'hover:opacity-80'
                   }`}
                 >
                   <Image src={img} alt="" fill className="object-contain p-2" />
@@ -188,10 +181,10 @@ export default function ProductDetailPage() {
                   SKU: {product.sku}
                 </span>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                  <span className="text-xs font-bold text-blue-800 bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200">
                     {totalAvailableStock} un. em estoque
                   </span>
-                  <span className="text-xs font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                  <span className="text-xs font-medium text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full border border-blue-200">
                     {product.brand} Oficial
                   </span>
                 </div>
@@ -222,7 +215,7 @@ export default function ProductDetailPage() {
                 <div>
                   <span className="text-[11px] font-bold text-gray-700 block">Preço Corporativo / Unidade:</span>
                   {isAuthenticated ? (
-                    <span className="text-2xl sm:text-3xl font-black text-[#004e38]">
+                    <span className="text-2xl sm:text-3xl font-black text-[#2563eb]">
                       R$ {product.basePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                     </span>
                   ) : (
@@ -249,7 +242,7 @@ export default function ProductDetailPage() {
                     {product.volumeDiscounts.map((tier, idx) => (
                       <div key={idx} className="bg-white p-2 rounded-xl border border-gray-200">
                         <span className="block text-[10px] text-gray-600">A partir de {tier.minQuantity} un.</span>
-                        <strong className="text-emerald-800 font-black">
+                        <strong className="text-blue-800 font-black">
                           R$ {tier.unitPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                         </strong>
                       </div>
@@ -274,7 +267,7 @@ export default function ProductDetailPage() {
                       setSelectedImage(color.imgIndex);
                     }}
                     className={`w-9 h-9 rounded-full flex items-center justify-center transition-all cursor-pointer ${
-                      selectedColor === color.name ? 'ring-2 ring-offset-2 ring-[#004e38]' : 'hover:scale-110'
+                      selectedColor === color.name ? 'ring-2 ring-offset-2 ring-[#2563eb]' : 'hover:scale-110'
                     }`}
                     style={{ backgroundColor: color.hex }}
                     title={color.name}
@@ -314,8 +307,8 @@ export default function ProductDetailPage() {
                   onClick={handleAddToCart}
                   className={`w-full py-3.5 px-6 rounded-full font-black text-xs transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer ${
                     isAdded
-                      ? 'bg-emerald-700 text-white'
-                      : 'bg-[#004e38] hover:bg-[#003c2b] text-white hover:shadow-lg'
+                      ? 'bg-blue-700 text-white'
+                      : 'bg-[#2563eb] hover:bg-[#003c2b] text-white hover:shadow-lg'
                   }`}
                 >
                   {isAdded ? (
@@ -343,25 +336,14 @@ export default function ProductDetailPage() {
                 <button
                   type="button"
                   onClick={() => setIsQuoteModalOpen(true)}
-                  className="py-3 px-4 rounded-full bg-emerald-50 hover:bg-emerald-100 text-[#004e38] text-xs font-black transition-colors flex items-center justify-center gap-2 cursor-pointer border border-emerald-200"
+                  className="py-3 px-4 rounded-full bg-blue-50 hover:bg-blue-100 text-[#2563eb] text-xs font-black transition-colors flex items-center justify-center gap-2 cursor-pointer border border-blue-200"
                 >
-                  <FileCheck2 className="w-4 h-4 text-[#004e38]" />
+                  <FileCheck2 className="w-4 h-4 text-[#2563eb]" />
                   <span>Gerar Proposta Comercial (PDF)</span>
                 </button>
               </div>
 
-              {/* Add to Compare button */}
-              <button
-                type="button"
-                onClick={handleCompareClick}
-                className="w-full py-2.5 text-center text-xs font-bold text-gray-500 hover:text-[#004e38] transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
-              >
-                <Scale className="w-3.5 h-3.5" />
-                <span>
-                  {isProductInCompare(product.id) ? 'Item no Comparador' : 'Adicionar ao Comparador Técnico'}
-                </span>
-              </button>
-            </div>
+              </div>
 
             {/* 3. Real-time Multi-CD Stock & Tax Simulator */}
             <div className="pt-4 border-t border-gray-100">

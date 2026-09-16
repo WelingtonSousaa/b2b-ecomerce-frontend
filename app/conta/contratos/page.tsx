@@ -51,7 +51,7 @@ CONTRATO NÚMERO: ${contract.contractNumber}
 ================================================================================
 
 1. PARTES CONTRATANTES:
-   CONTRATADA: Shopcart Distribuição e Soluções Tecnológicas B2B LTDA (CNPJ: 10.987.654/0001-32)
+   CONTRATADA: OneSync Distribuição e Soluções Tecnológicas B2B LTDA (CNPJ: 10.987.654/0001-32)
    CONTRATANTE: Tech Solutions & Tecnologia LTDA (CNPJ: 12.345.678/0001-95)
 
 2. OBJETO DO CONTRATO:
@@ -114,7 +114,7 @@ Documento registrado digitalmente e válido em todo o território nacional.
             onClick={handleDownloadAllPackage}
             className="bg-white hover:bg-gray-100 text-gray-800 border border-gray-200 text-xs font-bold px-4 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-2xs"
           >
-            <Download className="w-4 h-4 text-[#004e38]" />
+            <Download className="w-4 h-4 text-[#2563eb]" />
             <span>Baixar Pacote de Contratos</span>
           </button>
         }
@@ -124,7 +124,7 @@ Documento registrado digitalmente e válido em todo o território nacional.
         
         {isLoading ? (
           <div className="p-16 text-center space-y-3 bg-white rounded-3xl border border-gray-200 shadow-2xs">
-            <Loader2 className="w-8 h-8 text-[#004e38] animate-spin mx-auto" />
+            <Loader2 className="w-8 h-8 text-[#2563eb] animate-spin mx-auto" />
             <p className="text-xs font-bold text-gray-500">Carregando contratos de fornecimento...</p>
           </div>
         ) : contracts.length === 0 ? (
@@ -136,18 +136,18 @@ Documento registrado digitalmente e válido em todo o território nacional.
         ) : (
           <div className="space-y-6">
             {contracts.map((contract) => (
-              <div key={contract.id} className="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-2xs space-y-6 hover:border-[#004e38] transition-all">
+              <div key={contract.id} className="bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-2xs space-y-6 hover:border-[#2563eb] transition-all">
                 
                 {/* Header of Contract */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
                   <div className="flex items-center gap-3.5">
-                    <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-[#004e38] flex items-center justify-center font-black shadow-xs">
+                    <div className="w-12 h-12 rounded-2xl bg-blue-100 text-[#2563eb] flex items-center justify-center font-black shadow-xs">
                       <FileCheck2 className="w-6 h-6" />
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-mono font-black text-sm text-[#004e38]">{contract.contractNumber}</span>
-                        <span className="bg-emerald-100 text-[#004e38] text-[10px] font-black px-2.5 py-0.5 rounded-full border border-emerald-200">
+                        <span className="font-mono font-black text-sm text-[#2563eb]">{contract.contractNumber}</span>
+                        <span className="bg-blue-100 text-[#2563eb] text-[10px] font-black px-2.5 py-0.5 rounded-full border border-blue-200">
                           Contrato Ativo & Homologado
                         </span>
                       </div>
@@ -162,7 +162,7 @@ Documento registrado digitalmente e válido em todo o território nacional.
                     </div>
                     <div className="text-right">
                       <span className="text-gray-400 block text-[10px] uppercase font-bold">Compromisso Anual:</span>
-                      <strong className="text-[#004e38] text-sm font-black">
+                      <strong className="text-[#2563eb] text-sm font-black">
                         R$ {(contract.sla?.minAnnualVolumeCommitment || 250000).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                       </strong>
                     </div>
@@ -176,7 +176,7 @@ Documento registrado digitalmente e válido em todo o território nacional.
                     <strong className="text-gray-900 font-black text-sm">{contract.priceBookName || 'Tabela Corporativa VIP Gold'}</strong>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="bg-emerald-100 text-[#004e38] text-xs font-black px-3.5 py-1.5 rounded-full border border-emerald-200">
+                    <span className="bg-blue-100 text-[#2563eb] text-xs font-black px-3.5 py-1.5 rounded-full border border-blue-200">
                       Rebate Anual Bonificado: {contract.sla?.rebatePercentageAnnual || 2}%
                     </span>
                   </div>
@@ -184,14 +184,14 @@ Documento registrado digitalmente e válido em todo o território nacional.
 
                 {/* SLA & Digital Signature ICP-Brasil */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                  <div className="bg-emerald-50/60 p-4 rounded-2xl border border-emerald-200 space-y-1.5">
-                    <span className="font-extrabold text-[#004e38] flex items-center gap-1.5 text-xs">
-                      <Award className="w-4 h-4 text-[#004e38]" /> SLA Operacional Garantido:
+                  <div className="bg-blue-50/60 p-4 rounded-2xl border border-blue-200 space-y-1.5">
+                    <span className="font-extrabold text-[#2563eb] flex items-center gap-1.5 text-xs">
+                      <Award className="w-4 h-4 text-[#2563eb]" /> SLA Operacional Garantido:
                     </span>
-                    <p className="text-[11px] text-emerald-950 font-medium">
+                    <p className="text-[11px] text-blue-950 font-medium">
                       Expedição nos Centros de Distribuição em até <strong>{contract.sla?.minDispatchHours || 24} horas úteis</strong>.
                     </p>
-                    <p className="text-[10px] text-emerald-800">
+                    <p className="text-[10px] text-blue-800">
                       Multa por Atraso: <strong>{contract.sla?.penaltyRatePerDayLate || 0.5}% ao dia</strong> sobre o valor do lote.
                     </p>
                   </div>
@@ -223,7 +223,7 @@ Documento registrado digitalmente e válido em todo o território nacional.
 
                   <button
                     onClick={() => handleDownloadContractDocument(contract)}
-                    className="bg-[#004e38] hover:bg-[#033627] text-white font-black px-5 py-2 rounded-full transition-all flex items-center gap-1.5 shadow-xs cursor-pointer"
+                    className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-black px-5 py-2 rounded-full transition-all flex items-center gap-1.5 shadow-xs cursor-pointer"
                   >
                     <Download className="w-3.5 h-3.5 text-amber-300" />
                     <span>Baixar Minuta Assinada</span>
@@ -244,7 +244,7 @@ Documento registrado digitalmente e válido em todo o território nacional.
             
             <div className="flex items-center justify-between border-b border-gray-100 pb-3">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-xl bg-emerald-100 text-[#004e38] flex items-center justify-center font-bold">
+                <div className="w-8 h-8 rounded-xl bg-blue-100 text-[#2563eb] flex items-center justify-center font-bold">
                   <FileCheck2 className="w-4 h-4" />
                 </div>
                 <div>
@@ -269,7 +269,7 @@ Documento registrado digitalmente e válido em todo o território nacional.
                   required
                   value={renewVolume}
                   onChange={(e) => setRenewVolume(Number(e.target.value))}
-                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-mono font-bold text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl px-4 py-2.5 font-mono font-bold text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
                 />
               </div>
 
@@ -280,11 +280,11 @@ Documento registrado digitalmente e válido em todo o território nacional.
                   value={renewNotes}
                   onChange={(e) => setRenewNotes(e.target.value)}
                   placeholder="Ex: Desejamos incluir novas filiais em SC e ampliar o rebate para 3%..."
-                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
                 />
               </div>
 
-              <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900 text-[11px] leading-relaxed">
+              <div className="p-3 bg-blue-50 border border-blue-200 rounded-xl text-blue-900 text-[11px] leading-relaxed">
                 ℹ️ A proposta será encaminhada para o comitê comercial corporativo com resposta em até 24 horas úteis.
               </div>
 
@@ -298,7 +298,7 @@ Documento registrado digitalmente e válido em todo o território nacional.
                 </button>
                 <button
                   type="submit"
-                  className="bg-[#004e38] hover:bg-[#033627] text-white font-black px-6 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-xs"
+                  className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-black px-6 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-xs"
                 >
                   <Send className="w-3.5 h-3.5 text-amber-300" />
                   <span>Enviar Solicitação</span>

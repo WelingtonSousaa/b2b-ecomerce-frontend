@@ -1,6 +1,6 @@
-import { apiClient } from '@/lib/api/client';
 import { ApiResponse } from '@/lib/api/types';
 import { Branch, CompanyAccount, CompanyUser } from '@/types/b2b';
+import { mockDb } from '@/lib/mockDb';
 
 export interface LoginCredentials {
   email: string;
@@ -12,129 +12,97 @@ export interface AuthResponseData {
   user: CompanyUser;
   company: CompanyAccount;
   accessToken: string;
-  refreshToken?: string;
-  expiresIn?: number;
 }
 
+// Initial Seed Data
+const initialCompany: CompanyAccount = {
+  id: '',
+  cnpj: '',
+  razaoSocial: '',
+  nomeFantasia: '',
+  industrySegment: '',
+  inscricaoEstadual: '',
+  inscricaoMunicipal: '',
+  regimeTributario: 'SIMPLES_NACIONAL',
+  suframaCode: '',
+  hasSuframaIncentive: false,
+  status: 'PENDING_ANALYSIS',
+  creditLimitTotal: 0,
+  creditLimitAvailable: 0,
+  mainAddress: { logradouro: '', numero: '', bairro: '', cidade: '', uf: '', cep: '', pais: '' },
+  branches: []
+};
+
+const initialUsers: CompanyUser[] = [];
+const initialBranches: Branch[] = [];
+
 export const authService = {
-  /**
-   * Authenticates a B2B company user
-   */
   async login(credentials: LoginCredentials): Promise<ApiResponse<AuthResponseData>> {
-    const response = await apiClient.post<ApiResponse<AuthResponseData>>('/auth/login', credentials);
-    if (response.data?.accessToken && typeof window !== 'undefined') {
-      localStorage.setItem('b2b_auth_token', response.data.accessToken);
-    }
-    return response;
-  },
-
-  /**
-   * Registers a new Company & User
-   */
-  async register(data: {
-    company: Partial<CompanyAccount>;
-    user: Partial<CompanyUser>;
-    password?: string;
-  }): Promise<ApiResponse<AuthResponseData>> {
-    const response = await apiClient.post<ApiResponse<AuthResponseData>>('/auth/register', data);
-    if (response.data?.accessToken && typeof window !== 'undefined') {
-      localStorage.setItem('b2b_auth_token', response.data.accessToken);
-    }
-    return response;
-  },
-
-  /**
-   * Gets current authenticated profile
-   */
-  async getProfile(): Promise<ApiResponse<{ user: CompanyUser; company: CompanyAccount }>> {
-    return apiClient.get<ApiResponse<{ user: CompanyUser; company: CompanyAccount }>>('/auth/me');
-  },
-
-  /**
-   * Gets company corporate info by ID
-   */
-  async getCompanyById(companyId: string): Promise<ApiResponse<CompanyAccount>> {
-    return apiClient.get<ApiResponse<CompanyAccount>>(`/companies/${companyId}`);
-  },
-
-  /**
-   * Gets company corporate info by CNPJ
-   */
-  async getCompanyByCnpj(cnpj: string): Promise<ApiResponse<CompanyAccount>> {
-    const cleanCnpj = cnpj.replace(/\D/g, '');
-    return apiClient.get<ApiResponse<CompanyAccount>>(`/companies/cnpj/${cleanCnpj}`);
-  },
-
-  /**
-   * Updates company corporate info
-   */
-  async updateCompany(companyId: string, data: Partial<CompanyAccount>): Promise<ApiResponse<CompanyAccount>> {
-    return apiClient.put<ApiResponse<CompanyAccount>>(`/companies/${companyId}`, data);
-  },
-
-  /**
-   * Lists branches belonging to a company
-   */
-  async getCompanyBranches(companyId: string): Promise<ApiResponse<Branch[]>> {
-    return apiClient.get<ApiResponse<Branch[]>>(`/companies/${companyId}/branches`);
-  },
-
-  /**
-   * Adds a branch to a company
-   */
-  async addCompanyBranch(companyId: string, data: Partial<Branch>): Promise<ApiResponse<Branch>> {
-    return apiClient.post<ApiResponse<Branch>>(`/companies/${companyId}/branches`, data);
-  },
-
-  /**
-   * Unlinks a branch from a company
-   */
-  async deleteCompanyBranch(companyId: string, branchId: string): Promise<ApiResponse<void>> {
-    return apiClient.delete<ApiResponse<void>>(`/companies/${companyId}/branches/${branchId}`);
-  },
-
-  /**
-   * Lists users belonging to a company
-   */
-  async getCompanyUsers(companyId: string): Promise<ApiResponse<CompanyUser[]>> {
-    return apiClient.get<ApiResponse<CompanyUser[]>>(`/companies/${companyId}/users`);
-  },
-
-  /**
-   * Creates a user in a company
-   */
-  async createCompanyUser(companyId: string, data: Partial<CompanyUser> & { password?: string }): Promise<ApiResponse<CompanyUser>> {
-    return apiClient.post<ApiResponse<CompanyUser>>(`/companies/${companyId}/users`, data);
-  },
-
-  /**
-   * Updates a company user's permissions or spending limit
-   */
-  async updateCompanyUser(companyId: string, userId: string, data: Partial<CompanyUser>): Promise<ApiResponse<CompanyUser>> {
-    return apiClient.put<ApiResponse<CompanyUser>>(`/companies/${companyId}/users/${userId}`, data);
-  },
-
-  /**
-   * Toggles a user's active status
-   */
-  async toggleCompanyUserStatus(companyId: string, userId: string): Promise<ApiResponse<CompanyUser>> {
-    return apiClient.patch<ApiResponse<CompanyUser>>(`/companies/${companyId}/users/${userId}/status`);
-  },
-
-  /**
-   * Revokes access and deletes a user
-   */
-  async deleteCompanyUser(companyId: string, userId: string): Promise<ApiResponse<void>> {
-    return apiClient.delete<ApiResponse<void>>(`/companies/${companyId}/users/${userId}`);
-  },
-
-  /**
-   * Logs out user and cleans local session
-   */
-  logout(): void {
+    mockDb.init('b2b_users', initialUsers);
+    mockDb.init('b2b_company', initialCompany);
+    
+    const users = mockDb.get('b2b_users');
+    const user = users.find((u: any) => u.email === credentials.email) || { id: 'temp-user', name: 'Usuário Temporário', email: credentials.email, role: 'ADMIN', isActive: true };
+    const company = mockDb.get('b2b_company');
+    
     if (typeof window !== 'undefined') {
-      localStorage.removeItem('b2b_auth_token');
-      sessionStorage.removeItem('b2b_auth_token');
+      localStorage.setItem('b2b_auth_token', 'mock_token');
+      localStorage.setItem('b2b_current_user', JSON.stringify(user));
     }
+    return { success: true, data: { user, company, accessToken: 'mock_token' } };
+  },
+
+  async getProfile(): Promise<ApiResponse<{ user: CompanyUser; company: CompanyAccount }>> {
+    mockDb.init('b2b_company', initialCompany);
+    let user = null;
+    if (typeof window !== 'undefined') {
+      const u = localStorage.getItem('b2b_current_user');
+      if (u) user = JSON.parse(u);
+    }
+    if (!user) user = { id: 'temp-user', name: 'Usuário Temporário', role: 'ADMIN', isActive: true };
+    return { success: true, data: { user, company: mockDb.get('b2b_company') } };
+  },
+
+  async getCompanyBranches(companyId: string): Promise<ApiResponse<Branch[]>> {
+    mockDb.init('b2b_branches', initialBranches);
+    return { success: true, data: mockDb.get('b2b_branches') };
+  },
+
+  async addCompanyBranch(companyId: string, branchData: Partial<Branch>): Promise<ApiResponse<Branch>> {
+    const branches = mockDb.get('b2b_branches') || [];
+    const newBranch = { ...branchData, id: `branch-${Date.now()}` } as Branch;
+    mockDb.set('b2b_branches', [newBranch, ...branches]);
+    return { success: true, data: newBranch };
+  },
+  
+  async deleteCompanyBranch(companyId: string, branchId: string): Promise<ApiResponse<void>> {
+    const branches = mockDb.get('b2b_branches') || [];
+    mockDb.set('b2b_branches', branches.filter((b: any) => b.id !== branchId));
+    return { success: true, data: undefined };
+  },
+
+  async getCompanyUsers(companyId: string): Promise<ApiResponse<CompanyUser[]>> {
+    mockDb.init('b2b_users', initialUsers);
+    return { success: true, data: mockDb.get('b2b_users') };
+  },
+
+  async createCompanyUser(companyId: string, userData: Partial<CompanyUser>): Promise<ApiResponse<CompanyUser>> {
+    const users = mockDb.get('b2b_users') || [];
+    const newUser = { ...userData, id: `user-${Date.now()}`, companyId } as CompanyUser;
+    mockDb.set('b2b_users', [newUser, ...users]);
+    return { success: true, data: newUser };
+  },
+  
+  async toggleCompanyUserStatus(companyId: string, userId: string): Promise<ApiResponse<CompanyUser>> {
+    const users = mockDb.get('b2b_users') || [];
+    const updated = users.map((u: any) => u.id === userId ? { ...u, isActive: !u.isActive } : u);
+    mockDb.set('b2b_users', updated);
+    return { success: true, data: updated.find((u: any) => u.id === userId) };
+  },
+  
+  async deleteCompanyUser(companyId: string, userId: string): Promise<ApiResponse<void>> {
+    const users = mockDb.get('b2b_users') || [];
+    mockDb.set('b2b_users', users.filter((u: any) => u.id !== userId));
+    return { success: true, data: undefined };
   }
 };

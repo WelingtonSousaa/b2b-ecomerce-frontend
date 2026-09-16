@@ -30,22 +30,10 @@ export default function TabelasDePrecosPage() {
   const [search, setSearch] = useState('');
   
   // Modals state
-  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-  const [isAddItemModalOpen, setIsAddItemModalOpen] = useState(false);
 
   // New Price Book modal state
-  const [newName, setNewName] = useState('');
-  const [newCode, setNewCode] = useState('');
-  const [newDescription, setNewDescription] = useState('');
-  const [newCnpjs, setNewCnpjs] = useState('12.345.678/0001-90');
-  const [newRegions, setNewRegions] = useState('SP, RJ, MG');
 
   // Add Item to PB modal state
-  const [itemSku, setItemSku] = useState('SKU-HEAD-02');
-  const [itemName, setItemName] = useState('Headphone Studio Pro Hi-Res');
-  const [itemPrice, setItemPrice] = useState<number>(389.00);
-  const [itemMoq, setItemMoq] = useState<number>(5);
-  const [itemDiscount, setItemDiscount] = useState<number>(15);
 
   React.useEffect(() => {
     priceBooksService.getPriceBooks()
@@ -65,78 +53,6 @@ export default function TabelasDePrecosPage() {
     item.productName?.toLowerCase().includes(search.toLowerCase()) ||
     item.sku?.toLowerCase().includes(search.toLowerCase())
   ) || [];
-
-  const handleCreatePriceBook = (e: React.FormEvent) => {
-    e.preventDefault();
-    const newBook: PriceBook = {
-      id: `pb-${Date.now()}`,
-      name: newName,
-      code: newCode.toUpperCase(),
-      description: newDescription,
-      isActive: true,
-      validFrom: '2026-08-01',
-      validTo: '2027-08-01',
-      assignedCnpjs: newCnpjs.split(',').map(c => c.trim()),
-      targetRegionUF: newRegions.split(',').map(r => r.trim()),
-      items: [
-        {
-          sku: 'SKU-HEAD-01',
-          productName: 'Wireless Earbuds IPX8 Noise Canceling',
-          customPrice: 420.00,
-          minMoqOverride: 2,
-          discountPercentageFromBase: 14.1
-        },
-        {
-          sku: 'SKU-PHONE-BLK-128',
-          productName: 'Smartphone Galaxy Enterprise 5G 128GB',
-          customPrice: 3100.00,
-          minMoqOverride: 2,
-          discountPercentageFromBase: 11.4
-        }
-      ]
-    };
-
-    setPriceBooks(prev => [newBook, ...prev]);
-    setSelectedPb(newBook);
-    setIsCreateModalOpen(false);
-    showToast(`Tabela de Preço "${newName}" criada com sucesso!`, 'success');
-
-    priceBooksService.createPriceBook(newBook).then(res => {
-      if (res.data) {
-        setPriceBooks(prev => prev.map(pb => pb.id === newBook.id ? res.data : pb));
-        setSelectedPb(res.data);
-      }
-    }).catch(() => {});
-
-    setNewName('');
-    setNewCode('');
-    setNewDescription('');
-  };
-
-  const handleAddItemToPriceBook = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!selectedPb) return;
-
-    const newItem: PriceBookItem = {
-      sku: itemSku,
-      productName: itemName,
-      customPrice: Number(itemPrice),
-      minMoqOverride: Number(itemMoq),
-      discountPercentageFromBase: Number(itemDiscount)
-    };
-
-    const updatedPb = {
-      ...selectedPb,
-      items: [...selectedPb.items, newItem]
-    };
-
-    setSelectedPb(updatedPb);
-    setPriceBooks(prev => prev.map(p => p.id === updatedPb.id ? updatedPb : p));
-    setIsAddItemModalOpen(false);
-    showToast(`SKU "${itemSku}" adicionado à tabela "${selectedPb.name}"!`, 'success');
-
-    priceBooksService.addItemToPriceBook(selectedPb.id, newItem).catch(() => {});
-  };
 
   const handleExportXls = () => {
     if (!selectedPb) return;
@@ -182,13 +98,13 @@ export default function TabelasDePrecosPage() {
               <span>Exportar Tabela (CSV/XLS)</span>
             </button>
 
-            <button
-              onClick={() => setIsCreateModalOpen(true)}
-              className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-black px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-sm"
+            <Link
+              href="/conta/tabelas-de-precos/nova"
+              className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-black px-5 py-2.5 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-sm"
             >
               <Plus className="w-4 h-4 text-amber-300" />
               <span>Nova Tabela de Preço</span>
-            </button>
+            </Link>
           </>
         }
       />
@@ -204,13 +120,13 @@ export default function TabelasDePrecosPage() {
               <h2 className="text-sm font-black text-gray-900 uppercase tracking-wider">
                 Tabelas Contratuais ({priceBooks.length})
               </h2>
-              <span className="text-xs text-[#004e38] font-bold">100% Sincronizado</span>
+              <span className="text-xs text-[#2563eb] font-bold">100% Sincronizado</span>
             </div>
 
             <div className="space-y-3">
               {isLoading ? (
                 <div className="p-8 text-center bg-white rounded-3xl border border-gray-200 shadow-2xs">
-                  <Tag className="w-6 h-6 text-[#004e38] animate-spin mx-auto mb-2" />
+                  <Tag className="w-6 h-6 text-[#2563eb] animate-spin mx-auto mb-2" />
                   <p className="text-xs font-bold text-gray-500">Carregando tabelas de preço...</p>
                 </div>
               ) : priceBooks.map((pb) => {
@@ -221,16 +137,16 @@ export default function TabelasDePrecosPage() {
                     onClick={() => setSelectedPb(pb)}
                     className={`p-5 rounded-3xl border-2 transition-all cursor-pointer space-y-2.5 ${
                       isSelected
-                        ? 'border-[#004e38] bg-white shadow-md'
+                        ? 'border-[#2563eb] bg-white shadow-md'
                         : 'border-gray-200 bg-white hover:border-gray-300 hover:shadow-2xs'
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <span className="bg-emerald-50 text-[#004e38] font-mono font-black text-[10px] px-2.5 py-0.5 rounded-full border border-emerald-200">
+                      <span className="bg-blue-50 text-[#2563eb] font-mono font-black text-[10px] px-2.5 py-0.5 rounded-full border border-blue-200">
                         {pb.code}
                       </span>
-                      <span className="text-[10px] font-black text-emerald-700 flex items-center gap-1 bg-emerald-50 px-2 py-0.5 rounded">
-                        <CheckCircle2 className="w-3 h-3 text-emerald-600" /> Ativa
+                      <span className="text-[10px] font-black text-blue-700 flex items-center gap-1 bg-blue-50 px-2 py-0.5 rounded">
+                        <CheckCircle2 className="w-3 h-3 text-blue-600" /> Ativa
                       </span>
                     </div>
 
@@ -242,7 +158,7 @@ export default function TabelasDePrecosPage() {
                         <Building2 className="w-3 h-3 text-gray-500" />
                         {pb.assignedCnpjs.length} CNPJ(s)
                       </span>
-                      <span className="font-mono text-[#004e38] font-bold">
+                      <span className="font-mono text-[#2563eb] font-bold">
                         {pb.items.length} Itens com Desconto
                       </span>
                     </div>
@@ -265,7 +181,7 @@ export default function TabelasDePrecosPage() {
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-4">
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="bg-[#004e38] text-white font-mono text-[10px] font-bold px-2 py-0.5 rounded">
+                        <span className="bg-[#2563eb] text-white font-mono text-[10px] font-bold px-2 py-0.5 rounded">
                           {selectedPb.code}
                         </span>
                         <h2 className="text-xl font-black text-gray-900">{selectedPb.name}</h2>
@@ -274,7 +190,7 @@ export default function TabelasDePrecosPage() {
                     </div>
 
                     <div className="flex items-center gap-2 shrink-0">
-                      <span className="bg-emerald-100 text-[#004e38] text-xs font-bold px-3 py-1 rounded-full">
+                      <span className="bg-blue-100 text-[#2563eb] text-xs font-bold px-3 py-1 rounded-full">
                         Vigência: {selectedPb.validFrom} até {selectedPb.validTo}
                       </span>
                     </div>
@@ -302,7 +218,7 @@ export default function TabelasDePrecosPage() {
                       <div className="flex flex-wrap gap-1.5">
                         {selectedPb.targetRegionUF && selectedPb.targetRegionUF.length > 0 ? (
                           selectedPb.targetRegionUF.map((uf, idx) => (
-                            <span key={idx} className="bg-emerald-50 border border-emerald-200 text-[#004e38] text-[11px] font-black px-2.5 py-1 rounded-lg">
+                            <span key={idx} className="bg-blue-50 border border-blue-200 text-[#2563eb] text-[11px] font-black px-2.5 py-1 rounded-lg">
                               UF: {uf}
                             </span>
                           ))
@@ -323,7 +239,7 @@ export default function TabelasDePrecosPage() {
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                         placeholder="Filtrar por SKU ou Produto..."
-                        className="w-full bg-[#f5f6f6] rounded-full py-2 pl-3 pr-8 text-xs font-medium focus:outline-none focus:ring-1 focus:ring-[#004e38]"
+                        className="w-full bg-[#f5f6f6] rounded-full py-2 pl-3 pr-8 text-xs font-medium focus:outline-none focus:ring-1 focus:ring-[#2563eb]"
                       />
                       <Search className="w-3.5 h-3.5 text-gray-400 absolute right-3 top-2.5" />
                     </div>
@@ -331,8 +247,8 @@ export default function TabelasDePrecosPage() {
                     <div className="flex items-center gap-3">
                       <span className="text-xs text-gray-400 font-semibold">{filteredItems.length} Itens Vinculados</span>
                       <button
-                        onClick={() => setIsAddItemModalOpen(true)}
-                        className="bg-[#004e38] hover:bg-[#033627] text-white font-black text-xs px-4 py-2 rounded-full transition-all flex items-center gap-1.5 shadow-2xs cursor-pointer"
+                        onClick={() => alert("Função em desenvolvimento. Agora terá página própria.")}
+                        className="bg-[#2563eb] hover:bg-[#033627] text-white font-black text-xs px-4 py-2 rounded-full transition-all flex items-center gap-1.5 shadow-2xs cursor-pointer"
                       >
                         <Plus className="w-3.5 h-3.5 text-amber-300" />
                         <span>Adicionar Item à Tabela</span>
@@ -342,7 +258,7 @@ export default function TabelasDePrecosPage() {
 
                   <div className="overflow-x-auto">
                     <table className="w-full text-left text-xs">
-                      <thead className="bg-[#004e38] text-white font-extrabold uppercase text-[10px] tracking-wider">
+                      <thead className="bg-[#2563eb] text-white font-extrabold uppercase text-[10px] tracking-wider">
                         <tr>
                           <th className="p-4">SKU / Mercadoria</th>
                           <th className="p-4 text-center">MOQ Mínimo</th>
@@ -365,12 +281,12 @@ export default function TabelasDePrecosPage() {
                               </span>
                             </td>
 
-                            <td className="p-4 text-right font-black text-sm text-[#004e38]">
+                            <td className="p-4 text-right font-black text-sm text-[#2563eb]">
                               R$ {item.customPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                             </td>
 
                             <td className="p-4 text-center">
-                              <span className="bg-emerald-50 text-emerald-800 border border-emerald-200 font-black text-[10px] px-2.5 py-0.5 rounded-full">
+                              <span className="bg-blue-50 text-blue-800 border border-blue-200 font-black text-[10px] px-2.5 py-0.5 rounded-full">
                                 -{item.discountPercentageFromBase}% OFF
                               </span>
                             </td>
@@ -378,7 +294,7 @@ export default function TabelasDePrecosPage() {
                             <td className="p-4 text-center">
                               <Link
                                 href={`/produto/${item.sku}`}
-                                className="text-[#004e38] hover:underline text-[11px] font-bold inline-flex items-center gap-1"
+                                className="text-[#2563eb] hover:underline text-[11px] font-bold inline-flex items-center gap-1"
                               >
                                 <span>Ver Catálogo</span>
                                 <ArrowRight className="w-3 h-3" />
@@ -397,212 +313,6 @@ export default function TabelasDePrecosPage() {
         </div>
 
       </div>
-
-      {/* MODAL 1: CRIAR NOVA TABELA DE PREÇOS */}
-      {isCreateModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200 font-sans">
-          <div className="bg-white text-gray-900 rounded-3xl shadow-2xl border border-gray-100 w-full max-w-xl overflow-hidden relative flex flex-col">
-            
-            <div className="bg-[#004e38] text-white p-6 relative">
-              <button
-                onClick={() => setIsCreateModalOpen(false)}
-                className="absolute top-5 right-5 p-1 rounded-full bg-white/10 hover:bg-white/20 text-white cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-              <div className="flex items-center gap-2 mb-1">
-                <Tag className="w-5 h-5 text-amber-300" />
-                <h3 className="text-xl font-black">Criar Tabela de Preços Negociada</h3>
-              </div>
-              <p className="text-xs text-emerald-100">
-                Cadastre condições comerciais exclusivas para um contrato corporativo ou região.
-              </p>
-            </div>
-
-            <form onSubmit={handleCreatePriceBook} className="p-6 space-y-4 text-xs">
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <label className="font-bold text-gray-700">Nome da Tabela *</label>
-                  <input
-                    type="text"
-                    required
-                    value={newName}
-                    onChange={(e) => setNewName(e.target.value)}
-                    placeholder="Ex: Tabela Parceiros Tier 1"
-                    className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-2.5 font-bold focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <label className="font-bold text-gray-700">Código Interno / ERP *</label>
-                  <input
-                    type="text"
-                    required
-                    value={newCode}
-                    onChange={(e) => setNewCode(e.target.value)}
-                    placeholder="Ex: PB-TIER1-2026"
-                    className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-2.5 font-mono font-bold focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-1">
-                <label className="font-bold text-gray-700">Descrição Comercial</label>
-                <textarea
-                  rows={2}
-                  value={newDescription}
-                  onChange={(e) => setNewDescription(e.target.value)}
-                  placeholder="Justificativa do acordo comercial..."
-                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                />
-              </div>
-
-              <div className="space-y-1">
-                <label className="font-bold text-gray-700">CNPJs Autorizados (separados por vírgula)</label>
-                <input
-                  type="text"
-                  value={newCnpjs}
-                  onChange={(e) => setNewCnpjs(e.target.value)}
-                  placeholder="Ex: 12.345.678/0001-90, 98.765.432/0001-11"
-                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-2.5 font-mono focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                />
-              </div>
-
-              <div className="space-y-1">
-                <label className="font-bold text-gray-700">Estados / Regiões Válidas (UFs)</label>
-                <input
-                  type="text"
-                  value={newRegions}
-                  onChange={(e) => setNewRegions(e.target.value)}
-                  placeholder="Ex: SP, RJ, MG, PR"
-                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-2.5 focus:outline-none focus:ring-2 focus:ring-[#004e38]"
-                />
-              </div>
-
-              <div className="flex items-center justify-end gap-3 pt-3 border-t border-gray-100">
-                <button
-                  type="button"
-                  onClick={() => setIsCreateModalOpen(false)}
-                  className="px-4 py-2 rounded-full font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 cursor-pointer"
-                >
-                  Cancelar
-                </button>
-                <button
-                  type="submit"
-                  className="bg-[#004e38] hover:bg-[#033627] text-white font-black px-6 py-2 rounded-full shadow-xs cursor-pointer"
-                >
-                  Salvar Tabela de Preço
-                </button>
-              </div>
-            </form>
-
-          </div>
-        </div>
-      )}
-
-      {/* MODAL 2: ADICIONAR ITEM À TABELA SELECIONADA */}
-      {isAddItemModalOpen && selectedPb && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200 font-sans">
-          <div className="bg-white text-gray-900 rounded-3xl shadow-2xl border border-gray-100 w-full max-w-lg overflow-hidden relative flex flex-col">
-            
-            <div className="bg-[#004e38] text-white p-6 relative">
-              <button
-                onClick={() => setIsAddItemModalOpen(false)}
-                className="absolute top-5 right-5 p-1 rounded-full bg-white/10 hover:bg-white/20 text-white cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-              <div className="flex items-center gap-2 mb-1">
-                <Plus className="w-5 h-5 text-amber-300" />
-                <h3 className="text-xl font-black">Adicionar Item com Preço Negociado</h3>
-              </div>
-              <p className="text-xs text-emerald-100">
-                Tabela de Destino: <strong>{selectedPb.name} ({selectedPb.code})</strong>
-              </p>
-            </div>
-
-            <form onSubmit={handleAddItemToPriceBook} className="p-6 space-y-4 text-xs">
-              <div className="space-y-1">
-                <label className="font-bold text-gray-700">Código SKU do Produto *</label>
-                <input
-                  type="text"
-                  required
-                  value={itemSku}
-                  onChange={(e) => setItemSku(e.target.value)}
-                  placeholder="Ex: SKU-AUDIO-PRO-01"
-                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-2.5 font-mono font-bold"
-                />
-              </div>
-
-              <div className="space-y-1">
-                <label className="font-bold text-gray-700">Nome do Produto *</label>
-                <input
-                  type="text"
-                  required
-                  value={itemName}
-                  onChange={(e) => setItemName(e.target.value)}
-                  placeholder="Ex: Fone Headphone Wireless Pro Studio"
-                  className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-2.5 font-bold"
-                />
-              </div>
-
-              <div className="grid grid-cols-3 gap-3">
-                <div className="space-y-1">
-                  <label className="font-bold text-gray-700">Preço B2B (R$) *</label>
-                  <input
-                    type="number"
-                    step="0.01"
-                    required
-                    value={itemPrice}
-                    onChange={(e) => setItemPrice(Number(e.target.value))}
-                    className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-2.5 font-black text-[#004e38]"
-                  />
-                </div>
-
-                <div className="space-y-1">
-                  <label className="font-bold text-gray-700">Lote Mínimo (MOQ)</label>
-                  <input
-                    type="number"
-                    min="1"
-                    required
-                    value={itemMoq}
-                    onChange={(e) => setItemMoq(Number(e.target.value))}
-                    className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-2.5 font-bold"
-                  />
-                </div>
-
-                <div className="space-y-1">
-                  <label className="font-bold text-gray-700">Desconto (%)</label>
-                  <input
-                    type="number"
-                    step="0.1"
-                    required
-                    value={itemDiscount}
-                    onChange={(e) => setItemDiscount(Number(e.target.value))}
-                    className="w-full bg-[#f5f6f6] border border-gray-200 rounded-xl p-2.5 font-bold text-emerald-700"
-                  />
-                </div>
-              </div>
-
-              <div className="flex items-center justify-end gap-3 pt-3 border-t border-gray-100">
-                <button
-                  type="button"
-                  onClick={() => setIsAddItemModalOpen(false)}
-                  className="px-4 py-2 rounded-full font-bold text-gray-600 bg-gray-100 hover:bg-gray-200 cursor-pointer"
-                >
-                  Cancelar
-                </button>
-                <button
-                  type="submit"
-                  className="bg-[#004e38] hover:bg-[#033627] text-white font-black px-6 py-2 rounded-full shadow-xs cursor-pointer"
-                >
-                  Adicionar ao Price Book
-                </button>
-              </div>
-            </form>
-
-          </div>
-        </div>
-      )}
 
     </div>
   );

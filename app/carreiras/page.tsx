@@ -54,45 +54,45 @@ export default function CarreirasPage() {
         
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs text-gray-500 font-medium border-b border-gray-100 pb-4">
-          <Link href="/" className="hover:text-[#004e38]">Home</Link>
+          <Link href="/" className="hover:text-[#2563eb]">Home</Link>
           <span>/</span>
           <span className="font-bold text-gray-900">Carreiras</span>
         </div>
 
         {/* Hero Section */}
         <div className="bg-[#f5f6f6] rounded-3xl p-8 lg:p-14 text-center space-y-4">
-          <span className="inline-block bg-emerald-100 text-[#004e38] text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider">
+          <span className="inline-block bg-blue-100 text-[#2563eb] text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider">
             Trabalhe Conosco
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight">
             Construa o Futuro do Comércio B2B no Brasil
           </h1>
           <p className="text-xs sm:text-sm text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Somos um time apaixonado por inovação, tecnologia e eficiência. Na Shopcart, incentivamos a autonomia, a diversidade e o desenvolvimento contínuo dos nossos talentos.
+            Somos um time apaixonado por inovação, tecnologia e eficiência. Na OneSync, incentivamos a autonomia, a diversidade e o desenvolvimento contínuo dos nossos talentos.
           </p>
         </div>
 
         {/* Benefits Grid */}
         <div className="space-y-6">
           <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight text-center">
-            Por que Fazer Parte do Time Shopcart?
+            Por que Fazer Parte do Time OneSync?
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="p-6 bg-white rounded-3xl border border-gray-200 space-y-2">
-              <HeartHandshake className="w-8 h-8 text-[#004e38]" />
+              <HeartHandshake className="w-8 h-8 text-[#2563eb]" />
               <h3 className="text-base font-extrabold text-gray-900">Saúde & Bem-Estar</h3>
               <p className="text-xs text-gray-500">Plano de Saúde Bradesco Top Nacional, Plano Odontológico, Gympass e auxílio saúde mental.</p>
             </div>
 
             <div className="p-6 bg-white rounded-3xl border border-gray-200 space-y-2">
-              <Briefcase className="w-8 h-8 text-[#004e38]" />
+              <Briefcase className="w-8 h-8 text-[#2563eb]" />
               <h3 className="text-base font-extrabold text-gray-900">Crescimento & Carreira</h3>
               <p className="text-xs text-gray-500">PLR semestral atrelada a metas, orçamento anual para cursos/certificações e plano de cargos estruturado.</p>
             </div>
 
             <div className="p-6 bg-white rounded-3xl border border-gray-200 space-y-2">
-              <Users className="w-8 h-8 text-[#004e38]" />
+              <Users className="w-8 h-8 text-[#2563eb]" />
               <h3 className="text-base font-extrabold text-gray-900">Flexibilidade Híbrida</h3>
               <p className="text-xs text-gray-500">Ambiente de trabalho flexível com auxílio home-office e escritórios modernos em SP, SC e BA.</p>
             </div>
@@ -109,11 +109,11 @@ export default function CarreirasPage() {
             {jobs.map((job) => (
               <div
                 key={job.id}
-                className="bg-white p-6 rounded-3xl border border-gray-200 hover:border-[#004e38] transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-2xs"
+                className="bg-white p-6 rounded-3xl border border-gray-200 hover:border-[#2563eb] transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-2xs"
               >
                 <div className="space-y-2">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="bg-emerald-50 text-[#004e38] text-[10px] font-bold px-2.5 py-1 rounded-md">
+                    <span className="bg-blue-50 text-[#2563eb] text-[10px] font-bold px-2.5 py-1 rounded-md">
                       {job.department}
                     </span>
                     <span className="text-xs text-gray-400 font-medium flex items-center gap-1">
@@ -130,7 +130,7 @@ export default function CarreirasPage() {
 
                 <button
                   onClick={() => setSelectedJob(job.title)}
-                  className="bg-[#004e38] hover:bg-[#033627] text-white text-xs font-bold px-6 py-3 rounded-full transition-all shrink-0 cursor-pointer text-center"
+                  className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-bold px-6 py-3 rounded-full transition-all shrink-0 cursor-pointer text-center"
                 >
                   Candidatar-se à Vaga
                 </button>
@@ -143,7 +143,7 @@ export default function CarreirasPage() {
         {selectedJob && (
           <div className="border border-gray-200 rounded-3xl p-6 lg:p-8 bg-[#f5f6f6] space-y-4 animate-in fade-in duration-200">
             <h3 className="text-lg font-black text-gray-900">
-              Candidatura para: <span className="text-[#004e38]">{selectedJob}</span>
+              Candidatura para: <span className="text-[#2563eb]">{selectedJob}</span>
             </h3>
 
             {!submitted ? (
@@ -175,7 +175,7 @@ export default function CarreirasPage() {
                   </button>
                   <button
                     type="submit"
-                    className="bg-[#004e38] hover:bg-[#033627] text-white font-bold px-8 py-2.5 rounded-full transition-all shadow-xs cursor-pointer"
+                    className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold px-8 py-2.5 rounded-full transition-all shadow-xs cursor-pointer"
                   >
                     Enviar Candidatura
                   </button>
@@ -183,7 +183,7 @@ export default function CarreirasPage() {
               </form>
             ) : (
               <div className="bg-white p-6 rounded-2xl text-center space-y-2">
-                <CheckCircle2 className="w-10 h-10 text-[#004e38] mx-auto" />
+                <CheckCircle2 className="w-10 h-10 text-[#2563eb] mx-auto" />
                 <h4 className="text-base font-bold text-gray-900">Candidatura Recebida com Sucesso!</h4>
                 <p className="text-xs text-gray-500">Nosso time de Talent Acquisition analisará seu perfil e entrará em contato em breve.</p>
               </div>

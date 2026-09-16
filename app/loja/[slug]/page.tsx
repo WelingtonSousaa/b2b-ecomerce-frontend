@@ -66,7 +66,7 @@ const storesData: Record<string, StoreData> = {
     reviewsCount: 215,
     activeContracts: 142,
     leadTime: 'Pronta entrega CD-SP / CD-SC',
-    primaryColor: '#004e38',
+    primaryColor: '#2563eb',
     bannerBgColor: '#f9ece4',
     heroHeadline: 'Comunicação Unificada & Headsets para Call Centers',
     heroSubheadline: 'Cancelamento de ruído híbrido ANC com homologação Microsoft Teams e Zoom Rooms.',
@@ -124,7 +124,7 @@ export default function StorefrontPublicPage() {
     reviewsCount: 120,
     activeContracts: 38,
     leadTime: 'Pronta entrega CD-SP',
-    primaryColor: '#004e38',
+    primaryColor: '#2563eb',
     bannerBgColor: '#f9ece4',
     heroHeadline: `Catálogo Oficial ${slug.replace(/-/g, ' ').toUpperCase()}`,
     heroSubheadline: 'Fornecimento corporativo direto da fábrica com faturamento por boleto 30/60/90 dias.',
@@ -187,8 +187,8 @@ export default function StorefrontPublicPage() {
                 <h1 className="text-xl sm:text-2xl font-black text-gray-900 tracking-tight">
                   {store.name}
                 </h1>
-                <span className="inline-flex items-center gap-1 bg-emerald-50 text-emerald-800 border border-emerald-200 text-[10px] font-black px-2.5 py-0.5 rounded-full">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                <span className="inline-flex items-center gap-1 bg-blue-50 text-blue-800 border border-blue-200 text-[10px] font-black px-2.5 py-0.5 rounded-full">
+                  <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
                   Fornecedor Oficial Homologado
                 </span>
               </div>
@@ -253,7 +253,7 @@ export default function StorefrontPublicPage() {
 
             <div className="flex flex-wrap items-center gap-4 pt-2 text-xs font-bold text-gray-800">
               <span className="flex items-center gap-1.5 bg-white/70 px-3 py-1.5 rounded-xl border border-black/5">
-                <Truck className="w-4 h-4 text-emerald-600" />
+                <Truck className="w-4 h-4 text-blue-600" />
                 {store.leadTime}
               </span>
               <span className="flex items-center gap-1.5 bg-white/70 px-3 py-1.5 rounded-xl border border-black/5">
@@ -288,7 +288,7 @@ export default function StorefrontPublicPage() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder={`Pesquisar no catálogo da ${store.name}...`}
-              className="w-full bg-[#f5f6f6] rounded-full py-2.5 pl-10 pr-4 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full bg-[#f5f6f6] rounded-full py-2.5 pl-10 pr-4 text-xs font-medium focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-3" />
           </div>
@@ -355,7 +355,7 @@ export default function StorefrontPublicPage() {
                   </div>
 
                   <div>
-                    <h3 className="text-xs font-bold text-gray-900 group-hover:text-[#004e38] transition-colors line-clamp-2">
+                    <h3 className="text-xs font-bold text-gray-900 group-hover:text-[#2563eb] transition-colors line-clamp-2">
                       {prod.name}
                     </h3>
                     <p className="text-[11px] text-gray-500 mt-1 line-clamp-1">{prod.description}</p>
@@ -367,7 +367,7 @@ export default function StorefrontPublicPage() {
                     <div>
                       <span className="text-[10px] text-gray-400 block font-medium">Lote Mínimo: {prod.moq} un.</span>
                       {isAuthenticated ? (
-                        <strong className="text-sm font-black text-[#004e38]">
+                        <strong className="text-sm font-black text-[#2563eb]">
                           R$ {prod.basePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                         </strong>
                       ) : (
@@ -394,7 +394,7 @@ export default function StorefrontPublicPage() {
                       type="button"
                       onClick={() => handleAddToCart(prod.id, prod.name)}
                       className={`py-2 px-3 rounded-full text-center text-xs font-bold text-white transition-all cursor-pointer flex items-center justify-center gap-1 ${
-                        isAdded ? 'bg-emerald-700' : 'hover:opacity-90'
+                        isAdded ? 'bg-blue-700' : 'hover:opacity-90'
                       }`}
                       style={{ backgroundColor: isAdded ? undefined : store.primaryColor }}
                     >

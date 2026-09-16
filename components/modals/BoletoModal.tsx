@@ -30,7 +30,7 @@ export default function BoletoModal({
   const updatedAmount = originalAmount + penalty + dailyInterest;
 
   const barcode = '34191.09008 61234.567890 12345.678904 1 98450001482349';
-  const pixCopyPaste = '00020126580014BR.GOV.BCB.PIX0136123e4567-e89b-12d3-a456-426614174000520400005303986540714823.495802BR5925SHOPCART ATACADO E DISTR6009SAO PAULO62070503***6304E2D5';
+  const pixCopyPaste = '00020126580014BR.GOV.BCB.PIX0136123e4567-e89b-12d3-a456-426614174000520400005303986540714823.495802BR5925ONESYNC ATACADO E DISTR6009SAO PAULO62070503***6304E2D5';
 
   const copyToClipboard = (text: string, type: 'code' | 'pix') => {
     navigator.clipboard.writeText(text);
@@ -48,19 +48,19 @@ export default function BoletoModal({
       <div className="bg-white text-gray-900 rounded-3xl shadow-2xl border border-gray-200 w-full max-w-xl overflow-hidden relative">
         
         {/* Header */}
-        <div className="bg-[#0b1d16] text-white px-6 py-4 flex items-center justify-between">
+        <div className="bg-[#0f172a] text-white px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-amber-400 text-gray-950 font-black flex items-center justify-center text-xs">
               2ª VIA
             </div>
             <div>
               <h3 className="text-sm font-black tracking-tight">2ª Via de Boleto Faturado B2B</h3>
-              <p className="text-[10px] text-emerald-300">Recálculo de Juros e Multas em Tempo Real</p>
+              <p className="text-[10px] text-blue-300">Recálculo de Juros e Multas em Tempo Real</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1 hover:bg-emerald-900/60 rounded-lg text-emerald-200 hover:text-white transition-colors"
+            className="p-1 hover:bg-blue-900/60 rounded-lg text-blue-200 hover:text-white transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -101,8 +101,8 @@ export default function BoletoModal({
               <span className="font-semibold">+ R$ {dailyInterest.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
             </div>
             <div className="flex items-center justify-between pt-2 border-t border-gray-300 font-black text-sm">
-              <span className="text-emerald-950">Novo Valor para Quitação Hoje:</span>
-              <span className="text-emerald-900 text-base">R$ {updatedAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+              <span className="text-blue-950">Novo Valor para Quitação Hoje:</span>
+              <span className="text-blue-900 text-base">R$ {updatedAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
             </div>
           </div>
 
@@ -115,7 +115,7 @@ export default function BoletoModal({
               <span className="truncate flex-1 select-all font-bold">{barcode}</span>
               <button
                 onClick={() => copyToClipboard(barcode, 'code')}
-                className="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg font-sans font-bold text-[11px] flex items-center gap-1.5 transition-colors shrink-0"
+                className="px-3 py-1.5 bg-blue-700 hover:bg-blue-800 text-white rounded-lg font-sans font-bold text-[11px] flex items-center gap-1.5 transition-colors shrink-0"
               >
                 {copiedCode ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copiedCode ? 'Copiado!' : 'Copiar'}</span>
@@ -128,7 +128,7 @@ export default function BoletoModal({
             <label className="block text-[11px] font-bold text-gray-700">
               Ou pague com PIX para Baixa Instantânea
             </label>
-            <div className="flex items-center gap-2 bg-emerald-50/80 p-2.5 rounded-xl border border-emerald-200 font-mono text-[11px] text-emerald-950">
+            <div className="flex items-center gap-2 bg-blue-50/80 p-2.5 rounded-xl border border-blue-200 font-mono text-[11px] text-blue-950">
               <span className="truncate flex-1 select-all font-medium">{pixCopyPaste}</span>
               <button
                 onClick={() => copyToClipboard(pixCopyPaste, 'pix')}
@@ -158,7 +158,7 @@ export default function BoletoModal({
               </button>
               <button
                 onClick={() => window.print()}
-                className="px-4 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold flex items-center gap-2 transition-colors shadow-md"
+                className="px-4 py-2.5 rounded-xl bg-blue-700 hover:bg-blue-800 text-white font-extrabold flex items-center gap-2 transition-colors shadow-md"
               >
                 <Printer className="w-4 h-4" />
                 <span>Imprimir</span>

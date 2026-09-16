@@ -208,7 +208,7 @@ export default function CheckoutPage() {
     return (
       <div className="bg-white min-h-screen py-16 px-4 font-sans flex items-center justify-center">
         <div className="max-w-md w-full text-center space-y-6 bg-[#f5f6f6] p-8 rounded-3xl border border-gray-100 shadow-sm">
-          <div className="w-16 h-16 rounded-full bg-emerald-100 text-[#004e38] mx-auto flex items-center justify-center shadow-xs">
+          <div className="w-16 h-16 rounded-full bg-blue-100 text-[#2563eb] mx-auto flex items-center justify-center shadow-xs">
             <Lock className="w-8 h-8" />
           </div>
 
@@ -221,7 +221,7 @@ export default function CheckoutPage() {
 
           <button
             onClick={() => openAuthModal()}
-            className="w-full bg-[#004e38] text-white text-xs font-bold py-3.5 rounded-full transition-all hover:bg-[#033627] cursor-pointer"
+            className="w-full bg-[#2563eb] text-white text-xs font-bold py-3.5 rounded-full transition-all hover:bg-[#1d4ed8] cursor-pointer"
           >
             Entrar com CNPJ ou Cadastrar Empresa
           </button>
@@ -234,7 +234,7 @@ export default function CheckoutPage() {
     return (
       <div className="bg-white min-h-screen py-16 px-4 font-sans flex items-center justify-center">
         <div className="max-w-lg w-full text-center space-y-6 bg-[#f5f6f6] p-8 rounded-3xl border border-gray-100 shadow-sm">
-          <div className="w-16 h-16 rounded-full bg-[#004e38] text-white mx-auto flex items-center justify-center shadow-sm">
+          <div className="w-16 h-16 rounded-full bg-[#2563eb] text-white mx-auto flex items-center justify-center shadow-sm">
             <CheckCircle2 className="w-10 h-10" />
           </div>
 
@@ -248,7 +248,7 @@ export default function CheckoutPage() {
           <div className="bg-white p-5 rounded-2xl text-left text-xs space-y-3 border border-gray-100">
             <div className="flex justify-between border-b border-gray-50 pb-2">
               <span className="text-gray-500 font-bold">Tipo de Entrega:</span>
-              <span className="font-extrabold text-[#004e38]">
+              <span className="font-extrabold text-[#2563eb]">
                 {deliveryMode === 'SINGLE' ? 'Endereço Único (Matriz)' : 'Split Multi-Filiais (3 Destinos)'}
               </span>
             </div>
@@ -267,7 +267,7 @@ export default function CheckoutPage() {
 
             <div className="flex justify-between border-t border-gray-50 pt-2">
               <span className="text-gray-500 font-bold">Total Faturado:</span>
-              <span className="font-black text-base text-[#004e38]">
+              <span className="font-black text-base text-[#2563eb]">
                 R$ {totals.total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
               </span>
             </div>
@@ -276,7 +276,7 @@ export default function CheckoutPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/conta/pedidos"
-              className="bg-[#004e38] text-white text-xs font-bold px-6 py-3 rounded-full transition-all hover:bg-[#033627]"
+              className="bg-[#2563eb] text-white text-xs font-bold px-6 py-3 rounded-full transition-all hover:bg-[#1d4ed8]"
             >
               Ver no Painel de Pedidos
             </Link>
@@ -299,7 +299,7 @@ export default function CheckoutPage() {
         {/* Header Title */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-100 pb-4 gap-4">
           <div>
-            <Link href="/" className="inline-flex items-center gap-1 text-xs font-bold text-[#004e38] mb-2 hover:underline">
+            <Link href="/" className="inline-flex items-center gap-1 text-xs font-bold text-[#2563eb] mb-2 hover:underline">
               <ArrowLeft className="w-4 h-4" /> Voltar para a Loja
             </Link>
             <h1 className="text-3xl font-black text-gray-900 tracking-tight">Finalizar Compra B2B (Checkout Corporativo)</h1>
@@ -311,37 +311,37 @@ export default function CheckoutPage() {
           <div className="flex items-center gap-3">
             <button
               onClick={() => setIsProposalModalOpen(true)}
-              className="bg-white hover:bg-emerald-50 text-[#004e38] border border-emerald-300 px-4 py-2 rounded-full text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs"
+              className="bg-white hover:bg-blue-50 text-[#2563eb] border border-blue-300 px-4 py-2 rounded-full text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs"
             >
               <FileText className="w-4 h-4" />
               <span>Gerar Proposta PDF</span>
             </button>
 
-            <div className="flex items-center gap-2 text-xs font-bold text-gray-600 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
-              <ShieldCheck className="w-4 h-4 text-[#004e38]" />
+            <div className="flex items-center gap-2 text-xs font-bold text-gray-600 bg-blue-50 px-3 py-1.5 rounded-full border border-blue-200">
+              <ShieldCheck className="w-4 h-4 text-[#2563eb]" />
               <span>DANFE / NF-e Garantida</span>
             </div>
           </div>
         </div>
 
         {/* Applied Price Book Banner */}
-        <div className="bg-emerald-50/80 border border-emerald-200 p-4 rounded-3xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="bg-blue-50/80 border border-blue-200 p-4 rounded-3xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-xl bg-[#004e38] text-white flex items-center justify-center">
+            <div className="w-8 h-8 rounded-xl bg-[#2563eb] text-white flex items-center justify-center">
               <Tag className="w-4 h-4 text-amber-300" />
             </div>
             <div>
-              <span className="text-xs font-black text-[#004e38] block">
+              <span className="text-xs font-black text-[#2563eb] block">
                 {appliedPriceBook?.name || 'Tabela de Preços Corporativa Ouro VIP'} (Ativa para seu CNPJ)
               </span>
-              <span className="text-[11px] text-emerald-900">
+              <span className="text-[11px] text-blue-900">
                 Preço de contrato aplicado: <strong>R$ {unitPrice.toFixed(2)} / un</strong> (14.1% de desconto sobre a tabela padrão).
               </span>
             </div>
           </div>
           <Link
             href="/conta/tabelas-de-precos"
-            className="text-xs font-bold text-[#004e38] hover:underline shrink-0"
+            className="text-xs font-bold text-[#2563eb] hover:underline shrink-0"
           >
             Ver Todas as Tabelas Contratuais →
           </Link>
@@ -357,7 +357,7 @@ export default function CheckoutPage() {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <h2 className="text-xl font-black text-gray-900 tracking-tight flex items-center gap-2">
-                  <MapPin className="w-5 h-5 text-[#004e38]" />
+                  <MapPin className="w-5 h-5 text-[#2563eb]" />
                   <span>1. Modelo de Destino & Entrega</span>
                 </h2>
                 <span className="text-xs font-semibold text-gray-400">Total: {totalCartQty} unidades</span>
@@ -369,7 +369,7 @@ export default function CheckoutPage() {
                   onClick={() => setDeliveryMode('SINGLE')}
                   className={`p-4 rounded-2xl border-2 text-left space-y-1 transition-all cursor-pointer ${
                     deliveryMode === 'SINGLE'
-                      ? 'border-[#004e38] bg-emerald-50/50 text-[#004e38] shadow-xs'
+                      ? 'border-[#2563eb] bg-blue-50/50 text-[#2563eb] shadow-xs'
                       : 'border-gray-200 bg-white hover:bg-gray-50 text-gray-700'
                   }`}
                 >
@@ -377,7 +377,7 @@ export default function CheckoutPage() {
                     <span className="font-extrabold text-sm flex items-center gap-1.5">
                       <Building2 className="w-4 h-4" /> Endereço Único
                     </span>
-                    {deliveryMode === 'SINGLE' && <CheckCircle2 className="w-4 h-4 text-[#004e38]" />}
+                    {deliveryMode === 'SINGLE' && <CheckCircle2 className="w-4 h-4 text-[#2563eb]" />}
                   </div>
                   <p className="text-xs text-gray-500">Entrega centralizada de 100% da carga na Matriz ou Sede Central.</p>
                 </button>
@@ -387,7 +387,7 @@ export default function CheckoutPage() {
                   onClick={() => setDeliveryMode('MULTI_BRANCH')}
                   className={`p-4 rounded-2xl border-2 text-left space-y-1 transition-all cursor-pointer ${
                     deliveryMode === 'MULTI_BRANCH'
-                      ? 'border-[#004e38] bg-emerald-50/50 text-[#004e38] shadow-xs'
+                      ? 'border-[#2563eb] bg-blue-50/50 text-[#2563eb] shadow-xs'
                       : 'border-gray-200 bg-white hover:bg-gray-50 text-gray-700'
                   }`}
                 >
@@ -395,7 +395,7 @@ export default function CheckoutPage() {
                     <span className="font-extrabold text-sm flex items-center gap-1.5">
                       <Layers className="w-4 h-4 text-amber-500" /> Split Multi-Filiais
                     </span>
-                    {deliveryMode === 'MULTI_BRANCH' && <CheckCircle2 className="w-4 h-4 text-[#004e38]" />}
+                    {deliveryMode === 'MULTI_BRANCH' && <CheckCircle2 className="w-4 h-4 text-[#2563eb]" />}
                   </div>
                   <p className="text-xs text-gray-500">Distribua quantidades para diferentes filiais CNPJ com cálculo fiscal por UF.</p>
                 </button>
@@ -409,7 +409,7 @@ export default function CheckoutPage() {
                       Alocação de Quantidades por Filial:
                     </span>
                     <span className={`font-bold px-2.5 py-0.5 rounded-full text-xs ${
-                      isAllocationComplete ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-900'
+                      isAllocationComplete ? 'bg-blue-100 text-blue-800' : 'bg-amber-100 text-amber-900'
                     }`}>
                       {allocatedSum} de {totalCartQty} un alocadas
                     </span>
@@ -432,14 +432,14 @@ export default function CheckoutPage() {
                               max={totalCartQty}
                               value={branch.allocatedQuantity}
                               onChange={(e) => handleUpdateBranchQuantity(branch.branchId, Number(e.target.value))}
-                              className="w-16 bg-[#f5f6f6] border border-gray-200 rounded-lg p-1.5 text-center font-black text-gray-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                              className="w-16 bg-[#f5f6f6] border border-gray-200 rounded-lg p-1.5 text-center font-black text-gray-900 text-xs focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
                             />
                             <span className="text-gray-400 font-bold">un</span>
                           </div>
                         </div>
 
                         {branch.allocatedQuantity > 0 && (
-                          <div className="bg-emerald-50/50 p-2.5 rounded-xl border border-emerald-100 flex flex-wrap items-center justify-between text-[11px] gap-2">
+                          <div className="bg-blue-50/50 p-2.5 rounded-xl border border-blue-100 flex flex-wrap items-center justify-between text-[11px] gap-2">
                             <span className="text-gray-600">
                               Subtotal: <strong>R$ {(branch.allocatedQuantity * unitPrice).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong>
                             </span>
@@ -477,7 +477,7 @@ export default function CheckoutPage() {
                     <button
                       type="button"
                       onClick={() => setIsEditingDelivery(!isEditingDelivery)}
-                      className="text-xs font-bold text-[#004e38] hover:underline cursor-pointer"
+                      className="text-xs font-bold text-[#2563eb] hover:underline cursor-pointer"
                     >
                       {isEditingDelivery ? 'Salvar' : 'Editar'}
                     </button>
@@ -502,20 +502,20 @@ export default function CheckoutPage() {
             {/* 2. PROGRAMAÇÃO DE ENTREGAS / CRONOGRAMA FRACIONADO */}
             <div className="space-y-4">
               <h2 className="text-xl font-black text-gray-900 tracking-tight flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-[#004e38]" />
+                <Calendar className="w-5 h-5 text-[#2563eb]" />
                 <span>2. Cronograma de Expedição & Entrega</span>
               </h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                 <label className={`p-4 rounded-2xl border-2 flex items-center gap-3 cursor-pointer transition-all ${
-                  scheduleMode === 'IMMEDIATE' ? 'border-[#004e38] bg-emerald-50/50 text-[#004e38]' : 'border-gray-200 bg-white hover:bg-gray-50 text-gray-700'
+                  scheduleMode === 'IMMEDIATE' ? 'border-[#2563eb] bg-blue-50/50 text-[#2563eb]' : 'border-gray-200 bg-white hover:bg-gray-50 text-gray-700'
                 }`}>
                   <input
                     type="radio"
                     name="schedule"
                     checked={scheduleMode === 'IMMEDIATE'}
                     onChange={() => setScheduleMode('IMMEDIATE')}
-                    className="accent-[#004e38]"
+                    className="accent-[#2563eb]"
                   />
                   <div>
                     <span className="font-extrabold block">Expedição Imediata (Lote Total)</span>
@@ -524,14 +524,14 @@ export default function CheckoutPage() {
                 </label>
 
                 <label className={`p-4 rounded-2xl border-2 flex items-center gap-3 cursor-pointer transition-all ${
-                  scheduleMode === 'SCHEDULED' ? 'border-[#004e38] bg-emerald-50/50 text-[#004e38]' : 'border-gray-200 bg-white hover:bg-gray-50 text-gray-700'
+                  scheduleMode === 'SCHEDULED' ? 'border-[#2563eb] bg-blue-50/50 text-[#2563eb]' : 'border-gray-200 bg-white hover:bg-gray-50 text-gray-700'
                 }`}>
                   <input
                     type="radio"
                     name="schedule"
                     checked={scheduleMode === 'SCHEDULED'}
                     onChange={() => setScheduleMode('SCHEDULED')}
-                    className="accent-[#004e38]"
+                    className="accent-[#2563eb]"
                   />
                   <div>
                     <span className="font-extrabold block">Entregas Programadas (50% + 50%)</span>
@@ -616,7 +616,7 @@ export default function CheckoutPage() {
                 <div className="space-y-2 text-xs">
                   
                   {/* Boleto Faturado a Prazo */}
-                  <label className="flex flex-col p-3.5 rounded-2xl border-2 border-emerald-300 bg-emerald-50/40 cursor-pointer">
+                  <label className="flex flex-col p-3.5 rounded-2xl border-2 border-blue-300 bg-blue-50/40 cursor-pointer">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2 font-bold text-gray-900">
                         <input
@@ -624,11 +624,11 @@ export default function CheckoutPage() {
                           name="payment"
                           checked={paymentMethod === 'boleto_faturado'}
                           onChange={() => setPaymentMethod('boleto_faturado')}
-                          className="accent-[#004e38]"
+                          className="accent-[#2563eb]"
                         />
                         <span>Boleto Bancário Faturado (À Prazo)</span>
                       </div>
-                      <span className="bg-[#004e38] text-white text-[9px] font-black px-2 py-0.5 rounded-full">
+                      <span className="bg-[#2563eb] text-white text-[9px] font-black px-2 py-0.5 rounded-full">
                         Crédito Aprovado
                       </span>
                     </div>
@@ -636,7 +636,7 @@ export default function CheckoutPage() {
                       <select
                         value={installments}
                         onChange={(e) => setInstallments(e.target.value as '28_days' | '28_56_days' | '28_56_84_days')}
-                        className="w-full bg-white border border-emerald-300 rounded-xl px-3 py-1.5 text-xs font-bold text-gray-800"
+                        className="w-full bg-white border border-blue-300 rounded-xl px-3 py-1.5 text-xs font-bold text-gray-800"
                       >
                         <option value="28_days">1x em 28 Dias (Sem Juros)</option>
                         <option value="28_56_days">2x em 28 / 56 Dias (Sem Juros)</option>
@@ -656,11 +656,11 @@ export default function CheckoutPage() {
                         name="payment"
                         checked={paymentMethod === 'pix'}
                         onChange={() => setPaymentMethod('pix')}
-                        className="accent-[#004e38]"
+                        className="accent-[#2563eb]"
                       />
                       <span>PIX B2B Instantâneo</span>
                     </div>
-                    <span className="text-emerald-700 font-bold text-[10px]">5% de Desconto À Vista</span>
+                    <span className="text-blue-700 font-bold text-[10px]">5% de Desconto À Vista</span>
                   </label>
 
                   {/* Cartão Corporativo */}
@@ -671,7 +671,7 @@ export default function CheckoutPage() {
                         name="payment"
                         checked={paymentMethod === 'card'}
                         onChange={() => setPaymentMethod('card')}
-                        className="accent-[#004e38]"
+                        className="accent-[#2563eb]"
                       />
                       <span>Cartão de Crédito Corporativo</span>
                     </div>
@@ -692,7 +692,7 @@ export default function CheckoutPage() {
 
                 <div className="flex justify-between text-gray-500">
                   <span>Crédito ICMS Destacado:</span>
-                  <span className="font-mono text-emerald-700 font-bold">
+                  <span className="font-mono text-blue-700 font-bold">
                     R$ {totals.icms.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                   </span>
                 </div>
@@ -708,14 +708,14 @@ export default function CheckoutPage() {
 
                 <div className="flex justify-between">
                   <span>Frete {deliveryMode === 'MULTI_BRANCH' ? '(3 Destinos)' : '(FOB Dedicado)'}:</span>
-                  <span className="font-bold text-emerald-700">
+                  <span className="font-bold text-blue-700">
                     {totals.freight === 0 ? 'Grátis (FOB)' : `R$ ${totals.freight.toFixed(2)}`}
                   </span>
                 </div>
 
                 <div className="flex justify-between items-center text-sm font-black text-gray-900 pt-3 border-t border-gray-200">
                   <span>Total Geral Faturado:</span>
-                  <span className="text-xl text-[#004e38]">
+                  <span className="text-xl text-[#2563eb]">
                     R$ {totals.total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                   </span>
                 </div>
@@ -723,7 +723,7 @@ export default function CheckoutPage() {
 
               <button
                 type="submit"
-                className="w-full bg-[#004e38] hover:bg-[#033627] text-white text-sm font-black py-4 rounded-full transition-all shadow-md cursor-pointer flex items-center justify-center gap-2"
+                className="w-full bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-sm font-black py-4 rounded-full transition-all shadow-md cursor-pointer flex items-center justify-center gap-2"
               >
                 <ShieldCheck className="w-5 h-5 text-amber-300" />
                 <span>Confirmar & Emitir Pedido B2B</span>

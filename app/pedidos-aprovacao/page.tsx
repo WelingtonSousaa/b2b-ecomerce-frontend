@@ -65,7 +65,7 @@ export default function PedidosAprovacaoPage() {
         {/* Top Breadcrumb */}
         <div className="flex items-center justify-between border-b border-gray-200 pb-4">
           <div>
-            <Link href="/conta" className="inline-flex items-center gap-1 text-xs font-bold text-[#004e38] mb-2 hover:underline">
+            <Link href="/conta" className="inline-flex items-center gap-1 text-xs font-bold text-[#2563eb] mb-2 hover:underline">
               <ArrowLeft className="w-4 h-4" /> Voltar ao Dashboard
             </Link>
             <h1 className="text-3xl font-black text-gray-900 tracking-tight">Central de Aprovação de Alçadas B2B</h1>
@@ -74,7 +74,7 @@ export default function PedidosAprovacaoPage() {
 
         {/* Status Role Banner */}
         <div className={`p-6 rounded-3xl border shadow-sm flex flex-col md:flex-row items-center justify-between gap-4 ${
-          isApprover ? 'bg-emerald-900 text-white border-emerald-950' : 'bg-amber-50 text-amber-950 border-amber-200'
+          isApprover ? 'bg-blue-900 text-white border-blue-950' : 'bg-amber-50 text-amber-950 border-amber-200'
         }`}>
           <div className="space-y-1">
             <div className="flex items-center gap-2 font-black text-xs uppercase tracking-wider">
@@ -92,12 +92,12 @@ export default function PedidosAprovacaoPage() {
         {/* Pending Orders List */}
         {isLoading ? (
           <div className="p-16 text-center bg-white rounded-3xl border border-gray-200 shadow-2xs">
-            <Loader2 className="w-8 h-8 text-[#004e38] animate-spin mx-auto mb-2" />
+            <Loader2 className="w-8 h-8 text-[#2563eb] animate-spin mx-auto mb-2" />
             <p className="text-xs font-bold text-gray-500">Buscando pedidos pendentes de aprovação...</p>
           </div>
         ) : orders.length === 0 ? (
           <div className="p-16 text-center bg-white rounded-3xl border border-gray-200 shadow-2xs">
-            <CheckCircle2 className="w-10 h-10 text-emerald-600 mx-auto mb-2" />
+            <CheckCircle2 className="w-10 h-10 text-blue-600 mx-auto mb-2" />
             <h3 className="text-base font-black text-gray-900">Todos os pedidos estão em dia!</h3>
             <p className="text-xs text-gray-400 mt-1">Não há pedidos corporativos aguardando liberação de alçada no momento.</p>
           </div>
@@ -120,7 +120,7 @@ export default function PedidosAprovacaoPage() {
                         </span>
                       )}
                       {o.status === 'APPROVED' && (
-                        <span className="bg-emerald-100 text-emerald-900 font-bold px-2.5 py-0.5 rounded-full text-[10px]">
+                        <span className="bg-blue-100 text-blue-900 font-bold px-2.5 py-0.5 rounded-full text-[10px]">
                           ✔ Aprovado
                         </span>
                       )}
@@ -137,7 +137,7 @@ export default function PedidosAprovacaoPage() {
 
                   <div className="text-right">
                     <span className="text-gray-400 text-xs block">Valor Total do Pedido:</span>
-                    <span className="text-2xl font-black text-[#004e38]">
+                    <span className="text-2xl font-black text-[#2563eb]">
                       R$ {(o.summary?.grandTotal || 0).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                     </span>
                   </div>
@@ -171,7 +171,7 @@ export default function PedidosAprovacaoPage() {
 
                     <button
                       onClick={() => handleApprove(o.id)}
-                      className="w-full sm:w-auto px-8 py-2.5 rounded-full bg-[#004e38] hover:bg-[#033627] text-white text-xs font-black transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                      className="w-full sm:w-auto px-8 py-2.5 rounded-full bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-black transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                     >
                       <CheckCircle2 className="w-4 h-4 text-amber-300" />
                       <span>Liberar Alçada & Faturar Pedido</span>

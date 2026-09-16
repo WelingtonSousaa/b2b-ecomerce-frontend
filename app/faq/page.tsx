@@ -12,7 +12,7 @@ export default function FAQPage() {
     {
       question: 'Como funciona o cadastro por CNPJ e a consulta automática na Receita Federal?',
       category: 'Cadastro & Validação Fiscal',
-      answer: 'O cadastro B2B na Shopcart é 100% automatizado. Basta informar os 14 dígitos do CNPJ da sua empresa na tela de cadastro. Nosso sistema consulta diretamente a base da Receita Federal e do Sintegra, preenchendo automaticamente a Razão Social, Nome Fantasia, Inscrição Estadual e Endereço Fiscal, eliminando digitação manual.'
+      answer: 'O cadastro B2B na OneSync é 100% automatizado. Basta informar os 14 dígitos do CNPJ da sua empresa na tela de cadastro. Nosso sistema consulta diretamente a base da Receita Federal e do Sintegra, preenchendo automaticamente a Razão Social, Nome Fantasia, Inscrição Estadual e Endereço Fiscal, eliminando digitação manual.'
     },
     {
       question: 'Quais são as condições para faturamento no boleto bancário (28, 56 e 84 dias)?',
@@ -37,7 +37,7 @@ export default function FAQPage() {
     {
       question: 'Qual a diferença entre as modalidades de frete CIF e FOB disponíveis?',
       category: 'Logística & Envio',
-      answer: 'No frete CIF (Cost, Insurance and Freight), a Shopcart se responsabiliza totalmente pela contratação do transporte, seguro e entrega até o endereço cadastrado. Na modalidade FOB (Free on Board), sua empresa pode indicar a transportadora parceira de sua preferência (informando CNPJ e número de contrato).'
+      answer: 'No frete CIF (Cost, Insurance and Freight), a OneSync se responsabiliza totalmente pela contratação do transporte, seguro e entrega até o endereço cadastrado. Na modalidade FOB (Free on Board), sua empresa pode indicar a transportadora parceira de sua preferência (informando CNPJ e número de contrato).'
     },
     {
       question: 'Como solicitar a 2ª via de boleto bancário vencido ou alteração de vencimento?',
@@ -63,14 +63,14 @@ export default function FAQPage() {
         
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs text-gray-500 font-medium border-b border-gray-100 pb-4">
-          <Link href="/" className="hover:text-[#004e38]">Home</Link>
+          <Link href="/" className="hover:text-[#2563eb]">Home</Link>
           <span>/</span>
           <span className="font-bold text-gray-900">Perguntas Frequentes (FAQ)</span>
         </div>
 
         {/* Header Title & Search Bar */}
         <div className="text-center space-y-4">
-          <span className="inline-block bg-emerald-100 text-[#004e38] text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider">
+          <span className="inline-block bg-blue-100 text-[#2563eb] text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider">
             Central de Suporte B2B
           </span>
           <h1 className="text-3xl sm:text-4xl font-black text-gray-900 tracking-tight">
@@ -87,7 +87,7 @@ export default function FAQPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Digite sua dúvida (ex: boleto, CNPJ, frete, SUFRAMA)..."
-              className="w-full bg-[#f5f6f6] border border-gray-200 rounded-full py-3 pl-5 pr-12 text-xs font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+              className="w-full bg-[#f5f6f6] border border-gray-200 rounded-full py-3 pl-5 pr-12 text-xs font-medium text-gray-900 focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
             />
             <Search className="w-4 h-4 text-gray-400 absolute right-4 top-5" />
           </div>
@@ -95,7 +95,7 @@ export default function FAQPage() {
 
         {/* Category Pills */}
         <div className="flex flex-wrap items-center justify-center gap-2 text-xs font-bold">
-          <span className="bg-[#004e38] text-white px-4 py-1.5 rounded-full">Todas</span>
+          <span className="bg-[#2563eb] text-white px-4 py-1.5 rounded-full">Todas</span>
           <span className="bg-[#f5f6f6] text-gray-700 px-4 py-1.5 rounded-full">Cadastro & CNPJ</span>
           <span className="bg-[#f5f6f6] text-gray-700 px-4 py-1.5 rounded-full">Crédito & Boletos</span>
           <span className="bg-[#f5f6f6] text-gray-700 px-4 py-1.5 rounded-full">Impostos & NF-e</span>
@@ -114,16 +114,16 @@ export default function FAQPage() {
                 >
                   <button
                     onClick={() => setOpenIndex(isOpen ? null : idx)}
-                    className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-xs sm:text-sm text-gray-900 hover:text-[#004e38] transition-colors cursor-pointer"
+                    className="w-full p-5 text-left flex items-center justify-between gap-4 font-bold text-xs sm:text-sm text-gray-900 hover:text-[#2563eb] transition-colors cursor-pointer"
                   >
                     <div className="space-y-1">
-                      <span className="text-[10px] font-bold text-[#004e38] bg-emerald-50 px-2 py-0.5 rounded uppercase tracking-wider block w-fit">
+                      <span className="text-[10px] font-bold text-[#2563eb] bg-blue-50 px-2 py-0.5 rounded uppercase tracking-wider block w-fit">
                         {faq.category}
                       </span>
                       <span>{faq.question}</span>
                     </div>
 
-                    <ChevronDown className={`w-5 h-5 text-gray-400 shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180 text-[#004e38]' : ''}`} />
+                    <ChevronDown className={`w-5 h-5 text-gray-400 shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180 text-[#2563eb]' : ''}`} />
                   </button>
 
                   {isOpen && (
@@ -143,7 +143,7 @@ export default function FAQPage() {
 
         {/* Still Need Help Box */}
         <div className="bg-[#f5f6f6] p-8 rounded-3xl text-center space-y-3 border border-gray-200">
-          <HelpCircle className="w-10 h-10 text-[#004e38] mx-auto" />
+          <HelpCircle className="w-10 h-10 text-[#2563eb] mx-auto" />
           <h3 className="text-lg font-black text-gray-900">Ainda precisa de atendimento corporativo?</h3>
           <p className="text-xs text-gray-600 max-w-md mx-auto">
             Nossa mesa de crédito e consultores B2B estão disponíveis de segunda a sexta, das 08h às 18h.
@@ -151,7 +151,7 @@ export default function FAQPage() {
           <div className="pt-2">
             <Link
               href="/contato"
-              className="inline-block bg-[#004e38] text-white text-xs font-bold px-8 py-3 rounded-full hover:bg-[#033627] transition-all"
+              className="inline-block bg-[#2563eb] text-white text-xs font-bold px-8 py-3 rounded-full hover:bg-[#1d4ed8] transition-all"
             >
               Falar com um Consultor B2B
             </Link>

@@ -19,14 +19,14 @@ export default function ContatoPage() {
         
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-xs text-gray-500 font-medium border-b border-gray-100 pb-4">
-          <Link href="/" className="hover:text-[#004e38]">Home</Link>
+          <Link href="/" className="hover:text-[#2563eb]">Home</Link>
           <span>/</span>
           <span className="font-bold text-gray-900">Fale Conosco</span>
         </div>
 
         {/* Title Banner */}
         <div className="text-center space-y-3">
-          <span className="inline-block bg-emerald-100 text-[#004e38] text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider">
+          <span className="inline-block bg-blue-100 text-[#2563eb] text-xs font-black px-3.5 py-1.5 rounded-full uppercase tracking-wider">
             Canais de Atendimento Corporativo
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-gray-900 tracking-tight">
@@ -52,29 +52,29 @@ export default function ContatoPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="font-bold text-gray-700 block mb-1">Razão Social / Nome da Empresa*</label>
-                    <input type="text" required placeholder="ex: Tech Solutions LTDA" className="w-full bg-[#f5f6f6] rounded-xl px-4 py-3 font-medium focus:outline-none focus:ring-2 focus:ring-[#004e38]" />
+                    <input type="text" required placeholder="ex: Tech Solutions LTDA" className="w-full bg-[#f5f6f6] rounded-xl px-4 py-3 font-medium focus:outline-none focus:ring-2 focus:ring-[#2563eb]" />
                   </div>
                   <div>
                     <label className="font-bold text-gray-700 block mb-1">CNPJ da Empresa*</label>
-                    <input type="text" required placeholder="00.000.000/0001-00" className="w-full bg-[#f5f6f6] rounded-xl px-4 py-3 font-mono font-bold focus:outline-none focus:ring-2 focus:ring-[#004e38]" />
+                    <input type="text" required placeholder="00.000.000/0001-00" className="w-full bg-[#f5f6f6] rounded-xl px-4 py-3 font-mono font-bold focus:outline-none focus:ring-2 focus:ring-[#2563eb]" />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="font-bold text-gray-700 block mb-1">Nome do Responsável*</label>
-                    <input type="text" required placeholder="Seu nome completo" className="w-full bg-[#f5f6f6] rounded-xl px-4 py-3 font-medium focus:outline-none focus:ring-2 focus:ring-[#004e38]" />
+                    <input type="text" required placeholder="Seu nome completo" className="w-full bg-[#f5f6f6] rounded-xl px-4 py-3 font-medium focus:outline-none focus:ring-2 focus:ring-[#2563eb]" />
                   </div>
                   <div>
                     <label className="font-bold text-gray-700 block mb-1">E-mail Corporativo*</label>
-                    <input type="email" required placeholder="compras@empresa.com.br" className="w-full bg-[#f5f6f6] rounded-xl px-4 py-3 font-medium focus:outline-none focus:ring-2 focus:ring-[#004e38]" />
+                    <input type="email" required placeholder="compras@empresa.com.br" className="w-full bg-[#f5f6f6] rounded-xl px-4 py-3 font-medium focus:outline-none focus:ring-2 focus:ring-[#2563eb]" />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="font-bold text-gray-700 block mb-1">Telefone / WhatsApp*</label>
-                    <input type="text" required placeholder="(11) 98765-4321" className="w-full bg-[#f5f6f6] rounded-xl px-4 py-3 font-medium focus:outline-none focus:ring-2 focus:ring-[#004e38]" />
+                    <input type="text" required placeholder="(11) 98765-4321" className="w-full bg-[#f5f6f6] rounded-xl px-4 py-3 font-medium focus:outline-none focus:ring-2 focus:ring-[#2563eb]" />
                   </div>
                   <div>
                     <label className="font-bold text-gray-700 block mb-1">Departamento Desejado*</label>
@@ -97,13 +97,13 @@ export default function ContatoPage() {
                     required
                     rows={4}
                     placeholder="Descreva os produtos, quantidades estimadas ou dúvida comercial..."
-                    className="w-full bg-[#f5f6f6] rounded-xl p-4 font-medium focus:outline-none focus:ring-2 focus:ring-[#004e38]"
+                    className="w-full bg-[#f5f6f6] rounded-xl p-4 font-medium focus:outline-none focus:ring-2 focus:ring-[#2563eb]"
                   ></textarea>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full bg-[#004e38] hover:bg-[#033627] text-white font-bold py-3.5 rounded-full transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-bold py-3.5 rounded-full transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Send className="w-4 h-4" />
                   <span>Enviar Mensagem Comercial</span>
@@ -111,7 +111,7 @@ export default function ContatoPage() {
               </form>
             ) : (
               <div className="text-center py-10 space-y-3">
-                <CheckCircle2 className="w-14 h-14 text-[#004e38] mx-auto" />
+                <CheckCircle2 className="w-14 h-14 text-[#2563eb] mx-auto" />
                 <h3 className="text-xl font-black text-gray-900">Mensagem Enviada com Sucesso!</h3>
                 <p className="text-xs text-gray-500 max-w-sm mx-auto">
                   Um consultor dedicado do departamento de <strong className="text-gray-900">{department}</strong> retornará o contato no seu e-mail corporativo.
@@ -130,7 +130,7 @@ export default function ContatoPage() {
 
               <div className="space-y-4 text-xs">
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-2xl bg-white text-[#004e38] flex items-center justify-center shrink-0 shadow-2xs">
+                  <div className="w-10 h-10 rounded-2xl bg-white text-[#2563eb] flex items-center justify-center shrink-0 shadow-2xs">
                     <Phone className="w-5 h-5" />
                   </div>
                   <div>
@@ -141,7 +141,7 @@ export default function ContatoPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-2xl bg-white text-[#004e38] flex items-center justify-center shrink-0 shadow-2xs">
+                  <div className="w-10 h-10 rounded-2xl bg-white text-[#2563eb] flex items-center justify-center shrink-0 shadow-2xs">
                     <MessageSquare className="w-5 h-5" />
                   </div>
                   <div>
@@ -152,18 +152,18 @@ export default function ContatoPage() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-2xl bg-white text-[#004e38] flex items-center justify-center shrink-0 shadow-2xs">
+                  <div className="w-10 h-10 rounded-2xl bg-white text-[#2563eb] flex items-center justify-center shrink-0 shadow-2xs">
                     <Mail className="w-5 h-5" />
                   </div>
                   <div>
                     <h4 className="font-bold text-gray-900 text-sm">E-mail Comercial</h4>
-                    <p className="text-gray-600 font-mono font-bold text-xs">atendimento@shopcart.com.br</p>
+                    <p className="text-gray-600 font-mono font-bold text-xs">atendimento@onesync.com.br</p>
                     <p className="text-gray-400 text-[11px]">Recebimento de RFQ e orçamentos</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-2xl bg-white text-[#004e38] flex items-center justify-center shrink-0 shadow-2xs">
+                  <div className="w-10 h-10 rounded-2xl bg-white text-[#2563eb] flex items-center justify-center shrink-0 shadow-2xs">
                     <MapPin className="w-5 h-5" />
                   </div>
                   <div>

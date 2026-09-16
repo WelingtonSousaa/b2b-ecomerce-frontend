@@ -4,11 +4,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Phone, ChevronDown, UserCheck } from 'lucide-react';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
-import { useStorefront } from '@/context/StorefrontContext';
 
 export default function HeaderTopBar() {
   const { user, isAuthenticated } = useAuth();
-  const { config } = useStorefront();
 
   const [location, setLocation] = useState('São Paulo, SP');
   const [isLocOpen, setIsLocOpen] = useState(false);
@@ -27,8 +25,7 @@ export default function HeaderTopBar() {
 
   return (
     <div
-      className="text-white text-xs py-2 px-4 lg:px-12 font-medium transition-colors"
-      style={{ backgroundColor: config.theme.primaryColor || '#004e38' }}
+      className="text-white text-xs py-2 px-4 lg:px-12 font-medium transition-colors bg-[#2563eb]"
     >
       <div className="max-w-[1440px] mx-auto flex items-center justify-between gap-4">
         
@@ -40,10 +37,10 @@ export default function HeaderTopBar() {
 
         {/* Mensagem Promocional / Announcement */}
         <div className="hidden md:flex items-center gap-1.5 text-[11px] sm:text-xs font-normal text-white/90">
-          <span>{config.announcement.enabled ? config.announcement.text : 'Ganhe até 50% de Desconto em Fones Selecionados'}</span>
+          <span>Ganhe até 50% de Desconto em Fones Selecionados</span>
           <span className="text-white/60">|</span>
-          <Link href={config.announcement.linkUrl || '/produtos'} className="font-bold underline hover:text-white transition-colors">
-            {config.announcement.linkText || 'Comprar Agora'}
+          <Link href="/produtos" className="font-bold underline hover:text-white transition-colors">
+            Comprar Agora
           </Link>
         </div>
 
@@ -56,7 +53,7 @@ export default function HeaderTopBar() {
               href="/conta"
               className="flex items-center gap-1.5 bg-white/15 hover:bg-white/25 px-2.5 py-1 rounded-full text-[10px] font-bold text-white transition-colors cursor-pointer"
             >
-              <UserCheck className="w-3 h-3 text-emerald-300" />
+              <UserCheck className="w-3 h-3 text-blue-300" />
               <span className="truncate max-w-[150px]">
                 {user.role === 'ADMIN' ? '👑 Admin' : user.role === 'APPROVER' ? '👔 Aprovador' : `👤 ${user.name.split(' ')[0]}`}
               </span>
@@ -84,7 +81,7 @@ export default function HeaderTopBar() {
                   <button
                     key={loc}
                     onClick={() => { setLocation(loc); setIsLocOpen(false); }}
-                    className="w-full text-left px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50 hover:text-[#004e38] transition-colors cursor-pointer"
+                    className="w-full text-left px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50 hover:text-[#2563eb] transition-colors cursor-pointer"
                   >
                     {loc}
                   </button>
