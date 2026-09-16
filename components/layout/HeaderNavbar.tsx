@@ -21,16 +21,16 @@ import {
 } from 'lucide-react';
 import CartDrawer from '@/components/cart/CartDrawer';
 import NotificationDropdown from '@/components/layout/NotificationDropdown';
-import { productsService } from '@/services/products.service';
 import { Product } from '@/types/b2b';
 import { useAuth } from '@/context/AuthContext';
+import { mockProducts } from '@/mocks/mockProducts';
 
 interface HeaderNavbarProps {
   cartCount?: number;
 }
 
 export default function HeaderNavbar({ cartCount = 2 }: HeaderNavbarProps) {
-  const { user, company, isAuthenticated, logout, openAuthModal} = useAuth();
+  const { user, company, isAuthenticated, login, logout, openAuthModal} = useAuth();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -42,11 +42,7 @@ export default function HeaderNavbar({ cartCount = 2 }: HeaderNavbarProps) {
   const searchRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    productsService.getProducts().then((res) => {
-      if (res.data) {
-        setAllProducts(res.data);
-      }
-    }).catch(() => {});
+    setAllProducts(mockProducts as any);
   }, []);
 
   // Close dropdowns on click outside
@@ -70,7 +66,7 @@ export default function HeaderNavbar({ cartCount = 2 }: HeaderNavbarProps) {
 
   const handleCartClick = () => {
     if (!isAuthenticated) {
-      openAuthModal('Para acessar o carrinho de compras e ver preços faturados por CNPJ, por favor acesse sua conta ou cadastre sua empresa.');
+      login();
     } else {
       setIsCartOpen(true);
     }
@@ -78,7 +74,7 @@ export default function HeaderNavbar({ cartCount = 2 }: HeaderNavbarProps) {
 
   const handleAccountClick = () => {
     if (!isAuthenticated) {
-      openAuthModal('Para acessar sua conta corporativa e consultar limite de crédito, faça login ou cadastre sua empresa.');
+      login();
     } else {
       setIsAccountMenuOpen(!isAccountMenuOpen);
     }
@@ -98,17 +94,14 @@ export default function HeaderNavbar({ cartCount = 2 }: HeaderNavbarProps) {
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
 
-          {/* Logo: OneSync (Cart Icon + Brand Name) */}
-          <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
-            <div className="relative w-8 h-8 flex items-center justify-center text-[#2563eb]">
-              <div className="w-7 h-7 rounded-lg bg-[#2563eb] text-white flex items-center justify-center shadow-xs group-hover:scale-105 transition-transform">
-                <ShoppingCart className="w-4 h-4 stroke-[2.5]" />
-              </div>
-              <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-amber-400 rounded-full border border-white"></span>
-            </div>
-            <span className="text-2xl font-black text-gray-900 tracking-tight flex items-center gap-0.5">
-              OneSync
-            </span>
+          {/* Logo */}
+          <Link href="/" className="flex items-center shrink-0 group relative h-10 w-32 sm:w-40">
+            <Image 
+              src="/logo.png" 
+              alt="Logo" 
+              fill
+              className="object-contain object-left group-hover:scale-105 transition-transform" 
+            />
           </Link>
 
           {/* Guest vs Authenticated Status Badge (Purely Visual when Authenticated) */}
@@ -127,7 +120,7 @@ export default function HeaderNavbar({ cartCount = 2 }: HeaderNavbarProps) {
               </div>
             ) : (
               <button
-                onClick={() => openAuthModal('Você está no Modo Visitante. Entre com seu CNPJ para desbloquear preços e faturamento.')}
+                onClick={() => login()}
                 className="flex items-center gap-2 bg-[#f5f6f6] hover:bg-gray-200 text-gray-700 px-3.5 py-1.5 rounded-full border border-gray-200 text-xs font-semibold transition-colors cursor-pointer"
               >
                 <Lock className="w-3.5 h-3.5 text-amber-600" />

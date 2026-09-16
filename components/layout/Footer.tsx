@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   ShoppingCart,
   Truck,
@@ -69,15 +70,17 @@ export default function Footer() {
           
           {/* Brand Info (4 cols) */}
           <div className="lg:col-span-4 space-y-4">
-            <Link href="/" className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-[#2563eb] text-white flex items-center justify-center shadow-xs">
-                <ShoppingCart className="w-4 h-4 stroke-[2.5]" />
-              </div>
-              <span className="text-2xl font-black text-gray-900 tracking-tight">OneSync</span>
+            <Link href="/" className="flex items-center gap-2.5 relative h-10 w-32 sm:w-40">
+              <Image 
+                src="/logo.png" 
+                alt="Logo" 
+                fill
+                className="object-contain object-left" 
+              />
             </Link>
 
             <p className="text-gray-500 text-xs leading-relaxed max-w-sm">
-              A OneSync é o seu destino principal para equipamentos de áudio de alta qualidade, eletrônicos e suprimentos corporativos com entrega rápida e precificação fiscal automatizada por estado.
+              Sua plataforma de negócios B2B para equipamentos corporativos com entrega rápida e precificação fiscal automatizada por estado.
             </p>
 
             <div className="space-y-2 pt-2 text-xs font-semibold text-gray-800">

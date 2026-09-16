@@ -39,26 +39,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     let isMounted = true;
 
     async function initAuth() {
-      try {
-        if (typeof window !== 'undefined') {
-          const token = localStorage.getItem('b2b_auth_token');
-          if (token) {
-            const profileRes = await authService.getProfile();
-            if (isMounted && profileRes.data?.user && profileRes.data?.company) {
-              setUser(profileRes.data.user);
-              setCompany(profileRes.data.company);
-            }
-          }
-        }
-      } catch {
-        if (typeof window !== 'undefined') {
-          localStorage.removeItem('b2b_auth_token');
-        }
-      } finally {
-        if (isMounted) {
-          setIsLoading(false);
-        }
-      }
+      setIsLoading(false);
     }
 
     initAuth();
@@ -69,20 +50,42 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const login = async (email?: string, password?: string, cnpj?: string) => {
-    const targetEmail = email || 'carlos.compras@techsolutions.com.br';
-    const targetPassword = password || 'password123';
+    // 1-Click Phantom Mock Login
+    const mockUser: CompanyUser = {
+      id: '1',
+      name: 'João Compras',
+      email: 'joao@techsolutions.com',
+      role: 'ADMIN',
+      isActive: true,
+      companyId: '1'
+    };
 
-    const response = await authService.login({
-      email: targetEmail,
-      password: targetPassword,
-      cnpj,
-    });
+    const mockCompany: CompanyAccount = {
+      id: '1',
+      cnpj: '12.345.678/0001-90',
+      razaoSocial: 'Tech Solutions B2B',
+      nomeFantasia: 'Tech Solutions',
+      inscricaoEstadual: '123456',
+      regimeTributario: 'LUCRO_REAL',
+      mainAddress: {
+        logradouro: 'Rua das Flores',
+        numero: '123',
+        bairro: 'Centro',
+        cidade: 'São Paulo',
+        uf: 'SP',
+        cep: '01001-000',
+        pais: 'Brasil'
+      },
+      hasSuframaIncentive: false,
+      status: 'APPROVED',
+      creditLimitTotal: 50000,
+      creditLimitAvailable: 50000,
+      branches: []
+    };
 
-    if (response.data?.user && response.data?.company) {
-      setUser(response.data.user);
-      setCompany(response.data.company);
-      setIsAuthModalOpen(false);
-    }
+    setUser(mockUser);
+    setCompany(mockCompany);
+    setIsAuthModalOpen(false);
   };
 
   const logout = () => {
@@ -91,7 +94,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   };
 
   const register = async (companyData: Partial<CompanyAccount>, userData: Partial<CompanyUser>, password?: string) => {
-    // Mock register
     setUser(userData as CompanyUser);
     setCompany(companyData as CompanyAccount);
     setIsAuthModalOpen(false);

@@ -21,6 +21,7 @@ import { useAuth } from '@/context/AuthContext';
 import ProductFilterBar, { FilterState } from '@/components/catalog/ProductFilterBar';
 import { productsService } from '@/services/products.service';
 import { Product } from '@/types/b2b';
+import { mockProducts } from '@/mocks/mockProducts';
 
 const defaultCatalogShowcase: Product[] = [];
 
@@ -46,13 +47,17 @@ export default function Home() {
   const [filters, setFilters] = useState<FilterState>(initialFilters);
 
   useEffect(() => {
-    productsService.getProducts()
-      .then((res) => {
-        if (res.data && res.data.length > 0) {
-          setProducts(res.data);
-        }
-      })
-      .catch(() => {});
+    // Carregar mock de produtos diretamente (Bypass Backend)
+    const formattedProducts = mockProducts.map(p => ({
+      id: p.id,
+      sku: p.sku,
+      name: p.nome,
+      basePrice: p.precos.padrao,
+      description: `MOQ: ${p.moq} | Múltiplo: ${p.multiploVenda} cx`,
+      categorySlug: p.categoria,
+      images: [p.imagem]
+    }));
+    setProducts(formattedProducts as any);
   }, []);
 
   const toggleFavorite = (id: string) => {
@@ -82,7 +87,14 @@ export default function Home() {
   };
 
   // Popular Categories
-  const popularCategories: any[] = [];
+  const popularCategories = [
+    { slug: 'Notebooks', name: 'Notebooks', count: '120 itens', img: '/imagem.jpeg' },
+    { slug: 'Monitores', name: 'Monitores', count: '85 itens', img: '/imagem.jpeg' },
+    { slug: 'Servidores', name: 'Servidores', count: '40 itens', img: '/imagem.jpeg' },
+    { slug: 'Redes', name: 'Redes Corporativas', count: '65 itens', img: '/imagem.jpeg' },
+    { slug: 'Acessórios', name: 'Acessórios', count: '200 itens', img: '/imagem.jpeg' },
+    { slug: 'Softwares', name: 'Softwares TI', count: '30 itens', img: '/imagem.jpeg' }
+  ];
 
   // Filter products based on selected options
   const filteredProducts = products.filter(p => {
@@ -156,7 +168,7 @@ export default function Home() {
           {/* Right Hero Image */}
           <div className="relative w-full md:w-1/2 aspect-[4/3] max-w-md shrink-0">
             <Image
-              src="/media/hero_woman.jpg"
+              src="/imagem.jpeg"
               alt="Hero Banner"
               fill
               className="object-cover rounded-2xl shadow-md"
@@ -173,7 +185,7 @@ export default function Home() {
           filters={filters}
           onFilterChange={setFilters}
           onResetFilters={() => setFilters(initialFilters)}
-          availableTypes={['Todos', 'fones-audio', 'computadores-ti', 'servidores-e-datacenter', 'moveis-escritorio']}
+          availableTypes={['Todos', 'Notebooks', 'Monitores', 'Servidores', 'Redes', 'Acessórios']}
           totalResultsCount={filteredProducts.length}
           maxCatalogPrice={30000}
         />
@@ -212,7 +224,7 @@ export default function Home() {
                   className="relative w-full h-full flex items-center justify-center"
                 >
                   <Image
-                    src={prod.images && prod.images[0] ? prod.images[0] : '/media/img1.jpeg'}
+                    src={prod.images && prod.images[0] ? prod.images[0] : '/imagem.jpeg'}
                     alt={prod.name}
                     fill
                     className="object-contain p-4"
@@ -333,7 +345,7 @@ export default function Home() {
                   onClick={handleProductClick}
                   className="relative w-full h-full flex items-center justify-center"
                 >
-                  <Image src={prod.images && prod.images[0] ? prod.images[0] : '/media/img1.jpeg'} alt={prod.name} fill className="object-contain p-4" />
+                  <Image src={prod.images && prod.images[0] ? prod.images[0] : '/imagem.jpeg'} alt={prod.name} fill className="object-contain p-4" />
                 </Link>
               </div>
 

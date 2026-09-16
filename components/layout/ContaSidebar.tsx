@@ -108,9 +108,9 @@ export default function ContaSidebar() {
         <p className="text-[11px] text-blue-100 leading-relaxed font-medium">
           Aumente seu limite e solicite parcelamento direto de boletos.
         </p>
-        <Link href="/conta/credito/solicitar" className="block w-full bg-white text-[#2563eb] text-center text-[10px] font-black py-2 rounded-lg hover:bg-gray-50 transition-colors uppercase tracking-wider shadow-sm">
+        <button onClick={() => alert('Simulação: Solicitação de limite de crédito corporativo enviada para análise da mesa de crédito.')} className="block w-full bg-white text-[#2563eb] text-center text-[10px] font-black py-2 rounded-lg hover:bg-gray-50 transition-colors uppercase tracking-wider shadow-sm cursor-pointer">
           Solicitar Limite
-        </Link>
+        </button>
       </div>
     </aside>
   );

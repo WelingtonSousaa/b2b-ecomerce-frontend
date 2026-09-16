@@ -76,29 +76,54 @@ class ApiClient {
     const url = this.buildUrl(endpoint, params);
 
     try {
-      const response = await fetch(url, config);
-      clearTimeout(timeoutId);
-
-      let responseData: Record<string, unknown> | string | null = null;
-      const contentType = response.headers.get('content-type');
-      if (contentType && contentType.includes('application/json')) {
-        responseData = (await response.json()) as Record<string, unknown>;
-      } else {
-        responseData = await response.text();
+      // ==== MOCK INTERCEPTOR PARA A APRESENTAÇÃO ====
+      // Impede qualquer chamada real de quebrar a aplicação.
+      console.log(`[Mock API] Intercepted request to ${endpoint}`);
+      
+      let mockData: any = [];
+      
+      if (endpoint.includes('/products')) {
+        const { mockProducts } = await import('@/mocks/mockProducts');
+        mockData = mockProducts.map((p: any) => ({
+          id: p.id,
+          sku: p.sku,
+          name: p.nome,
+          basePrice: p.precos?.padrao || 0,
+          description: `MOQ: ${p.moq} | Múltiplo: ${p.multiploVenda} cx`,
+          categorySlug: p.categoria,
+          images: [p.imagem],
+          moq: p.moq,
+          hasVariants: false,
+          stockByCD: [
+            { cdId: 'cd-sp', availableQuantity: 500 },
+            { cdId: 'cd-sc', availableQuantity: 200 }
+          ]
+        }));
+      } else if (endpoint.includes('/orders')) {
+        mockData = [
+          {
+            id: 'ord-001',
+            orderNumber: 'PED-2026-0001',
+            createdAt: new Date().toISOString(),
+            status: 'APPROVED',
+            payment: { type: 'BOLETO_FATURADO', termsDays: [30, 60] },
+            summary: { grandTotal: 25000.50, subtotal: 25500, discountTotal: 499.50 },
+            items: [
+              {
+                quantity: 5, unitPrice: 5000, 
+                product: { name: 'Servidor Fantasma B2B', sku: 'SRV-001' }
+              }
+            ]
+          }
+        ];
       }
 
-      if (!response.ok) {
-        const errorObj = typeof responseData === 'object' && responseData !== null ? responseData : {};
-        throw new ApiError({
-          message: (errorObj.message as string) || (errorObj.error as string) || `HTTP error ${response.status}: ${response.statusText}`,
-          statusCode: response.status,
-          code: errorObj.code as string | undefined,
-          errors: errorObj.errors as Record<string, string[]> | undefined,
-        });
-      }
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      return { data: mockData, success: true } as unknown as T;
+      // ==== FIM MOCK INTERCEPTOR ====
 
-      // If backend returns { success: true, data: ... }, extract or return raw
-      return responseData as T;
     } catch (error: unknown) {
       clearTimeout(timeoutId);
 

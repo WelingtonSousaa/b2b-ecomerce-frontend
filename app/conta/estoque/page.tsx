@@ -403,7 +403,7 @@ export default function GestaoEstoqueVendedorPage() {
           <div className="bg-white p-5 rounded-3xl border border-gray-200 space-y-1 shadow-2xs">
             <span className="text-xs font-bold text-gray-400 uppercase">Estoque Físico Consolidado</span>
             <div className="text-2xl font-black text-[#2563eb]">
-              {products.reduce((acc, p) => acc + p.stockByCD.reduce((cAcc, cd) => cAcc + cd.availableQuantity, 0), 0)} Unidades
+              {products.reduce((acc, p) => acc + (p.stockByCD || []).reduce((cAcc, cd) => cAcc + (cd.availableQuantity || 0), 0), 0)} Unidades
             </div>
             <span className="text-[10px] text-gray-500">Distribuídos nos CDs de SP, SC e BA</span>
           </div>

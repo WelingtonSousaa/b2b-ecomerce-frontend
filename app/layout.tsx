@@ -8,8 +8,8 @@ import AuthRequiredModal from "@/components/modals/AuthRequiredModal";
 import EditCompanyModal from "@/components/modals/EditCompanyModal";
 
 export const metadata: Metadata = {
-  title: "OneSync B2B - Portal Corporativo de Vendas & Distribuição",
-  description: "Plataforma e-commerce corporativa para compras por CNPJ, precificação fiscal automatizada por estado, estoque multi-CD e faturamento a prazo.",
+  title: "OneSync B2B",
+  description: "Plataforma de E-commerce B2B",
 };
 
 export default function RootLayout({
@@ -18,19 +18,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="pt-BR"
-      className="h-full antialiased"
-      suppressHydrationWarning
-    >
-      <body
-        className="min-h-full flex flex-col bg-white text-gray-900 font-sans"
-        suppressHydrationWarning
-      >
+    <html lang="pt-BR" suppressHydrationWarning>
+      <body className="antialiased bg-gray-50 min-h-screen flex flex-col" suppressHydrationWarning>
         <AuthProvider>
           <ToastProvider>
             <HeaderNavbar />
-            <main className="flex-1 w-full">
+            <main className="flex-1 w-full flex flex-col">
               {children}
             </main>
             <Footer />

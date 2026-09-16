@@ -450,7 +450,11 @@ ${widgets.filter(w => w.enabled).map(w => `- [${w.category}] ${w.title}: ${w.des
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-gray-50 font-medium">
-                            {[].map((row: any, idx) => (
+                            {[
+                              { sku: 'NTB-DELL-LAT7420', name: 'Notebook Dell Latitude 7420', sold: 450, revenue: 3375000, img: '/imagem.jpeg' },
+                              { sku: 'SRV-HP-DL380', name: 'Servidor HP ProLiant', sold: 32, revenue: 800000, img: '/imagem.jpeg' },
+                              { sku: 'MON-DELL-P2422H', name: 'Monitor Dell 24"', sold: 820, revenue: 984000, img: '/imagem.jpeg' }
+                            ].map((row: any, idx) => (
                               <tr key={idx} className="hover:bg-[#f5f6f6]/60 transition-colors">
                                 <td className="py-2.5 font-mono text-gray-400 font-bold">{row.sku}</td>
                                 <td className="py-2.5">
@@ -474,7 +478,13 @@ ${widgets.filter(w => w.enabled).map(w => `- [${w.category}] ${w.title}: ${w.des
 
                     {widget.id === 'widget-active-days' && (
                       <div className="flex items-end justify-between h-36 pt-4 px-2">
-                        {[].map((bar: any, i) => (
+                        {[
+                          { day: 'Seg', val: 40, active: false },
+                          { day: 'Ter', val: 70, active: false },
+                          { day: 'Qua', val: 100, active: true },
+                          { day: 'Qui', val: 60, active: false },
+                          { day: 'Sex', val: 30, active: false }
+                        ].map((bar: any, i) => (
                           <div key={i} className="flex flex-col items-center gap-2 flex-1">
                             {bar.active && (
                               <span className="text-[9px] font-black text-[#2563eb] bg-blue-50 px-1.5 py-0.5 rounded border border-blue-200">
