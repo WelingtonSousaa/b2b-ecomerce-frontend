@@ -180,7 +180,7 @@ export default function StockMovementModal({
                 }`}
               >
                 <ArrowUpRight className="w-4 h-4 text-blue-600" />
-                <span>🟢 Entrada de Estoque (+)</span>
+                <span>Entrada de Estoque (+)</span>
               </button>
 
               <button
@@ -196,7 +196,7 @@ export default function StockMovementModal({
                 }`}
               >
                 <ArrowDownRight className="w-4 h-4 text-red-600" />
-                <span>🔴 Saída / Baixa Manual (-)</span>
+                <span>Saída / Baixa Manual (-)</span>
               </button>
             </div>
           </div>

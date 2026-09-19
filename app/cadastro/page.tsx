@@ -362,8 +362,8 @@ export default function CadastroPage() {
                       : 'border-gray-200 hover:border-gray-300 bg-gray-50/50'
                   }`}
                 >
-                  <div className="w-8 h-8 rounded-full bg-blue-100 text-[#2563eb] flex items-center justify-center shrink-0 font-bold">
-                    ⚡
+                  <div className="w-8 h-8 rounded-full bg-blue-100 text-[#2563eb] flex items-center justify-center shrink-0">
+                    <Sparkles className="w-4 h-4 text-[#2563eb]" />
                   </div>
                   <div>
                     <p className="text-xs font-black text-gray-900">Preenchimento Automático via CNPJ</p>
@@ -382,8 +382,8 @@ export default function CadastroPage() {
                       : 'border-gray-200 hover:border-gray-300 bg-gray-50/50'
                   }`}
                 >
-                  <div className="w-8 h-8 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center shrink-0 font-bold">
-                    ✍️
+                  <div className="w-8 h-8 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center shrink-0">
+                    <FileText className="w-4 h-4 text-gray-700" />
                   </div>
                   <div>
                     <p className="text-xs font-black text-gray-900">Preenchimento 100% Manual</p>

@@ -463,7 +463,7 @@ export default function ProductFilterBar({
                   : 'bg-[#f5f6f6] hover:bg-gray-200 text-gray-800 border-transparent'
               }`}
             >
-              <span>{filters.minRating > 0 ? `${filters.minRating}★ ou mais` : 'Avaliação'}</span>
+              <span>{filters.minRating > 0 ? `${filters.minRating} estrelas ou mais` : 'Avaliação'}</span>
               <ChevronDown className={`w-3.5 h-3.5 transition-transform ${activeDropdown === 'rating' ? 'rotate-180' : ''}`} />
             </button>
 
@@ -840,7 +840,7 @@ export default function ProductFilterBar({
                       }`}
                     >
                       {r > 0 && <Star className="w-3 h-3 fill-amber-400 text-amber-400" />}
-                      <span>{r === 0 ? 'Todas' : `${r}★ ou mais`}</span>
+                      <span>{r === 0 ? 'Todas' : `${r} estrelas ou mais`}</span>
                     </button>
                   ))}
                 </div>

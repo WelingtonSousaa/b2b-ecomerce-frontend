@@ -403,7 +403,7 @@ export default function ClientesEFiliaisPage() {
                         <span className={`text-[10px] font-black px-2 py-0.5 rounded uppercase ${
                           branch.isActive ? 'text-blue-800 bg-blue-50 border border-blue-200' : 'text-gray-500 bg-gray-100'
                         }`}>
-                          {branch.isActive ? '✓ Habilitada para NF-e' : 'Bloqueada'}
+                          {branch.isActive ? 'Habilitada para NF-e' : 'Bloqueada'}
                         </span>
                         <h4 className="font-black text-sm text-gray-900 mt-1.5 line-clamp-1">{branch.nomeFilial}</h4>
                         <p className="font-mono text-xs font-bold text-gray-600">CNPJ: {branch.cnpj}</p>
@@ -548,17 +548,17 @@ export default function ClientesEFiliaisPage() {
                           <td className="p-4">
                             {u.role === 'ADMIN' && (
                               <span className="bg-purple-100 text-purple-900 border border-purple-200 font-black text-[10px] px-2.5 py-1 rounded-full">
-                                👑 Administrador Master
+                                Administrador Master
                               </span>
                             )}
                             {u.role === 'APPROVER' && (
                               <span className="bg-blue-100 text-blue-900 border border-blue-200 font-black text-[10px] px-2.5 py-1 rounded-full">
-                                🛡️ Aprovadora Financeira
+                                Aprovadora Financeira
                               </span>
                             )}
                             {u.role === 'BUYER' && (
                               <span className="bg-blue-100 text-blue-900 border border-blue-200 font-black text-[10px] px-2.5 py-1 rounded-full">
-                                🛍️ Comprador B2B
+                                Comprador B2B
                               </span>
                             )}
                           </td>
@@ -571,7 +571,7 @@ export default function ClientesEFiliaisPage() {
                             <span className={`font-bold text-[10px] px-2 py-0.5 rounded-full ${
                               u.isActive ? 'bg-blue-100 text-blue-800' : 'bg-red-100 text-red-800'
                             }`}>
-                              {u.isActive ? '✓ Ativo' : 'Bloqueado'}
+                              {u.isActive ? 'Ativo' : 'Bloqueado'}
                             </span>
                           </td>
 
@@ -586,7 +586,7 @@ export default function ClientesEFiliaisPage() {
                               }`}
                               disabled={isCurrentUser}
                             >
-                              {isCurrentUser ? 'Perfil Ativo' : 'Simular Papel ⚡'}
+                              {isCurrentUser ? 'Perfil Ativo' : 'Simular Papel'}
                             </button>
                           </td>
 

@@ -132,7 +132,7 @@ export default function AuthRequiredModal() {
                 onClick={handleQuickDemoLogin}
                 className="w-full bg-[#f5f6f6] hover:bg-gray-200 text-[#2563eb] font-bold text-xs py-3 rounded-full transition-colors cursor-pointer border border-blue-200"
               >
-                ⚡ Entrar em 1 Clique (Demonstração)
+                Entrar em 1 Clique (Demonstração)
               </button>
             </div>
           </form>

@@ -55,7 +55,7 @@ export default function HeaderTopBar() {
             >
               <UserCheck className="w-3 h-3 text-blue-300" />
               <span className="truncate max-w-[150px]">
-                {user.role === 'ADMIN' ? '👑 Admin' : user.role === 'APPROVER' ? '👔 Aprovador' : `👤 ${user.name.split(' ')[0]}`}
+                {user.role === 'ADMIN' ? 'Admin' : user.role === 'APPROVER' ? 'Aprovador' : user.name.split(' ')[0]}
               </span>
             </Link>
           )}

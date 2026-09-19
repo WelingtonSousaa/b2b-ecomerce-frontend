@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/context/ToastContext';
+import { useCart } from '@/context/CartContext';
 import { productsService } from '@/services/products.service';
 import { Product } from '@/types/b2b';
 
@@ -97,6 +98,7 @@ export default function StorefrontPublicPage() {
   const slug = (params?.slug as string) || 'dell-enterprise';
   const { isAuthenticated, openAuthModal } = useAuth();
   const { showToast } = useToast();
+  const { addItem } = useCart();
 
   const [products, setProducts] = useState<Product[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -145,10 +147,21 @@ export default function StorefrontPublicPage() {
       openAuthModal('Para adicionar itens ao carrinho e faturar por CNPJ, acesse sua conta.');
       return;
     }
-    setAddedItems(prev => ({ ...prev, [id]: true }));
+    const targetProduct = storeProducts.find((p) => p.id === id);
+    if (targetProduct) {
+      addItem({
+        id: targetProduct.id,
+        sku: targetProduct.sku,
+        name: targetProduct.name,
+        price: targetProduct.basePrice,
+        image: targetProduct.images && targetProduct.images[0] ? targetProduct.images[0] : '/placeholder.jpg',
+        moq: targetProduct.moq || 1,
+      });
+    }
+    setAddedItems((prev) => ({ ...prev, [id]: true }));
     showToast(`${name} adicionado ao carrinho da loja oficial!`, 'success');
     setTimeout(() => {
-      setAddedItems(prev => ({ ...prev, [id]: false }));
+      setAddedItems((prev) => ({ ...prev, [id]: false }));
     }, 2000);
   };
 
@@ -371,8 +384,8 @@ export default function StorefrontPublicPage() {
                           R$ {prod.basePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                         </strong>
                       ) : (
-                        <span className="text-[10px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
-                          🔒 Preço Oculto
+                        <span className="text-[10px] font-bold text-slate-700 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                          Sob Consulta
                         </span>
                       )}
                     </div>

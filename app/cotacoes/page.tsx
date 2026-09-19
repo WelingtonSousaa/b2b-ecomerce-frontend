@@ -1,10 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import HeaderNavbar from '@/components/layout/HeaderNavbar';
-import Footer from '@/components/layout/Footer';
 import RFQModal from '@/components/modals/RFQModal';
-import { FileSpreadsheet, Plus, ArrowUpRight, Loader2, Clock, CheckCircle2, XCircle } from 'lucide-react';
+import { FileSpreadsheet, Plus, ArrowUpRight, Loader2, Clock, CheckCircle2, XCircle, X } from 'lucide-react';
 import { rfqService } from '@/services/rfq.service';
 import { RFQRequest } from '@/types/b2b';
 
@@ -92,8 +90,6 @@ export default function CotacoesPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#f8fafc] text-gray-900 font-sans">
-      <HeaderNavbar />
-
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 py-8">
         
         {/* Banner Header */}
@@ -198,9 +194,10 @@ export default function CotacoesPage() {
               </div>
               <button
                 onClick={() => setSelectedQuote(null)}
-                className="p-1 rounded-full hover:bg-gray-100 text-gray-500 font-bold text-sm cursor-pointer"
+                className="p-1.5 rounded-full hover:bg-gray-100 text-gray-500 transition-colors cursor-pointer"
+                title="Fechar"
               >
-                ✕
+                <X className="w-4 h-4" />
               </button>
             </div>
 
@@ -235,8 +232,6 @@ export default function CotacoesPage() {
         onClose={() => setIsRfqModalOpen(false)}
         onSuccess={fetchQuotes}
       />
-
-      <Footer />
     </div>
   );
 }

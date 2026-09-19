@@ -433,7 +433,7 @@ export default function GestaoEstoqueVendedorPage() {
           >
             <span className="flex items-center gap-2">
               <Boxes className="w-4 h-4" />
-              <span>📦 Catálogo & Estoque Físico Multi-CD ({filteredProducts.length})</span>
+              <span>Catálogo & Estoque Físico Multi-CD ({filteredProducts.length})</span>
             </span>
           </button>
 
@@ -447,7 +447,7 @@ export default function GestaoEstoqueVendedorPage() {
           >
             <span className="flex items-center gap-2">
               <History className="w-4 h-4" />
-              <span>📜 Histórico de Movimentações / Kardex ({filteredMovements.length})</span>
+              <span>Histórico de Movimentações / Kardex ({filteredMovements.length})</span>
             </span>
           </button>
         </div>
@@ -751,7 +751,7 @@ export default function GestaoEstoqueVendedorPage() {
                       movementTypeFilter === 'IN' ? 'bg-blue-600 text-white shadow-2xs' : 'text-gray-600'
                     }`}
                   >
-                    🟢 Entradas (+)
+                    Entradas (+)
                   </button>
                   <button
                     onClick={() => setMovementTypeFilter('OUT')}
@@ -759,7 +759,7 @@ export default function GestaoEstoqueVendedorPage() {
                       movementTypeFilter === 'OUT' ? 'bg-red-600 text-white shadow-2xs' : 'text-gray-600'
                     }`}
                   >
-                    🔴 Saídas (-)
+                    Saídas (-)
                   </button>
                 </div>
               </div>

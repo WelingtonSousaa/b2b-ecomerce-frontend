@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/context/ToastContext';
+import { useCart } from '@/context/CartContext';
 import ShippingTaxCalculator from '@/components/common/ShippingTaxCalculator';
 import FormalQuotePdfModal from '@/components/modals/FormalQuotePdfModal';
 import { productsService } from '@/services/products.service';
@@ -25,6 +26,7 @@ import { Product } from '@/types/b2b';
 export default function ProductDetailPage() {
   const { isAuthenticated, openAuthModal } = useAuth();
   const { showToast } = useToast();
+  const { addItem } = useCart();
   const params = useParams();
   const slug = params?.slug as string;
 
@@ -94,6 +96,16 @@ export default function ProductDetailPage() {
     if (!isAuthenticated) {
       openAuthModal('Para adicionar produtos ao carrinho e realizar compras na plataforma B2B, por favor acesse sua conta.');
       return;
+    }
+    if (product) {
+      addItem({
+        id: product.id,
+        sku: product.sku,
+        name: product.name,
+        price: product.basePrice,
+        image: selectedImage || (images && images[0]) || '/placeholder.jpg',
+        moq: product.moq || 1,
+      }, quantity);
     }
     setIsAdded(true);
     showToast(`${product.name} (${quantity} un.) adicionado ao carrinho com sucesso!`, 'success');
