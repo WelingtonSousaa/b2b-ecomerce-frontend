@@ -36,55 +36,25 @@ interface CartContextType {
   grandTotal: number;
 }
 
-const DEFAULT_INITIAL_ITEMS: CartItem[] = [
-  {
-    id: '1',
-    sku: 'NTB-DELL-LAT7420',
-    name: 'Notebook Dell Latitude 7420 14" i7 16GB 512GB SSD',
-    price: 7500.0,
-    quantity: 2,
-    image: '/dellNotenook.jpg',
-    ncm: '8471.30.12',
-    taxST: 320.0,
-    ipi: 375.0,
-    moq: 5,
-    multiploVenda: 5,
-    rating: 5,
-    reviewCount: 48,
-  },
-  {
-    id: '2',
-    sku: 'MON-DELL-P2422H',
-    name: 'Monitor Dell 24" P2422H IPS Full HD',
-    price: 1200.0,
-    quantity: 5,
-    image: '/monitorDell.jpg',
-    ncm: '8528.52.00',
-    taxST: 85.0,
-    ipi: 24.0,
-    moq: 10,
-    multiploVenda: 2,
-    rating: 5,
-    reviewCount: 92,
-  },
-];
-
-const STORAGE_KEY = 'onesync_b2b_cart_v1';
+const STORAGE_KEY = 'onesync_b2b_cart_v2';
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
-  const [items, setItems] = useState<CartItem[]>(DEFAULT_INITIAL_ITEMS);
+  const [items, setItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isInitialized, setIsInitialized] = useState(false);
 
   // Load cart from localStorage after mount to avoid SSR hydration mismatch
   useEffect(() => {
     try {
+      // Remove legacy storage key that may have inflated quantities
+      localStorage.removeItem('onesync_b2b_cart_v1');
+
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) {
+        if (Array.isArray(parsed)) {
           setItems(parsed);
         }
       }

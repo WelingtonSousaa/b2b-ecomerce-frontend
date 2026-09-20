@@ -15,7 +15,9 @@ import {
   MapPin,
   Tag,
   AlertCircle,
-  Truck
+  Truck,
+  PackageOpen,
+  ArrowRight
 } from 'lucide-react';
 // importacao do simulador de carga e cubagem
 import CargoSimulator from '@/components/cart/CargoSimulator';
@@ -80,8 +82,8 @@ export default function CheckoutPage() {
   const [isEditingDelivery, setIsEditingDelivery] = useState(false);
 
   // Total items in cart dynamically connected
-  const totalCartQty = totalItemsCount > 0 ? totalItemsCount : 10;
-  const unitPrice = totalItemsCount > 0 ? Number((cartSubtotal / totalItemsCount).toFixed(2)) : 2190.00;
+  const totalCartQty = totalItemsCount;
+  const unitPrice = totalItemsCount > 0 ? Number((cartSubtotal / totalItemsCount).toFixed(2)) : 0;
 
   // Branches distribution state
   const [branchSplits, setBranchSplits] = useState<BranchSplitItem[]>([
@@ -251,6 +253,41 @@ export default function CheckoutPage() {
           >
             Entrar com CNPJ ou Cadastrar Empresa
           </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (cartItems.length === 0 && !isSuccess) {
+    return (
+      <div className="bg-white min-h-screen py-16 px-4 font-sans flex items-center justify-center">
+        <div className="max-w-md w-full text-center space-y-6 bg-[#f8fafc] p-8 rounded-3xl border border-slate-200/80 shadow-sm">
+          <div className="w-16 h-16 rounded-full bg-blue-50 text-[#2563eb] mx-auto flex items-center justify-center shadow-xs">
+            <PackageOpen className="w-8 h-8" />
+          </div>
+
+          <div className="space-y-2">
+            <h1 className="text-2xl font-black text-gray-900">Seu Carrinho Corporativo está Vazio</h1>
+            <p className="text-xs text-gray-500 leading-relaxed">
+              Adicione produtos a partir do catálogo ou envie uma lista via Quick Order (CSV) para prosseguir com o fechamento do pedido e faturamento por CNPJ.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+            <Link
+              href="/produtos"
+              className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-bold px-6 py-3 rounded-full transition-all flex items-center justify-center gap-2 shadow-sm"
+            >
+              <span>Explorar Catálogo</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/quick-order"
+              className="bg-white hover:bg-slate-50 text-gray-700 border border-gray-200 text-xs font-bold px-6 py-3 rounded-full transition-all flex items-center justify-center gap-2"
+            >
+              <span>Quick Order (CSV)</span>
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -597,17 +634,7 @@ export default function CheckoutPage() {
               </h2>
 
               <div className="space-y-2.5">
-                {(cartItems.length > 0 ? cartItems : [
-                  {
-                    id: 'default-1',
-                    sku: 'NTB-DELL-LAT7420',
-                    name: 'Notebook Dell Latitude 7420 14" i7 16GB 512GB SSD',
-                    ncm: '8471.30.12',
-                    price: unitPrice,
-                    quantity: totalCartQty,
-                    image: '/dellNotenook.jpg',
-                  }
-                ]).map((item) => (
+                {cartItems.map((item) => (
                   <div key={item.id} className="bg-[#f8fafc] border border-slate-200/80 p-4 rounded-2xl flex items-center justify-between gap-4">
                     <div className="flex items-center gap-3.5">
                       <div className="w-14 h-14 bg-white rounded-xl p-1.5 relative flex items-center justify-center shrink-0 border border-slate-100 shadow-2xs">
@@ -647,21 +674,11 @@ export default function CheckoutPage() {
                 <span>4. Cubagem & Eficiência do Frete CIF</span>
               </h2>
               <CargoSimulator
-                items={
-                  cartItems.length > 0
-                    ? cartItems.map((item) => ({
-                        id: item.id,
-                        name: item.name,
-                        quantity: item.quantity,
-                      }))
-                    : [
-                        {
-                          id: 'c1',
-                          name: 'Notebook Dell Latitude 7420',
-                          quantity: totalCartQty,
-                        },
-                      ]
-                }
+                items={cartItems.map((item) => ({
+                  id: item.id,
+                  name: item.name,
+                  quantity: item.quantity,
+                }))}
               />
             </div>
 

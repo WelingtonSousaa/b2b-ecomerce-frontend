@@ -35,6 +35,7 @@ export default function CartDrawer({ isOpen: propsIsOpen, onClose: propsOnClose 
     updateQuantity,
     removeItem,
     fillPallet,
+    clearCart,
     subtotal,
     totalTaxST,
     totalIPI,
@@ -77,13 +78,29 @@ export default function CartDrawer({ isOpen: propsIsOpen, onClose: propsOnClose 
                   </span>
                 </div>
               </div>
-              <button
-                onClick={handleClose}
-                className="p-1.5 rounded-xl hover:bg-white/15 text-white transition-colors cursor-pointer"
-                title="Fechar Carrinho"
-              >
-                <X className="w-5 h-5" />
-              </button>
+              <div className="flex items-center gap-1">
+                {items.length > 0 && (
+                  <button
+                    onClick={() => {
+                      if (confirm('Deseja realmente esvaziar o carrinho corporativo?')) {
+                        clearCart();
+                      }
+                    }}
+                    className="p-1.5 rounded-xl hover:bg-white/15 text-blue-100 hover:text-white transition-colors cursor-pointer text-xs flex items-center gap-1 mr-1"
+                    title="Esvaziar todo o carrinho"
+                  >
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span className="text-[11px] font-medium hidden sm:inline">Limpar</span>
+                  </button>
+                )}
+                <button
+                  onClick={handleClose}
+                  className="p-1.5 rounded-xl hover:bg-white/15 text-white transition-colors cursor-pointer"
+                  title="Fechar Carrinho"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
             </div>
 
             {/* 2. Scrollable Body: Items + Simulator + Taxes */}

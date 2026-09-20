@@ -143,7 +143,11 @@ export default function CargoSimulator({ items, onFillPallet, compact = false }:
               Faltam aprox. <strong>+{sim.recommendedUnitsToFillPallet} un</strong> para fechar 100%
             </span>
             <button
-              onClick={() => onFillPallet(sim.recommendedUnitsToFillPallet)}
+              onClick={() => {
+                if (confirm(`Deseja adicionar +${sim.recommendedUnitsToFillPallet} unidades para preencher 100% da capacidade do palete PBR?`)) {
+                  onFillPallet(sim.recommendedUnitsToFillPallet);
+                }
+              }}
               className="inline-flex items-center gap-1 bg-blue-600 hover:bg-blue-700 text-white text-[10px] font-bold px-2.5 py-1 rounded-md transition-colors shadow-2xs cursor-pointer"
             >
               <PlusCircle className="w-3 h-3" />
