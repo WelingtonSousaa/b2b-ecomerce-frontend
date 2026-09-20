@@ -13,7 +13,7 @@ export async function GET() {
       stockByCD: JSON.parse(p.stockByCD)
     }));
     return NextResponse.json({ data: formattedProducts, success: true });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ message: 'Erro ao buscar produtos', success: false }, { status: 500 });
   }
 }

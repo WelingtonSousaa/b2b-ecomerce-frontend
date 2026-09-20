@@ -368,7 +368,7 @@ export default function QuickOrderPage() {
                           price: p.product.basePrice,
                           image: p.product.images?.[0] || '/placeholder.jpg',
                           moq: p.product.moq || 1,
-                        }, p.requestedQuantity);
+                        }, p.rawQuantity);
                       }
                     });
                     openCart();

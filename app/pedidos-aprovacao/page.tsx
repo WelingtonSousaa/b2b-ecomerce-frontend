@@ -22,6 +22,7 @@ const DEMO_PENDING_ORDERS: OrderB2B[] = [
     createdByUserId: 'carlos.comprador@empresa.com.br',
     createdAt: new Date(Date.now() - 1000 * 60 * 180).toISOString(),
     status: 'PENDING_APPROVAL',
+    requiresManagerApproval: true,
     payment: {
       type: 'BOLETO_FATURADO',
       termsDays: [28, 56, 84],
@@ -38,6 +39,7 @@ const DEMO_PENDING_ORDERS: OrderB2B[] = [
     },
     items: [
       {
+        id: 'cart-demo-1',
         product: {
           id: '1',
           sku: 'NTB-DELL-LAT7420',
@@ -56,6 +58,7 @@ const DEMO_PENDING_ORDERS: OrderB2B[] = [
         taxBreakdown: { icms: 18, icmsSt: 12, ipi: 5, totalTaxRate: 35, calculatedTaxAmount: 3800 } as any,
       },
       {
+        id: 'cart-demo-2',
         product: {
           id: '2',
           sku: 'MON-DELL-P2422H',
@@ -74,21 +77,21 @@ const DEMO_PENDING_ORDERS: OrderB2B[] = [
         taxBreakdown: { icms: 18, icmsSt: 10, ipi: 2, totalTaxRate: 30, calculatedTaxAmount: 1050 } as any,
       },
     ],
-    delivery: {
-      mode: 'SINGLE',
-      destinationCnpj: '12.345.678/0001-90',
-      shippingAddress: {
-        logradouro: 'Av. Paulista',
-        numero: '1000',
-        bairro: 'Bela Vista',
-        cidade: 'São Paulo',
-        uf: 'SP',
-        cep: '01310-100',
-        pais: 'Brasil',
-      },
-      freightType: 'CIF',
-      estimatedDeliveryDate: '2026-09-25',
-    } as any,
+    shippingAddress: {
+      logradouro: 'Av. Paulista',
+      numero: '1000',
+      bairro: 'Bela Vista',
+      cidade: 'São Paulo',
+      uf: 'SP',
+      cep: '01310-100',
+      pais: 'Brasil',
+    },
+    freight: {
+      type: 'CIF',
+      carrierName: 'Transportadora ABC',
+      price: 0,
+      estimatedDeliveryDays: 5,
+    },
   },
 ];
 

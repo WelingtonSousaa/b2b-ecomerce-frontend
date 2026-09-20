@@ -14,7 +14,7 @@ export async function GET() {
       items: JSON.parse(o.items)
     }));
     return NextResponse.json({ data: formattedOrders, success: true });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ message: 'Erro ao buscar pedidos', success: false }, { status: 500 });
   }
 }

@@ -103,7 +103,7 @@ export default function ProductDetailPage() {
         sku: product.sku,
         name: product.name,
         price: product.basePrice,
-        image: selectedImage || (images && images[0]) || '/placeholder.jpg',
+        image: (images && images[selectedImage]) || (images && images[0]) || '/placeholder.jpg',
         moq: product.moq || 1,
       }, quantity);
     }
