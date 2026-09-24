@@ -14,6 +14,87 @@ import { useToast } from '@/context/ToastContext';
 import { ordersService } from '@/services/orders.service';
 import { OrderB2B } from '@/types/b2b';
 
+const DEMO_PENDING_ORDERS: OrderB2B[] = [
+  {
+    id: 'ord-pending-1',
+    orderNumber: 'PED-2026-0089',
+    companyId: 'comp-1',
+    createdByUserId: 'carlos.comprador@empresa.com.br',
+    createdAt: new Date(Date.now() - 1000 * 60 * 180).toISOString(),
+    status: 'PENDING_APPROVAL',
+    requiresManagerApproval: true,
+    payment: {
+      type: 'BOLETO_FATURADO',
+      termsDays: [28, 56, 84],
+    },
+    summary: {
+      subtotal: 42500.0,
+      totalTaxes: 4850.0,
+      totalFreight: 0,
+      discountTotal: 1200.0,
+      grandTotal: 46150.0,
+      minOrderValueThreshold: 5000,
+      isMinOrderMet: true,
+      remainingForMinOrder: 0,
+    },
+    items: [
+      {
+        id: 'cart-demo-1',
+        product: {
+          id: '1',
+          sku: 'NTB-DELL-LAT7420',
+          name: 'Notebook Dell Latitude 7420 14" i7 16GB RAM 512GB SSD',
+          basePrice: 7500.0,
+          description: 'MOQ: 5 | Múltiplo: 5 cx',
+          categorySlug: 'Notebooks',
+          images: ['/dellNotenook.jpg'],
+          moq: 5,
+        } as any,
+        quantity: 5,
+        selectedUOM: 'BOX' as any,
+        selectedCDId: 'cd-sp',
+        unitPrice: 7200.0,
+        subtotal: 36000.0,
+        taxBreakdown: { icms: 18, icmsSt: 12, ipi: 5, totalTaxRate: 35, calculatedTaxAmount: 3800 } as any,
+      },
+      {
+        id: 'cart-demo-2',
+        product: {
+          id: '2',
+          sku: 'MON-DELL-P2422H',
+          name: 'Monitor Dell 24" P2422H IPS Full HD',
+          basePrice: 1200.0,
+          description: 'MOQ: 10 | Múltiplo: 2 cx',
+          categorySlug: 'Monitores',
+          images: ['/monitorDell.jpg'],
+          moq: 10,
+        } as any,
+        quantity: 6,
+        selectedUOM: 'BOX' as any,
+        selectedCDId: 'cd-sp',
+        unitPrice: 1083.33,
+        subtotal: 6500.0,
+        taxBreakdown: { icms: 18, icmsSt: 10, ipi: 2, totalTaxRate: 30, calculatedTaxAmount: 1050 } as any,
+      },
+    ],
+    shippingAddress: {
+      logradouro: 'Av. Paulista',
+      numero: '1000',
+      bairro: 'Bela Vista',
+      cidade: 'São Paulo',
+      uf: 'SP',
+      cep: '01310-100',
+      pais: 'Brasil',
+    },
+    freight: {
+      type: 'CIF',
+      carrierName: 'Transportadora ABC',
+      price: 0,
+      estimatedDeliveryDays: 5,
+    },
+  },
+];
+
 export default function PedidosAprovacaoPage() {
   const { user } = useAuth();
   const { showToast } = useToast();
@@ -25,10 +106,15 @@ export default function PedidosAprovacaoPage() {
     ordersService.getOrders()
       .then((res) => {
         if (res.data) {
-          setOrders(res.data.filter(o => o.status === 'PENDING_APPROVAL'));
+          const pending = res.data.filter(o => o.status === 'PENDING_APPROVAL');
+          setOrders(pending.length > 0 ? pending : DEMO_PENDING_ORDERS);
+        } else {
+          setOrders(DEMO_PENDING_ORDERS);
         }
       })
-      .catch(() => {})
+      .catch(() => {
+        setOrders(DEMO_PENDING_ORDERS);
+      })
       .finally(() => {
         setIsLoading(false);
       });
@@ -116,17 +202,17 @@ export default function PedidosAprovacaoPage() {
                       <span className="text-xs text-gray-400">• {new Date(o.createdAt).toLocaleDateString('pt-BR')}</span>
                       {o.status === 'PENDING_APPROVAL' && (
                         <span className="bg-amber-100 text-amber-900 font-bold px-2.5 py-0.5 rounded-full text-[10px]">
-                          ⏳ Aguardando Aprovação
+                          Aguardando Aprovação
                         </span>
                       )}
                       {o.status === 'APPROVED' && (
                         <span className="bg-blue-100 text-blue-900 font-bold px-2.5 py-0.5 rounded-full text-[10px]">
-                          ✔ Aprovado
+                          Aprovado
                         </span>
                       )}
                       {o.status === 'CANCELLED' && (
                         <span className="bg-red-100 text-red-900 font-bold px-2.5 py-0.5 rounded-full text-[10px]">
-                          ✖ Cancelado / Reprovado
+                          Cancelado / Reprovado
                         </span>
                       )}
                     </div>

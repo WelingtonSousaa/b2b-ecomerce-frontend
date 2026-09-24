@@ -76,53 +76,25 @@ class ApiClient {
     const url = this.buildUrl(endpoint, params);
 
     try {
-      // ==== MOCK INTERCEPTOR PARA A APRESENTAÇÃO ====
-      // Impede qualquer chamada real de quebrar a aplicação.
-      console.log(`[Mock API] Intercepted request to ${endpoint}`);
-      
-      let mockData: any = [];
-      
-      if (endpoint.includes('/products')) {
-        const { mockProducts } = await import('@/mocks/mockProducts');
-        mockData = mockProducts.map((p: any) => ({
-          id: p.id,
-          sku: p.sku,
-          name: p.nome,
-          basePrice: p.precos?.padrao || 0,
-          description: `MOQ: ${p.moq} | Múltiplo: ${p.multiploVenda} cx`,
-          categorySlug: p.categoria,
-          images: [p.imagem],
-          moq: p.moq,
-          hasVariants: false,
-          stockByCD: [
-            { cdId: 'cd-sp', availableQuantity: 500 },
-            { cdId: 'cd-sc', availableQuantity: 200 }
-          ]
-        }));
-      } else if (endpoint.includes('/orders')) {
-        mockData = [
-          {
-            id: 'ord-001',
-            orderNumber: 'PED-2026-0001',
-            createdAt: new Date().toISOString(),
-            status: 'APPROVED',
-            payment: { type: 'BOLETO_FATURADO', termsDays: [30, 60] },
-            summary: { grandTotal: 25000.50, subtotal: 25500, discountTotal: 499.50 },
-            items: [
-              {
-                quantity: 5, unitPrice: 5000, 
-                product: { name: 'Servidor Fantasma B2B', sku: 'SRV-001' }
-              }
-            ]
-          }
-        ];
+      const response = await fetch(url, config);
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        let errorData;
+        try {
+          errorData = await response.json();
+        } catch {
+          errorData = { message: response.statusText };
+        }
+        
+        throw new ApiError({
+          message: errorData.message || 'Erro na requisição da API',
+          statusCode: response.status,
+          code: errorData.code || 'API_ERROR',
+        });
       }
 
-      // Simulate network delay
-      await new Promise(resolve => setTimeout(resolve, 300));
-      
-      return { data: mockData, success: true } as unknown as T;
-      // ==== FIM MOCK INTERCEPTOR ====
+      return await response.json() as T;
 
     } catch (error: unknown) {
       clearTimeout(timeoutId);

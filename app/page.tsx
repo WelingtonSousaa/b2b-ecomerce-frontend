@@ -18,6 +18,7 @@ import {
   Building2
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
+import { useCart } from '@/context/CartContext';
 import ProductFilterBar, { FilterState } from '@/components/catalog/ProductFilterBar';
 import { productsService } from '@/services/products.service';
 import { Product } from '@/types/b2b';
@@ -28,6 +29,7 @@ const defaultCatalogShowcase: Product[] = [];
 export default function Home() {
   const router = useRouter();
   const { isAuthenticated, openAuthModal } = useAuth();
+  const { addItem } = useCart();
 
   const [products, setProducts] = useState<Product[]>(defaultCatalogShowcase);
   const [favorites, setFavorites] = useState<Record<string, boolean>>({});
@@ -73,9 +75,20 @@ export default function Home() {
       openAuthModal('Para adicionar itens ao carrinho e realizar compras por CNPJ, acesse sua conta ou cadastre sua empresa.');
       return;
     }
-    setAddedCart(prev => ({ ...prev, [id]: true }));
+    const targetProduct = products.find((p) => p.id === id);
+    if (targetProduct) {
+      addItem({
+        id: targetProduct.id,
+        sku: targetProduct.sku,
+        name: targetProduct.name,
+        price: targetProduct.basePrice,
+        image: targetProduct.images && targetProduct.images[0] ? targetProduct.images[0] : '/placeholder.jpg',
+        moq: targetProduct.moq || 1,
+      });
+    }
+    setAddedCart((prev) => ({ ...prev, [id]: true }));
     setTimeout(() => {
-      setAddedCart(prev => ({ ...prev, [id]: false }));
+      setAddedCart((prev) => ({ ...prev, [id]: false }));
     }, 2000);
   };
 
@@ -360,8 +373,9 @@ export default function Home() {
                     R$ {prod.basePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                   </span>
                 ) : (
-                  <span className="text-[10px] font-bold text-[#2563eb] bg-blue-50 px-2 py-0.5 rounded border border-blue-200 shrink-0">
-                    🔒 Sob Consulta
+                  <span className="text-[10px] font-bold text-[#2563eb] bg-blue-50 px-2 py-0.5 rounded border border-blue-200 shrink-0 inline-flex items-center gap-1">
+                    <Lock className="w-2.5 h-2.5" />
+                    <span>Sob Consulta</span>
                   </span>
                 )}
               </div>

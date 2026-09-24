@@ -14,9 +14,15 @@ import {
   Layers,
   MapPin,
   Tag,
-  AlertCircle
+  AlertCircle,
+  Truck,
+  PackageOpen,
+  ArrowRight
 } from 'lucide-react';
+// importacao do simulador de carga e cubagem
+import CargoSimulator from '@/components/cart/CargoSimulator';
 import { useAuth } from '@/context/AuthContext';
+import { useCart } from '@/context/CartContext';
 import PixPaymentModal from '@/components/modals/PixPaymentModal';
 import CommercialProposalModal from '@/components/modals/CommercialProposalModal';
 import BoletoModal from '@/components/modals/BoletoModal';
@@ -40,6 +46,7 @@ interface BranchSplitItem {
 
 export default function CheckoutPage() {
   const { isAuthenticated, user, company, openAuthModal } = useAuth();
+  const { items: cartItems, totalItemsCount, subtotal: cartSubtotal, totalTaxST: cartTaxST, clearCart } = useCart();
 
   // Mode: Single Address vs Multi-Branch Split
   const [deliveryMode, setDeliveryMode] = useState<'SINGLE' | 'MULTI_BRANCH'>('SINGLE');
@@ -74,9 +81,9 @@ export default function CheckoutPage() {
   const mobile = '(11) 98765-4321';
   const [isEditingDelivery, setIsEditingDelivery] = useState(false);
 
-  // Total items in cart
-  const totalCartQty = 10;
-  const unitPrice = 2190.00; // Preço negociado via Price Book VIP Ouro (Base era R$ 2.549)
+  // Total items in cart dynamically connected
+  const totalCartQty = totalItemsCount;
+  const unitPrice = totalItemsCount > 0 ? Number((cartSubtotal / totalItemsCount).toFixed(2)) : 0;
 
   // Branches distribution state
   const [branchSplits, setBranchSplits] = useState<BranchSplitItem[]>([
@@ -120,6 +127,21 @@ export default function CheckoutPage() {
       deliveryDays: 3
     }
   ]);
+
+  // Adjust branch splits when cart quantity changes
+  useEffect(() => {
+    if (totalCartQty > 0) {
+      const q1 = Math.max(1, Math.round(totalCartQty * 0.5));
+      const q2 = Math.max(0, Math.round(totalCartQty * 0.3));
+      const q3 = Math.max(0, totalCartQty - q1 - q2);
+
+      setBranchSplits((prev) => [
+        { ...prev[0], allocatedQuantity: q1 },
+        { ...prev[1], allocatedQuantity: q2 },
+        { ...prev[2], allocatedQuantity: q3 },
+      ]);
+    }
+  }, [totalCartQty]);
 
   const allocatedSum = branchSplits.reduce((acc, b) => acc + (Number(b.allocatedQuantity) || 0), 0);
   const isAllocationComplete = allocatedSum === totalCartQty;
@@ -184,9 +206,12 @@ export default function CheckoutPage() {
         companyId: company?.id,
         buyerUserId: user?.id,
         buyerUserName: user?.name,
-        items: [{ sku: 'DELL-R750-XS', quantity: totalCartQty, customUnitPrice: unitPrice }],
+        items: cartItems.length > 0 
+          ? cartItems.map(i => ({ sku: i.sku, quantity: i.quantity, customUnitPrice: i.price }))
+          : [{ sku: 'DELL-R750-XS', quantity: totalCartQty, customUnitPrice: unitPrice }],
         paymentType: 'BOLETO_FATURADO',
       }).catch(() => {});
+      clearCart();
       setIsSuccess(true);
     }
   };
@@ -198,9 +223,12 @@ export default function CheckoutPage() {
       companyId: company?.id,
       buyerUserId: user?.id,
       buyerUserName: user?.name,
-      items: [{ sku: 'DELL-R750-XS', quantity: totalCartQty, customUnitPrice: unitPrice }],
+      items: cartItems.length > 0 
+        ? cartItems.map(i => ({ sku: i.sku, quantity: i.quantity, customUnitPrice: i.price }))
+        : [{ sku: 'DELL-R750-XS', quantity: totalCartQty, customUnitPrice: unitPrice }],
       paymentType: paymentMethod === 'pix' ? 'PIX' : 'BOLETO_FATURADO',
     }).catch(() => {});
+    clearCart();
     setIsSuccess(true);
   };
 
@@ -225,6 +253,41 @@ export default function CheckoutPage() {
           >
             Entrar com CNPJ ou Cadastrar Empresa
           </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (cartItems.length === 0 && !isSuccess) {
+    return (
+      <div className="bg-white min-h-screen py-16 px-4 font-sans flex items-center justify-center">
+        <div className="max-w-md w-full text-center space-y-6 bg-[#f8fafc] p-8 rounded-3xl border border-slate-200/80 shadow-sm">
+          <div className="w-16 h-16 rounded-full bg-blue-50 text-[#2563eb] mx-auto flex items-center justify-center shadow-xs">
+            <PackageOpen className="w-8 h-8" />
+          </div>
+
+          <div className="space-y-2">
+            <h1 className="text-2xl font-black text-gray-900">Seu Carrinho Corporativo está Vazio</h1>
+            <p className="text-xs text-gray-500 leading-relaxed">
+              Adicione produtos a partir do catálogo ou envie uma lista via Quick Order (CSV) para prosseguir com o fechamento do pedido e faturamento por CNPJ.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+            <Link
+              href="/produtos"
+              className="bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-bold px-6 py-3 rounded-full transition-all flex items-center justify-center gap-2 shadow-sm"
+            >
+              <span>Explorar Catálogo</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/quick-order"
+              className="bg-white hover:bg-slate-50 text-gray-700 border border-gray-200 text-xs font-bold px-6 py-3 rounded-full transition-all flex items-center justify-center gap-2"
+            >
+              <span>Quick Order (CSV)</span>
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -564,36 +627,59 @@ export default function CheckoutPage() {
               )}
             </div>
 
-            {/* 3. REVISÃO DO ITEM */}
+            {/* 3. REVISÃO DOS ITENS */}
             <div className="space-y-4">
               <h2 className="text-xl font-black text-gray-900 tracking-tight">
-                3. Itens do Pedido
+                3. Itens do Pedido ({totalCartQty} un)
               </h2>
 
-              <div className="bg-[#f5f6f6] p-4 rounded-2xl flex items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-white rounded-xl p-2 relative flex items-center justify-center shrink-0 shadow-2xs">
-                    <Image
-                      src="/media/airpods_max_pink.jpg"
-                      alt="AirPods Max"
-                      fill
-                      className="object-contain p-1"
-                    />
-                  </div>
+              <div className="space-y-2.5">
+                {cartItems.map((item) => (
+                  <div key={item.id} className="bg-[#f8fafc] border border-slate-200/80 p-4 rounded-2xl flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3.5">
+                      <div className="w-14 h-14 bg-white rounded-xl p-1.5 relative flex items-center justify-center shrink-0 border border-slate-100 shadow-2xs">
+                        <Image
+                          src={item.image || '/placeholder.jpg'}
+                          alt={item.name}
+                          fill
+                          sizes="56px"
+                          className="object-contain p-1"
+                        />
+                      </div>
 
-                  <div className="space-y-1">
-                    <h3 className="text-sm font-bold text-gray-900">AirPods Max High-Fi Studio Edition</h3>
-                    <p className="text-xs text-gray-500">SKU: <span className="font-mono text-gray-800">SKU-HEAD-02</span> | NCM: 8518.30.00</p>
-                  </div>
-                </div>
+                      <div className="space-y-0.5">
+                        <h3 className="text-xs sm:text-sm font-bold text-gray-900 line-clamp-1">{item.name}</h3>
+                        <p className="text-[11px] text-gray-500">
+                          SKU: <span className="font-mono text-gray-800 font-bold">{item.sku}</span>
+                          {item.ncm && <> | NCM: {item.ncm}</>}
+                        </p>
+                      </div>
+                    </div>
 
-                <div className="text-right space-y-1">
-                  <div className="text-sm font-black text-gray-900">
-                    R$ {unitPrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })} / un
+                    <div className="text-right space-y-0.5 shrink-0">
+                      <div className="text-xs sm:text-sm font-black text-[#2563eb]">
+                        R$ {item.price.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+                      </div>
+                      <div className="text-[11px] text-gray-500">Qtd: <strong className="text-gray-900">{item.quantity} un</strong></div>
+                    </div>
                   </div>
-                  <div className="text-xs text-gray-500">Qtd: <strong className="text-gray-900">{totalCartQty} un</strong></div>
-                </div>
+                ))}
               </div>
+            </div>
+
+            {/* 4. cubagem e eficiencia logistica de carga */}
+            <div className="space-y-3">
+              <h2 className="text-xl font-black text-gray-900 tracking-tight flex items-center gap-2">
+                <Truck className="w-5 h-5 text-[#2563eb]" />
+                <span>4. Cubagem & Eficiência do Frete CIF</span>
+              </h2>
+              <CargoSimulator
+                items={cartItems.map((item) => ({
+                  id: item.id,
+                  name: item.name,
+                  quantity: item.quantity,
+                }))}
+              />
             </div>
 
           </div>

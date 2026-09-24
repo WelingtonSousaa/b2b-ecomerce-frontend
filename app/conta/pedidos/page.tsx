@@ -28,10 +28,12 @@ import { ordersService } from '@/services/orders.service';
 import { OrderB2B } from '@/types/b2b';
 import CompanyPanelHeader from '@/components/layout/CompanyPanelHeader';
 import { useToast } from '@/context/ToastContext';
+import { useCart } from '@/context/CartContext';
 
 export default function PedidosPage() {
   const router = useRouter();
   const { showToast } = useToast();
+  const { addItem } = useCart();
 
   const [orders, setOrders] = useState<OrderB2B[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -121,10 +123,19 @@ Destinatário: Tech Solutions & Tecnologia LTDA - CNPJ: 12.345.678/0001-95
   };
 
   const handleReorder = (ord: OrderB2B) => {
-    if (typeof window !== 'undefined' && ord.items && ord.items.length > 0) {
-      localStorage.setItem('b2b_checkout_items', JSON.stringify(ord.items));
+    if (ord.items && ord.items.length > 0) {
+      ord.items.forEach((it) => {
+        addItem({
+          id: it.product?.id || it.id,
+          sku: it.product?.sku || it.id,
+          name: it.product?.name || 'Produto Corporativo',
+          price: it.unitPrice || it.product?.basePrice || 0,
+          image: it.product?.images?.[0] || '/placeholder.jpg',
+          moq: it.product?.moq || 1,
+        }, it.quantity);
+      });
     }
-    showToast(`Itens do pedido ${ord.orderNumber} carregados para recompra!`, 'success');
+    showToast(`Itens do pedido ${ord.orderNumber} adicionados ao carrinho para recompra!`, 'success');
     router.push('/checkout');
   };
 
@@ -325,7 +336,7 @@ Destinatário: Tech Solutions & Tecnologia LTDA - CNPJ: 12.345.678/0001-95
               <div className="flex items-center justify-between text-xs font-bold relative">
                 <div className="flex flex-col items-center gap-1 z-10">
                   <div className="w-7 h-7 rounded-full bg-[#2563eb] text-white flex items-center justify-center text-xs">
-                    ✓
+                    <Check className="w-3.5 h-3.5" />
                   </div>
                   <span className="text-[10px] text-gray-800">1. Aprovado</span>
                 </div>
@@ -334,7 +345,7 @@ Destinatário: Tech Solutions & Tecnologia LTDA - CNPJ: 12.345.678/0001-95
 
                 <div className="flex flex-col items-center gap-1 z-10">
                   <div className="w-7 h-7 rounded-full bg-[#2563eb] text-white flex items-center justify-center text-xs">
-                    ✓
+                    <Check className="w-3.5 h-3.5" />
                   </div>
                   <span className="text-[10px] text-gray-800">2. Faturado NF-e</span>
                 </div>

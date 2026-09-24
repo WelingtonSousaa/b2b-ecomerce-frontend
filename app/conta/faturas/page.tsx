@@ -245,17 +245,17 @@ export default function FaturasPage() {
                       <td className="p-4 text-center">
                         {inv.status === 'PAID' && (
                           <span className="bg-blue-100 text-blue-800 font-bold px-2.5 py-1 rounded-md text-[10px]">
-                            ✔ Liquidado / Pago
+                            Liquidado / Pago
                           </span>
                         )}
                         {inv.status === 'OPEN' && (
                           <span className="bg-blue-100 text-blue-800 font-bold px-2.5 py-1 rounded-md text-[10px]">
-                            ⏳ A Vencer
+                            A Vencer
                           </span>
                         )}
                         {inv.status === 'OVERDUE' && (
                           <span className="bg-red-100 text-red-800 font-bold px-2.5 py-1 rounded-md text-[10px]">
-                            ⚠️ Vencido (Atualizar)
+                            Vencido (Atualizar)
                           </span>
                         )}
                       </td>
@@ -366,7 +366,7 @@ export default function FaturasPage() {
                   onClick={handleCopyPix}
                   className="text-[#2563eb] font-bold hover:underline inline-flex items-center gap-1 cursor-pointer"
                 >
-                  {copiedPix ? '✔ PIX Copiado!' : 'Copiar Chave PIX'}
+                  {copiedPix ? 'PIX Copiado!' : 'Copiar Chave PIX'}
                 </button>
               </div>
               <p className="text-[11px] text-blue-800 leading-relaxed">

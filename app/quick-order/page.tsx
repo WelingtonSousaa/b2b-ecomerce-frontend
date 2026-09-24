@@ -16,8 +16,10 @@ import {
 } from 'lucide-react';
 import { productsService } from '@/services/products.service';
 import { CSVImportRowResult, CSVImportRowStatus, Product } from '@/types/b2b';
+import { useCart } from '@/context/CartContext';
 
 export default function QuickOrderPage() {
+  const { addItem, openCart } = useCart();
   const [activeTab, setActiveTab] = useState<'csv' | 'manual'>('csv');
   const [catalogProducts, setCatalogProducts] = useState<Product[]>([]);
   const [manualRows, setManualRows] = useState<{ id: number; sku: string; quantity: number }[]>([
@@ -352,13 +354,24 @@ export default function QuickOrderPage() {
 
                 <button
                   onClick={() => {
-                    const validProducts = validationResults.filter((r) => r.status === 'VALID');
+                    const validProducts = validationResults?.filter((r) => r.status === 'VALID') || [];
                     if (validProducts.length === 0) {
                       alert('Nenhum item válido para enviar ao carrinho.');
                       return;
                     }
-                    alert(`${validProducts.length} itens adicionados ao carrinho com sucesso! Redirecionando...`);
-                    window.location.href = '/';
+                    validProducts.forEach((p) => {
+                      if (p.product) {
+                        addItem({
+                          id: p.product.id,
+                          sku: p.product.sku,
+                          name: p.product.name,
+                          price: p.product.basePrice,
+                          image: p.product.images?.[0] || '/placeholder.jpg',
+                          moq: p.product.moq || 1,
+                        }, p.rawQuantity);
+                      }
+                    });
+                    openCart();
                   }}
                   className="bg-amber-400 hover:bg-amber-500 text-gray-900 text-xs font-black px-6 py-2.5 rounded-lg shadow-md transition-all flex items-center gap-2 cursor-pointer"
                 >

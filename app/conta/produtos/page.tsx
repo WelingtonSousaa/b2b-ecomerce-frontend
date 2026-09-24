@@ -21,9 +21,11 @@ import {
 import { productsService } from '@/services/products.service';
 import { Product } from '@/types/b2b';
 import { useToast } from '@/context/ToastContext';
+import { useCart } from '@/context/CartContext';
 
 export default function GestaoProdutosPage() {
   const { showToast } = useToast();
+  const { addItem } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -76,38 +78,16 @@ export default function GestaoProdutosPage() {
 
   const handleQuickAdd = (prod: Product) => {
     const qty = quantities[prod.id] || prod.moq || 1;
-    if (typeof window !== 'undefined') {
-      try {
-        const existing = JSON.parse(localStorage.getItem('b2b_checkout_items') || '[]');
-        const existingIdx = existing.findIndex((item: { sku: string }) => item.sku === prod.sku);
-        if (existingIdx >= 0) {
-          existing[existingIdx].quantity += qty;
-          existing[existingIdx].totalPrice = existing[existingIdx].quantity * prod.basePrice;
-        } else {
-          existing.push({
-            productId: prod.id,
-            sku: prod.sku,
-            name: prod.name,
-            quantity: qty,
-            unitPrice: prod.basePrice,
-            totalPrice: prod.basePrice * qty
-          });
-        }
-        localStorage.setItem('b2b_checkout_items', JSON.stringify(existing));
-      } catch {
-        const items = [{
-          productId: prod.id,
-          sku: prod.sku,
-          name: prod.name,
-          quantity: qty,
-          unitPrice: prod.basePrice,
-          totalPrice: prod.basePrice * qty
-        }];
-        localStorage.setItem('b2b_checkout_items', JSON.stringify(items));
-      }
-    }
+    addItem({
+      id: prod.id,
+      sku: prod.sku,
+      name: prod.name,
+      price: prod.basePrice,
+      image: prod.images && prod.images[0] ? prod.images[0] : '/placeholder.jpg',
+      moq: prod.moq || 1,
+    }, qty);
     setAddedItemSku(prod.sku);
-    showToast(`${qty} un. do item "${prod.name}" adicionadas ao lote de faturamento!`, 'success');
+    showToast(`${qty} un. do item "${prod.name}" adicionadas ao carrinho B2B!`, 'success');
     setTimeout(() => setAddedItemSku(null), 2000);
   };
 

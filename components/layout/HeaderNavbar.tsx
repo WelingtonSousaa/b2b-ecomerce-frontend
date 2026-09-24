@@ -23,19 +23,22 @@ import CartDrawer from '@/components/cart/CartDrawer';
 import NotificationDropdown from '@/components/layout/NotificationDropdown';
 import { Product } from '@/types/b2b';
 import { useAuth } from '@/context/AuthContext';
+import { useCart } from '@/context/CartContext';
 import { mockProducts } from '@/mocks/mockProducts';
 
 interface HeaderNavbarProps {
   cartCount?: number;
 }
 
-export default function HeaderNavbar({ cartCount = 2 }: HeaderNavbarProps) {
-  const { user, company, isAuthenticated, login, logout, openAuthModal} = useAuth();
+export default function HeaderNavbar({ cartCount: propCartCount }: HeaderNavbarProps) {
+  const { user, company, isAuthenticated, login, logout, openAuthModal } = useAuth();
+  const { isCartOpen, openCart, closeCart, totalItemsCount } = useCart();
+
+  const cartCount = propCartCount !== undefined ? propCartCount : totalItemsCount;
 
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const [allProducts, setAllProducts] = useState<Product[]>([]);
 
@@ -65,11 +68,7 @@ export default function HeaderNavbar({ cartCount = 2 }: HeaderNavbarProps) {
     : allProducts.slice(0, 4);
 
   const handleCartClick = () => {
-    if (!isAuthenticated) {
-      login();
-    } else {
-      setIsCartOpen(true);
-    }
+    openCart();
   };
 
   const handleAccountClick = () => {
@@ -174,7 +173,7 @@ export default function HeaderNavbar({ cartCount = 2 }: HeaderNavbarProps) {
                           </div>
                         </div>
                         <span className="text-xs font-black text-[#2563eb] shrink-0 pl-2">
-                          {isAuthenticated ? `R$ ${prod.basePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : '🔒 Sob Consulta'}
+                          {isAuthenticated ? `R$ ${prod.basePrice.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}` : 'Sob Consulta'}
                         </span>
                       </Link>
                     ))
@@ -258,10 +257,11 @@ export default function HeaderNavbar({ cartCount = 2 }: HeaderNavbarProps) {
             <button
               onClick={handleCartClick}
               className="flex items-center gap-2 hover:text-[#2563eb] transition-colors py-2 cursor-pointer"
+              title="Abrir Carrinho"
             >
               <div className="relative">
                 <ShoppingCart className="w-5 h-5 text-gray-800" />
-                {cartCount > 0 && isAuthenticated && (
+                {cartCount > 0 && (
                   <span className="absolute -top-1.5 -right-2 bg-[#2563eb] text-white text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">
                     {cartCount}
                   </span>
@@ -302,7 +302,7 @@ export default function HeaderNavbar({ cartCount = 2 }: HeaderNavbarProps) {
       </header>
 
       {/* Cart Slideover Component */}
-      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+      <CartDrawer isOpen={isCartOpen} onClose={closeCart} />
     </>
   );
 }

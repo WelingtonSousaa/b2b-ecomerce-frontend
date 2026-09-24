@@ -1,4 +1,4 @@
-# 🏢 Especificação Funcional e Arquitetura B2B - Shopcart Enterprise
+# Especificação Funcional e Arquitetura B2B - Shopcart Enterprise
 
 > **Data de Atualização:** Agosto de 2026  
 > **Status:** Arquitetura Front-end Completa & Homologada (52 Rotas Ativas)  
@@ -6,7 +6,7 @@
 
 ---
 
-## 🧭 1. Visão Geral do Modelo de Negócio
+## 1. Visão Geral do Modelo de Negócio
 
 O **Shopcart Corporativo** opera como uma plataforma **SaaS Multi-Tenant B2B e Marketplace Corporativo por Assinatura**, inspirada nos modelos corporativos da *Shopify Plus*, *AliExpress B2B* e *VTEX Enterprise*:
 
@@ -16,7 +16,7 @@ O **Shopcart Corporativo** opera como uma plataforma **SaaS Multi-Tenant B2B e M
 
 ---
 
-## 🛠️ 2. Stack Tecnológica & Padrões de Engenharia
+## 2. Stack Tecnológica & Padrões de Engenharia
 
 - **Framework**: Next.js 16 (App Router + Turbopack)
 - **Linguagem**: TypeScript (Strict Mode)
@@ -29,7 +29,7 @@ O **Shopcart Corporativo** opera como uma plataforma **SaaS Multi-Tenant B2B e M
 
 ---
 
-## 🏛️ 3. Módulos e Requisitos Funcionais Essenciais
+## 3. Módulos e Requisitos Funcionais Essenciais
 
 ### 3.1. Gestão de Clientes, CNPJ & Alçadas Hierárquicas
 1. **Modo Visitante (Guest Mode)**:
@@ -52,8 +52,8 @@ O **Shopcart Corporativo** opera como uma plataforma **SaaS Multi-Tenant B2B e M
 1. **Precificação Regional por Estado de Destino**:
    - Cálculo automático de alíquotas interestaduais com base na UF de entrega selecionada (SP, SC, RJ, MG, BA, etc.).
 2. **Seletor de Finalidade da Compra**:
-   - 🔄 **Para Revenda Comercial**: Aplica **ICMS-ST (Substituição Tributária com MVA)** e destaca o aproveitamento de créditos fiscais de ICMS (12%) e PIS/COFINS (9.25%).
-   - 🏢 **Para Uso / Consumo ou Ativo Imobilizado**: Calcula a apuração automática do **DIFAL (Diferencial de Alíquota interestadual)** na emissão da NF-e.
+   - **Para Revenda Comercial**: Aplica **ICMS-ST (Substituição Tributária com MVA)** e destaca o aproveitamento de créditos fiscais de ICMS (12%) e PIS/COFINS (9.25%).
+   - **Para Uso / Consumo ou Ativo Imobilizado**: Calcula a apuração automática do **DIFAL (Diferencial de Alíquota interestadual)** na emissão da NF-e.
 3. **Painel de Inteligência Fiscal (`/conta/analise-tributaria`)**:
    - Simulador avançado de alíquotas, NCMs e regimes especiais por estado.
 
@@ -114,7 +114,7 @@ O **Shopcart Corporativo** opera como uma plataforma **SaaS Multi-Tenant B2B e M
 
 ---
 
-## 🗺️ 4. Mapa Completo das 52 Rotas Ativas (Next.js App Router)
+## 4. Mapa Completo das 52 Rotas Ativas (Next.js App Router)
 
 ```
 app/
@@ -178,7 +178,7 @@ app/
 
 ---
 
-## 💾 5. Contratos de Dados TypeScript Oficiais
+## 5. Contratos de Dados TypeScript Oficiais
 
 Os tipos oficiais que regem a plataforma estão centralizados em:
 - [`types/b2b.ts`](file:///home/welington/projects/b2b-ecomerce/types/b2b.ts): Modelos para Clientes (`CompanyAccount`), Usuários (`CompanyUser`), Produtos (`Product`), Estoques (`StockByCD`), Impostos (`TaxBreakdown`), Carrinho (`CartItem`) e Pedidos (`OrderB2B`).
@@ -186,6 +186,6 @@ Os tipos oficiais que regem a plataforma estão centralizados em:
 
 ---
 
-## 🎯 6. Conclusão & Prontidão para Back-end
+## 6. Conclusão & Prontidão para Back-end
 
 A camada de interface Front-end está **100% implementada, tipada e compilando perfeitamente**, sem pontas soltas. Toda a comunicação de dados já segue o padrão de requisições assíncronas e contratos tipados, facilitando a transição para banco de dados relacional (ex: PostgreSQL/Prisma) e autenticação JWT em produção.

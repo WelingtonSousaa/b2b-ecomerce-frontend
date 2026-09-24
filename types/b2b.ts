@@ -232,6 +232,30 @@ export interface CSVImportRowResult {
 // 5. CHECKOUT, FRETE E PAGAMENTO HÍBRIDO
 // ==========================================
 
+// dimensoes fisicas de mercadoria para calculo de cubagem
+export interface CargoItemDimensions {
+  widthCm: number;
+  heightCm: number;
+  lengthCm: number;
+  weightKg: number;
+}
+
+// resultado consolidado da simulacao de palete
+export interface PalletSimulationResult {
+  totalWeightKg: number;
+  totalVolumeM3: number;
+  palletCapacityM3: number;
+  palletMaxWeightKg: number;
+  volumeOccupancyPercent: number;
+  weightOccupancyPercent: number;
+  overallOccupancyPercent: number;
+  limitingFactor: 'VOLUME' | 'WEIGHT';
+  palletsNeeded: number;
+  freightEfficiencyStatus: 'UNDERUTILIZED' | 'GOOD' | 'OPTIMAL' | 'OVERLOAD';
+  recommendedUnitsToFillPallet: number;
+  freightSavingsEstimated: number;
+}
+
 export type FreightType = 'CIF' | 'FOB' | 'PICKUP';
 
 export interface FreightOption {

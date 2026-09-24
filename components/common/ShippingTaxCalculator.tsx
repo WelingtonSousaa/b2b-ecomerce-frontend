@@ -143,7 +143,7 @@ export default function ShippingTaxCalculator({ productPrice = 2549.00 }: Shippi
                   <strong className="text-blue-900">R$ {icmsStAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong>
                 </div>
                 <p className="text-[10px] text-blue-800 pt-1">
-                  ✔ Sua empresa tem direito a crédito de PIS/COFINS (9.25%) e ICMS destacado conforme regime tributário do CNPJ.
+                  Sua empresa tem direito a crédito de PIS/COFINS (9.25%) e ICMS destacado conforme regime tributário do CNPJ.
                 </p>
               </div>
             ) : (
@@ -157,7 +157,7 @@ export default function ShippingTaxCalculator({ productPrice = 2549.00 }: Shippi
                   <strong className="text-blue-900">R$ {difalAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</strong>
                 </div>
                 <p className="text-[10px] text-blue-800 pt-1">
-                  ✔ Compra para Ativo Imobilizado/Consumo com DIFAL recolhido na emissão da NF-e (sem bitributação na barreira fiscal).
+                  Compra para Ativo Imobilizado/Consumo com DIFAL recolhido na emissão da NF-e (sem bitributação na barreira fiscal).
                 </p>
               </div>
             )}

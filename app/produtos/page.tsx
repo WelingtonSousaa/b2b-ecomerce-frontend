@@ -13,10 +13,13 @@ import {
 import ProductFilterBar, { FilterState } from '@/components/catalog/ProductFilterBar';
 import { productsService } from '@/services/products.service';
 import { Product } from '@/types/b2b';
+import { useCart } from '@/context/CartContext';
+import { mockProducts } from '@/mocks/mockProducts';
 
 const defaultCatalogShowcase: Product[] = [];
 
 export default function CatalogPage() {
+  const { addItem } = useCart();
   const [products, setProducts] = useState<Product[]>(defaultCatalogShowcase);
 
   // Unified Filter State
@@ -40,9 +43,29 @@ export default function CatalogPage() {
       .then((res) => {
         if (res.data && res.data.length > 0) {
           setProducts(res.data);
+        } else {
+          setProducts(mockProducts.map((p) => ({
+            id: p.id,
+            sku: p.sku,
+            name: p.nome,
+            basePrice: p.precos.padrao,
+            description: `MOQ: ${p.moq} | Múltiplo: ${p.multiploVenda} cx`,
+            categorySlug: p.categoria,
+            images: [p.imagem]
+          })) as any);
         }
       })
-      .catch(() => {});
+      .catch(() => {
+        setProducts(mockProducts.map((p) => ({
+          id: p.id,
+          sku: p.sku,
+          name: p.nome,
+          basePrice: p.precos.padrao,
+          description: `MOQ: ${p.moq} | Múltiplo: ${p.multiploVenda} cx`,
+          categorySlug: p.categoria,
+          images: [p.imagem]
+        })) as any);
+      });
   }, []);
 
   const toggleFavorite = (id: string) => {
@@ -50,6 +73,17 @@ export default function CatalogPage() {
   };
 
   const handleAddToCart = (id: string) => {
+    const targetProduct = products.find((p) => p.id === id);
+    if (targetProduct) {
+      addItem({
+        id: targetProduct.id,
+        sku: targetProduct.sku,
+        name: targetProduct.name,
+        price: targetProduct.basePrice,
+        image: targetProduct.images && targetProduct.images[0] ? targetProduct.images[0] : '/placeholder.jpg',
+        moq: targetProduct.moq || 1,
+      });
+    }
     setAddedCart(prev => ({ ...prev, [id]: true }));
     setTimeout(() => {
       setAddedCart(prev => ({ ...prev, [id]: false }));

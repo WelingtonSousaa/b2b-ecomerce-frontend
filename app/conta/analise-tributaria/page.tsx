@@ -199,7 +199,7 @@ CRÉDITO FISCAL APROPRIÁVEL (ICMS + PIS/COFINS): R$ ${currentCalc.netCredit.toF
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
-                🔄 Para Revenda Comercial
+                Para Revenda Comercial
               </button>
               <button
                 type="button"
@@ -210,7 +210,7 @@ CRÉDITO FISCAL APROPRIÁVEL (ICMS + PIS/COFINS): R$ ${currentCalc.netCredit.toF
                     : 'text-gray-600 hover:text-gray-900'
                 }`}
               >
-                🏢 Uso / Consumo ou Ativo
+                Uso / Consumo ou Ativo
               </button>
             </div>
           </div>
@@ -326,7 +326,7 @@ CRÉDITO FISCAL APROPRIÁVEL (ICMS + PIS/COFINS): R$ ${currentCalc.netCredit.toF
 
             {currentCalc.netCredit > 0 && (
               <div className="bg-blue-50 border border-blue-200 p-3 rounded-2xl flex items-center justify-between text-xs text-[#2563eb]">
-                <span className="font-bold">✨ Aproveitamento de Crédito Tributário (Lucro Real):</span>
+                <span className="font-bold">Aproveitamento de Crédito Tributário (Lucro Real):</span>
                 <span className="font-mono font-black text-sm">
                   + R$ {currentCalc.netCredit.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
                 </span>

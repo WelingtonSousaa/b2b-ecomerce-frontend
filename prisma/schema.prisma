@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Product {
+  id           String   @id @default(uuid())
+  sku          String   @unique
+  name         String
+  basePrice    Float
+  description  String
+  categorySlug String
+  images       String // JSON array of image URLs
+  moq          Int
+  hasVariants  Boolean  @default(false)
+  stockByCD    String // JSON array of stock per CD
+}
+
+model Order {
+  id          String   @id @default(uuid())
+  orderNumber String   @unique
+  createdAt   DateTime @default(now())
+  status      String
+  payment     String // JSON representation
+  summary     String // JSON representation
+  items       String // JSON representation of items
+}
